@@ -1,0 +1,63 @@
+---
+title: "Streamflow"
+author: "AnnaClaire Marley"
+date: "6/19/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dataRetrieval)
+library(maps)
+library(sf)
+```
+
+
+```{r}
+# site type is streamflow
+#param code for Discharge, mean daily (cfs)
+st_nm <- whatNWISdata(stateCd="NM", siteType="ST", service="dv", parameterCd="00060") # new mexico
+st_az <- whatNWISdata(stateCd="AZ", siteType="ST", service="dv", parameterCd="00060") # arizona
+
+```
+
+```{r}
+
+
+map('state', regions='new mexico')
+title(main="New Mexico Stream Sites")
+
+plot(chuska$geometry)
+points(x=st_nm$dec_long_va, 
+       y=st_nm$dec_lat_va)
+
+plot(chuska$geometry)
+points(x=st_az$dec_long_va, 
+       y=st_az$dec_lat_va)
+
+```
+
+
+```{r}
+# read in the chuska shapefile
+chuska <- read_sf("../Data/shapefiles/Chuska/", layer = "Chuska")
+
+
+
+```
+
+
+```{r}
+map('state', regions='new mexico')
+```
+
+
+
+```{r}
+chuska_st_data <- readNWISdata(bBox=c(-109.3536,35.8342,-108.663,36.6488),
+                           parameterCd="00060")
+```
+

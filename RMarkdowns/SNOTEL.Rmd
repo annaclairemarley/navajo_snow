@@ -1,0 +1,495 @@
+---
+title: "Snotel"
+author: "AnnaClaire Marley"
+date: "6/18/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This RMarkdown conducts initial time series analyses on two SNOTEL sites in the Chuska Mountains located in the Navajo Nation.
+
+**Read in packages**
+
+```{r, message=FALSE}
+library(RNRCS)
+library(tidyverse)
+library(lubridate)
+library(gridExtra)
+library(measurements)
+library(mltools)
+library(dataRetrieval)
+```
+
+### Navajo Whiskey Creek
+
+* Station ID:	1138
+
+* State:	New Mexico
+
+* Network:	SNOTEL
+
+* County:	San Juan
+
+* Elevation:	9050 ft.
+
+* Latitude:	36.18
+
+* Longitude:	-108.95
+
+* HUC:	140802040206
+
+```{r, echo = FALSE}
+# fixes numbers showing up in scientific notation
+options(scipen = 999)
+
+# grab snotel data from NRCS
+whiskey_creek_snotel <- grabNRCS.data(network = "SNTL",
+                                      site_id = 1138,
+                                      timescale = "daily",
+                                      DayBgn = "2009-05-12",
+                                      DayEnd = "2020-06-01")
+
+# clean dataset
+wc_clean <- whiskey_creek_snotel %>% 
+  select(Date,
+          "air_temp_av_F" = Air.Temperature.Average..degF., 
+         "air_temp_max_F" = Air.Temperature.Maximum..degF., 
+        "air_temp_min_F" =  Air.Temperature.Minimum..degF.,
+        "precip_in" = Precipitation.Accumulation..in..Start.of.Day.Values,
+        "snow_depth_in" = Snow.Depth..in..Start.of.Day.Values,
+        "swe_in" = Snow.Water.Equivalent..in..Start.of.Day.Values) %>% 
+  mutate(Date = ymd(Date)) %>% 
+  mutate(snow_depth_in = ifelse(snow_depth_in < 100, 
+                                snow_depth_in, NA)) # get rid of outliers
+
+# convert everything to metric units
+wc_clean_metric <- wc_clean %>% 
+  mutate(air_temp_av_C = round(conv_unit(air_temp_av_F, "F", "C"),2)) %>% 
+  mutate(air_temp_max_C = round(conv_unit(air_temp_max_F, "F", "C"),2)) %>% 
+  mutate(air_temp_min_C = round(conv_unit(air_temp_min_F, "F", "C"),2)) %>% 
+  mutate(precip_mm = conv_unit(precip_in, "inch", "mm")) %>% 
+  mutate(snow_depth_mm = conv_unit(snow_depth_in, "inch", "mm")) %>%
+  mutate(swe_mm = conv_unit(swe_in, "inch", "mm")) %>% 
+  select(Date, air_temp_av_C, air_temp_max_C, air_temp_min_C, precip_mm, snow_depth_mm, swe_mm)
+```
+
+#### Daily basic trends
+
+```{r, echo = FALSE}
+# SWE
+wc_swe_daily <- ggplot(wc_clean_metric, aes(x = Date, y = swe_mm)) +
+                    geom_line() +
+                    labs(
+                      x = "Date",
+                      y = "SWE (mm)",
+                      title = "Daily SWE"
+                    ) +
+                    theme_classic()
+
+# snow depth
+wc_depth_daily <- ggplot(wc_clean_metric, aes(x = Date, y = snow_depth_mm)) +
+                    geom_line() +
+                    labs(
+                      x = "Date",
+                      y = "Snow Depth (mm)",
+                      title = "Daily Snow Depth"
+                    ) +
+                    theme_classic()
+
+# max temp
+wc_max_temp_daily <- ggplot(wc_clean_metric, aes(x = Date, y = air_temp_max_C)) +
+                    geom_line() +
+                    labs(
+                      x = "Date",
+                      y = "Air Temperature (C)",
+                      title = "Daily Maximum Air Temperature"
+                    ) +
+                    theme_classic()
+
+# show all together
+grid.arrange(wc_swe_daily, wc_depth_daily, wc_max_temp_daily, ncol = 2)
+
+```
+
+
+
+#### Monthly basic trends
+
+```{r, echo = FALSE}
+# maximum monthly data
+wc_max_monthly <- wc_clean_metric %>% 
+  group_by(year = year(Date), 
+           month = month(Date)) %>% 
+  summarize(air_temp_av_C = max(air_temp_av_C),
+            air_temp_max_C = max(air_temp_max_C),
+            air_temp_min_C = max(air_temp_min_C),
+            swe_mm = max(swe_mm),
+            snow_depth_mm = max(snow_depth_mm)) %>% 
+  mutate(Date = ymd(paste0(year, "-", month, "-01")))
+
+# SWE
+wc_swe_monthly <- ggplot(wc_max_monthly, aes(x = Date, y = swe_mm)) +
+                    geom_line() +
+                    labs(
+                      x = "Date",
+                      y = "SWE (mm)",
+                      title = "Max Monthly SWE"
+                    ) +
+                    theme_classic()
+
+# snow depth
+wc_depth_monthly <- ggplot(wc_max_monthly, aes(x = Date, y = snow_depth_mm)) +
+                    geom_line() +
+                    labs(
+                      x = "Date",
+                      y = "Snow Depth (mm)",
+                      title = "Max Monthly Snow Depth"
+                    ) +
+                    theme_classic()
+
+# max temp
+wc_max_temp_monthly <- ggplot(wc_max_monthly,
+                              aes(x = Date, y = air_temp_max_C)) +
+                    geom_line() +
+                    labs(
+                      x = "Date",
+                      y = "Air Temperature (C)",
+                      title = "Max Monthly Maximum Air Temperature"
+                    ) +
+                    theme_classic()
+
+# show all together
+grid.arrange(wc_swe_monthly, wc_depth_monthly, wc_max_temp_monthly, ncol = 2)
+
+
+```
+
+#### Compare to SNODAS data (extracted for the same lat/long as snotel site)
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+# read in snodas swe
+wc_snodas_swe <- read_csv("../Data/whiskey_creek_snodas_swe.csv",
+                          col_names = c("Date", "snodas_swe_mm"), 
+                          skip = 1)
+# read in snodas snow depth
+wc_snodas_depth <- read_csv("../Data/whiskey_creek_snodas_depth.csv",
+                          col_names = c("Date", "snodas_snow_depth_mm"), 
+                          skip = 1)
+
+
+```
+
+### Daily data
+
+```{r, echo = FALSE}
+
+# combine snodas and snotel
+wc_snodas_snotel <- left_join(wc_snodas_swe, wc_snodas_depth) %>% 
+  left_join(wc_clean_metric, by = "Date") %>% 
+  select(Date, snodas_swe_mm,  snodas_snow_depth_mm,
+         "snotel_depth_mm" = snow_depth_mm, 
+         "snotel_swe_mm" = swe_mm) 
+
+# tidy the data for plotting
+wc_tidy_snodas_snotel <- wc_snodas_snotel %>% 
+  pivot_longer(c(snodas_swe_mm, snodas_snow_depth_mm, 
+                 snotel_depth_mm, snotel_swe_mm),
+               names_to = "type", values_to = "value_mm")
+
+```
+
+```{r, echo = FALSE}
+### SWE ###
+wc_das_tel_swe <- wc_tidy_snodas_snotel %>% 
+  filter(type == "snodas_swe_mm" | type ==  "snotel_swe_mm") %>% 
+  ggplot(aes(x = Date, y = value_mm)) +
+  geom_line(aes(color = type)) +
+  labs(
+    y = "SWE (mm)",
+    type = "Data Source",
+    title = "SNODAS and SNOTEL SWE"
+  ) +
+  theme_classic()
+wc_das_tel_swe
+
+# correlations
+ggplot(wc_snodas_snotel, aes(x = snodas_swe_mm, y = snotel_swe_mm)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  labs(
+    title = "SNOTEL and SNODAS Daily SWE Relationship"
+  ) +
+  theme_classic()
+
+
+
+```
+
+**stats**
+```{r}
+# correlation
+cor.test(wc_snodas_snotel$snodas_swe_mm, wc_snodas_snotel$snotel_swe_mm)
+
+# linear model 
+summary(lm(wc_snodas_snotel$snodas_swe_mm ~ wc_snodas_snotel$snotel_swe_mm))
+
+# root mean square error
+rmse(wc_snodas_snotel$snodas_swe_mm, wc_snodas_snotel$snotel_swe_mm, na.rm = TRUE)
+```
+
+
+```{r, echo = FALSE}
+# snow depth
+wc_das_tel_depth <- wc_tidy_snodas_snotel %>% 
+  filter(type == "snodas_snow_depth_mm" | type ==  "snotel_depth_mm") %>% 
+  ggplot(aes(x = Date, y = value_mm)) +
+  geom_line(aes(color = type)) +
+  labs(
+    y = "Snow depth (mm)",
+    type = "Data Source",
+    title = "SNODAS and SNOTEL Snow Depth"
+  ) +
+  theme_classic()
+wc_das_tel_depth
+
+# correlation
+ggplot(wc_snodas_snotel, aes(x = snodas_snow_depth_mm, y = snotel_depth_mm)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  labs(
+    title = "SNOTEL and SNODAS Daily snow depth Relationship"
+  ) +
+  theme_classic()
+
+```
+
+Stats
+
+```{r}
+# correlation
+cor.test(wc_snodas_snotel$snodas_snow_depth_mm, wc_snodas_snotel$snotel_depth_mm)
+
+# linear model 
+summary(lm(wc_snodas_snotel$snodas_snow_depth_mm ~ wc_snodas_snotel$snotel_depth_mm))
+
+# root mean square error
+rmse(wc_snodas_snotel$snodas_snow_depth_mm, wc_snodas_snotel$snotel_depth_mm, na.rm = TRUE)
+```
+
+Timing of max swe
+
+
+```{r, echo = FALSE}
+#' Gets the water week number for a given date (week starts on Sunday)
+#'
+#' @param date the date to get the water week number for. N.B. this has to be a Date object, not a string
+#'
+#' @return water week number for a given date (1-52)
+#' @export
+#'
+#' @examples to_water_week(date)
+#' @examples mutate(week_water_year = to_water_week(date))
+
+to_water_week = function(date) {
+  octStartWeek = epiweek(ymd(paste(year(date), "-10-01")))
+  diff = 52 - octStartWeek
+  return((epiweek(date) + diff) %% 52 + 1)
+  
+}
+```
+
+
+```{r, echo = FALSE}
+
+max_swe <- wc_snodas_snotel %>% 
+  addWaterYear() 
+  
+# snodas
+max_swe_snodas_time <- max_swe %>% 
+  select(Date, waterYear, snodas_swe_mm) %>% 
+  group_by(waterYear) %>% 
+  top_n(1, snodas_swe_mm) %>% 
+  mutate(water_week = to_water_week(Date)) %>% 
+  top_n(1, water_week) %>% 
+  rename(swe_mm = snodas_swe_mm) %>% 
+  mutate(type = "snodas")
+
+# SNOTEL
+max_swe_snotel_time <- max_swe %>% 
+  select(Date, waterYear, snotel_swe_mm) %>% 
+  filter(waterYear >= 2010) %>% 
+  group_by(waterYear) %>% 
+  top_n(1, snotel_swe_mm) %>% 
+  mutate(water_week = to_water_week(Date)) %>% 
+  top_n(1, water_week) %>% 
+  rename(swe_mm = snotel_swe_mm) %>% 
+  mutate(type = "snotel")
+
+max_swe_all <- rbind(max_swe_snodas_time, max_swe_snotel_time)
+
+# plot
+ggplot(max_swe_all, aes(x = waterYear, y= water_week)) +
+  geom_point(aes(color = type)) +
+  geom_line(aes(color = type)) +
+  labs(
+    title = "Timing of peak SWE by Water Week"
+  ) +
+  theme_bw()
+
+```
+
+
+
+### Monthly max
+
+```{r, echo = FALSE}
+wc_snodas_snotel_monthly <- wc_snodas_snotel %>% 
+  group_by(year = year(Date), 
+           month = month(Date)) %>% 
+  summarize(snodas_snow_depth_mm = max(snodas_snow_depth_mm),
+            snodas_swe_mm = max(snodas_swe_mm),
+            snotel_depth_mm = max(snotel_depth_mm),
+            snotel_swe_mm = max(snotel_swe_mm)) %>% 
+  mutate(Date = ymd(paste0(year, "-", month, "-01")))
+
+
+```
+
+```{r, echo = FALSE}
+# correlations
+ggplot(wc_snodas_snotel_monthly, aes(x = snodas_swe_mm, y = snotel_swe_mm)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  labs(
+    title = "SNOTEL and SNODAS Daily SWE Relationship"
+  ) +
+  theme_classic()
+
+
+```
+
+Stats
+
+```{r}
+# correlation
+cor.test(wc_snodas_snotel_monthly$snodas_swe_mm,
+         wc_snodas_snotel_monthly$snotel_swe_mm)
+
+# linear model 
+summary(lm(wc_snodas_snotel_monthly$snodas_swe_mm ~ wc_snodas_snotel_monthly$snotel_swe_mm))
+
+# root mean square error
+rmse(wc_snodas_snotel_monthly$snodas_swe_mm,
+     wc_snodas_snotel_monthly$snotel_swe_mm, na.rm = TRUE)
+```
+
+```{r, echo = FALSE}
+# correlations
+ggplot(wc_snodas_snotel_monthly, aes(x = snodas_snow_depth_mm, y = snotel_depth_mm)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  labs(
+    title = "SNOTEL and SNODAS Monthly maximum snow depth Relationship"
+  ) +
+  theme_classic()
+
+
+```
+
+#### Comparison with PRISM data
+
+```{r}
+# read in whiskey creek prism data
+wc_prism_precip <- read_csv("../Data/wc_prism_precip.csv")
+
+```
+
+
+
+### Beaver Spring
+
+* Station ID:	1143
+
+* State:	Arizona
+
+* Network:	SNOTEL
+
+* County:	Apache
+
+* Elevation:	9200 ft.
+
+* Latitude:	36.33
+
+* Longitude:	-109.06
+
+* HUC:	140802040401
+
+```{r, echo = FALSE}
+# grab snotel data from NRCS
+beaver_spring_snotel <- grabNRCS.data(network = "SNTL",
+                                      site_id = 1143,
+                                      timescale = "daily",
+                                      DayBgn = "2009-10-01",
+                                      DayEnd = "2020-06-01")
+
+# clean dataset
+bs_clean <- beaver_spring_snotel %>% 
+  select(Date,
+          "air_temp_av_F" = Air.Temperature.Average..degF., 
+         "air_temp_max_F" = Air.Temperature.Maximum..degF., 
+        "air_temp_min_F" =  Air.Temperature.Minimum..degF.,
+        "precip_in" = Precipitation.Accumulation..in..Start.of.Day.Values,
+        "snow_depth_in" = Snow.Depth..in..Start.of.Day.Values,
+        "swe_in" = Snow.Water.Equivalent..in..Start.of.Day.Values) %>% 
+  mutate(Date = ymd(Date))
+```
+
+##### Daily basic trends
+
+```{r, echo = FALSE}
+# SWE
+bs_swe_daily <- ggplot(bs_clean, aes(x = Date, y = swe_in)) +
+                    geom_line() +
+                    labs(
+                      x = "Date",
+                      y = "SWE (in)",
+                      title = "Daily SWE"
+                    ) +
+                    theme_classic()
+
+# snow depth
+bs_depth_daily <- ggplot(bs_clean, aes(x = Date, y = snow_depth_in)) +
+                    geom_line() +
+                    labs(
+                      x = "Date",
+                      y = "Snow Depth (in)",
+                      title = "Daily Snow Depth"
+                    ) +
+                    theme_classic()
+
+# max temp
+bs_max_temp_daily <- ggplot(bs_clean, aes(x = Date, y = air_temp_max_F)) +
+                    geom_line() +
+                    labs(
+                      x = "Date",
+                      y = "Air Temperature (F)",
+                      title = "Daily Maximum Air Temperature"
+                    ) +
+                    theme_classic()
+
+# show all together
+grid.arrange(bs_swe_daily, bs_depth_daily, bs_max_temp_daily, ncol = 2)
+
+```
+
+
+#### Comparison with PRISM data
+
+```{r}
+# read in whiskey creek prism data
+bs_prism_precip <- read_csv("../Data/bs_prism_precip.csv")
+
+```

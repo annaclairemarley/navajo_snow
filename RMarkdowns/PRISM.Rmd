@@ -1,0 +1,183 @@
+---
+title: "PRISM"
+author: "AnnaClaire Marley"
+date: "6/19/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Analysis of PRISM data
+
+```{r, include = FALSE}
+library(tidyverse)
+library(lubridate)
+library(ggplot2)
+library(tidyquant)
+library(dataRetrieval)
+```
+
+```{r, echo = FALSE}
+# path to source graphing functions
+path_graph <- "../Functions/Graphing/"
+```
+
+```{r, echo = FALSE}
+# source functions
+source(paste0(path_graph, "graph_season_trend.R"))
+```
+
+
+### Precipitation
+
+Daily
+```{r, echo = FALSE}
+# read in prism data -- sum of precipiation across the chuska mountains
+chuska_precip_day <- read_csv("../Data/chuska_prism_precip.csv", col_names = c("Date", "precip_mm"), skip = 1) %>% 
+  mutate(Date = ymd(Date))
+
+# initial look
+ggplot(chuska_precip_day, aes(x = Date, y = precip_mm)) +
+  geom_line()
+
+```
+
+
+Monthly sum
+```{r, echo = FALSE}
+chuska_precip_month <- chuska_precip_day %>% 
+  mutate(year = year(Date)) %>% 
+  mutate(month = month(Date)) %>% 
+  group_by(year, month) %>% 
+  summarize(precip_mm = sum(precip_mm)) %>% 
+  mutate(Date = ymd(paste0(year, "-", month, "-01")))
+
+ggplot(chuska_precip_month, aes(x = Date, y = precip_mm)) +
+  geom_line() +
+  geom_ma(ma_fun = SMA, n = 12, color = "red", linetype = 5) +
+  labs(
+    title = "Monthly sum of precipitation Chuska Mountains"
+  ) +
+  theme_classic()
+```
+
+### Temperature
+
+```{r, echo = FALSE}
+# read in mean temp data (C)
+chuska_tmean <- read_csv("../Data/chuska_prism_tmean.csv") %>% 
+  mutate(Date = ymd(Date)) %>% 
+  arrange(Date) %>% 
+  addWaterYear()
+
+# initial look
+ggplot(chuska_tmean, aes(x = Date, y = tmean)) +
+  geom_line()
+
+```
+
+Number of freezing days, when average temperature is at or below 0
+
+```{r, echo = FALSE}
+# number of freezing days per water year
+# remove 1981 because wasn't a full winter (data starts in Jan)
+num_freeze <- chuska_tmean %>% 
+  mutate(freeze = ifelse(tmean <= 0, 1, 0)) %>% 
+  group_by(waterYear) %>% 
+  summarize(ndayfr=sum(freeze)) %>% 
+  filter(waterYear != 1981)
+
+# graphit
+graph_season_trend(num_freeze, num_freeze$ndayfr, num_freeze$waterYear, 
+                   title = "Number of Freezing Days per Water Year", 
+                   xlabel = "Water Year",
+                   ylabel = "Number of Freezing Days")  
+```
+
+
+## Temp and precip
+
+```{r, echo = FALSE}
+# combine temp and snow 
+ch_tav_precip <- left_join(chuska_tmean, chuska_precip_day, by = "Date") %>% 
+  mutate(precip_type = ifelse(tmean <= 0, "snow", "rain"))
+```
+
+
+**Amount of snow each water year**
+
+```{r, echo = FALSE}
+# total amount of snow that fell on the chuskas
+ch_snow_total <- ch_tav_precip %>% 
+  filter(precip_type == "snow") %>% 
+  filter(waterYear > 1981) %>% 
+  drop_na(precip_mm) %>% 
+  group_by(waterYear) %>% 
+  summarize(snow_mm = sum(precip_mm))
+
+# plot it
+graph_season_trend(ch_snow_total, (ch_snow_total$snow_mm)/1000, ch_snow_total$waterYear, 
+                   title = "Amount of snow per Water Year", 
+                   xlabel = "Water Year",
+                   ylabel = "Snow (m)") 
+```
+
+
+**Nunber of snow days**
+
+```{r, echo = FALSE}
+# snow days, # get rid of 1981 because not full water year
+snow_days <- ch_tav_precip %>% 
+  filter(precip_mm > 0) %>% 
+  group_by(waterYear) %>% 
+  filter(waterYear != 1981) %>% 
+  count(precip_type) %>% 
+  mutate(perc = (n/sum(n))*100)
+
+# plot number of days
+ggplot(snow_days, aes(x = waterYear, y = n)) +
+  geom_col(aes(fill = precip_type)) +
+  labs(
+    x = "Number of Days",
+    y = "Water Year",
+    fill = "Precipitation Type",
+    title = "Number of Days Each Water Year Falling as Rain or"
+  ) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+
+# plot percent of days
+ggplot(snow_days, aes(x = waterYear, y = perc)) +
+  geom_col(aes(fill = precip_type)) +
+  labs(
+    x = "Water Year",
+    y = "Percent of Days",
+    fill = "Precipitation Type",
+    title = "Percent of Days Each Water Year Falling as Rain or"
+  ) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
