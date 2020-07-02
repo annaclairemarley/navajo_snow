@@ -1,0 +1,78 @@
+---
+title: "Streamflow Data Cleaning"
+author: "AnnaClaire Marley"
+date: "6/29/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### This markdown takes in excel workbooks of streamflow gague data, converts them into a single csv file and tidies them for analysis
+
+```{r, include = FALSE}
+# load packages
+library(tidyverse)
+library(readxl)
+library(gdata)
+library(lubridate)
+library(dataRetrieval)
+library(measurements)
+```
+
+```{r, include = FALSE}
+# set path to streamflow data
+path_stream = "../Data/stream_flow/"
+
+# set path to cleaning functions
+path_clean = "../Functions/Cleaning/"
+```
+
+Cubic feet per second daily discharge
+
+```{r, include = FALSE}
+### Read in all of the stream gauge stations
+source(paste0(path_clean, "stream_xls_to_df.R")) # source excel cleaning function
+
+# Asaayi Station
+asaayi <- stream_xls_to_df(path_stream, "Asaayi Daily Q's WY92-Current.xls", sheet_no = c(1:26))
+
+# Captain Tom Wash
+#captain_tom <- stream_xls_to_df(path_stream, 
+ #                                        "Captain Tom Daily Q's WY97-Current.xls", sheet_no = c(1:28))
+# Wheatfields creek
+#wheatfields <- stream_xls_to_df(path_stream, 
+ #                                        "Wheatfields Daily Q's WY96-Current.xls", sheet_no = c(1:24))
+# Tsaile Creek
+#tsaile <- stream_xls_to_df(path_stream, 
+ #                                        "Tsaile Daily Q's WY92-Current.xls", sheet_no = c(1:23))
+# Lukachai Creek
+#lukachai_creek <- stream_xls_to_df(path_stream, 
+ #                                        "Lukachukai Daily Q's WY98-Current.xls", sheet_no = c(1:22))
+# Whiskey creek -- doesnt work
+#whiskey_creek_stream <- stream_xls_to_df(path_stream, 
+ #                                        "whiskey.xls", sheet_no = c(1:8))
+
+```
+
+# Asaayi
+```{r}
+# convert to tidy form and clean dataframe
+asaayi_tidy <- asaayi %>% 
+  mutate(WY = ifelse(WY == "1999-2000", "1999", WY)) %>% 
+  pivot_longer(c(OCT, NOV, DEC, JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP), 
+               names_to = "month", values_to = "discharge_cfps") %>% 
+  mutate(wy_date = paste(month, Day, WY, sep = " ")) %>% #make water year dat
+  mutate(wy_date = mdy(wy_date)) %>% 
+  mutate(E_day = ifelse(str_detect(discharge_cfps, "E"), "E", NA)) %>% # keep track of days with E
+  mutate(discharge_cfps = str_remove(discharge_cfps, "E")) %>% # then remove from measuremnt
+  mutate(r_day = ifelse(str_detect(discharge_cfps, "r"), "r", NA)) %>% 
+  replace_with_na(., replace = list(discharge_cfps = "r")) %>% 
+  mutate(discharge_cfps = as.numeric(discharge_cfps)) %>% 
+  mutate(WY = as.integer(WY)) %>% 
+  mutate(dishcarge_cmps = conv_unit(discharge_cfps, "ft3_per_sec", "m3_per_sec"))
+
+write_csv(asaayi_tidy, "../Data/asaayi_stream_tidy.csv")
+```
+

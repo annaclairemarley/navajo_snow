@@ -96,6 +96,37 @@ graph_season_trend(num_freeze, num_freeze$ndayfr, num_freeze$waterYear,
                    ylabel = "Number of Freezing Days")  
 ```
 
+Temperature of hottest average temperature days each water year
+
+```{r, echo = FALSE}
+# hottest day each water year
+chuska_hot <- chuska_tmean %>% 
+  group_by(waterYear) %>% 
+  summarize(tmean = max(tmean)) %>% 
+  filter(waterYear != 2020) # not a complete water year
+
+# graphit
+graph_season_trend(chuska_hot, chuska_hot$tmean, chuska_hot$waterYear, 
+                   title = "Temperature of Hottest Day Each Water Year", 
+                   xlabel = "Water Year",
+                   ylabel = "Temperature C")  
+
+# hottest day each winter water year winter = nov, dec, jan, feb, mar, apr
+chuska_hot_winter <- chuska_tmean %>% 
+  mutate(month = month(Date)) %>% 
+  filter(month %in% c(11, 12, 1, 2, 3, 4)) %>% 
+  group_by(waterYear) %>% 
+  summarize(tmean = max(tmean))
+
+# graphit
+graph_season_trend(chuska_hot_winter, chuska_hot_winter$tmean, chuska_hot_winter$waterYear, 
+                   title = "Temperature of Hottest Day Each Winter Water Year", 
+                   xlabel = "Winter Water Year",
+                   ylabel = "Temperature C")  
+
+```
+
+
 
 ## Temp and precip
 

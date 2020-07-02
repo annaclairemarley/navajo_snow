@@ -9,55 +9,255 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r, include = FALSE}
+# load packages
+library(tidyverse)
+library(readxl)
+library(gdata)
+library(lubridate)
 library(dataRetrieval)
-library(maps)
-library(sf)
+library(measurements)
+library(naniar)
 ```
 
 
-```{r}
-# site type is streamflow
-#param code for Discharge, mean daily (cfs)
-st_nm <- whatNWISdata(stateCd="NM", siteType="ST", service="dv", parameterCd="00060") # new mexico
-st_az <- whatNWISdata(stateCd="AZ", siteType="ST", service="dv", parameterCd="00060") # arizona
+```{r, include = FALSE}
+
+asaayi_tidy <- read_csv("../Data/asaayi_stream_tidy.csv")
 
 ```
 
-```{r}
+```{r, include = FALSE}
+# read in whiskey creek snotel data
+wc_snotel <- read_csv("../Data/wc_snotel.csv")
+```
+
+## Asaayi Station
+
+```{r, echo = FALSE}
+# plot
+ggplot(asaayi_tidy, aes(x = wy_date, y = dishcarge_cmps)) +
+  geom_line()
+
+# order of months
+wy_order <- c("NOV", "DEC", "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT")
+
+```
+
+## Investigate missing values
+
+```{r, echo = FALSE}
+asaayi_miss_WY <- asaayi_tidy %>% 
+  select(WY,dishcarge_cmps) %>% 
+  group_by(WY) %>% 
+  miss_var_summary()
+
+asaayi_miss_month <- asaayi_tidy %>% 
+  select(WY, month, dishcarge_cmps) %>% 
+  group_by(WY, month) %>% 
+  miss_var_summary()
+
+# plot missing percent WY
+ggplot(asaayi_miss_WY, aes( x= WY, y = pct_miss)) +
+  geom_col(fill = "light blue") +
+  scale_x_continuous(breaks = seq(1992,2018, by = 2)) +
+  labs(
+    x = "Water Year",
+    y = "Percent Data Missing",
+    title = "Percent data missing each year"
+  ) +
+  theme_bw()
+
+# plot missing percent each month
+ggplot(asaayi_miss_month, aes(x = WY, y = pct_miss)) +
+  geom_col(fill = "dark red") +
+  facet_wrap(~ factor(month, wy_order)) +
+  scale_x_continuous(breaks = seq(1992,2018, by = 8)) +
+  labs(
+    x = "Water Year",
+    y = "Percent Data Missing",
+    title = "Percent data missing Each Month"
+  ) +
+  theme_bw()
+```
 
 
-map('state', regions='new mexico')
-title(main="New Mexico Stream Sites")
 
-plot(chuska$geometry)
-points(x=st_nm$dec_long_va, 
-       y=st_nm$dec_lat_va)
+## look at monthly peak streamflow
 
-plot(chuska$geometry)
-points(x=st_az$dec_long_va, 
-       y=st_az$dec_lat_va)
+```{r, echo = FALSE}
+
+asaayi_month <- asaayi_tidy %>% 
+  group_by(WY, month) %>% 
+  summarize(dishcarge_cmps = max(dishcarge_cmps, na.rm = TRUE)) %>% 
+  ungroup() 
+
+ggplot(asaayi_month, aes(x = WY, y = dishcarge_cmps)) +
+  geom_col() +
+  facet_wrap(~factor(asaayi_month$month, levels = wy_order)) +
+  labs(
+    x = "Water Year",
+    y = "Discharge (m3/s)",
+    title = "Asaayi Station Peak Monthly Discharge"
+  ) +
+  scale_x_continuous(breaks = seq(1992, 2018, by =8)) +
+  theme_bw()
+
+ggplot(asaayi_month, aes(x = factor(month, levels = wy_order), y = dishcarge_cmps)) +
+  geom_col() +
+  facet_wrap(~WY) +
+  labs(
+    x = "Month",
+    y = "Discharge (m3/s)",
+    title = "Asaayi Station Peak Monthly Discharge"
+  ) +
+  theme_bw()
 
 ```
 
 
-```{r}
-# read in the chuska shapefile
-chuska <- read_sf("../Data/shapefiles/Chuska/", layer = "Chuska")
+## compare to Whiskey Creek Snotel Station
+
+###  compare time series of snotel swe and streamflow
+```{r, echo = FALSE}
+asaayi_wc_snotel_daily <- asaayi_tidy %>% 
+  mutate(Year = ifelse(month %in% c("OCT", "NOV", "DEC"), WY-1, WY)) %>% 
+  mutate(Date = mdy(paste(month, Day, Year, sep = " "))) %>% 
+  filter(WY > 2009) %>% 
+  left_join(wc_snotel) %>% 
+  select(Date, WY, dishcarge_cmps, swe_mm) %>% 
+  mutate(swe_m = conv_unit(swe_mm, "mm", "m"))
+
+# plot the time series togethr
+ggplot(asaayi_wc_snotel_daily, aes(x = Date, y = swe_m)) +
+  geom_line(size = 1) +
+  geom_line(aes(y = dishcarge_cmps), color = "#1219cc") +
+  scale_x_date(expand = c(0,0)) +
+  labs(
+    y = "SWE (m)",
+    title = "Asaayi Steamflow Gague and Whiskey Creek SNOTEL SWE"
+  ) +
+  scale_y_continuous(
+    sec.axis = sec_axis(~., "Streamflow Discharge (m3/s)"),
+    expand = c(0,0)
+  )+
+  theme_bw() +
+   theme(axis.line.y.right = element_line(color = "#1219cc"),
+          axis.text.y.right = element_text(color = "#1219cc"),
+          axis.title.y.right = element_text(color = "#1219cc")) 
+
+```
+
+### Compare date of peak swe with peak streamflow
+
+```{r, echo = FALSE}
+
+wc_snotel_peak <- asaayi_wc_snotel_daily %>% 
+  group_by(WY) %>% 
+  top_n(1, swe_m) %>% 
+  top_n(1, Date) %>% 
+  mutate(value = swe_m) %>% 
+  mutate(type = "swe_m") %>% 
+  select(Date, WY, value, type) %>% 
+  mutate(water_week = to_water_week(Date))
+
+asaayi_peak <- asaayi_wc_snotel_daily %>% 
+  group_by(WY) %>% 
+  top_n(1, dishcarge_cmps) %>% 
+  top_n(1, Date) %>% 
+  mutate(value = dishcarge_cmps) %>% 
+  mutate(type = "dishcarge_cmps") %>% 
+  select(Date, WY, value, type)   %>% 
+  mutate(water_week = to_water_week(Date))
+
+asaayi_wc_peak <- rbind(wc_snotel_peak, asaayi_peak)
+
+ggplot(asaayi_wc_peak, aes( x= Date, y = value)) +
+  geom_line(aes(color = type)) +
+  geom_point(aes(color = type))
 
 
 
 ```
 
 
-```{r}
-map('state', regions='new mexico')
+### Compare SNOTEL peak SWE rank order with yearly summed streamflow rank order
+
+```{r, echo = FALSE}
+
+wc_snotel_rank <- wc_snotel %>% 
+  select(Date, swe_mm) %>% 
+  addWaterYear() %>% 
+  filter(waterYear > 2009) %>% 
+  group_by(waterYear) %>% 
+  summarize(max_swe_mm = max(swe_mm, na.rm = TRUE)) %>% 
+  arrange(max_swe_mm) %>% 
+  mutate(rank_swe = 1:n())
+
+ggplot(wc_snotel_rank, aes( x = fct_reorder(as.character(waterYear), desc(max_swe_mm)), y = max_swe_mm)) +
+  geom_col() +
+  labs(
+    x = "Water Year",
+    y = "Max SWE (mm)",
+    title = "Whiskey Creek Max SWE in Water Year Descending order"
+  )
+
 ```
 
+```{r, echo = FALSE}
+
+asaayi_wy_sum %>% 
+  filter(WY > 2009 & WY <= 2018) %>% 
+ggplot(aes(x = fct_reorder(as.character(WY), desc(dishcarge_cmps)), 
+                          y =  dishcarge_cmps)) +
+  geom_col()+
+  labs(
+    x = "Water Year",
+    y = "Total Discharge (m3/s)",
+    title = "Asaayi Total Discharge in Descending Water Year Order"
+  ) +
+  theme_bw() 
+```
+
+### Compare total winter discharge to snotel peak swe
+
+```{r, echo = FALSE}
+
+# winter summed streamflow and peak swe
+asaayi_wc_snotel <- asaayi_tidy %>% 
+  filter(WY > 2009) %>% 
+  rename(waterYear = WY) %>% 
+  filter(month %in% c("NOV", "DEC", "JAN", "FEB", "MAR", "APR")) %>% 
+  group_by(waterYear) %>% 
+  summarize(dishcarge_cmps = sum(dishcarge_cmps, na.rm = TRUE)) %>% 
+  arrange(dishcarge_cmps) %>% 
+  mutate(rank_stream = 1:n()) %>% 
+  left_join(wc_snotel_rank, by = "waterYear") %>% 
+  arrange(waterYear)
+
+# plot ranks
+ggplot(asaayi_wc_snotel, aes(x = waterYear, y = rank_swe)) +
+  geom_point() +
+  geom_line() +
+  geom_line(aes(y = rank_stream, color = "Rank Streamflow")) +
+  geom_point(aes(y = rank_stream, color = "Rank Streamflow"))
+
+# test ranks
+mann_u <- wilcox.test(asaayi_wc_snotel$rank_stream, asaayi_wc_snotel$rank_swe)
+# ranks are equal
+
+ggplot(asaayi_wc_snotel, aes(x = dishcarge_cmps, y = max_swe_mm)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    x = "Asaayi Station Total Winter Discharge (m3/s)",
+    y = "Whiskey Creek SNOTEL Maximum SWE (mm)"
+  )
+
+# r2  
+r2 <- round(summary(lm(asaayi_wc_snotel$max_swe_mm ~
+                         asaayi_wc_snotel$dishcarge_cmps))$adj.r.squared, 2)
 
 
-```{r}
-chuska_st_data <- readNWISdata(bBox=c(-109.3536,35.8342,-108.663,36.6488),
-                           parameterCd="00060")
 ```
 
