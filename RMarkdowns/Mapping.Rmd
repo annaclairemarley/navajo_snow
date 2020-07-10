@@ -1,0 +1,127 @@
+---
+title: "Mapping"
+author: "AnnaClaire Marley"
+date: "7/7/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This Rmarkdown includes all mapping for visualizations for this project. It includes:
+
+- Chuska mountains with SNOTEL and snow course locations
+
+```{r, include = FALSE}
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggrepel)
+library(raster)
+library(RColorBrewer)
+```
+
+```{r, echo = FALSE}
+# path to shapefile date
+path_shape <- "../Data/shapefiles/"
+```
+
+
+```{r, echo = FALSE}
+### read in shapefiles ###
+# Chuska mountains outline
+chuska <- read_sf(paste0(path_shape, "/Chuska"), layer = "Chuska")
+
+# us states
+us <- ne_states(country = "united states of america", returnclass = "sf")
+
+# Navajo Nation reservation outline
+navajo_nation <- read_sf(paste0(path_shape, "/Reservation"), layer = "NavajoReservation")
+
+# all snow stations
+snow_stations <- read_sf(paste0(path_shape, "/SnowStations"), layer = "Snow_Stations")
+
+# all mountian regions
+mt_regions <- read_sf(paste0(path_shape, "/mt_ranges"), layer = "Polygons")
+```
+
+```{r, echo = FALSE}
+# download DEM
+dem.raster <- getData("SRTM", lat = 36, lon = -109 , download = TRUE)
+
+# crop to extent we want to look at
+extent_ch <- extent(c(-109.5, -108.4, 35.7, 36.65))
+ch_raster <- crop(dem.raster, extent_ch, snap='out')
+
+# plot to see
+plot(ch_raster)
+plot(chuska$geometry, add = TRUE)
+
+# convert raster to dataframe for plotting
+ch_dem_point  <-  rasterToPoints(ch_raster)
+ch_dem_df <-  data.frame(ch_dem_point)
+colnames(ch_dem_df) = c("lon", "lat", "alt")
+
+# map it
+ggplot() +
+  geom_raster(data = ch_dem_df, aes(lon, lat, fill = alt), alpha = .45) +
+  scale_fill_gradientn(colours = terrain.colors(100)) +
+  geom_sf(data = snow_stations, aes(shape = Network, color = Network), size = 2) +
+  geom_text_repel(data = snow_stations %>% filter(Network != "SNOTEL"), 
+                  aes(x = Longitude, y = Latitude, label = Name),
+                  nudge_x = c(0.25, 0.25, -0.25, 0.25), nudge_y = c(0.25, 0.25, 0.25, 0.25)) +
+  coord_sf(xlim = c(-109.5, -108.4), ylim = c(35.7, 36.65), expand = FALSE) +
+  theme_classic()
+
+```
+
+
+```{r, echo = FALSE}
+
+# zoomed out area of navajo nation with the chuska mountains
+ggplot() +
+  geom_sf(data = us, fill= "antiquewhite") +
+  geom_sf_label(data = us, aes(label = name)) +
+  geom_sf(data = navajo_nation) +
+  geom_sf(data = chuska, fill = "dark green") +
+  coord_sf(xlim = c(-113.99, -103.09), ylim = c(32.77, 39.90), expand = FALSE) +
+  theme_classic()
+
+ggplot() +
+ # geom_sf(data = us, fill = "white") +
+  geom_sf(data = chuska) +
+  geom_sf(data = snow_stations, aes(shape = Network, color = Network), size = 2) +
+  geom_text_repel(data = snow_stations %>% filter(Network != "SNOTEL"), 
+                  aes(x = Longitude, y = Latitude, label = Name),
+                  nudge_x = c(0.5, 0.5, -0.5), nudge_y = c(0.25, 0.1, 0.1)) +
+  coord_sf(xlim = c(-110.269, -108.154), ylim = c(35.539, 36.82), expand = FALSE) +
+  theme_classic()
+  
+
+```
+
+## correlations of all mountain regions with the Chuskas
+
+```{r, echo = FALSE}
+# correlations of each mountain region to the chuskas for daily SWE values
+mt_pvalues <- data.frame("Name" = mt_regions$Name, 
+                         "chuska_cor" = c(0.7795139, 0.5658080, 
+                                          0.6676870, 0.6927036, 1.0000000, 0.7974344))
+
+# map it
+mt_pvalue_geom <- left_join(mt_regions, mt_pvalues, by = "Name")
+
+ggplot() +
+  geom_sf(data = navajo_nation) +
+  geom_sf(data = mt_pvalue_geom, aes(fill = chuska_cor)) +
+  scale_fill_gradient(low = "yellow", high = "red") +
+  labs(
+    fill = "Correlation",
+    title = "Daily Total SWE Correlation to Chuska Daily Total SWE"
+  ) +
+  theme_classic()
+
+```
+

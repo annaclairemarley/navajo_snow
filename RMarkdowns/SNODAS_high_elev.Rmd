@@ -1,0 +1,189 @@
+---
+title: "High Elevation SNODAS"
+author: "AnnaClaire Marley"
+date: "7/9/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r, include = FALSE}
+library(tidyverse)
+library(dataRetrieval)
+library(measurements)
+library(corrplot)
+library(lubridate)
+```
+
+```{r, include = FALSE}
+# set path to source funcitons from data cleaning folder
+path_clean = "../Functions/Cleaning/"
+path_graph = "../Functions/Graphing/"
+```
+
+```{r, echo = FALSE}
+# source functions
+source(paste0(path_clean, "to_water_week.R")) # for calculating week of water year
+source(paste0(path_graph, "graph_season_trend.R"))
+```
+
+```{r, echo = FALSE}
+chuskas_swe <- read_csv("../Data/ch_snodas_swe_wint_03-20.csv") # Chuska mountains
+nav_mt_swe <- read_csv("../Data/nm_snodas_swe_wint_03_20.csv") # Navajo Mountain
+mt_pow_swe <- read_csv("../Data/mp_snodas_swe_wint_03-20.csv") # Mount Powell
+black_mesa_swe <- read_csv("../Data/bm_swe_wint_03_20.csv") # Black Mesa
+carrizo_swe <- read_csv("../Data/car_snodas_swe_wint_03_20.csv") # Carrizo
+def_plateau_swe <- read_csv("../Data/dp_snodas_swe_wint_04_20.csv") # Defiance Plateau
+```
+
+```{r, include = FALSE}
+# km areas of each mountain range:
+carrizo_area_km = 339 #km2
+chuska_area_km = 4581 #km2
+bm_area_km = 1413 #km2
+defiance_area_km = 1106 #km2
+mt_powell_area_km = 77 #km2
+nm_area_km = 96 #km2
+nn_area_km = 67636 #km2
+
+# m2 areas of each mountain range:
+carrizo_area_m2 = conv_unit(carrizo_area_km, "km2", "m2")  
+chuska_area_m2 = conv_unit(chuska_area_km, "km2", "m2") 
+bm_area_m2 = conv_unit(bm_area_km, "km2", "m2") 
+defiance_area_m2 = conv_unit(defiance_area_km, "km2", "m2") 
+mt_powell_area_m2 = conv_unit(mt_powell_area_km, "km2", "m2") 
+nm_area_m2 = conv_unit(nm_area_km, "km2", "m2") 
+```
+
+```{r, echo = FALSE}
+# all SWE as an area average
+daily_swe_all_area_av <- carrizo_swe %>% 
+  rename(carrizo = swe_mm) %>% 
+  left_join(chuskas_swe, by = "date") %>% 
+  rename(chuska = swe_mm) %>% 
+  left_join(black_mesa_swe, by = "date") %>% 
+  rename(black_mesa = swe_mm) %>% 
+  left_join(nav_mt_swe, by = "date") %>% 
+  rename(navajo_mt = swe_mm) %>% 
+  left_join(mt_pow_swe, by = "date") %>% 
+  rename(mt_powell = swe_mm) %>% 
+  left_join(def_plateau_swe, by = "date") %>% 
+  rename(defiance_plateau = swe_mm) %>% 
+  rename(Date = date) %>% 
+  addWaterYear() 
+
+# all high elevation SWE as total sum of SWE on each mountain (m^3)
+daily_swe_all <- daily_swe_all_area_av %>% 
+  mutate(carrizo = carrizo_area_m2*conv_unit(carrizo, "mm", "m")) %>% 
+  mutate(chuska = chuska_area_m2*conv_unit(chuska, "mm", "m")) %>% 
+  mutate(black_mesa = bm_area_m2*conv_unit(black_mesa, "mm", "m")) %>% 
+  mutate(navajo_mt = nm_area_m2*conv_unit(navajo_mt, "mm", "m")) %>% 
+  mutate(mt_powell = mt_powell_area_m2*conv_unit(mt_powell, "mm", "m")) %>% 
+  mutate(defiance_plateau = defiance_area_m2*conv_unit(defiance_plateau, "mm", "m"))
+
+# tidy version
+daily_swe_all_tidy <- daily_swe_all %>% 
+  pivot_longer(c(carrizo:defiance_plateau), names_to = "mt_region", values_to = "swe_m3")
+```
+
+## Daily SWE
+
+```{r, echo = FALSE}
+
+ggplot(daily_swe_all_tidy, aes(x = Date, y = swe_m3)) +
+  geom_line(aes(color = mt_region)) +
+  scale_y_continuous(expand = c(0,0)) +
+  scale_x_date(expand = c(0,0)) +
+  labs(
+    y = bquote('SWE'~(m^3)),
+    color = "High Elevation Region"
+  ) +
+  theme_classic()
+
+```
+
+
+### Daily SWE Correlations between high elevation regions
+
+```{r, echo = FALSE}
+# correlation matrix
+daily_swe_all_corr <- daily_swe_all %>% 
+  select(-waterYear) %>% 
+  column_to_rownames(var = "Date")
+
+cor <- cor(daily_swe_all_corr)
+pval <- cor.mtest(daily_swe_all_corr, conf.level = 0.95)
+corrplot(cor, method = "square", type = "upper", 
+         addCoef.col = "white", tl.col = "black", tl.srt=45,
+         p.mat = pval$p, sig.level = 0.05, insig = "blank")
+
+```
+
+All correlations are significant. Defiance Plateu has the highest correlation with the Chuskas
+
+### Water Year Maximum Timing
+
+```{r, echo = FALSE}
+
+max_swe_timing <- daily_swe_all_tidy %>% 
+  group_by(mt_region, waterYear) %>% 
+  top_n(1, swe_m3) %>% 
+  mutate(water_week = to_water_week(Date)) %>% 
+  top_n(1, water_week)
+
+ggplot(max_swe_timing, aes(x = waterYear, y = water_week)) +
+  geom_col(aes(fill = mt_region), position = "dodge") +
+# geom_point(aes(color = mt_region)) +
+  labs(
+    x = "Water Year",
+    y = "Week of Water Year",
+    color = "High Elevation region",
+    title = "Timing of Max SWE"
+  ) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+
+ggplot(max_swe_timing, aes(x = waterYear, y = water_week)) +
+  geom_line(aes(color = mt_region)) +
+  facet_wrap(~mt_region) +
+# geom_point(aes(color = mt_region)) +
+  labs(
+    x = "Water Year",
+    y = "Week of Water Year",
+    color = "High Elevation region",
+    title = "Timing of Max SWE"
+  ) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+
+```
+
+## Median monthly SWE 
+
+```{r, echo = FALSE}
+
+median_monthly_wy <- daily_swe_all_tidy %>% 
+  group_by(mt_region, "month" = month(Date, label = TRUE, abbr = TRUE)) %>% 
+  summarize(swe_m3 = median(swe_m3, na.rm = TRUE))
+
+
+ggplot(median_monthly_wy, aes(x = factor(month, 
+                                         levels = c("Nov","Dec","Jan", "Feb", "Mar", "Apr")), 
+                              y = swe_m3, group = mt_region)) +
+  geom_point(aes(color = mt_region)) +
+  geom_line(aes(color = mt_region)) +
+  labs(
+    x = "Month",
+    y = bquote('SWE'~(m^3)),
+    title = "Median SWE each month 2004-2020 water years"
+  ) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+```
+
+

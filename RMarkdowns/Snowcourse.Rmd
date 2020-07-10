@@ -1,0 +1,140 @@
+---
+title: "Snow Course Data"
+author: "AnnaClaire Marley"
+date: "7/7/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This Rmarkdown analyzes snow course data from the Navajo Nation. It:
+
+* analyzes temporal variability of snowpack accumulation at each snow course site
+
+* 
+
+```{r, include = FALSE}
+library(tidyverse)
+library(lubridate)
+library(janitor)
+library(ggridges)
+library(corrplot)
+```
+
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+# read in raw snow course data
+snow_course <- read_csv("../Data/snow_course_data_85-18.csv")
+
+# clean up 
+snow_course_clean <- snow_course %>% 
+  mutate(Date = paste0("01", "-", Date)) %>% 
+  mutate(Date = dmy(Date)) %>% 
+  rename_all(funs(str_replace(., "Start of Month Values", " "))) %>% 
+  clean_names() %>% 
+  rename_all(funs(str_replace(., "_[0-9]+[np][0-9]+", ""))) %>% 
+  rename_all(funs(str_replace(., "_number", "")))
+
+# make a tidy version
+snow_course_tidy <- snow_course_clean %>% 
+  pivot_longer(c(2:15), names_to = "type", values_to = "values") 
+  
+```
+
+Look at SWE distribution across the different stations
+```{r, echo = FALSE}
+
+# SWE
+snow_course_tidy %>% 
+  filter(str_detect(type, "water")) %>% 
+  mutate(type = str_remove(type, "_snow_water_equivalent_mm")) %>% 
+  ggplot(aes(x = values, 
+             y = factor(type, c("tsaile_canyon_3", "whiskey_creek","bowl_canyon","beaver_spring",
+                                "tsaile_canyon_1", "fluted_rock", "missionary_spring")))) +
+  geom_density_ridges(scale = 7,
+                      aes(fill = type),
+                      size = 0.3,
+                      color = "NA",
+                      alpha = 0.5,
+                      show.legend = FALSE) +
+  theme_minimal() +
+  labs(
+    x = "SWE (mm)",
+    y = "Snow Course Station"
+  )
+
+# Snow depth
+snow_course_tidy %>% 
+  filter(str_detect(type, "depth")) %>% 
+  mutate(type = str_remove(type, "_snow_depth_cm")) %>% 
+  ggplot(aes(x = values, 
+              y = factor(type, c("tsaile_canyon_3", "whiskey_creek","bowl_canyon","beaver_spring",
+                                "tsaile_canyon_1", "fluted_rock", "missionary_spring")))) +
+  geom_density_ridges(scale = 7,
+                      aes(fill = type),
+                      size = 0.3,
+                      color = "NA",
+                      alpha = 0.5,
+                      show.legend = FALSE) +
+  theme_minimal() +
+  labs(
+    x = "Snow Depth (cm)",
+    y = "Snow Course Station"
+  )
+```
+
+SWE for each station 
+```{r, echo = FALSE}
+
+# SWE
+snow_course_tidy %>% 
+  filter(str_detect(type, "water")) %>% 
+  mutate(type = str_remove(type, "_snow_water_equivalent_mm")) %>% 
+  ggplot(aes(x = date, y = values)) +
+  geom_col() +
+  facet_wrap(~type) +
+  labs(
+    x = "Date",
+    y = "SWE (mm)"
+  ) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+
+# March SWE
+snow_course_tidy %>% 
+  filter(str_detect(type, "water")) %>% 
+  mutate(type = str_remove(type, "_snow_water_equivalent_mm")) %>% 
+  filter(month(date) == 3) %>% 
+  ggplot(aes(x = date, y = values)) +
+  geom_col() +
+  facet_wrap(~type) +
+  labs(
+    x = "Date",
+    y = "SWE (mm)",
+    title = "March Snow Water Equivalent (mm)"
+  ) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+  
+
+```
+
+Correlations for SWE between stations
+
+```{r, echo = FALSE}
+# need to figure out how to handle so many NA values
+snow_course_cor_swe <- snow_course_clean %>% 
+  column_to_rownames(var = "date") %>% 
+  select(contains("water")) %>% 
+  rename_all(funs(str_replace(., "_snow_water_equivalent_mm", ""))) %>% 
+  drop_na()
+  
+
+cor_swe <- cor(snow_course_cor_swe)
+corrplot(cor_swe, method = "square", type = "upper", 
+         addCoef.col = "white", tl.col = "black", tl.srt=45)
+
+```
+
