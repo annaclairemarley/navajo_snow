@@ -186,4 +186,21 @@ ggplot(median_monthly_wy, aes(x = factor(month,
   theme_classic()
 ```
 
+```{r, echo = FALSE}
+
+daily_swe_all_tidy %>% 
+  mutate(month = month(Date, label = TRUE, abbr = TRUE)) %>% 
+  group_by(month) %>% 
+  ggplot(aes(x = factor(month, 
+                        levels = c("Nov","Dec","Jan", "Feb", "Mar", "Apr")), y = swe_m3)) +
+  geom_boxplot(aes(color = month)) +
+  facet_wrap(~mt_region, scales = "free") +
+  labs( 
+    x = "Month",
+    y = "SWE (m^3)"
+    ) +
+  theme_classic()
+
+```
+
 

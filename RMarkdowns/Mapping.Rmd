@@ -115,13 +115,24 @@ mt_pvalue_geom <- left_join(mt_regions, mt_pvalues, by = "Name")
 
 ggplot() +
   geom_sf(data = navajo_nation) +
-  geom_sf(data = mt_pvalue_geom, aes(fill = chuska_cor)) +
-  scale_fill_gradient(low = "yellow", high = "red") +
+ geom_sf(data = mt_pvalue_geom, aes(fill = chuska_cor)) +
+ scale_fill_gradient(low = "yellow", high = "red") +
   labs(
     fill = "Correlation",
     title = "Daily Total SWE Correlation to Chuska Daily Total SWE"
   ) +
   theme_classic()
+
+ggplot() +
+  geom_sf(data = navajo_nation) +
+ geom_sf(data = mt_regions) +
+  geom_sf_text(data = mt_regions, aes(label = Name)) +
+  labs(
+    fill = "Correlation",
+    title = "Mountain Regions"
+  ) +
+  theme_classic()
+
 
 ```
 

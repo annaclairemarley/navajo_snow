@@ -29,6 +29,7 @@ library(corrplot)
 snow_course <- read_csv("../Data/snow_course_data_85-18.csv")
 
 # clean up 
+### ***** NEED TO CONVERT EVERYTHING TO MM **********
 snow_course_clean <- snow_course %>% 
   mutate(Date = paste0("01", "-", Date)) %>% 
   mutate(Date = dmy(Date)) %>% 
@@ -108,7 +109,27 @@ snow_course_tidy %>%
   mutate(type = str_remove(type, "_snow_water_equivalent_mm")) %>% 
   filter(month(date) == 3) %>% 
   ggplot(aes(x = date, y = values)) +
-  geom_col() +
+  geom_line() +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~type) +
+  labs(
+    x = "Date",
+    y = "SWE (mm)",
+    title = "March Snow Water Equivalent (mm)"
+  ) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+
+# April SWE
+snow_course_tidy %>% 
+  filter(str_detect(type, "water")) %>% 
+  mutate(type = str_remove(type, "_snow_water_equivalent_mm")) %>% 
+  filter(month(date) == 4) %>% 
+  ggplot(aes(x = date, y = values)) +
+  geom_line() +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
   facet_wrap(~type) +
   labs(
     x = "Date",
