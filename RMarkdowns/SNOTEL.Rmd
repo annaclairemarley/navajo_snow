@@ -911,7 +911,6 @@ ggplot(aes(x = waterYear, y = percent)) +
 
 ```
 
-
 #### freezing days
 ```{r, echo = FALSE}
 # determine when snow and when rain
@@ -921,17 +920,73 @@ wc_prism_freeze <- wc_prism_precip_tmean %>%
   filter(precip_type != is.na(precip_type)) %>% 
   mutate(prism_snow_mm = ifelse(precip_type == "snow", ppt, 0))
 
-wc_prism_snowpack <- wc_prism_freeze %>% 
+# prism snow accumulation
+wc_prism_snow_all <- wc_prism_freeze %>% 
   group_by(waterYear) %>% 
   mutate(prism_snow_mm_accum = cumsum(prism_snow_mm)) %>% 
-  mutate(prism_snow_mm_accum = ifelse(month(Date) %in% c(5,6,7,8,9), 0,  prism_snow_mm_accum)) %>% 
+  mutate(prism_snow_mm_accum = ifelse(month(Date) %in% c(5,6,7,8,9), 0,  prism_snow_mm_accum))
+
+# dialy estimated snofall
+ggplot(wc_prism_snow_all, aes(x=Date, y = prism_snow_mm_accum)) +
+  geom_line() +
+  labs(
+    x = "Year",
+    y = "PRISM Estimated Snowfall Accumulation (mm)",
+    title = "PRISM Estimated Snowfall Accumulation"
+  ) +
+  scale_x_date(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+
+# maximum accumulated snow per year
+wc_prism_max <- wc_prism_snow_all %>% 
+  group_by(waterYear) %>% 
+  summarize(prism_snow_mm_accum = max(prism_snow_mm_accum))
+
+# plot
+ggplot(wc_prism_max, aes(x = waterYear, y = prism_snow_mm_accum)) +
+  geom_col()
+
+# anomaly for 1981-2001 normal
+wc_prism_max_anomaly_91_01 <- wc_prism_max %>% 
+  filter(waterYear <= 2001) %>% 
+  ungroup() %>% 
+  summarize(av = mean(prism_snow_mm_accum))
+
+# anomaly for 1981-2010 normal
+wc_prism_max_anomaly_91_10 <- wc_prism_max %>% 
+  filter(waterYear <= 2010) %>% 
+  ungroup() %>% 
+  summarize(av = mean(prism_snow_mm_accum))
+
+wc_prism_max_anomaly <- wc_prism_max %>% 
+  mutate(av_81_01 = wc_prism_max_anomaly_91_01$av) %>% 
+  mutate(av_81_10 = wc_prism_max_anomaly_91_10$av) %>% 
+  mutate(anomaly_81_01 = (prism_snow_mm_accum - av_81_01)/prism_snow_mm_accum) %>%
+  mutate(anomaly_81_10 = (prism_snow_mm_accum - av_81_10)/prism_snow_mm_accum)
+
+# anomaly for 1981-2001 normal
+ggplot(wc_prism_max_anomaly, aes(x = waterYear, y = anomaly_81_01)) +
+  geom_col()
+
+# anomaly for 1981-2010 normal
+ggplot(wc_prism_max_anomaly, aes(x = waterYear, y = anomaly_81_10)) +
+  geom_col()
+
+
+
+```
+
+```{r, echo = FALSE}
+
+wc_prism_snowpack <- wc_prism_snow_all %>% 
   mutate(decade = ifelse(waterYear %in% c(1981:1990), "1981-1990", 
                          ifelse(waterYear %in% c(1991:2000), "1991-2000",
                                 ifelse(waterYear %in% c(2001:2010), "2001-2010",
                                        "2011-2020")))) %>% 
   filter(month(Date) %in% c(11,12,1,2,3,4))
 
-ggplot(wc_prism_snowpack, aes( x= Date, y = prism_snow_mm_accum)) +
+ggplot(wc_prism_snowpack, aes(x=Date, y = prism_snow_mm_accum)) +
   geom_line()
 
 # distribution
@@ -951,6 +1006,7 @@ ggplot(wc_prism_snowpack, aes( x= Date, y = prism_snow_mm_accum)) +
   )
 
 ```
+
 
 ```{r, echo = FALSE}
 # how much total snow vs rain per month
@@ -1050,6 +1106,38 @@ graph_season_trend(num_freeze, num_freeze$ndayfr, num_freeze$waterYear,
                    title = "Number of Freezing Days per Water Year", 
                    xlabel = "Water Year",
                    ylabel = "Number of Freezing Days")  
+```
+
+freezing days correlation to SNOTEL swe max
+```{r, echo = FALSE}
+
+snotel_swe_max <- wc_clean_metric %>% 
+  addWaterYear() %>% 
+  filter(waterYear != 2009) %>% 
+  group_by(waterYear) %>% 
+  summarize(swe_mm = max(swe_mm, na.rm = TRUE)) %>% 
+  left_join(num_freeze, by = "waterYear")
+
+ggplot(snotel_swe_max, aes(x = ndayfr, y = swe_mm)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+# theres a relationship between number of freezing days and maximum SWE
+cor.test(snotel_swe_max$swe_mm, snotel_swe_max$ndayfr)
+summary(lm(snotel_swe_max$swe_mm ~ snotel_swe_max$ndayfr))
+
+```
+
+Freezing days relationship to week of water year of max swe
+
+```{r, echo = FALSE}
+# not much of a relationship
+snotel_swe_max_week <- left_join(max_swe_snotel_time, num_freeze, by = "waterYear")
+
+ggplot(snotel_swe_max_week, aes(x = ndayfr, y = water_week)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
 ```
 
 

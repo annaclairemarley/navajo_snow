@@ -16,7 +16,7 @@ stream_xls_to_df = function(path, xls, sheet_no){
   # list of na strings that commonly occur in this dataset
   na_strings <- c("------", "-----", "----", "-----------------", "NO DATA", 
                   " N O   D A T A   T H I S   W A T E R   Y E A R", "------",
-                  "---------", "------------")
+                  "---------", "------------", "")
   
   df = NULL # creat empty dataframe
   
@@ -32,7 +32,7 @@ stream_xls_to_df = function(path, xls, sheet_no){
       select(1:13) %>% 
       mutate(WY = sheet_name) %>% 
       mutate(WY = str_remove(WY, "WY")) %>% 
-      mutate(WY = str_remove(WY, "_"))
+      mutate(WY = str_remove_all(WY, "_"))
     
     if (is.null(df)) { # don't merge the first one
       df = readFile
