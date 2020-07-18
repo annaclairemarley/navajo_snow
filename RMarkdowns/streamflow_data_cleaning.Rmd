@@ -51,21 +51,22 @@ Cubic feet per second daily discharge
                   "---------", "------------", "")
 
 # Asaayi Station
-asaayi <- stream_xls_to_df(path_stream, "Asaayi Daily Q's WY92-Current.xls", sheet_no = c(1:26))
+asaayi_clean <- stream_xls_to_df(path_stream, "Asaayi Daily Q's WY92-Current.xls", sheet_no = c(1:26))
 
 # Captain Tom Wash
-captain_tom <- stream_xls_to_df(path_stream, "Captain Tom Daily Q's WY97-Current.xls", 
+captain_tom_clean <- stream_xls_to_df(path_stream, "Captain Tom Daily Q's WY97-Current.xls", 
                                 sheet_no = c(1:28))
 # Wheatfields creek
-#wheatfields <- stream_xls_to_df(path_stream, "Wheatfields Daily Q's WY96-Current.xls", sheet_no = c(1:24))
+wheatfields_clean <- stream_xls_to_df(path_stream, "Wheatfields Daily Q's WY96-Current.xls", 
+                                sheet_no = c(1:24))
 # Tsaile Creek
-#tsaile <- stream_xls_to_df(path_stream, 
- #                                        "Tsaile Daily Q's WY92-Current.xls", sheet_no = c(1:23))
+tsaile_clean <- stream_xls_to_df(path_stream, "Tsaile Daily Q's WY92-Current.xls", sheet_no = c(1:27))
+
 # Lukachai Creek
-#lukachai_creek <- stream_xls_to_df(path_stream, 
- #                                        "Lukachukai Daily Q's WY98-Current.xls", sheet_no = c(1:22))
-# Whiskey creek -- doesnt work
-whiskey_creek_stream <- stream_xls_to_df(path_stream, 
+lukachai_creek_clean <- stream_xls_to_df(path_stream, "Lukachukai Daily Q's WY98-Current.xls",
+                                   sheet_no = c(1:22))
+# Whiskey creek 
+whiskey_creek_stream_clean <- stream_xls_to_df(path_stream, 
                                          "Whiskey Daily Q's WY98-Current.xls", sheet_no = c(1:28))
 
 ```
@@ -75,19 +76,48 @@ whiskey_creek_stream <- stream_xls_to_df(path_stream,
 # convert to tidy form and clean dataframe and then write to csv
 
 # asaayi
-asaayi_tidy <- stream_data_tidy(asaayi)
+asaayi_tidy <- stream_data_tidy(asaayi_clean, gauge_name = "Asaayi") 
 write_csv(asaayi_tidy, "../Data/asaayi_stream_tidy.csv")
 
 # whiskey creek
-wc_stream_tidy <- stream_data_tidy(whiskey_creek_stream)
+wc_stream_tidy <- stream_data_tidy(whiskey_creek_stream_clean, gauge_name = "Whiskey Creek")
 write_csv(wc_stream_tidy, "../Data/wc_stream_tidy.csv")
 
-# Lukachai Creek
-
-# Tsaile Creek
+# Captain Tom Wash
+capt_tom_tidy <- stream_data_tidy(captain_tom_clean, gauge_name = "Captain Tom Wash")
+write_csv(capt_tom_tidy, "../Data/capt_tom_tidy.csv")
 
 # Wheatfields creek
+wheatfields_tidy <- wheatfields_clean %>% 
+  mutate(WY = str_remove(WY, "oct[0-9]+[0-9]-sep")) %>% 
+  mutate(WY = ifelse(startsWith(WY, "9"), paste0("19", WY), 
+                     ifelse(startsWith(WY, "0"), paste0("20", WY), WY))) %>% 
+  stream_data_tidy(gauge_name = "Wheatfields")
 
-# Captain Tom Wash
+write_csv(wheatfields_tidy, "../Data/wheatfields_tidy.csv")
+
+# Tsaile Creek
+tsaile_tidy <- tsaile_clean %>% 
+  mutate(WY = str_remove(WY, "TSAILE")) %>% 
+  mutate(WY = ifelse(startsWith(WY, "9"), paste0("19", WY), 
+                     ifelse(startsWith(WY, "0"), paste0("20", WY), WY))) %>% 
+  mutate(WY = ifelse(WY == "10", paste0("20",WY),WY)) %>% 
+  stream_data_tidy(gauge_name = "Tsaile Creek")
+
+write_csv(tsaile_tidy, "../Data/tsaile_tidy.csv")
+
+# Lukachai Creek
+lukachai_tidy <- stream_data_tidy(lukachai_creek_clean, gauge_name = "Lukachai Creek") 
+
+write_csv(lukachai_tidy, "../Data/lukachai_tidy.csv")
+
+
+
+
+
+
+
+
+
 ```
 

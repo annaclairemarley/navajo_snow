@@ -21,41 +21,93 @@ library(lubridate)
 library(janitor)
 library(ggridges)
 library(corrplot)
+library(readxl)
+library(gdata)
+library(naniar)
+```
+
+```{r}
+# set water year order
+wint_wy_order <- c("Dec", "Jan", "Feb", "Mar", "Apr")
 ```
 
 
-```{r, echo = FALSE, message = FALSE, warning=FALSE}
-# read in raw snow course data
-snow_course <- read_csv("../Data/snow_course_data_85-18.csv")
+```{r, echo = FALSE}
 
-# clean up 
-### ***** NEED TO CONVERT EVERYTHING TO MM **********
+# Turn snow course data into one dataframe 
+
+  # get names of excel sheets
+  list_sheets <- excel_sheets("../Data/NN_snowcoursedata_1985_2014.xlsx")
+  
+  # list of na strings that commonly occur in this dataset
+  na_strings <- c("")
+  
+  snow_course = NULL # creat empty dataframe
+  for (sheet_name in list_sheets) {
+    
+    print(sheet_name)
+    # read individual excel sheets and clean
+    readFile <- read.xls("../Data/NN_snowcoursedata_1985_2014.xlsx", 
+                        sheet = sheet_name, header = TRUE, stringsAsFactors=FALSE)  %>% 
+      select(1:13) %>% 
+      replace_with_na_all(condition = ~. %in% na_strings) 
+    
+    if (is.null(snow_course)) { # don't merge the first one
+      snow_course = readFile
+    } else {
+      snow_course = rbind(snow_course, readFile) # bind the files together
+    }
+  }
+  
 snow_course_clean <- snow_course %>% 
-  mutate(Date = paste0("01", "-", Date)) %>% 
-  mutate(Date = dmy(Date)) %>% 
-  rename_all(funs(str_replace(., "Start of Month Values", " "))) %>% 
   clean_names() %>% 
-  rename_all(funs(str_replace(., "_[0-9]+[np][0-9]+", ""))) %>% 
-  rename_all(funs(str_replace(., "_number", "")))
-
-# make a tidy version
-snow_course_tidy <- snow_course_clean %>% 
-  pivot_longer(c(2:15), names_to = "type", values_to = "values") 
+  mutate(date_collected = ymd(date_collected)) %>% 
+  select(station_name, "date" = date_collected, water_year, swe_m, ave_snow_depth_in) %>% 
+  mutate(swe_m = as.numeric(swe_m)) %>% 
+  mutate(av_snow_depth_m = conv_unit(ave_snow_depth_in, "inch", "m"))
   
 ```
 
-Look at SWE distribution across the different stations
+Look at measurements
+
+```{r, echo = FALSE}
+ggplot(snow_course_clean, aes(x = date, y = swe_m)) +
+  geom_point(aes(color = station_name))+
+  geom_line(aes(color = station_name))+
+  facet_wrap(~station_name)
+```
+
+Look at seasonal monthly median
+
 ```{r, echo = FALSE}
 
+seasonal_median <- snow_course_clean %>% 
+  mutate(month = month(date, label = TRUE, abbr = TRUE)) %>% 
+  group_by(station_name, month) %>% 
+  summarize(swe_m = median(swe_m, na.rm = TRUE)) %>% 
+  drop_na()
+
+ggplot(seasonal_median, aes(x = factor(month, wint_wy_order), y = swe_m, group = station_name)) +
+  geom_point(aes(color = station_name)) +
+  geom_line(aes(color = station_name)) +
+  labs(
+    x = "Month",
+    y = "SWE (m)",
+    color = "Station"
+  ) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+
+
+```
+
+
+Look at SWE distribution across the different stations
+```{r, echo = FALSE}
 # SWE
-snow_course_tidy %>% 
-  filter(str_detect(type, "water")) %>% 
-  mutate(type = str_remove(type, "_snow_water_equivalent_mm")) %>% 
-  ggplot(aes(x = values, 
-             y = factor(type, c("tsaile_canyon_3", "whiskey_creek","bowl_canyon","beaver_spring",
-                                "tsaile_canyon_1", "fluted_rock", "missionary_spring")))) +
+  ggplot(snow_course_clean, aes(x = swe_m, y = station_name)) +
   geom_density_ridges(scale = 7,
-                      aes(fill = type),
+                      aes(fill = station_name),
                       size = 0.3,
                       color = "NA",
                       alpha = 0.5,
@@ -67,95 +119,18 @@ snow_course_tidy %>%
   )
 
 # Snow depth
-snow_course_tidy %>% 
-  filter(str_detect(type, "depth")) %>% 
-  mutate(type = str_remove(type, "_snow_depth_cm")) %>% 
-  ggplot(aes(x = values, 
-              y = factor(type, c("tsaile_canyon_3", "whiskey_creek","bowl_canyon","beaver_spring",
-                                "tsaile_canyon_1", "fluted_rock", "missionary_spring")))) +
+ggplot(snow_course_clean, aes(x = av_snow_depth_m, y = station_name)) +
   geom_density_ridges(scale = 7,
-                      aes(fill = type),
+                      aes(fill = station_name),
                       size = 0.3,
                       color = "NA",
                       alpha = 0.5,
                       show.legend = FALSE) +
   theme_minimal() +
   labs(
-    x = "Snow Depth (cm)",
+    x = "Snow Depth (m)",
     y = "Snow Course Station"
   )
 ```
 
-SWE for each station 
-```{r, echo = FALSE}
-
-# SWE
-snow_course_tidy %>% 
-  filter(str_detect(type, "water")) %>% 
-  mutate(type = str_remove(type, "_snow_water_equivalent_mm")) %>% 
-  ggplot(aes(x = date, y = values)) +
-  geom_col() +
-  facet_wrap(~type) +
-  labs(
-    x = "Date",
-    y = "SWE (mm)"
-  ) +
-  scale_y_continuous(expand = c(0,0)) +
-  theme_classic()
-
-# March SWE
-snow_course_tidy %>% 
-  filter(str_detect(type, "water")) %>% 
-  mutate(type = str_remove(type, "_snow_water_equivalent_mm")) %>% 
-  filter(month(date) == 3) %>% 
-  ggplot(aes(x = date, y = values)) +
-  geom_line() +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE) +
-  facet_wrap(~type) +
-  labs(
-    x = "Date",
-    y = "SWE (mm)",
-    title = "March Snow Water Equivalent (mm)"
-  ) +
-  scale_y_continuous(expand = c(0,0)) +
-  theme_classic()
-
-# April SWE
-snow_course_tidy %>% 
-  filter(str_detect(type, "water")) %>% 
-  mutate(type = str_remove(type, "_snow_water_equivalent_mm")) %>% 
-  filter(month(date) == 4) %>% 
-  ggplot(aes(x = date, y = values)) +
-  geom_line() +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE) +
-  facet_wrap(~type) +
-  labs(
-    x = "Date",
-    y = "SWE (mm)",
-    title = "March Snow Water Equivalent (mm)"
-  ) +
-  scale_y_continuous(expand = c(0,0)) +
-  theme_classic()
-  
-
-```
-
-Correlations for SWE between stations
-
-```{r, echo = FALSE}
-# need to figure out how to handle so many NA values
-snow_course_cor_swe <- snow_course_clean %>% 
-  column_to_rownames(var = "date") %>% 
-  select(contains("water")) %>% 
-  rename_all(funs(str_replace(., "_snow_water_equivalent_mm", ""))) %>% 
-  drop_na()
-  
-
-cor_swe <- cor(snow_course_cor_swe)
-corrplot(cor_swe, method = "square", type = "upper", 
-         addCoef.col = "white", tl.col = "black", tl.srt=45)
-
-```
 
