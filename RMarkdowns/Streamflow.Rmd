@@ -33,6 +33,7 @@ capt_tom <- read_csv("../Data/capt_tom_tidy.csv")
 wheatfields <- read_csv("../Data/wheatfields_tidy.csv")
 tsaile <- read_csv("../Data/tsaile_tidy.csv")
 lukachai <- read_csv("../Data/lukachai_tidy.csv")
+
 ```
 
 ```{r, echo = FALSE, warning = FALSE}
@@ -46,7 +47,7 @@ all_streams_ne <- all_streams %>%
 # make a wide format version for correlation plotting
 # this version isn't working -- has a bunch of NULLs I can't get rid of
 all_streams_ne_wide_null <- all_streams_ne %>% 
-  select(date, station, discharge_cmps) %>% 
+  dplyr::select(date, station, discharge_cmps) %>% 
   pivot_wider(names_from = station, values_from = discharge_cmps) 
 
 # try a different way 
@@ -204,7 +205,7 @@ All of the station usually have peak streamflow in April EXCEPT Lukachai, which 
 
 # Seasonal streamflow
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, fig.width=5}
 
 # mean
 mean_seasonal <- all_streams_ne %>% 

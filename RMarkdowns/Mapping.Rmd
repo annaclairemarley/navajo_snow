@@ -47,6 +47,44 @@ snow_stations <- read_sf(paste0(path_shape, "/SnowStations"), layer = "Snow_Stat
 mt_regions <- read_sf(paste0(path_shape, "/mt_ranges"), layer = "Polygons")
 ```
 
+Plot high elevation regions in the Navajo Nation
+
+```{r, echo = FALSE}
+# download DEM
+dem_raster_NN_1 <- getData("SRTM", lat = 36.5, lon = -109.5, download = TRUE)
+dem_raster_NN_2 <- getData("SRTM", lat = 36.5, lon = -112, download = TRUE)
+
+# merge to one raster
+dem_raster_NN <- merge(dem_raster_NN_1, dem_raster_NN_2, progress = 'text')
+
+# crop to extent we want to look at
+extent_nn <- extent(c(-112, -107, 34, 37.5))
+nn_raster <- crop(dem_raster_NN, extent_nn, snap='out')
+
+plot(nn_raster)
+plot(navajo_nation, add = TRUE)
+
+# convert DEM to df for plotting
+# convert raster to dataframe for plotting
+nn_dem_point  <-  rasterToPoints(nn_raster)
+nn_dem_df <-  data.frame(nn_dem_point)
+colnames(nn_dem_df) = c("lon", "lat", "alt")
+
+
+ggplot() +
+  geom_raster(data = nn_dem_df, aes(lon, lat, fill = alt), alpha = .45) +
+  scale_fill_gradientn(colors = terrain.colors(100)) +
+  geom_sf(data = mt_regions, color = "burlywood4", fill = NA) +
+  geom_sf(data = navajo_nation, fill = NA) +
+  labs(
+    colors = "Elevation"
+  ) +
+  theme_classic()
+  
+
+```
+
+
 ```{r, echo = FALSE}
 # download DEM
 dem.raster <- getData("SRTM", lat = 36, lon = -109 , download = TRUE)
@@ -126,7 +164,9 @@ ggplot() +
 ggplot() +
   geom_sf(data = navajo_nation) +
  geom_sf(data = mt_regions) +
-  geom_sf_text(data = mt_regions, aes(label = Name)) +
+  geom_sf_text(data = mt_regions, aes(label = Name),
+                nudge_x = c(-0.025, 0.025, -0.05, 0.5, 0.5, 0,5),
+               nudge_y = c(-0.025, -0.025, 0, 0.5, 0.5, 0,5)) +
   labs(
     fill = "Correlation",
     title = "Mountain Regions"

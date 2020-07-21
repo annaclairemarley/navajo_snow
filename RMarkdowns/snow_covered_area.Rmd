@@ -1,0 +1,162 @@
+---
+title: "Snow Covered Area"
+author: "AnnaClaire Marley"
+date: "7/20/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Snow covered ARea (km^2)
+
+```{r, include = FALSE}
+# load packages 
+library(tidyverse)
+library(janitor)
+```
+
+```{r, include = FALSE}
+# set path to source funcitons from data cleaning folder
+path_clean = "../Functions/Cleaning/"
+path_graph = "../Functions/Graphing/"
+```
+
+```{r, echo = FALSE}
+# source functions
+source(paste0(path_clean, "to_water_week.R")) # for calculating week of water year
+source(paste0(path_graph, "graph_season_trend.R"))
+```
+
+```{r, echo = FALSE}
+# prism snow
+chuska_prism_snow <- read_csv("../Data/chuska_prism_snow.csv")
+```
+
+
+```{r, echo = FALSE}
+sca <- read_csv("../Data/snow_covered_area.csv") %>% 
+  clean_names() %>% 
+  mutate(date = dmy(date))
+
+sca_tidy <- sca %>% 
+  pivot_longer(c(mount_powell:all_mountains), values_to = "sca_km_2", names_to = "region")
+```
+
+```{r, echo = FALSE}
+
+sca_tidy %>% 
+  filter(!region %in% c("navajo_nation", "all_mountains")) %>% 
+  ggplot(aes(x = date, y = sca_km_2)) +
+  geom_line(aes(color = region)) +
+  labs(
+    x = "Year",
+    y = bquote("Snow Covered Area " (km^2)),
+    title = "Average Weekly Snow Covered Area"
+  )+
+  scale_x_date(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw() +
+  theme(legend.position="bottom", text = element_text(size=14)) 
+
+sca_tidy %>% 
+  filter(region == "chuska") %>% 
+  ggplot(aes(x = date, y = sca_km_2)) +
+  geom_line() +
+  labs(
+    x = "Year",
+    y = bquote("Snow Covered Area " (km^2)),
+    title = "Chuska Mountains Average Weekly Snow Covered Area"
+  )+
+  scale_x_date(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw() +
+  theme(legend.position="bottom", text = element_text(size=14)) 
+
+```
+
+Chuska average weekly snow cover compared to PRISM
+
+```{r, echo = FALSE}
+# prism average weely accumulated snow
+ch_prism_week <- chuska_prism_snow %>% 
+  mutate(week = week(Date)) %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year, week) %>% 
+  summarize(prism_snow_mm_accum = mean(prism_snow_mm_accum, na.rm = TRUE)) %>% 
+  mutate(date = (ymd(paste0(year, "-01-01")) + weeks(week - 1 ))) %>% 
+  ungroup() %>% 
+  filter(year(date) >=2000) %>% 
+  filter(month(date) %in% c(11,12,1,2,3,4)) 
+  
+# chuska prism and sca
+ch_prism_sca <- sca_tidy %>% 
+  filter(region == "chuska") %>% 
+  mutate(week = week(date))
+  left_join(ch_prism_week, by = "date")
+```
+
+
+```{r, echo = FALSE}
+
+sca_tidy %>% 
+  filter(region == "chuska") %>% 
+  ggplot(aes(x = date, y = sca_km_2)) +
+  geom_col(fill = "steelblue4") +
+  labs(
+    x = "Year",
+    y = bquote("Snow Covered Area " (km^2)),
+    title = "Chuska Mountains Average Weekly Snow Covered Area"
+  ) +
+  scale_x_date(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw() +
+  theme(legend.position="bottom", text = element_text(size=14)) 
+
+```
+
+
+
+Maximum snow covered area for the Chuskas
+
+```{r, echo = FALSE}
+
+chuska_max_week_sca <- sca_tidy %>% 
+  filter(region == "chuska") %>% 
+  rename(Date = date) %>% 
+  addWaterYear() %>% 
+  group_by(waterYear) %>% 
+  top_n(1, sca_km_2) %>% 
+  mutate(water_week = to_water_week(Date))
+
+ggplot(chuska_max_week_sca, aes(x = waterYear, y = sca_km_2)) +
+  geom_col(fill = "brown")
+
+
+ggplot(chuska_max_week_sca, aes(x = waterYear, y = water_week)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    x = "Water Year",
+    y = "Water Week",
+    title = "Chuska Mountains Timing of Maximum Snow Covered Area"
+  ) +
+  theme_bw()
+
+graph_season_trend(chuska_max_week_sca, chuska_max_week_sca$water_week,
+                   chuska_max_week_sca$waterYear, 
+                   title = "Chuska Mountains Timing of Maximum Snow Covered Area", 
+                   xlabel = "Water Year",
+                   ylabel = "Water Week")  
+
+```
+
+Week of water year of max snow covered area
+
+```{r, echo = FALSE}
+
+
+
+```
+

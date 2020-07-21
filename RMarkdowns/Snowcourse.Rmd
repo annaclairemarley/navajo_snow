@@ -16,7 +16,6 @@ This Rmarkdown analyzes snow course data from the Navajo Nation. It:
 * 
 
 ```{r, include = FALSE}
-library(tidyverse)
 library(lubridate)
 library(janitor)
 library(ggridges)
@@ -24,15 +23,27 @@ library(corrplot)
 library(readxl)
 library(gdata)
 library(naniar)
+library(measurements)
+library(tidyverse)
 ```
 
-```{r}
+```{r, echo = FALSE}
 # set water year order
 wint_wy_order <- c("Dec", "Jan", "Feb", "Mar", "Apr")
 ```
 
+```{r, echo = FALSE, message=FALSE}
+# read in snotel data
+wc_snotel <- read_csv("../Data/wc_snotel.csv")
+bs_snotel <- read_csv("../Data/bs_snotel.csv")
 
-```{r, echo = FALSE}
+# read in snodas data
+wc_snodas <- read_csv("../Data/whiskey_creek_snodas_swe.csv", col_names = c("date", "swe_mm"), skip = 1)
+bs_snodas <- read_csv("../Data/beaver_springs_snodas_swe.csv", col_names = c("date", "swe_mm"), skip = 1)
+```
+
+
+```{r, echo = FALSE, include = FALSE}
 
 # Turn snow course data into one dataframe 
 
@@ -68,14 +79,61 @@ snow_course_clean <- snow_course %>%
   
 ```
 
-Look at measurements
+Look at raw data
 
 ```{r, echo = FALSE}
 ggplot(snow_course_clean, aes(x = date, y = swe_m)) +
   geom_point(aes(color = station_name))+
-  geom_line(aes(color = station_name))+
+  #geom_line(aes(color = station_name))+
+#  geom_col(aes(fill = station_name)) +
   facet_wrap(~station_name)
 ```
+
+How much data is missing?
+
+```{r, echo = FALSE, warning = FALSE}
+
+missing_WY <- snow_course_clean %>% 
+  dplyr::select(water_year, station_name, swe_m) %>% 
+  group_by(station_name, water_year) %>% 
+  miss_var_summary()
+
+missing_month <- snow_course_clean %>% 
+  mutate(month = month(date, abbr = TRUE, label = TRUE)) %>% 
+  filter(!is.na(date)) %>% 
+  dplyr::select(date, month, station_name, swe_m) %>% 
+  group_by(station_name, month) %>% 
+  miss_var_summary()
+
+# plot missing percent WY
+ggplot(missing_WY, aes(x = water_year, y = pct_miss, group = station_name)) +
+  geom_col(aes(fill = station_name)) +
+  facet_wrap(~station_name) +
+  labs(
+    x = "Water Year",
+    y = "Percent Data Missing",
+    title = "Percent data missing each year"
+  ) +
+  scale_x_continuous(breaks = seq(1975,2020, by = 5), expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw() +
+  theme(legend.position="bottom", text = element_text(size=14)) 
+
+# plot missing percent WY
+ggplot(missing_month, aes(x = month, y = pct_miss, group = station_name)) +
+  geom_col(aes(fill = station_name)) +
+  facet_wrap(~station_name) +
+  labs(
+    x = "Water Year",
+    y = "Percent Data Missing",
+    title = "Percent data missing each month"
+  ) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw() +
+  theme(legend.position="bottom", text = element_text(size=14)) 
+
+```
+
 
 Look at seasonal monthly median
 
@@ -98,7 +156,28 @@ ggplot(seasonal_median, aes(x = factor(month, wint_wy_order), y = swe_m, group =
   scale_y_continuous(expand = c(0,0)) +
   theme_classic()
 
+```
 
+Seasonal monthly mean
+
+```{r, echo = FALSE}
+seasonal_mean <- snow_course_clean %>% 
+  mutate(month = month(date, label = TRUE, abbr = TRUE)) %>% 
+  group_by(station_name, month) %>% 
+  summarize(swe_m = mean(swe_m, na.rm = TRUE)) %>% 
+  drop_na()
+
+ggplot(seasonal_mean, aes(x = factor(month, wint_wy_order), y = swe_m, group = station_name)) +
+  geom_point(aes(color = station_name)) +
+  geom_line(aes(color = station_name)) +
+  labs(
+    x = "Month",
+    y = "SWE (m)",
+    title = "Seasonal Mean",
+    color = "Station"
+  ) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
 ```
 
 
@@ -133,4 +212,108 @@ ggplot(snow_course_clean, aes(x = av_snow_depth_m, y = station_name)) +
   )
 ```
 
+# compare SWE snotel to swe snow course for whiskey creek and beaver springs
+
+```{r, echo = FALSE}
+
+# whiskey creek snotel and snow course
+wc_snotel_course <- snow_course_clean %>% 
+  filter(station_name == "Whiskey Creek") %>% 
+  rename(Date = date) %>% 
+  left_join(wc_snotel, by = "Date") %>% 
+  filter(!is.na(swe_mm)) %>% 
+  mutate(snotel_swe_m = conv_unit(swe_mm, "mm", "m")) %>% 
+  mutate(snotel_depth_m = conv_unit(snow_depth_mm, "mm", "m"))
+
+ggplot(wc_snotel_course, aes( x = swe_m, y = snotel_swe_m)) +
+  geom_point() +
+  labs(
+    title = "Whiskey Creek Snotel and Snow Course Daily SWE",
+    x = "Snow Course SWE (m)",
+    y = "SNOTEL SWE (m)"
+  )
+
+summary(lm(wc_snotel_course$snotel_swe_m ~ wc_snotel_course$swe_m))
+
+ggplot(wc_snotel_course, aes( x = av_snow_depth_m, y = snotel_depth_m)) +
+  geom_point() +
+  labs(
+    title = "Whiskey Creek Snotel and Snow Course Daily Snow Depth",
+    x = "Snow Course Snow Depth (m)",
+    y = "SNOTEL Snow Depth (m)"
+  )
+
+summary(lm(wc_snotel_course$snotel_depth_m ~ wc_snotel_course$av_snow_depth_m))
+
+# Beaver Springs snotel and snow course
+bs_snotel_course <- snow_course_clean %>% 
+  filter(station_name == "Beaver Spring") %>% 
+  rename(Date = date) %>% 
+  left_join(bs_snotel, by = "Date") %>% 
+  filter(!is.na(swe_mm)) %>% 
+  mutate(snotel_swe_m = conv_unit(swe_mm, "mm", "m")) %>% 
+  mutate(snotel_depth_m = conv_unit(snow_depth_mm, "mm", "m"))
+
+# SWE
+ggplot(bs_snotel_course, aes( x = swe_m, y = snotel_swe_m)) +
+  geom_point() +
+  labs(
+    title = "Beaver Spring Snotel and Snow Course Daily SWE",
+    x = "Snow Course SWE (m)",
+    y = "SNOTEL SWE (m)"
+  )
+
+summary(lm(bs_snotel_course$snotel_swe_m ~ bs_snotel_course$swe_m))
+
+# snow depth
+ggplot(bs_snotel_course, aes(x = av_snow_depth_m, y = snotel_depth_m)) +
+  geom_point() +
+  labs(
+    title = "Beaver Spring Snotel and Snow Course Daily Snow Depth",
+    x = "Snow Course Snow Depth (m)",
+    y = "SNOTEL Snow Depth (m)"
+  )
+```
+
+# compare SWE SNODAS to swe snow course for whiskey creek and beaver springs
+
+```{r, echo = FALSE}
+# whiskey creek SNODAS and snow course
+wc_snodas_course <- snow_course_clean %>% 
+  filter(station_name == "Whiskey Creek") %>% 
+  left_join(wc_snodas, by = "date") %>% 
+  filter(!is.na(swe_mm)) %>% 
+  mutate(snodas_swe_m = conv_unit(swe_mm, "mm", "m")) 
+
+ggplot(wc_snodas_course, aes( x = swe_m, y = snodas_swe_m)) +
+  geom_point() +
+  labs(
+    title = "Whiskey Creek SNODAS and Snow Course Daily SWE",
+    x = "Snow Course SWE (m)",
+    y = "SNODAS SWE (m)"
+  )
+
+summary(lm(wc_snodas_course$snodas_swe_m ~ wc_snodas_course$swe_m))
+
+
+# Beaver Springs SNODAS and snow course
+bs_snodas_course <- snow_course_clean %>% 
+  filter(station_name == "Beaver Spring") %>% 
+  left_join(bs_snodas, by = "date") %>% 
+  filter(!is.na(swe_mm)) %>% 
+  mutate(snodas_swe_m = conv_unit(swe_mm, "mm", "m")) 
+
+# SWE
+ggplot(bs_snodas_course, aes(x = swe_m, y = snodas_swe_m)) +
+  geom_point() +
+  labs(
+    title = "Beaver Spring SNODAS and Snow Course Daily SWE",
+    x = "Snow Course SWE (m)",
+    y = "SNODAS SWE (m)"
+  )
+
+summary(lm(bs_snodas_course$snodas_swe_m ~ bs_snodas_course$swe_m))
+
+
+```
 
