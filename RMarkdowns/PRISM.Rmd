@@ -58,7 +58,9 @@ chuska_precip_month <- chuska_precip_day %>%
   mutate(month = month(Date)) %>% 
   group_by(year, month) %>% 
   summarize(precip_mm = sum(precip_mm)) %>% 
-  mutate(Date = ymd(paste0(year, "-", month, "-01")))
+  mutate(Date = ymd(paste0(year, "-", month, "-01"))) %>% 
+  addWaterYear() %>% 
+  ungroup()
 
 ggplot(chuska_precip_month, aes(x = Date, y = precip_mm)) +
   geom_line() +
@@ -67,6 +69,10 @@ ggplot(chuska_precip_month, aes(x = Date, y = precip_mm)) +
     title = "Monthly sum of precipitation Chuska Mountains"
   ) +
   theme_classic()
+
+ggplot(chuska_precip_month, aes(x = waterYear, y = precip_mm)) +
+  geom_col() +
+  facet_wrap(~month)
 ```
 
 
@@ -241,7 +247,6 @@ ch_tav_precip <- left_join(chuska_tmean, chuska_precip_day, by = "Date") %>%
 
 
 ```{r, echo = FALSE}
-
 # snotel data is accumulated precipitation, so we need to sum prism snowfall to estimate how much snow
 chuska_snow <- ch_tav_precip %>% 
   mutate(month = month(Date)) %>% 
@@ -251,8 +256,112 @@ chuska_snow <- ch_tav_precip %>%
   mutate(prism_snow_mm_accum = cumsum(prism_snow_mm)) %>%  # accumulate prism precip
   mutate(prism_snow_mm_accum = ifelse(month(Date) %in% c(4,5,6,7,8,9,10), 0, 
                                       prism_snow_mm_accum)) 
+```
+
+Is more preciptiation falling as rain or snow in winter?
+
+```{r, echo = FALSE}
+chuska_month_precip_all <- chuska_snow %>% 
+  ungroup() %>% 
+  mutate(month_name = month(Date, abbr = TRUE, label = TRUE)) %>% 
+  group_by(waterYear, month_name, precip_type) %>% 
+  summarize(precip_mm = sum(precip_mm, na.rm = TRUE)) %>% 
+  mutate(fraction_precip = precip_mm/sum(precip_mm))
+
+chuska_month_precip_all %>% 
+  filter(month_name %in% c("Nov", "Dec", "Jan", "Feb", "Mar", "Apr")) %>% 
+ggplot(aes(x = waterYear, y = precip_mm)) +
+  geom_col(aes(fill = precip_type)) +
+  facet_wrap(~factor(month_name, wy_order)) +
+  labs(
+    x = "Water Year",
+    y = "Precipitation (mm)",
+    fill = "Precipitation Type"
+  ) +
+  scale_y_continuous(expand = c(0,0)) +
+  scale_x_continuous(expand = c(0,0)) +
+  theme_bw()
+
+chuska_month_precip_all %>% 
+  filter(month_name %in% c("Nov", "Dec", "Jan", "Feb", "Mar", "Apr")) %>% 
+  filter(precip_type == "snow") %>% 
+ggplot(aes(x = waterYear, y = fraction_precip)) +
+  geom_point() +
+  geom_line() +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~factor(month_name, wy_order)) +
+  labs(
+    x = "Water Year",
+    y = "Fraction",
+    title = "Fraction of Total Monthly Precipitation Falling as Snow in the Chuskas"
+  ) +
+  scale_x_continuous(expand = c(0,0)) +
+  theme_bw()
+
+jan_snow_fraction <- chuska_month_precip_all %>% 
+  filter(month_name == "Jan") %>% 
+  filter(precip_type == "snow")
+
+summary(lm(jan_snow_fraction$fraction_precip ~ jan_snow_fraction$waterYear))
+
+
+chuska_wint_precip_fract <- chuska_snow %>% 
+  ungroup() %>% 
+  filter(month %in% c(11,12,1,2,3,4)) %>% 
+  group_by(waterYear, precip_type) %>% 
+  summarize(precip_mm = sum(precip_mm, na.rm = TRUE)) %>% 
+  mutate(fraction_precip = precip_mm/sum(precip_mm))
+
+
+chuska_wint_precip_fract %>% 
+  filter(precip_type == "snow") %>% 
+ggplot(aes(x = waterYear, y = fraction_precip)) +
+  geom_point() +
+ # geom_line() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    x = "Water Year",
+    y = "Fraction",
+    title = "Fraction of Total Winter Precipitation Falling as Snow in the Chuskas"
+  ) +
+  scale_x_continuous(expand = c(0,0)) +
+  theme_bw()
+
 
 ```
+
+Is less snow falling in the Spring?
+
+```{r, echo = FALSE}
+ch_snow_spring <- chuska_month_precip_all %>% 
+  filter(month_name %in% c("Mar", "Apr")) %>% 
+  filter(precip_type == "snow")
+
+ggplot(ch_snow_spring, aes(x = waterYear, y = precip_mm)) +
+  geom_col() +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~month_name) +
+  labs(
+    x = "Water Year",
+    y = "Snowfall (mm)",
+    title = "PRISM Estimated Total Snowfall Each Month in the Chuskas"
+  ) +
+  scale_y_continuous(expand = c(0,0)) +
+  scale_x_continuous(expand = c(0,0)) +
+  theme_bw()
+
+ch_snow_march <- ch_snow_spring %>% 
+  filter(month_name == "Mar")
+
+graph_season_trend(ch_snow_march, ch_snow_march$precip_mm, ch_snow_march$waterYear,
+                   title = "March Total Precipitation Chuskas",
+                   xlabel = "Water Year",
+                   ylabel = "Estimated Total Snowfall (mm)")
+
+summary(lm(ch_snow_march$precip_mm ~ ch_snow_march$waterYear))
+
+```
+
 
 
 ```{r, echo = FALSE}
@@ -269,13 +378,39 @@ ggplot(chuska_snow, aes(x = Date, y = prism_snow_mm_accum/1000)) +
 # total amount of snow that fell on the chuskas
 ch_snow_max <- chuska_snow %>% 
   filter(waterYear > 1981) %>% 
-  summarize(snow_mm = max(prism_snow_mm_accum, na.rm = TRUE))
+  summarize(snow_mm = max(prism_snow_mm_accum, na.rm = TRUE)) %>% 
+  mutate(prism_snow_m_accum = conv_unit(snow_mm, "mm", "m"))
 
 # plot it
 graph_season_trend(ch_snow_max, (ch_snow_max$snow_mm)/1000, ch_snow_max$waterYear, 
                    title = "Max Accumulated Snowfall", 
                    xlabel = "Water Year",
                    ylabel = "Snow (m)") 
+
+# anomaly for max accumulated snowfall PRISM
+ch_snow_max_mean_82_11 <- ch_snow_max %>% 
+  filter(waterYear <= 2011) %>% 
+  summarize(mean = mean(prism_snow_m_accum))
+ch_snow_max_sd_82_11 <- ch_snow_max %>% 
+  filter(waterYear <= 2011) %>% 
+  summarize(sd = sd(prism_snow_m_accum))
+
+ch_snow_max_anom <- ch_snow_max %>% 
+  mutate(mean_82_11 = ch_snow_max_mean_82_11$mean) %>% 
+  mutate(sd_82_11 = ch_snow_max_sd_82_11$sd) %>% 
+  mutate(anomaly = (prism_snow_m_accum-mean_82_11)/sd_82_11) %>% 
+  mutate(sign = ifelse(anomaly < 0, "negative", "positive"))
+
+ggplot(ch_snow_max_anom, aes(x = waterYear, y = anomaly)) +
+  geom_col(aes(fill = sign), show.legend = FALSE) +
+  scale_fill_manual(values = c("red", "darkgreen")) +
+  labs(
+    x = "Water Year",
+    y = "Anomaly",
+    title = "Max PRISM Accumulated Snowfall Anomaly From 1982-2011 Average"
+  ) +
+  theme_classic()
+
 ```
 
 #### Observation

@@ -45,7 +45,36 @@ snow_stations <- read_sf(paste0(path_shape, "/SnowStations"), layer = "Snow_Stat
 
 # all mountian regions
 mt_regions <- read_sf(paste0(path_shape, "/mt_ranges"), layer = "Polygons")
+
+# Chuska watersheds
+huc_8_watersheds <- read_sf(paste0(path_shape, "/chuska_huc8_watersheds"), 
+                            layer = "watersheds_chuska")
+
+huc_10_watersheds <- read_sf(paste0(path_shape, "/chuska_huc10_watersheds"), 
+                            layer = "chuska_huc10_watersheds")
 ```
+
+```{r, echo = FALSE}
+# creat streamflow shapefile
+  # Asaayi Creek: 35.98716709, -108.9213936
+  # Whiskey Creek: 36.14228284, -109.0183806
+  # Wheatfields Creek: 36.2376538943499, -109.047764567658
+  # Tsaile Creek: 36.2858494184911, -109.155961861833
+
+stream_stations <- data.frame(stations = c("Asaayi", "Whiskey Creek", 
+                                           "Wheatfields Creek", "Tsaile Creek"),
+                              latitude = c(35.98716709, 36.14228284, 
+                                           36.2376538943499, 36.2858494184911),
+                              longitude = c(-108.9213936, -109.0183806,
+                                            -109.047764567658, -109.155961861833)
+                              )
+stream_point <- st_as_sf(stream_stations, coords = c("longitude", "latitude"), remove = FALSE,
+                         crs = 4326)
+
+plot(stream_point$geometry)
+
+```
+
 
 Plot high elevation regions in the Navajo Nation
 
@@ -84,6 +113,7 @@ ggplot() +
 
 ```
 
+## SNOTEL Stations on DEM
 
 ```{r, echo = FALSE}
 # download DEM
@@ -113,6 +143,22 @@ ggplot() +
   coord_sf(xlim = c(-109.5, -108.4), ylim = c(35.7, 36.65), expand = FALSE) +
   theme_classic()
 
+```
+
+# Stream gauge locations on DEM
+
+```{r, echo = FALSE}
+# map it
+ggplot() +
+  geom_raster(data = ch_dem_df, aes(lon, lat, fill = alt), alpha = .45) +
+  scale_fill_gradientn(colours = terrain.colors(100)) +
+  geom_sf(data = stream_point, size = 2) +
+  geom_sf(data = huc_10_watersheds, fill = NA, color = "grey64") +
+  geom_sf(data = snow_stations %>% filter(Network == "SNOTEL"), color = "steelblue4", size = 2) +
+  geom_text_repel(data = stream_point, 
+                  aes(x = longitude, y = latitude, label = stations)) +
+  coord_sf(xlim = c(-109.5, -108.4), ylim = c(35.7, 36.65), expand = FALSE) +
+  theme_classic()
 ```
 
 

@@ -42,6 +42,9 @@ sca <- read_csv("../Data/snow_covered_area.csv") %>%
 
 sca_tidy <- sca %>% 
   pivot_longer(c(mount_powell:all_mountains), values_to = "sca_km_2", names_to = "region")
+
+chuska_sca <- sca_tidy %>% 
+  filter(region == "chuska")
 ```
 
 ```{r, echo = FALSE}
@@ -60,9 +63,8 @@ sca_tidy %>%
   theme_bw() +
   theme(legend.position="bottom", text = element_text(size=14)) 
 
-sca_tidy %>% 
-  filter(region == "chuska") %>% 
-  ggplot(aes(x = date, y = sca_km_2)) +
+
+  ggplot(chuska_sca, aes(x = date, y = sca_km_2)) +
   geom_line() +
   labs(
     x = "Year",
@@ -78,24 +80,6 @@ sca_tidy %>%
 
 Chuska average weekly snow cover compared to PRISM
 
-```{r, echo = FALSE}
-# prism average weely accumulated snow
-ch_prism_week <- chuska_prism_snow %>% 
-  mutate(week = week(Date)) %>% 
-  mutate(year = year(Date)) %>% 
-  group_by(year, week) %>% 
-  summarize(prism_snow_mm_accum = mean(prism_snow_mm_accum, na.rm = TRUE)) %>% 
-  mutate(date = (ymd(paste0(year, "-01-01")) + weeks(week - 1 ))) %>% 
-  ungroup() %>% 
-  filter(year(date) >=2000) %>% 
-  filter(month(date) %in% c(11,12,1,2,3,4)) 
-  
-# chuska prism and sca
-ch_prism_sca <- sca_tidy %>% 
-  filter(region == "chuska") %>% 
-  mutate(week = week(date))
-  left_join(ch_prism_week, by = "date")
-```
 
 
 ```{r, echo = FALSE}
@@ -116,6 +100,30 @@ sca_tidy %>%
 
 ```
 
+Average SCA for each month
+
+```{r, echo = FALSE}
+
+sca_month_av <- chuska_sca %>% 
+  mutate(month = month(date, abbr = TRUE, label = TRUE)) %>% 
+  rename(Date = date) %>% 
+  addWaterYear() %>% 
+  group_by(waterYear, month) %>% 
+  summarize(sca_km_2 = mean(sca_km_2))
+
+ggplot(sca_month_av, aes(x = waterYear, y = sca_km_2)) +
+  geom_col() +
+  facet_wrap(~factor(month, c("Nov", "Dec", "Jan", "Feb", "Mar", "Apr"))) +
+  labs(
+    x = "Water Year",
+    y = bquote("Snow Covered Area " (km^2)),
+    title = "Chuska Average SCA Each Month"
+  ) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw()
+  
+
+```
 
 
 Maximum snow covered area for the Chuskas
@@ -152,11 +160,65 @@ graph_season_trend(chuska_max_week_sca, chuska_max_week_sca$water_week,
 
 ```
 
-Week of water year of max snow covered area
+## PRISM and SCA
+
+```{r, echo = FALSE}
+# prism average weely accumulated snow
+ch_prism_sca <- chuska_prism_snow %>% 
+  rename(date = Date) %>% 
+  left_join(chuska_sca, by = "date") %>% 
+  filter(waterYear >=2000) %>% 
+  mutate(prism_snow_m_accum = conv_unit(prism_snow_mm_accum, "mm", "m") )
+ 
+
+ggplot(ch_prism_sca, aes(x = date, y= sca_km_2/100)) +
+  geom_col(fill = "grey62", width = 4) +
+  labs(
+    x = "Year",
+    y = bquote("Snow Covered Area " (x10^2,km^2)),
+    title = "Chuska Snow Covered Area and PRISM Estimated Snowfall Accumulation"
+  ) +
+  geom_line(aes(y = prism_snow_m_accum), color = "#1219cc") +
+  scale_x_date(expand = c(0,0)) +
+  scale_y_continuous(
+          sec.axis = sec_axis(~., "PRISM accumulated snow (m)"),
+          expand = c(0,0)
+        )+
+theme_bw() +
+         theme(axis.line.y.right = element_line(color = "#1219cc"),
+                axis.text.y.right = element_text(color = "#1219cc"),
+                axis.title.y.right = element_text(color = "#1219cc")) 
+  
+```
+
+
 
 ```{r, echo = FALSE}
 
+ch_max_prism_sca <- chuska_prism_snow %>% 
+  group_by(waterYear) %>% 
+  top_n(1, prism_snow_mm_accum) %>% 
+  top_n(1, Date) %>% 
+  ungroup() %>% 
+  mutate(waterYear = replace_na(waterYear, "2000")) %>% 
+  mutate(waterYear = as.integer(waterYear)) %>% 
+  select(waterYear, prism_snow_mm_accum) %>% 
+  left_join(chuska_max_week_sca, by = "waterYear") %>% 
+  filter(waterYear > 2000)
 
 
+ggplot(ch_max_prism_sca, aes(x = sca_km_2, y = prism_snow_mm_accum)) +
+  geom_point(aes(color = waterYear)) +
+  geom_smooth(method= "lm", se = FALSE) +
+  labs(
+    x = bquote("Max Snow Covered Area ", (km^2)),
+    y = "Max PRISM Estimated Accumulated Snowfall",
+    title = "Maximum SCA and PRISM Accumulated Snowfall Each Winter"
+  ) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw()
+
+summary(lm(ch_max_prism_sca$prism_snow_mm_accum ~ ch_max_prism_sca$sca_km_2))
+  
 ```
 
