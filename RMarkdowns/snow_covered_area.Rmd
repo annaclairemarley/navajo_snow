@@ -34,8 +34,21 @@ source(paste0(path_graph, "graph_season_trend.R"))
 chuska_prism_snow <- read_csv("../Data/chuska_prism_snow.csv")
 ```
 
+```{r, echo = FALSE}
+# km areas of each mountain range:
+carrizo_area_km = 339 #km2
+chuska_area_km = 4581 #km2
+bm_area_km = 1413 #km2
+defiance_area_km = 1106 #km2
+mt_powell_area_km = 77 #km2
+nm_area_km = 96 #km2
+nn_area_km = 67636 #km2
+```
+
 
 ```{r, echo = FALSE}
+
+# raw snow covered area
 sca <- read_csv("../Data/snow_covered_area.csv") %>% 
   clean_names() %>% 
   mutate(date = dmy(date))
@@ -45,10 +58,25 @@ sca_tidy <- sca %>%
 
 chuska_sca <- sca_tidy %>% 
   filter(region == "chuska")
+
+# fraction of snow covered area
+sca_fract <- sca %>% 
+  mutate(chuska = chuska/chuska_area_km) %>% 
+  mutate(defiance_plateau = defiance_plateau/ defiance_area_km) %>% 
+  mutate(black_mesa = black_mesa/bm_area_km) %>% 
+  mutate(mount_powell = mount_powell/mt_powell_area_km) %>% 
+  mutate(carrizo = carrizo/carrizo_area_km) %>% 
+  mutate(navajo_mountain = navajo_mountain/nm_area_km) %>% 
+  select(date, chuska, defiance_plateau, black_mesa, carrizo, mount_powell, navajo_mountain)
+  
+sca_fract_tidy <- sca_fract %>% 
+  pivot_longer(c(chuska:navajo_mountain), values_to = "fraction", names_to = "region")
+
+
 ```
 
 ```{r, echo = FALSE}
-
+# raw sca
 sca_tidy %>% 
   filter(!region %in% c("navajo_nation", "all_mountains")) %>% 
   ggplot(aes(x = date, y = sca_km_2)) +
@@ -63,7 +91,6 @@ sca_tidy %>%
   theme_bw() +
   theme(legend.position="bottom", text = element_text(size=14)) 
 
-
   ggplot(chuska_sca, aes(x = date, y = sca_km_2)) +
   geom_line() +
   labs(
@@ -75,8 +102,41 @@ sca_tidy %>%
   scale_y_continuous(expand = c(0,0)) +
   theme_bw() +
   theme(legend.position="bottom", text = element_text(size=14)) 
+  
+# fraction of mountain covered in snow
+  sca_fract_tidy %>% 
+  ggplot(aes(x = date, y = fraction)) +
+  geom_line(aes(color = region)) +
+  labs(
+    x = "Year",
+    y = "Fraction",
+    title = "Fraction of Region Covered in Snow"
+  )+
+  scale_x_date(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw() +
+  theme(legend.position="bottom", text = element_text(size=14)) 
 
 ```
+
+```{r, echo = FALSE}
+
+sca_fract_tidy %>% 
+  mutate(month = month(date, label = TRUE, abbr = TRUE)) %>% 
+  group_by(month) %>% 
+  ggplot(aes(x = factor(month, 
+                        levels = c("Nov","Dec","Jan", "Feb", "Mar", "Apr")), y = fraction)) +
+  geom_boxplot(aes(color = month)) +
+  facet_wrap(~region) +
+  labs( 
+    x = "Month",
+    y = "Fraction of SCA",
+    title = "Fraction of Area Covered By Snow"
+    ) +
+  theme_classic()
+
+```
+
 
 Chuska average weekly snow cover compared to PRISM
 
@@ -103,7 +163,7 @@ sca_tidy %>%
 Average SCA for each month
 
 ```{r, echo = FALSE}
-
+# raw area
 sca_month_av <- chuska_sca %>% 
   mutate(month = month(date, abbr = TRUE, label = TRUE)) %>% 
   rename(Date = date) %>% 
@@ -122,6 +182,25 @@ ggplot(sca_month_av, aes(x = waterYear, y = sca_km_2)) +
   scale_y_continuous(expand = c(0,0)) +
   theme_bw()
   
+# fraction of mountain covered in snow
+sca_month_av_fract <- sca_fract_tidy %>% 
+  filter(region == "chuska") %>% 
+  mutate(month = month(date, abbr = TRUE, label = TRUE)) %>% 
+  rename(Date = date) %>% 
+  addWaterYear() %>% 
+  group_by(waterYear, month) %>% 
+  summarize(fraction = mean(fraction))
+
+ggplot(sca_month_av_fract, aes(x = waterYear, y = fraction)) +
+  geom_col() +
+  facet_wrap(~factor(month, c("Nov", "Dec", "Jan", "Feb", "Mar", "Apr"))) +
+  labs(
+    x = "Water Year",
+    y = "Fraction",
+    title = "Chuska Average Fraction of SCA Each Month"
+  ) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw()
 
 ```
 
@@ -207,12 +286,12 @@ ch_max_prism_sca <- chuska_prism_snow %>%
   filter(waterYear > 2000)
 
 
-ggplot(ch_max_prism_sca, aes(x = sca_km_2, y = prism_snow_mm_accum)) +
+ggplot(ch_max_prism_sca, aes(x = sca_km_2, y = prism_snow_mm_accum/1000)) +
   geom_point(aes(color = waterYear)) +
   geom_smooth(method= "lm", se = FALSE) +
   labs(
-    x = bquote("Max Snow Covered Area ", (km^2)),
-    y = "Max PRISM Estimated Accumulated Snowfall",
+    x = bquote("Snow Covered Area " (km^2)),
+    y = "PRISM Estimated Accumulated Snowfall (m)",
     title = "Maximum SCA and PRISM Accumulated Snowfall Each Winter"
   ) +
   scale_y_continuous(expand = c(0,0)) +
@@ -220,5 +299,81 @@ ggplot(ch_max_prism_sca, aes(x = sca_km_2, y = prism_snow_mm_accum)) +
 
 summary(lm(ch_max_prism_sca$prism_snow_mm_accum ~ ch_max_prism_sca$sca_km_2))
   
+```
+
+MAX SNOTEL SWE and Chuska SCA
+
+```{r, echo = FALSE}
+# read in whiskey creek snotel data
+wc_snotel <- read_csv("../Data/wc_snotel.csv") %>% 
+  clean_names() %>% 
+  mutate(swe_m = conv_unit(swe_mm, "mm", "m")) %>% 
+  mutate(Date = date) %>% 
+  addWaterYear()
+
+bs_snotel <- read_csv("../Data/bs_snotel.csv") %>% 
+  clean_names() %>% 
+  mutate(swe_m = conv_unit(swe_mm, "mm", "m"))%>% 
+  mutate(Date = date) %>% 
+  addWaterYear()
+
+
+
+```
+```{r, echo = FALSE}
+
+# whiskey creek
+ch_max_snotel_sca <- wc_snotel %>% 
+  group_by(waterYear) %>% 
+  top_n(1, swe_m) %>% 
+  top_n(1, Date) %>% 
+  filter(waterYear > 2009) %>% 
+  ungroup() %>% 
+  select(waterYear, swe_m) %>% 
+  left_join(chuska_max_week_sca, by = "waterYear") 
+
+ch_max_snotel_sca %>% 
+  mutate(waterYear = as.integer(waterYear)) %>% 
+ggplot( aes(x = swe_m, y = sca_km_2)) +
+  geom_point(aes(color = waterYear)) +
+  geom_smooth(method= "lm", se = FALSE) +
+  scale_color_gradient(labels = c(2010, 2012, 2015, 2017, 2020)) +
+  labs(
+    x = "SNOTEL SWE (m)",
+    y = bquote("Snow Covered Area " (km^2)),
+    title = "Whiskey Creek Max SNOTEL SWE and Chuska SCA",
+    color = "Water Year"
+  ) +
+  theme_bw()
+
+summary(lm(ch_max_snotel_sca$sca_km_2 ~ ch_max_snotel_sca$swe_m))
+
+# beaver spring
+ch_max_snotel_sca <- bs_snotel %>% 
+  group_by(waterYear) %>% 
+  top_n(1, swe_m) %>% 
+  top_n(1, Date) %>% 
+  filter(waterYear > 2009) %>% 
+  ungroup() %>% 
+  select(waterYear, swe_m) %>% 
+  left_join(chuska_max_week_sca, by = "waterYear") 
+
+ch_max_snotel_sca %>% 
+  mutate(waterYear = as.integer(waterYear)) %>% 
+ggplot( aes(x = swe_m, y = sca_km_2)) +
+  geom_point(aes(color = waterYear)) +
+  geom_smooth(method= "lm", se = FALSE) +
+  scale_color_gradient(labels = c(2010, 2012, 2015, 2017, 2020)) +
+  labs(
+    x = "SNOTEL SWE (m)",
+    y = bquote("Snow Covered Area " (km^2)),
+    title = "Beaver Spring Max SNOTEL SWE and Chuska SCA",
+    color = "Water Year"
+  ) +
+  theme_bw()
+
+summary(lm(ch_max_snotel_sca$sca_km_2 ~ ch_max_snotel_sca$swe_m))
+
+
 ```
 

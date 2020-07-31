@@ -165,7 +165,7 @@ ggplot(max_swe_timing, aes(x = waterYear, y = water_week)) +
 
 ## Median monthly SWE 
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, fig.width=5}
 
 median_monthly_wy <- daily_swe_all_tidy %>% 
   group_by(mt_region, "month" = month(Date, label = TRUE, abbr = TRUE)) %>% 
@@ -180,10 +180,12 @@ ggplot(median_monthly_wy, aes(x = factor(month,
   labs(
     x = "Month",
     y = bquote('SWE'~(m^3)),
-    title = "Median SWE each month 2004-2020 water years"
+    title = "SNODAS Monthly Median SWE 2004-2020 WY",
+    color = "Mountain Region"
   ) +
   scale_y_continuous(expand = c(0,0)) +
-  theme_classic()
+  theme_classic() +
+  theme(legend.position="bottom", text = element_text(size=14)) 
 ```
 
 ```{r, echo = FALSE}

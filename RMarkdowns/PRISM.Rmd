@@ -38,11 +38,17 @@ wy_order = c("Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul
 
 ### Precipitation
 
+- precipitation needs to be made into volume falling on the Chuskas
+- Since this data is already a sum of all the grid cells of precipitaiton falling on the Chuskas we need to multiply this sum by area of each PRISM pixel (16 km2)
+
 Daily
 ```{r, echo = FALSE}
+prism_pixel_m2 = conv_unit(16, "km2", "m2")
+
 # read in prism data -- sum of precipiation across the chuska mountains
 chuska_precip_day <- read_csv("../Data/chuska_prism_precip.csv", col_names = c("Date", "precip_mm"), skip = 1) %>% 
-  mutate(Date = ymd(Date))
+  mutate(Date = ymd(Date)) %>% 
+  mutate(precip_m3 = conv_unit(precip_mm, "mm", "m")*prism_pixel_m2)
 
 # initial look
 ggplot(chuska_precip_day, aes(x = Date, y = precip_mm)) +
@@ -207,6 +213,32 @@ chuska_hot <- chuska_tmean %>%
   summarize(tmean = max(tmean)) %>% 
   filter(waterYear != 2020) # not a complete water year
 
+# look at dates of hottest days
+chuska_hot_winter_days <- chuska_tmean %>% 
+  filter(month(Date) %in% c(11,12,1,2,3,4)) %>% 
+  mutate(month_name = month(Date, label = TRUE, abbr = TRUE)) %>% 
+  group_by(waterYear) %>% 
+  top_n(1, tmean) %>% 
+  mutate(water_start_date = mdy(paste0("oct", "-", "1", "-", year(Date)-1))) %>% 
+  mutate(day_wy = Date-water_start_date) %>% 
+  mutate(day_wy = ifelse(month_name == "Nov", 35, day_wy))
+
+# histogram of day of water year
+ggplot(chuska_hot_winter_days, aes(x = day_wy)) +
+  geom_histogram() +
+  labs(
+    title = "Histogram of Day of Water of Year Hottest Day of Winter Occurs",
+    x = "Day of Water Year"
+  ) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+
+graph_season_trend(chuska_hot_winter_days, chuska_hot_winter_days$day_wy,
+                   chuska_hot_winter_days$waterYear, 
+                   title = "Day of Water Hottest Day of Winterr", 
+                   xlabel = "Water Year",
+                   ylabel = "Day of Water Year") 
+
 # graphit
 graph_season_trend(chuska_hot, chuska_hot$tmean, chuska_hot$waterYear, 
                    title = "Temperature of Hottest Day Each Water Year", 
@@ -229,6 +261,19 @@ graph_season_trend(chuska_hot_winter, chuska_hot_winter$tmean, chuska_hot_winter
 ggplot(chuska_hot_winter, aes(x = waterYear, y = tmean)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE)
+
+# average temperature winter water year winter = nov, dec, jan, feb, mar, apr
+chuska_av_winter <- chuska_tmean %>% 
+  mutate(month = month(Date)) %>% 
+  filter(month %in% c(11, 12, 1, 2, 3, 4)) %>% 
+  group_by(waterYear) %>% 
+  summarize(tmean = mean(tmean))
+
+# graphit
+graph_season_trend(chuska_av_winter, chuska_av_winter$tmean, chuska_av_winter$waterYear, 
+                   title = "Average Temperature Each Winter", 
+                   xlabel = "Winter Water Year",
+                   ylabel = "Temperature (°C)")  
 
 ```
 
@@ -317,7 +362,7 @@ chuska_wint_precip_fract %>%
   filter(precip_type == "snow") %>% 
 ggplot(aes(x = waterYear, y = fraction_precip)) +
   geom_point() +
- # geom_line() +
+  geom_line() +
   geom_smooth(method = "lm", se = FALSE) +
   labs(
     x = "Water Year",

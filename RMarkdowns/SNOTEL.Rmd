@@ -15,7 +15,6 @@ This RMarkdown conducts initial time series analyses on two SNOTEL sites in the 
 
 ```{r, message=FALSE, include = FALSE}
 library(RNRCS)
-library(tidyverse)
 library(lubridate)
 library(gridExtra)
 library(measurements)
@@ -23,6 +22,8 @@ library(mltools)
 library(dataRetrieval)
 library(naniar)
 library(ggridges)
+library(tidyverse)
+library(janitor)
 ```
 
 ```{r, include = FALSE}
@@ -514,6 +515,18 @@ ggplot(wc_snodas_snotel_wint, aes(x = snotel_depth_mm, y = snodas_snow_depth_mm)
       ) +
      theme_classic()
   
+```
+
+**stats**
+```{r}
+# correlation
+cor.test(wc_snodas_snotel_wint$snodas_snow_depth_mm, wc_snodas_snotel_wint$snotel_depth_mm)
+
+# linear model 
+summary(lm(wc_snodas_snotel_wint$snodas_snow_depth_mm ~ wc_snodas_snotel_wint$snotel_depth_mm))
+
+# root mean square error
+rmse(wc_snodas_snotel_wint$snodas_snow_depth_mm, wc_snodas_snotel_wint$snotel_depth_mm, na.rm = TRUE)
 ```
 
 ```{r, echo = FALSE}
@@ -1120,7 +1133,13 @@ snotel_swe_max <- wc_clean_metric %>%
 
 ggplot(snotel_swe_max, aes(x = ndayfr, y = swe_mm)) +
   geom_point() +
-  geom_smooth(method = "lm", se = FALSE)
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    x = "Number of PRISM Freezing Days",
+    y = "Max SNOTEL SWE (mm)"
+  ) +
+  theme_bw() +
+  theme(text = element_text(size=14))
 
 # theres a relationship between number of freezing days and maximum SWE
 cor.test(snotel_swe_max$swe_mm, snotel_swe_max$ndayfr)
@@ -1229,7 +1248,35 @@ ggplot(wc_prism_snotel_snodas_swe_max, aes(x = waterYear, y = snow_mm)) +
   scale_y_continuous(expand = c(0,0)) +
   theme_classic() +
   theme(legend.position="bottom", text = element_text(size=14)) 
-  
+
+
+# Max SWE correlation graph 
+wc_prism_snotel_snodas_swe_max_cor  <- wc_prism_snotel_snodas_swe_max %>% 
+  select(waterYear, measurement, snow_mm) %>% 
+  pivot_wider(names_from = measurement, values_from = snow_mm) %>% 
+  pivot_longer(c("SNODAS SWE (mm)", "PRISM Accumulated Snowfall (mm)"), 
+               names_to = "Snow Product", values_to = "snow_mm") %>% 
+  clean_names()
+
+ggplot(wc_prism_snotel_snodas_swe_max_cor, aes(x = snotel_swe_mm, y = snow_mm)) +
+  geom_point(aes(color = snow_product), show.legend = FALSE) +
+  geom_smooth(method = "lm", se = FALSE, aes(color = snow_product), show.legend = FALSE) +
+  labs(
+    x = "Max SNOTEL SWE (mm)",
+    y = "milimeters", 
+    color = "Remote Sensing Product"
+  ) +
+  theme_bw() +
+  theme(legend.position="bottom", text = element_text(size=14)) 
+
+wc_prism_max_lm <- wc_prism_snotel_snodas_swe_max_cor %>% 
+  filter(snow_product == "PRISM Accumulated Snowfall (mm)")
+
+wc_snodas_max_lm <- wc_prism_snotel_snodas_swe_max_cor %>% 
+  filter(snow_product == "SNODAS SWE (mm)")
+
+summary(lm(wc_prism_max_lm$snow_mm ~ wc_prism_max_lm$snotel_swe_mm))
+summary(lm(wc_snodas_max_lm$snow_mm ~ wc_snodas_max_lm$snotel_swe_mm))
 ```
 
 
@@ -1338,6 +1385,31 @@ ggplot(wc_prism_snotel, aes(x = Date, y = snotel_swe_mm)) +
 # root mean square error
 rmse(wc_prism_snotel_wint$prism_snow_mm_accum, wc_prism_snotel_wint$snotel_swe_mm)
 
+summary(lm(wc_prism_snotel_wint$prism_snow_mm_accum ~ wc_prism_snotel_wint$snotel_swe_mm))
+
+```
+
+```{r, echo = FALSE}
+# root mean square error
+rmse(wc_prism_snotel_wint$prism_snow_mm_accum, wc_prism_snotel_wint$snotel_swe_mm)
+
+# RMSE each year
+
+wc_rmse_clean <- wc_prism_snotel_wint %>% 
+  ungroup() %>% 
+  select(Date, waterYear, snotel_swe_mm, prism_snow_mm_accum)
+
+wc_rmse_wy <- wc_rmse_clean %>% 
+  group_by(waterYear) %>% 
+  mutate(rmse = rmse(snotel_swe_mm, prism_snow_mm_accum)) %>% 
+  slice(1)
+
+# RMSE each month
+wc_rmse_month <- wc_rmse_clean %>% 
+  mutate(month = month(Date)) %>% 
+  group_by(month) %>% 
+  mutate(rmse = rmse(snotel_swe_mm, prism_snow_mm_accum)) %>% 
+  slice(1)
 ```
 
 
@@ -1919,6 +1991,8 @@ rsquare_snodas_snotel_plot_bs <- rsquare_snodas_snotel_bs %>%
   theme_classic()
 rsquare_snodas_snotel_plot_bs
 
+summary(lm(bs_snodas_snotel_wint$snodas_swe_mm ~ bs_snodas_snotel_wint$snotel_swe_mm))
+
 
 ```
 
@@ -1948,6 +2022,8 @@ snodas_snotel_stats <- bs_snodas_snotel_wint %>%
   mutate(sd_snodas_swe = sd(snodas_swe_mm, na.rm = TRUE)) %>% 
 #  select(waterYear, rsquare_depth, rsquare_swe, var_depth, var_swe, rmse_depth, rmse_swe) %>% 
   slice(1)
+
+rmse(bs_snodas_snotel_wint$snodas_swe_mm, bs_snodas_snotel_wint$snotel_swe_mm)
 
 # plot rsquared
 rsquare_snodas_snotel_plot <- snodas_snotel_stats %>%
@@ -2211,6 +2287,9 @@ ggplot(bs_prism_snow, aes(x = waterYear, y = percent)) +
   theme_classic()
 ```
 
+
+
+
 Temperature of hottest average temperature days each water year
 
 ```{r, echo = FALSE}
@@ -2260,6 +2339,32 @@ graph_season_trend(num_freeze, num_freeze$ndayfr, num_freeze$waterYear,
 ```
 
 
+freezing days correlation to SNOTEL swe max
+```{r, echo = FALSE}
+
+snotel_swe_max <- bs_clean_metric %>% 
+  addWaterYear() %>% 
+  filter(waterYear != 2009) %>% 
+  group_by(waterYear) %>% 
+  summarize(swe_mm = max(swe_mm, na.rm = TRUE)) %>% 
+  left_join(num_freeze, by = "waterYear")
+
+ggplot(snotel_swe_max, aes(x = ndayfr, y = swe_mm)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    x = "Number of PRISM Freezing Days",
+    y = "SNOTEL SWE (mm)"
+  ) +
+  theme_bw() +
+  theme(text = element_text(size=14))
+
+# theres a relationship between number of freezing days and maximum SWE
+cor.test(snotel_swe_max$swe_mm, snotel_swe_max$ndayfr)
+summary(lm(snotel_swe_max$swe_mm ~ snotel_swe_max$ndayfr))
+
+```
+
 #### PRISM Snow accumulation vs SNOTEL SWE
 
 ```{r, echo = FALSE}
@@ -2293,6 +2398,8 @@ ggplot(bs_prism_snotel, aes(x = Date, y = snotel_swe_mm)) +
   ) +
   scale_x_date(date_breaks = "2 years", expand = c(0,0)) +
   theme_classic()
+
+summary(lm(bs_prism_snotel_wint$prism_snow_mm_accum ~ bs_prism_snotel_wint$snotel_swe_mm))
 ```
 
 ```{r, echo = FALSE}
@@ -2310,6 +2417,7 @@ bs_prism_snotel_snodas_swe_tidy <- bs_prism_snotel_snodas %>%
                names_to = "measurement") %>% 
   filter(Date > "2009-09-01")
   
+
 
 
 ```
@@ -2359,13 +2467,40 @@ ggplot(bs_prism_snotel_snodas_swe_max, aes(x = waterYear, y = snow_mm)) +
   scale_y_continuous(expand = c(0,0)) +
   theme_classic() +
   theme(legend.position="bottom", text = element_text(size=14)) 
+
+# Max SWE correlation graph 
+bs_prism_snotel_snodas_swe_max_cor  <- bs_prism_snotel_snodas_swe_max %>% 
+  select(waterYear, measurement, snow_mm) %>% 
+  pivot_wider(names_from = measurement, values_from = snow_mm) %>% 
+  pivot_longer(c("SNODAS SWE (mm)", "PRISM Accumulated Snowfall (mm)"), 
+               names_to = "Snow Product", values_to = "snow_mm") %>% 
+  clean_names()
+
+ggplot(bs_prism_snotel_snodas_swe_max_cor, aes(x = snotel_swe_mm, y = snow_mm)) +
+  geom_point(aes(color = snow_product), show.legend = FALSE) +
+  geom_smooth(method = "lm", se = FALSE, aes(color = snow_product), show.legend = FALSE) +
+  labs(
+    x = "Max SNOTEL SWE (mm)",
+    y = "milimeters", 
+    color = "Remote Sensing Product"
+  ) +
+  theme_bw() +
+  theme(legend.position="bottom", text = element_text(size=14)) 
+
+bs_prism_max_lm <- bs_prism_snotel_snodas_swe_max_cor %>% 
+  filter(snow_product == "PRISM Accumulated Snowfall (mm)")
+
+bs_snodas_max_lm <- bs_prism_snotel_snodas_swe_max_cor %>% 
+  filter(snow_product == "SNODAS SWE (mm)")
+
+summary(lm(bs_prism_max_lm$snow_mm ~ bs_prism_max_lm$snotel_swe_mm))
+summary(lm(bs_snodas_max_lm$snow_mm ~ bs_snodas_max_lm$snotel_swe_mm))
   
 ```
 
 
 ```{r, echo = FALSE}
-# root mean square error
-rmse(bs_prism_snotel_wint$prism_snow_mm_accum, bs_prism_snotel_wint$snotel_swe_mm)
+
 
 # plot it
 bs_prism_snotel_wint_plot <- bs_prism_snotel_wint %>% 
@@ -2391,6 +2526,15 @@ bs_prism_snotel_wint_plot + facet_wrap(~month)
 # corretions each water year
 bs_prism_snotel_wint_plot + facet_wrap(~waterYear) 
 
+
+# rsquared for each WY
+bs_prism_snotel_wint_r2_wy <-  bs_prism_snotel_wint %>% 
+  ungroup() %>% 
+  group_by(waterYear) %>% 
+  mutate(prism_snow_snotel_swe_r2 = summary(lm(prism_snow_mm_accum ~
+                                                 snotel_swe_mm))$adj.r.squared) %>% 
+  slice(1)
+
 # rsquared for each month
 bs_prism_snotel_wint_r2 <-  bs_prism_snotel_wint %>% 
   ungroup() %>% 
@@ -2414,6 +2558,30 @@ ggplot(bs_prism_snotel_wint_r2,
   scale_y_continuous(expand = c(0,0)) +
   theme_classic()
 ```
+
+```{r, echo = FALSE}
+# root mean square error
+rmse(bs_prism_snotel_wint$prism_snow_mm_accum, bs_prism_snotel_wint$snotel_swe_mm)
+
+# RMSE each year
+
+bs_rmse_clean <- bs_prism_snotel_wint %>% 
+  ungroup() %>% 
+  select(Date, waterYear, snotel_swe_mm, prism_snow_mm_accum)
+
+bs_rmse_wy <- bs_rmse_clean %>% 
+  group_by(waterYear) %>% 
+  mutate(rmse = rmse(snotel_swe_mm, prism_snow_mm_accum)) %>% 
+  slice(1)
+
+# RMSE each month
+bs_rmse_month <- bs_rmse_clean %>% 
+  mutate(month = month(Date)) %>% 
+  group_by(month) %>% 
+  mutate(rmse = rmse(snotel_swe_mm, prism_snow_mm_accum)) %>% 
+  slice(1)
+```
+
 
 ```{r, echo = FALSE}
 # max comparison

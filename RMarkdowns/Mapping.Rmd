@@ -80,8 +80,8 @@ Plot high elevation regions in the Navajo Nation
 
 ```{r, echo = FALSE}
 # download DEM
-dem_raster_NN_1 <- getData("SRTM", lat = 36.5, lon = -109.5, download = TRUE)
-dem_raster_NN_2 <- getData("SRTM", lat = 36.5, lon = -112, download = TRUE)
+dem_raster_NN_1 <- getData("SRTM", lat = 36.5, lon = -109.5)
+dem_raster_NN_2 <- getData("SRTM", lat = 36.5, lon = -112)
 
 # merge to one raster
 dem_raster_NN <- merge(dem_raster_NN_1, dem_raster_NN_2, progress = 'text')
@@ -102,11 +102,13 @@ colnames(nn_dem_df) = c("lon", "lat", "alt")
 
 ggplot() +
   geom_raster(data = nn_dem_df, aes(lon, lat, fill = alt), alpha = .45) +
-  scale_fill_gradientn(colors = terrain.colors(100)) +
+  scale_fill_gradientn(colors = terrain.colors(500)) +
   geom_sf(data = mt_regions, color = "burlywood4", fill = NA) +
+  geom_sf(data = us, fill = NA, color = "grey") +
   geom_sf(data = navajo_nation, fill = NA) +
-  labs(
-    colors = "Elevation"
+  coord_sf(xlim = c(-112.5, -107.5), ylim = c(34.5, 38), expand = FALSE) +
+  labs( 
+    fill = "Elevation"
   ) +
   theme_classic()
   
@@ -145,6 +147,23 @@ ggplot() +
 
 ```
 
+```{r, echo = FALSE}
+# map it
+ggplot() +
+  geom_raster(data = ch_dem_df, aes(lon, lat, fill = alt), alpha = .45) +
+  scale_fill_gradientn(colours = terrain.colors(100)) +
+  geom_sf(data = snow_stations %>% filter(Network == "SNOTEL"), color = "steelblue4", size = 2) +
+ # geom_text_repel(data = snow_stations %>% filter(Network == "SNOTEL"), 
+  #                aes(x = Longitude, y = Latitude, label = Name)) +
+  coord_sf(xlim = c(-109.5, -108.4), ylim = c(35.7, 36.65), expand = FALSE) +
+  labs(
+    fill = "Elevation",
+    x = "Longitude",
+    y = "Latitude"
+  ) +
+  theme_classic()
+```
+
 # Stream gauge locations on DEM
 
 ```{r, echo = FALSE}
@@ -153,7 +172,7 @@ ggplot() +
   geom_raster(data = ch_dem_df, aes(lon, lat, fill = alt), alpha = .45) +
   scale_fill_gradientn(colours = terrain.colors(100)) +
   geom_sf(data = stream_point, size = 2) +
-  geom_sf(data = huc_10_watersheds, fill = NA, color = "grey64") +
+  geom_sf(data = huc_8_watersheds, fill = NA, color = "grey64") +
   geom_sf(data = snow_stations %>% filter(Network == "SNOTEL"), color = "steelblue4", size = 2) +
   geom_text_repel(data = stream_point, 
                   aes(x = longitude, y = latitude, label = stations)) +

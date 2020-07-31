@@ -81,7 +81,7 @@ bs_snotel <- read_csv("../Data/bs_snotel.csv") %>%
   mutate(swe_m = conv_unit(swe_mm, "mm", "m"))
 
 # order of months
-wy_order <- c("NOV", "DEC", "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT")
+wy_order <- c("OCT", "NOV", "DEC", "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP")
 ```
 
 
@@ -143,7 +143,7 @@ ggplot(all_streams_ne, aes(x = date, y = discharge_cmps)) +
 
 ggplot(all_streams_ne, aes(x = date, y = discharge_cmps)) +
   geom_line(aes(color = station)) +
-  facet_wrap(~station) +
+  facet_wrap(~station, scales = "free") +
   labs(
     x = "Year",
     y = bquote('Daily Discharge' ~(m^3/s))
@@ -152,12 +152,64 @@ ggplot(all_streams_ne, aes(x = date, y = discharge_cmps)) +
   scale_y_continuous(expand = c(0,0)) +
   theme_bw() +
   theme(legend.position="bottom", text = element_text(size=14)) 
+
+ggplot(all_streams_ne, aes(discharge_cmps)) +
+  geom_histogram(aes(fill = station), bins = 76) +
+  facet_wrap(~station, scales = "free") +
+  labs(
+    x = bquote('Daily Discharge' ~(m^3/s)),
+    y = "Frequency"
+  ) +
+  scale_y_continuous(expand = c(0,0)) +
+  scale_x_continuous(expand = c(0,0)) +
+  theme_bw() +
+  theme(legend.position="bottom", text = element_text(size=14)) 
+
+
 ```
 
 #### Observations
 
 - Lukachai has the higest discharge, but isn't directly in the Chuskas
 - Captain Tom Wash has the next highest discharge
+
+# Annual peak streamflow date
+```{r, echo = FALSE}
+peak_discharge_year <- all_streams_ne %>% 
+  filter(station != "Lukachai Creek") %>% 
+  group_by(station, WY) %>% 
+  top_n(1, discharge_cmps) %>% 
+  select(date, WY, station, discharge_cmps) %>% 
+  top_n(1, date) %>% 
+  mutate(name_month = month(date, label = TRUE, abbr = TRUE)) %>% 
+  mutate(oct_1 = "10-01") %>% 
+  mutate(wy_start_date = ifelse(name_month %in% c("Oct", "Nov", "Dec"), 
+                                paste0(oct_1, "-", year(date)),
+                                paste0(oct_1, "-", year(date)-1)
+    
+  )
+         ) %>% 
+  mutate(wy_start_date = mdy(wy_start_date)) %>% 
+  mutate(wy_day = date - wy_start_date)
+
+ggplot(peak_discharge_year, aes(x = WY, y = wy_day)) +
+  geom_point(aes(color = station)) +
+ # geom_line(aes(color = station)) +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~station) +
+  labs(
+    x = "Water Year",
+    y = "Day of Water Year",
+    title = "Day of Peak Streamflow"
+  ) +
+  theme_bw() +
+  theme(legend.position="bottom", text = element_text(size=14)) 
+
+lm_wheat <- peak_discharge_year %>% 
+  filter(station == "Wheatfields")
+
+  
+```
 
 
 # Monthly peak streamflow
@@ -242,6 +294,23 @@ median_seasonal_plot <- ggplot(median_seasonal, aes(x = factor(month, wy_order),
                           theme(legend.position="bottom", text = element_text(size=14)) 
 
 grid.arrange(mean_seasonal_plot, median_seasonal_plot, ncol= 1)
+
+# median streamflow without lukachai creek
+median_seasonal %>% 
+  filter(station != "Lukachai Creek") %>% 
+ggplot(aes(x = factor(month, wy_order),
+                                                  y = discharge_cmps, group = station)) +
+        geom_line(aes(color = station)) +
+        labs(
+          x = "Month",
+          y = bquote('Discharge' ~(m^3/s)),
+          title = "Median Monthly Discharge",
+          color = "Station"
+        ) +
+        scale_y_continuous(expand = c(0,0)) +
+        scale_x_discrete(expand = c(0,0.1)) +
+        theme_classic() +
+        theme(legend.position="bottom", text = element_text(size=14)) 
 
 ```
 
