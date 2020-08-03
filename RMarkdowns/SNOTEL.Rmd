@@ -1159,6 +1159,19 @@ ggplot(snotel_swe_max_week, aes(x = ndayfr, y = water_week)) +
 
 ```
 
+```{r, echo = FALSE}
+# dataframe of just prism snow accumulation
+wc_prism_snow_accum <- wc_prism_freeze %>% 
+  select(-waterYear) %>% 
+  addWaterYear() %>% 
+  mutate(month = month(Date)) %>% 
+  drop_na(ppt) %>% 
+  group_by(waterYear) %>% 
+  mutate(prism_snow_mm_accum = cumsum(prism_snow_mm)) %>%  # accumulate prism precip
+  mutate(prism_snow_mm_accum = ifelse(month(Date) %in% c(4,5,6,7,8,9,10), 0, 
+                                      prism_snow_mm_accum)) 
+```
+
 
 ```{r, echo = FALSE}
 # snotel data is accumulated precipitation, so we need to sum prism snowfall to estimate how much snow
@@ -1250,6 +1263,8 @@ ggplot(wc_prism_snotel_snodas_swe_max, aes(x = waterYear, y = snow_mm)) +
   theme(legend.position="bottom", text = element_text(size=14)) 
 
 
+
+
 # Max SWE correlation graph 
 wc_prism_snotel_snodas_swe_max_cor  <- wc_prism_snotel_snodas_swe_max %>% 
   select(waterYear, measurement, snow_mm) %>% 
@@ -1270,13 +1285,18 @@ ggplot(wc_prism_snotel_snodas_swe_max_cor, aes(x = snotel_swe_mm, y = snow_mm)) 
   theme(legend.position="bottom", text = element_text(size=14)) 
 
 wc_prism_max_lm <- wc_prism_snotel_snodas_swe_max_cor %>% 
-  filter(snow_product == "PRISM Accumulated Snowfall (mm)")
+  filter(snow_product == "PRISM Accumulated Snowfall (mm)") %>% 
+  ungroup() %>% 
+  mutate(snodas_estimate = ifelse(snotel_swe_mm >= snow_mm, "underestimate", "overestimate"))
 
 wc_snodas_max_lm <- wc_prism_snotel_snodas_swe_max_cor %>% 
-  filter(snow_product == "SNODAS SWE (mm)")
+  filter(snow_product == "SNODAS SWE (mm)") %>% 
+  ungroup() %>% 
+  mutate(snodas_estimate = ifelse(snotel_swe_mm >= snow_mm, "underestimate", "overestimate"))
 
 summary(lm(wc_prism_max_lm$snow_mm ~ wc_prism_max_lm$snotel_swe_mm))
 summary(lm(wc_snodas_max_lm$snow_mm ~ wc_snodas_max_lm$snotel_swe_mm))
+rmse(wc_snodas_max_lm$snow_mm, wc_snodas_max_lm$snotel_swe_mm)
 ```
 
 
@@ -1438,6 +1458,18 @@ wc_prism_snotel_wint_plot + facet_wrap(~factor(month_name,
                                                level = c("Nov", "Dec", "Jan", "Feb", "Mar")))
 
 wc_prism_snotel_wint_plot + facet_wrap(~waterYear)
+
+# rsquared for each year
+wc_prism_snotel_wint_r2 <-  wc_prism_snotel_wint %>% 
+  ungroup() %>% 
+  group_by(waterYear) %>% 
+  mutate(prism_snow_snotel_swe_r2 = summary(lm(prism_snow_mm_accum ~
+                                                 snotel_swe_mm))$adj.r.squared) %>% 
+  mutate(prism_snow_snotel_swe_p = summary(lm(prism_snow_mm_accum ~
+                                                 snotel_swe_mm))$coefficients[2,4]) %>% 
+  slice(1) %>% 
+  mutate(month_name = month(Date, label = TRUE, abbr=TRUE)) %>% 
+  select(month_name, prism_snow_snotel_swe_r2, prism_snow_snotel_swe_p)
 
 # rsquared for each month
 wc_prism_snotel_wint_r2 <-  wc_prism_snotel_wint %>% 
@@ -2491,7 +2523,11 @@ bs_prism_max_lm <- bs_prism_snotel_snodas_swe_max_cor %>%
   filter(snow_product == "PRISM Accumulated Snowfall (mm)")
 
 bs_snodas_max_lm <- bs_prism_snotel_snodas_swe_max_cor %>% 
-  filter(snow_product == "SNODAS SWE (mm)")
+  filter(snow_product == "SNODAS SWE (mm)") %>% 
+  ungroup() %>% 
+  mutate(snodas_estimate = ifelse(snotel_swe_mm > snow_mm, "under", "over"))
+
+rmse(bs_prism_max_lm$snow_mm, bs_prism_max_lm$snotel_swe_mm)
 
 summary(lm(bs_prism_max_lm$snow_mm ~ bs_prism_max_lm$snotel_swe_mm))
 summary(lm(bs_snodas_max_lm$snow_mm ~ bs_snodas_max_lm$snotel_swe_mm))

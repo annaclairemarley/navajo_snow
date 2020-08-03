@@ -1,0 +1,2365 @@
+Date Collected,Station Name,Total Snow Depth (in),Ave Snow Depth (in),Ave Water Content (in),Ave Density (percent),Method,Precip Reading       (in)
+28-Dec-84,Arbab's Forest,28.5,5.7,1.6,28,BS,
+16-Jan-85,Arbab's Forest,58,11.6,2.6,22,BS,
+29-Jan-85,Arbab's Forest,95.5,19.1,4,21,TS,
+12-Feb-85,Arbab's Forest,108,21.6,5.7,26,TS,
+27-Feb-85,Arbab's Forest,71.5,14.3,4.4,31,TS,
+13-Mar-85,Arbab's Forest,14,2.8,0.8,29,BS,
+26-Mar-85,Arbab's Forest,0,0,0,0,NSM,
+27-Dec-84,Bowl Canyon,94,18.8,4,21,TS,
+10-Jan-85,Bowl Canyon,133,26.6,4.2,16,TS,
+30-Jan-85,Bowl Canyon,174,34.8,7.6,22,TS,
+08-Feb-85,Bowl Canyon,188.5,37.7,8.6,23,TS,
+27-Feb-85,Bowl Canyon,176,35.2,10.1,29,TS,
+13-Mar-85,Bowl Canyon,171,34.2,10.2,30,TS,
+28-Mar-85,Bowl Canyon,150,30,10.3,34,TS,
+05-Apr-85,Bowl Canyon,140,28,11.2,40,TS,
+28-Dec-84,Fluted Rock,34,6.8,2,29,BS,
+16-Jan-85,Fluted Rock,70,14,3.2,23,TS,
+29-Jan-85,Fluted Rock,96,19.2,4.7,24,TS,
+12-Feb-85,Fluted Rock,116,23.2,6.1,26,TS,
+27-Feb-85,Fluted Rock,85,17,5.5,32,TS,
+13-Mar-85,Fluted Rock,34,6.8,2,29,BS,
+26-Mar-85,Fluted Rock,0,0,0,0,NSM,
+26-Dec-84,Tsaile I,72,14.4,4.2,29,TS,
+14-Jan-85,Tsaile I,126.5,25.3,6,24,TS,6.08
+25-Jan-85,Tsaile I,127,25.4,6,24,TS,7
+13-Feb-85,Tsaile I,180.5,36.1,9.9,27,TS,9.2
+25-Feb-85,Tsaile I,151.5,30.3,9.2,30,TS,9.3
+12-Mar-85,Tsaile I,98,19.6,6.3,32,TS,10.6
+25-Mar-85,Tsaile I,70.5,14.1,5.6,40,TS,12
+09-Apr-85,Tsaile I,0,0,0,0,NSM,13
+25-Apr-85,Tsaile I,,,,,NSM,15
+26-Dec-84,Tsaile II,106.5,21.3,5.8,27,TS,
+14-Jan-85,Tsaile II,168.5,33.7,7.4,22,TS,
+25-Jan-85,Tsaile II,167,33.4,8.8,26,TS,
+13-Feb-85,Tsaile II,241,48.2,14.8,31,TS,
+25-Feb-85,Tsaile II,215,43,14.7,34,TS,
+12-Mar-85,Tsaile II,167.5,33.5,12.6,38,TS,
+25-Mar-85,Tsaile II,160,32,13.7,43,TS,
+10-Apr-85,Tsaile II,97,19.4,9.4,48,TS,
+27-Dec-84,Wheatfields,,,,,NM,
+17-Jan-85,Wheatfields,143,28.6,6.6,23,TS,7.35
+30-Jan-85,Wheatfields,,,,,NST,
+11-Feb-85,Wheatfields,214.5,42.9,10.8,25,TS,10
+26-Feb-85,Wheatfields,194.5,38.9,11.1,29,TS,10.9
+14-Mar-85,Wheatfields,167,33.4,10.9,33,TS,12.4
+27-Mar-85,Wheatfields,150,30,11.3,38,TS,13.2
+27-Dec-84,Whiskey Creek,83,16.6,4.4,27,TS,5.2
+15-Jan-85,Whiskey Creek,136.5,27.3,7.2,26,TS,6.8
+01-Feb-85,Whiskey Creek,,,,,NST,
+11-Feb-85,Whiskey Creek,203,40.6,10.9,27,TS,8.6
+26-Feb-85,Whiskey Creek,182,36.4,11.1,30,TS,8.9
+13-Mar-85,Whiskey Creek,174,34.8,10.9,31,TS,11.2
+27-Mar-85,Whiskey Creek,159.5,31.9,11.4,36,TS,
+27-Dec-85,Arbab's Forest,0,0,0,0,NSM,
+13-Jan-86,Arbab's Forest,0,0,0,0,NSM,
+29-Jan-86,Arbab's Forest,0,0,0,0,NSM,
+14-Feb-86,Arbab's Forest,16,3.2,0.8,25,BS,
+27-Feb-86,Arbab's Forest,0,0,0,0,NSM,
+14-Mar-86,Arbab's Forest,9.5,1.9,0.4,21,BS,
+30-Mar-86,Arbab's Forest,0,0,0,0,NSM,
+20-Dec-85,Beaver Spring,122.5,24.5,9.4,38,TS,13.2
+02-Jan-86,Beaver Spring,,,,,NST,
+13-Jan-86,Beaver Spring,125.5,25.1,10,40,TS,13.95
+29-Jan-86,Beaver Spring,120,24,7.6,32,TS,14.2
+13-Feb-86,Beaver Spring,176,35.2,11.2,32,TS,15.97
+27-Feb-86,Beaver Spring,148,29.6,10,34,TS,16.8
+14-Mar-86,Beaver Spring,,,,,NM,
+27-Mar-86,Beaver Spring,134.5,26.9,10,37,TS,17.5
+16-Dec-85,Bowl Canyon,85,17,5,29,TS,9.2
+02-Jan-86,Bowl Canyon,92,18.4,5.5,30,TS,9.6
+14-Jan-86,Bowl Canyon,96.5,19.3,5.2,27,TS,9.88
+28-Jan-86,Bowl Canyon,94.5,18.9,4.8,25,TS,9.77
+14-Feb-86,Bowl Canyon,118,23.6,6.1,26,TS,11
+28-Feb-86,Bowl Canyon,89,17.8,5.3,30,TS,11.93
+13-Mar-86,Bowl Canyon,90,18,5,28,TS,13.39
+28-Mar-86,Bowl Canyon,62,12.4,4.9,40,TS,14.78
+27-Dec-85,Fluted Rock,20.5,4.1,1.1,27,BS,
+02-Jan-86,Fluted Rock,,,,,NST,
+13-Jan-86,Fluted Rock,9,1.8,0.7,39,BS,
+29-Jan-86,Fluted Rock,0,0,0,0,NSM,
+14-Feb-86,Fluted Rock,13,2.6,0.6,23,BS,
+27-Feb-86,Fluted Rock,0,0,0,0,NSM,
+14-Mar-86,Fluted Rock,19.5,3.9,0.8,21,BS,
+30-Mar-86,Fluted Rock,0,0,0,0,NSM,
+23-Dec-85,Tsaile I,76.5,15.3,6.4,42,TS,10.18
+02-Jan-86,Tsaile I,,,,,NST,
+13-Jan-86,Tsaile I,75,15,7.2,48,TS,10.52
+30-Jan-86,Tsaile I,66,13.2,4.7,36,TS,
+13-Feb-86,Tsaile I,100,20,6.6,33,TS,12.25
+27-Feb-86,Tsaile I,63,12.6,5.5,44,TS,13.5
+13-Mar-86,Tsaile I,64,12.8,3.7,29,TS,15.23
+27-Mar-86,Tsaile I,43,8.6,3.3,38,TS,16.91
+23-Dec-85,Tsaile III,105,21,8.4,40,TS,
+02-Jan-86,Tsaile III,,,,,NST,
+13-Jan-86,Tsaile III,107,21.4,8.8,41,TS,
+30-Jan-86,Tsaile III,96,19.2,6,31,TS,
+13-Feb-86,Tsaile III,151,30.2,9.9,33,TS,
+27-Feb-86,Tsaile III,122,24.4,8,33,TS,
+13-Mar-86,Tsaile III,122,24.4,8,33,TS,
+27-Mar-86,Tsaile III,97,19.4,7.2,37,TS,
+18-Dec-85,Wheatfields,105.5,21.1,4.6,22,TS,9.17
+02-Jan-86,Wheatfields,109.5,21.9,5.2,24,TS,9.42
+14-Jan-86,Wheatfields,107,21.4,7.6,36,TS,9.55
+29-Jan-86,Wheatfields,108,21.6,5.8,27,TS,12.45
+13-Feb-86,Wheatfields,153,30.6,7.4,24,TS,13.7
+27-Feb-86,Wheatfields,107,21.4,8,37,TS,12.23
+28-Feb-86,Wheatfields,83,16.6,6.1,37,TS,14.8
+13-Mar-86,Wheatfields,118,23.6,6.7,28,TS,13.55
+28-Mar-86,Wheatfields,83,16.6,6.1,37,TS,14.8
+18-Dec-85,Whiskey Creek,84,16.8,3.4,20,TS,8.2
+02-Jan-86,Whiskey Creek,83.5,16.7,4.9,29,TS,12.6
+14-Jan-86,Whiskey Creek,83,16.6,4.6,28,TS,13.65
+29-Jan-86,Whiskey Creek,80.5,16.1,4.5,28,TS,12.55
+13-Feb-86,Whiskey Creek,115.5,23.1,5.7,25,TS,14.5
+27-Feb-86,Whiskey Creek,86,17.2,6.4,37,TS,9.85
+13-Mar-86,Whiskey Creek,108,21.6,6,28,TS,11.5
+28-Mar-86,Whiskey Creek,76,15.2,5.7,38,TS,12.35
+30-Dec-86,Arbab's Forest,,,,,NM,
+15-Jan-87,Arbab's Forest,34,6.8,1.7,25,BS,
+29-Jan-87,Arbab's Forest,38,7.6,2.05,27,BS,
+12-Feb-87,Arbab's Forest,21.5,4.3,1.5,35,BS,
+26-Feb-87,Arbab's Forest,,,,,NST,
+11-Mar-87,Arbab's Forest,19,3.8,1.54,41,BS,
+25-Mar-87,Arbab's Forest,11.5,2.3,0.65,28,BS,
+30-Dec-86,Beaver Spring,,,,,NM,
+15-Jan-87,Beaver Spring,83,16.6,3.5,21,TS,9.77
+29-Jan-87,Beaver Spring,92.5,18.5,4.3,23,TS,10.17
+12-Feb-87,Beaver Spring,86.5,17.3,4.3,25,TS,10.65
+26-Feb-87,Beaver Spring,,,,,NM,
+11-Mar-87,Beaver Spring,129,25.8,8.1,31,TS,13.8
+25-Mar-87,Beaver Spring,168.5,33.7,9.2,27,TS,15.63
+31-Dec-86,Bowl Canyon,63,12.6,2.5,20,TS,8.31
+14-Jan-87,Bowl Canyon,78,15.6,3,19,TS,8.9
+28-Jan-87,Bowl Canyon,95,19,3.7,19,TS,9.37
+11-Feb-87,Bowl Canyon,94,18.8,4.1,22,TS,9.61
+26-Feb-87,Bowl Canyon,,,,,NM,
+04-Mar-87,Bowl Canyon,158,31.6,8.5,27,TS,12.28
+11-Mar-87,Bowl Canyon,151.5,30.3,8.3,27,TS,13.43
+25-Mar-87,Bowl Canyon,171.5,34.3,11.5,34,TS,14.5
+30-Dec-86,Fluted Rock,,,,,NM,
+15-Jan-87,Fluted Rock,34,6.8,1.6,24,BS,
+29-Jan-87,Fluted Rock,34.5,6.9,2.05,30,BS,
+12-Feb-87,Fluted Rock,29,5.8,1.9,33,BS,
+26-Feb-87,Fluted Rock,,,,,NST,
+11-Mar-87,Fluted Rock,32,6.4,2.1,33,BS,
+25-Mar-87,Fluted Rock,27,5.4,1.45,27,BS,
+30-Dec-86,Hidden Valley,,,,,NST,
+15-Jan-87,Hidden Valley,47,9.4,2,21,TS,9.18
+29-Jan-87,Hidden Valley,58.5,11.7,2.4,21,TS,9.39
+11-Feb-87,Hidden Valley,56.5,11.3,2.5,22,TS,9.7
+26-Feb-87,Hidden Valley,111,22.2,4.7,21,TS,11.05
+11-Mar-87,Hidden Valley,81,16.2,5.8,36,TS,11.63
+25-Mar-87,Hidden Valley,114.5,22.9,7.2,31,TS,12.87
+30-Dec-86,Tsaile I,45,9,2.1,23,TS,
+14-Jan-87,Tsaile I,64,12.8,2.5,20,TS,10.39
+28-Jan-87,Tsaile I,74.5,14.9,4.6,31,TS,10.98
+11-Feb-87,Tsaile I,61,12.2,3.4,28,TS,10.7
+25-Feb-87,Tsaile I,107.5,21.5,5.1,24,TS,13.15
+12-Mar-87,Tsaile I,77,15.4,5.2,34,TS,14
+26-Mar-87,Tsaile I,97,19.4,6.3,32,TS,16.2
+30-Dec-86,Tsaile III,54.5,10.9,2.4,22,TS,
+14-Jan-87,Tsaile III,79.5,15.9,3,19,TS,
+28-Jan-87,Tsaile III,92.5,18.5,4.7,25,TS,
+11-Feb-87,Tsaile III,80,16,3.4,21,TS,
+25-Feb-87,Tsaile III,146.5,29.3,6.6,23,TS,
+12-Mar-87,Tsaile III,116,23.2,7.1,31,TS,
+26-Mar-87,Tsaile III,146,29.2,8.8,30,TS,
+02-Jan-87,Whiskey Creek,66,13.2,3.4,26,TS,8.45
+14-Jan-87,Whiskey Creek,79,15.8,4,25,TS,8.98
+28-Jan-87,Whiskey Creek,95.5,19.1,4.2,22,TS,9.2
+11-Feb-87,Whiskey Creek,96.5,19.3,4.8,25,TS,9.78
+26-Feb-87,Whiskey Creek,,,,,NST,
+04-Mar-87,Whiskey Creek,151.5,30.3,8.7,29,TS,11.99
+11-Mar-87,Whiskey Creek,142,28.4,8.5,30,TS,12.6
+25-Mar-87,Whiskey Creek,171.5,34.3,9.3,27,TS,14.02
+30-Dec-87,Arbab's Forest,62.5,12.5,2.8,22,TS,
+15-Jan-88,Arbab's Forest,59,11.8,3.3,28,TS,
+28-Jan-88,Arbab's Forest,91,18.2,5,27,TS,
+10-Feb-88,Arbab's Forest,100,20,5.5,28,TS,
+29-Feb-88,Arbab's Forest,46.5,9.3,2.8,30,TS,
+14-Mar-88,Arbab's Forest,23,4.6,2,43,TS,
+27-Mar-88,Arbab's Forest,0,0,0,0,NSM,
+29-Dec-87,Beaver Spring,,,,,NST,
+14-Jan-88,Beaver Spring,,,,,NST,
+27-Jan-88,Beaver Spring,170,34,9.7,29,TS,
+11-Feb-88,Beaver Spring,209,41.8,12.3,29,TS,
+02-Mar-88,Beaver Spring,170,34,11.3,33,TS,
+16-Mar-88,Beaver Spring,171.5,34.3,11.6,34,TS,
+30-Mar-88,Beaver Spring,104,20.8,8.5,41,TS,
+29-Dec-87,Bowl Canyon,98,19.6,5,26,TS,9.99
+14-Jan-88,Bowl Canyon,119.5,23.9,6.4,27,TS,10.41
+27-Jan-88,Bowl Canyon,153,30.6,8.2,27,TS,12.83
+12-Feb-88,Bowl Canyon,195.5,39.1,10.8,28,TS,15.25
+01-Mar-88,Bowl Canyon,162,32.4,10.7,33,TS,15.55
+15-Mar-88,Bowl Canyon,154,30.8,10.5,34,TS,15.87
+29-Mar-88,Bowl Canyon,97,19.4,7.8,40,TS,15.9
+30-Dec-87,Fluted Rock,60,12,2.6,22,TS,
+15-Jan-88,Fluted Rock,69.5,13.9,3.3,24,TS,
+28-Jan-88,Fluted Rock,97.5,19.5,5,26,TS,11.23
+10-Feb-88,Fluted Rock,126.5,25.3,6.3,25,TS,
+29-Feb-88,Fluted Rock,78.5,15.7,5.3,34,TS,
+14-Mar-88,Fluted Rock,56.5,11.3,4.2,37,BS,
+27-Mar-88,Fluted Rock,0,0,0,0,NSM,
+29-Dec-87,Hidden Valley,,,,,NST,
+14-Jan-88,Hidden Valley,88,17.6,4.3,24,TS,8.62
+27-Jan-88,Hidden Valley,120.5,24.1,6.6,27,TS,9.74
+11-Feb-88,Hidden Valley,165,33,8.9,27,TS,11.53
+02-Mar-88,Hidden Valley,122,24.4,7.9,32,TS,11.29
+16-Mar-88,Hidden Valley,119,23.8,8.2,34,TS,11.3
+30-Mar-88,Hidden Valley,67,13.4,5.6,42,TS,11.1
+29-Dec-87,Sloping Meadows,,,,,NST,
+14-Jan-88,Sloping Meadows,,,,,NST,
+27-Jan-88,Sloping Meadows,125.5,25.1,7.7,31,TS,12
+12-Feb-88,Sloping Meadows,130.5,26.1,8.7,33,TS,18.29
+02-Mar-88,Sloping Meadows,73,14.6,6.2,42,TS,13.49
+16-Mar-88,Sloping Meadows,53,10.6,4.2,40,TS,16.05
+30-Mar-88,Sloping Meadows,0,0,0,0,NSM,
+29-Dec-87,Tsaile I,70.5,14.1,3.7,26,TS,9.85
+13-Jan-88,Tsaile I,105,21,5.5,26,TS,11.3
+28-Jan-88,Tsaile I,139,27.8,7.8,28,TS,
+10-Feb-88,Tsaile I,184.5,36.9,10.3,28,TS,15.46
+01-Mar-88,Tsaile I,120.5,24.1,8.4,35,TS,15.7
+15-Mar-88,Tsaile I,120,24,9.3,39,TS,16.5
+29-Mar-88,Tsaile I,61,12.2,5.1,42,TS,16.8
+30-Dec-87,Tsaile III,87,17.4,4.3,25,TS,9.37
+13-Jan-88,Tsaile III,133,26.6,6.7,25,TS,
+28-Jan-88,Tsaile III,176.5,35.3,10.3,29,TS,
+10-Feb-88,Tsaile III,223,44.6,12.6,28,TS,
+01-Mar-88,Tsaile III,164,32.8,11,34,TS,14.9
+15-Mar-88,Tsaile III,158,31.6,12.3,39,TS,
+25-Mar-88,Tsaile III,96.5,19.3,8.7,45,TS,
+22-Dec-87,Whiskey Creek,69.5,13.9,3.8,28,TS,7.6
+29-Dec-87,Whiskey Creek,88.5,17.7,5,28,TS,10.44
+05-Jan-88,Whiskey Creek,88,17.6,4.5,26,TS,
+12-Jan-88,Whiskey Creek,119.5,23.9,6.1,26,TS,
+21-Jan-88,Whiskey Creek,174,34.8,8.8,25,TS,12.9
+26-Jan-88,Whiskey Creek,158.5,31.7,8.5,27,TS,10.6
+04-Feb-88,Whiskey Creek,223.5,44.7,11.2,25,TS,12.72
+09-Feb-88,Whiskey Creek,200.5,40.1,11.2,28,TS,12.69
+16-Feb-88,Whiskey Creek,183.5,36.7,10.8,29,TS,12.7
+23-Feb-88,Whiskey Creek,179,35.8,11,31,TS,12.7
+01-Mar-88,Whiskey Creek,153.5,30.7,10.1,33,TS,12.7
+08-Mar-88,Whiskey Creek,149.5,29.9,10.3,34,TS,13.1
+15-Mar-88,Whiskey Creek,165.5,33.1,11.6,35,TS,13.5
+22-Mar-88,Whiskey Creek,139,27.8,9.7,35,TS,13.5
+29-Mar-88,Whiskey Creek,114,22.8,9.1,40,TS,13.6
+05-Apr-88,Whiskey Creek,80,16,6.8,43,TS,13.75
+29-Dec-88,Arbab's Forest,39.5,7.9,0.34,4,BS,12.89
+12-Jan-89,Arbab's Forest,52.7,10.5,2.8,27,BS,
+31-Jan-89,Arbab's Forest,58,11.6,2.3,20,BS,
+15-Feb-89,Arbab's Forest,63.5,12.7,3.8,30,TS,
+01-Mar-89,Arbab's Forest,15.5,3.1,1,32,BS,
+15-Mar-89,Arbab's Forest,0,0,0,0,NSM,8.81
+29-Mar-89,Arbab's Forest,0,0,0,0,NSM,10.83
+28-Dec-88,Beaver Spring,131,26.2,6.3,24,TS,
+11-Jan-89,Beaver Spring,150,30,8.1,27,TS,9.7
+30-Jan-89,Beaver Spring,156.5,31.3,9.5,30,TS,
+14-Feb-89,Beaver Spring,190.5,38.1,10.8,28,TS,
+28-Feb-89,Beaver Spring,158,31.6,10.7,34,TS,
+14-Mar-89,Beaver Spring,124,24.8,9.6,39,TS,
+31-Mar-89,Beaver Spring,39,7.8,4,51,TS,13.8
+28-Dec-88,Bowl Canyon,101,20.2,4.2,21,TS,
+11-Jan-89,Bowl Canyon,129.5,25.9,5.4,21,TS,
+01-Feb-89,Bowl Canyon,144,28.8,7.1,25,TS,
+16-Feb-89,Bowl Canyon,156,31.2,7.7,25,TS,6.9
+27-Feb-89,Bowl Canyon,128,25.6,7.1,28,TS,
+14-Mar-89,Bowl Canyon,93.5,18.7,6.2,33,TS,15.2
+29-Mar-89,Bowl Canyon,11,2.2,0.7,32,BS,
+29-Dec-88,Fluted Rock,49,9.8,0.42,4,BS,
+12-Jan-89,Fluted Rock,63,12.6,2.4,19,TS,
+31-Jan-89,Fluted Rock,71.5,14.3,4.3,30,TS,
+15-Feb-89,Fluted Rock,82,16.4,4.4,27,TS,
+01-Mar-89,Fluted Rock,57,11.4,3.6,32,BS,9
+15-Mar-89,Fluted Rock,0,0,0,0,NSM,9.13
+29-Mar-89,Fluted Rock,0,0,0,0,NSM,14.29
+28-Dec-88,Hidden Valley,92,18.4,4.2,23,TS,
+11-Jan-89,Hidden Valley,115,23,5.4,23,TS,
+30-Jan-89,Hidden Valley,130,26,6.8,26,TS,
+14-Feb-89,Hidden Valley,145,29,8.3,29,TS,
+28-Feb-89,Hidden Valley,125,25,7.9,32,TS,
+14-Mar-89,Hidden Valley,82,16.4,5.9,36,TS,10.6
+30-Mar-89,Hidden Valley,0,0,0,0,NSM,
+28-Dec-88,Sloping Meadows,59,11.8,3.1,26,TS,
+11-Jan-89,Sloping Meadows,79.5,15.9,3.7,23,TS,7.4
+30-Jan-89,Sloping Meadows,112.5,22.5,5,22,TS,
+16-Feb-89,Sloping Meadows,99,19.8,6.3,32,TS,9
+27-Feb-89,Sloping Meadows,72.5,14.5,4.5,31,TS,
+29-Mar-89,Sloping Meadows,,,,,NM,12.67
+29-Mar-89,Sloping Meadows,0,0,0,0,NSM,
+29-Dec-88,Tsaile I,92.5,18.5,4.6,25,TS,
+12-Jan-89,Tsaile I,121,24.2,5.8,24,TS,
+31-Jan-89,Tsaile I,121,24.2,6.1,25,TS,9.83
+15-Feb-89,Tsaile I,147.5,29.5,8.2,28,TS,
+28-Feb-89,Tsaile I,107.5,21.5,6.6,31,TS,
+13-Mar-89,Tsaile I,54.5,10.9,4.5,41,TS,
+30-Mar-89,Tsaile I,0,0,0,0,NSM,
+29-Dec-88,Tsaile III,130.5,26.1,5.6,21,TS,6.63
+12-Jan-88,Tsaile III,144,28.8,7.2,25,TS,12.87
+31-Jan-89,Tsaile III,132.5,26.5,7.9,30,TS,8
+15-Feb-89,Tsaile III,163,32.6,9.6,29,TS,
+28-Feb-89,Tsaile III,135,27,8.9,33,TS,
+13-Mar-89,Tsaile III,97,19.4,7.5,39,TS,
+30-Mar-89,Tsaile III,0,0,0,0,NSM,
+28-Dec-88,Whiskey Creek,106,21.2,5,24,TS,7.9
+10-Jan-89,Whiskey Creek,125,25,6.8,27,TS,
+17-Jan-89,Whiskey Creek,120.5,24.1,6.8,28,TS,
+01-Feb-89,Whiskey Creek,137,27.4,7.7,28,TS,
+14-Feb-89,Whiskey Creek,174.5,34.9,11.4,33,TS,6
+21-Feb-89,Whiskey Creek,180,36,12,33,TS,
+28-Feb-89,Whiskey Creek,153,30.6,10.2,33,TS,
+07-Mar-89,Whiskey Creek,167.5,33.5,11.2,33,TS,9.99
+13-Mar-89,Whiskey Creek,132,26.4,10.7,41,TS,
+30-Mar-89,Whiskey Creek,52.5,10.5,4.7,45,TS,8.99
+27-Dec-89,Arbab's Forest,0,0,0,0,NSM,
+17-Jan-90,Arbab's Forest,0,0,0,0,NSM,
+01-Feb-90,Arbab's Forest,41.5,8.3,0.5,6,TS,
+15-Feb-90,Arbab's Forest,60,12,2.3,19,TS,
+28-Feb-90,Arbab's Forest,35.5,7.1,2.3,32,BS,
+15-Mar-90,Arbab's Forest,41,8.2,1.5,18,TS,
+29-Mar-90,Arbab's Forest,0,0,0,0,NSM,
+28-Dec-89,Beaver Spring,0,0,0,0,NSM,
+16-Jan-90,Beaver Spring,21.5,4.3,0.6,14,BS,
+31-Jan-90,Beaver Spring,32.5,6.5,1.1,17,BS,5.29
+15-Feb-90,Beaver Spring,,,,,NST,
+28-Feb-90,Beaver Spring,59.5,11.9,2.8,24,TS,7.64
+15-Mar-90,Beaver Spring,133,26.6,6.3,24,TS,
+29-Mar-90,Beaver Spring,,,,,NST,
+28-Dec-89,Bowl Canyon,0,0,0,0,NSM,
+16-Jan-90,Bowl Canyon,40,8,1.1,14,BS,
+31-Jan-90,Bowl Canyon,52,10.4,2,19,TS,
+14-Feb-90,Bowl Canyon,69.5,13.9,2.7,19,TS,
+27-Feb-90,Bowl Canyon,84.5,16.9,4.3,25,TS,5.8
+14-Mar-90,Bowl Canyon,134,26.8,8.4,31,TS,
+30-Mar-90,Bowl Canyon,53,10.6,3.4,32,TS,
+28-Dec-89,Fluted Rock,0,0,0,0,NSM,
+17-Jan-90,Fluted Rock,0,0,0,0,NSM,
+01-Feb-90,Fluted Rock,40.5,8.1,1.5,19,TS,
+15-Feb-90,Fluted Rock,67,13.4,3,22,TS,
+28-Feb-90,Fluted Rock,46,9.2,2.7,29,TS,
+15-Mar-90,Fluted Rock,69,13.8,3.7,27,TS,
+29-Mar-90,Fluted Rock,0,0,0,0,NSM,
+28-Dec-89,Hidden Valley,0,0,0,0,NSM,
+16-Jan-90,Hidden Valley,12.5,2.5,0.4,16,BS,
+31-Jan-90,Hidden Valley,22.5,4.5,0.8,18,BS,6.5
+16-Feb-90,Hidden Valley,52.5,10.5,2.3,22,TS,7.1
+28-Feb-90,Hidden Valley,56.5,11.3,3.3,29,TS,7.73
+15-Mar-90,Hidden Valley,100.5,20.1,5.6,28,TS,
+29-Mar-90,Hidden Valley,18.5,3.7,1.2,32,BS,
+28-Dec-89,Sloping Meadows,0,0,0,0,NSM,
+16-Jan-90,Sloping Meadows,0,0,0,0,NSM,
+31-Jan-90,Sloping Meadows,20.5,4.1,0.8,20,BS,4.9
+15-Feb-90,Sloping Meadows,,,,,NST,
+28-Feb-90,Sloping Meadows,,,,,NST,
+15-Mar-90,Sloping Meadows,,,,,NST,
+03-Apr-90,Sloping Meadows,,,,,NST,
+28-Dec-89,Tsaile I,0,0,0,0,NSM,
+16-Jan-90,Tsaile I,5,1,0.1,10,BS,
+31-Jan-90,Tsaile I,16.5,3.3,0.5,15,BS,5.39
+15-Feb-90,Tsaile I,,,,,NST,
+28-Feb-90,Tsaile I,32.5,6.5,1.8,28,BS,7.34
+15-Mar-90,Tsaile I,75,15,3.3,22,TS,
+28-Mar-90,Tsaile I,0,0,0,0,NSM,
+28-Dec-89,Tsaile III,2.5,0.5,0,0,NSM,
+16-Jan-90,Tsaile III,19,3.8,0.5,13,BS,
+31-Jan-90,Tsaile III,38.5,7.7,1.4,18,BS,
+15-Feb-90,Tsaile III,,,,,NST,
+28-Feb-90,Tsaile III,77,15.4,4.4,29,TS,
+15-Mar-90,Tsaile III,143,28.6,7.3,26,TS,
+29-Mar-90,Tsaile III,,,,,NST,
+28-Dec-89,Whiskey Creek,5,1,0.2,20,BS,
+16-Jan-90,Whiskey Creek,29.5,5.9,1,17,BS,
+31-Jan-90,Whiskey Creek,42,8.4,1.6,19,BS,5
+15-Feb-90,Whiskey Creek,82,16.4,2.9,18,TS,5.62
+27-Feb-90,Whiskey Creek,79.5,15.9,4.1,26,TS,6.11
+14-Mar-90,Whiskey Creek,128,25.6,6.4,25,TS,
+28-Mar-90,Whiskey Creek,53,10.6,3.7,35,BS,
+,Wind Rock Valley,,,,,NST,
+,Wind Rock Valley,,,,,NST,
+,Wind Rock Valley,,,,,NST,
+21-Feb-90,Wind Rock Valley,75,15,2.5,17,TS,4.85
+,Wind Rock Valley,,,,,NST,
+,Wind Rock Valley,,,,,NST,
+,Wind Rock Valley,,,,,NST,
+02-Jan-91,Arbab's Forest,64,12.8,2.6,20,TS,
+14-Jan-91,Arbab's Forest,50.5,10.1,3.2,32,TS,
+31-Jan-91,Arbab's Forest,73,14.6,4,27,TS,
+13-Feb-91,Arbab's Forest,52,10.4,3.2,31,TS,
+28-Feb-91,Arbab's Forest,19,3.8,1.6,42,BS,
+14-Mar-91,Arbab's Forest,15,3,1.2,40,BS,
+29-Mar-91,Arbab's Forest,34,6.8,2,29,TS,
+27-Dec-90,Beaver Spring,108,21.6,5.4,25,TS,9.52
+16-Jan-91,Beaver Spring,21.5,4.3,0.6,14,BS,
+31-Jan-91,Beaver Spring,164,32.8,9.9,30,TS,13
+14-Feb-91,Beaver Spring,156.5,31.3,10.1,32,TS,13.5
+28-Feb-91,Beaver Spring,154,30.8,10,32,TS,14.4
+14-Mar-91,Beaver Spring,178.5,35.7,12.1,34,TS,
+28-Mar-91,Beaver Spring,223,44.6,14.9,33,TS,18.78
+02-Jan-91,Bowl Canyon,136.5,27.3,7.2,26,TS,9.7
+14-Jan-91,Bowl Canyon,156,31.2,7.9,25,TS,11.5
+31-Jan-91,Bowl Canyon,165,33,9.2,28,TS,12
+14-Feb-91,Bowl Canyon,164,32.8,10,30,TS,12.25
+28-Feb-91,Bowl Canyon,162.5,32.5,9.6,30,TS,12.7
+14-Mar-91,Bowl Canyon,195,39,10.9,28,TS,
+28-Mar-91,Bowl Canyon,234.5,46.9,13,28,TS,16.6
+02-Jan-91,Fluted Rock,82,16.4,3.9,24,TS,
+07-Jan-91,Fluted Rock,77,15.4,4,26,TS,
+14-Jan-91,Fluted Rock,75,15,4,27,TS,
+31-Jan-91,Fluted Rock,88,17.6,5.2,30,TS,
+01-Feb-91,Fluted Rock,40.5,8.1,1.5,19,BS,
+13-Feb-91,Fluted Rock,78,15.6,5,32,TS,
+28-Feb-91,Fluted Rock,62,12.4,5,40,TS,
+14-Mar-91,Fluted Rock,60,12,4.6,38,TS,
+29-Mar-91,Fluted Rock,52,10.4,3,29,TS,
+27-Dec-90,Hidden Valley,90.5,18.1,2.3,13,TS,7.69
+14-Jan-91,Hidden Valley,138,27.6,8.1,29,TS,10.41
+30-Jan-91,Hidden Valley,151,30.2,9,30,TS,10.69
+13-Feb-91,Hidden Valley,148,29.6,9.4,32,TS,11
+27-Feb-91,Hidden Valley,141,28.2,8.5,30,TS,11.1
+13-Mar-91,Hidden Valley,166.5,33.3,10.3,31,TS,12.75
+27-Mar-91,Hidden Valley,184,36.8,11.7,32,TS,13.5
+02-Jan-91,Missionary Spring,65.5,13.1,3.4,26,TS,8.5
+14-Jan-91,Missionary Spring,61.5,12.3,4.4,36,TS,9.65
+31-Jan-91,Missionary Spring,74.5,14.9,4.1,28,TS,10.35
+14-Feb-91,Missionary Spring,62,12.4,4,32,TS,10.75
+28-Feb-91,Missionary Spring,40.5,8.1,3.4,42,BS,10.7
+14-Mar-91,Missionary Spring,36,7.2,2.6,36,BS,
+29-Mar-91,Missionary Spring,18.5,3.7,1.1,30,BS,13.6
+27-Dec-90,Tsaile I,95,19,4,21,TS,9.1
+14-Jan-91,Tsaile I,136.5,27.3,7.3,27,TS,
+31-Jan-91,Tsaile I,148,29.6,8.5,29,TS,13.38
+14-Feb-91,Tsaile I,132.5,26.5,7.6,29,TS,13.12
+28-Feb-91,Tsaile I,110,22,7.9,36,TS,13.79
+14-Mar-91,Tsaile I,113,22.6,8.2,36,TS,15.83
+28-Mar-91,Tsaile I,112.5,22.5,8.1,36,TS,17.11
+27-Dec-90,Tsaile III,110,22,5,23,TS,8.15
+15-Jan-90,Tsaile III,,,,,NST,
+31-Jan-91,Tsaile III,166.5,33.3,10.1,30,TS,11.8
+14-Feb-91,Tsaile III,152,30.4,9.5,31,TS,12.02
+28-Feb-91,Tsaile III,139.5,27.9,8.8,32,TS,12.75
+14-Mar-91,Tsaile III,155,31,10.6,34,TS,14.2
+28-Mar-91,Tsaile III,159,31.8,10.9,34,TS,15.31
+26-Dec-90,Whiskey Creek,129,25.8,6.7,26,TS,7.25
+14-Jan-91,Whiskey Creek,172,34.4,10.8,31,TS,9.28
+30-Jan-91,Whiskey Creek,184,36.8,11.4,31,TS,9.81
+13-Feb-91,Whiskey Creek,175,35,11.5,33,TS,10.03
+27-Feb-91,Whiskey Creek,162,32.4,11.1,34,TS,10.16
+13-Mar-91,Whiskey Creek,191.5,38.3,12.8,33,TS,11.6
+27-Mar-91,Whiskey Creek,217,43.4,14.1,32,TS,12.44
+30-Mar-92,Beaver Spring,147.5,29.5,9.8,33,TS,18.2
+09-Dec-91,Bowl Canyon,75.5,15.1,3.8,25,TS,8
+02-Jan-92,Bowl Canyon,114,22.8,5.7,25,TS,10.05
+14-Jan-92,Bowl Canyon,134,26.8,7,26,TS,11.5
+28-Jan-92,Bowl Canyon,130,26,6.9,27,TS,10.45
+14-Feb-92,Bowl Canyon,,,,,NST,
+27-Feb-92,Bowl Canyon,155.5,31.1,6.9,22,TS,12.4
+01-Mar-92,Bowl Canyon,142,28.4,8,28,TS,14.9
+12-Mar-92,Bowl Canyon,165.5,33.1,9.1,27,TS,13.5
+30-Mar-92,Bowl Canyon,142,28.4,8,28,TS,14.9
+02-Jan-92,Fluted Rock,70,14,3,21,TS,
+15-Jan-92,Fluted Rock,86,17.2,5.4,31,TS,
+28-Jan-92,Fluted Rock,79.5,15.9,4.2,26,TS,
+11-Feb-92,Fluted Rock,100,20,5,25,TS,
+27-Feb-92,Fluted Rock,84,16.8,4.6,27,TS,
+11-Mar-92,Fluted Rock,84.5,16.9,4.8,28,TS,
+30-Mar-92,Fluted Rock,16.5,3.3,1.2,36,TS,
+30-Dec-91,Hidden Valley,107.5,21.5,4.9,23,TS,8.8
+13-Jan-92,Hidden Valley,131.5,26.3,6.5,25,TS,9.61
+30-Jan-92,Hidden Valley,122,24.4,6.6,27,TS,9.75
+14-Feb-92,Hidden Valley,,,,,NST,
+27-Feb-92,Hidden Valley,159,31.8,9.2,29,TS,11.48
+13-Mar-92,Hidden Valley,153,30.6,8.9,29,TS,12.1
+30-Mar-92,Hidden Valley,120,24,7.4,31,TS,12.67
+02-Jan-92,Missionary Spring,65.5,13.1,3.7,28,TS,9.2
+16-Jan-92,Missionary Spring,88,17.6,5.8,33,TS,
+28-Jan-92,Missionary Spring,87.5,17.5,5,29,TS,
+12-Feb-92,Missionary Spring,103,20.6,5.4,26,TS,
+27-Feb-92,Missionary Spring,82.5,16.5,5.5,33,TS,10.9
+12-Mar-92,Missionary Spring,41.5,8.3,3.5,42,TS,11.5
+30-Mar-92,Missionary Spring,0,0,0,0,NSM,12.35
+03-Jan-92,Tsaile I,,,,,NST,
+13-Jan-92,Tsaile I,137.5,27.5,6.6,24,TS,13.82
+02-Jan-92,Arbab's Forest,75,15,3.4,23,TS,
+16-Jan-92,Arbab's Forest,80,16,4.6,29,TS,
+28-Jan-92,Arbab's Forest,78,15.6,3.8,24,TS,
+11-Feb-92,Arbab's Forest,79.5,15.9,3.9,25,TS,
+27-Feb-92,Arbab's Forest,53,10.6,3,28,TS,
+11-Mar-92,Arbab's Forest,24.5,4.9,1.6,33,TS,
+30-Mar-92,Arbab's Forest,0,0,0,0,NSM,
+30-Dec-91,Beaver Spring,122.5,24.5,5.7,23,TS,11.41
+13-Jan-92,Beaver Spring,152.5,30.5,7.5,25,TS,13.1
+29-Jan-92,Beaver Spring,132.5,26.5,7.7,29,TS,13.08
+14-Feb-92,Beaver Spring,,,,,NST,
+26-Feb-92,Beaver Spring,172,34.4,10.4,30,TS,15.9
+01-Mar-92,Beaver Spring,147.5,29.5,9.8,33,TS,18.2
+13-Mar-92,Beaver Spring,158,31.6,10.3,33,TS,16.87
+29-Jan-92,Tsaile I,119.5,23.9,6.4,27,TS,13.59
+11-Feb-92,Tsaile I,135.5,27.1,6,22,TS,14.4
+26-Feb-92,Tsaile I,154,30.8,8.5,28,TS,16.29
+12-Mar-92,Tsaile I,120.5,24.1,7.3,30,TS,17.31
+30-Mar-92,Tsaile I,,,,,NST,
+03-Jan-92,Tsaile III,,,,,NST,
+13-Jan-92,Tsaile III,166,33.2,7.9,24,TS,13.5
+29-Jan-92,Tsaile III,138,27.6,7.8,28,TS,13.51
+11-Feb-92,Tsaile III,172.5,34.5,8.5,25,TS,14.25
+26-Feb-92,Tsaile III,173,34.6,10.2,29,TS,15.69
+12-Mar-92,Tsaile III,160.5,32.1,10.4,32,TS,16.71
+30-Mar-92,Tsaile III,121.5,24.3,8.6,35,TS,17.93
+30-Dec-91,Whiskey Creek,103,20.6,5.3,26,TS,9.79
+13-Jan-92,Whiskey Creek,123.5,24.7,6.2,25,TS,10.5
+30-Jan-92,Whiskey Creek,111.5,22.3,6.3,28,TS,10.59
+14-Feb-92,Whiskey Creek,,,,,NST,
+27-Feb-92,Whiskey Creek,152.5,30.5,8.6,28,TS,13.62
+13-Mar-92,Whiskey Creek,156.5,31.3,9.2,29,TS,14.49
+30-Mar-92,Whiskey Creek,134,26.8,8.7,32,TS,14.37
+02-Jan-92,White Clay,51,10.2,2.5,24,TS,
+13-Jan-92,White Clay,70,14,4.4,31,TS,
+21-Jan-92,White Clay,66,13.2,3,23,TS,
+24-Jan-92,White Clay,61,12.2,3.1,25,TS,
+09-Feb-92,White Clay,69.5,13.9,3.3,24,TS,
+27-Feb-92,White Clay,42.5,8.5,2.8,33,TS,
+11-Mar-92,White Clay,11.5,2.3,0.8,35,BS,
+01-Apr-92,White Clay,,,,,NST,
+08-Jan-92,Wind Rock Valley,72,14.4,4,28,TS,8.3
+15-Jan-92,Wind Rock Valley,,,,,NST,
+29-Jan-92,Wind Rock Valley,54,10.8,3.4,31,TS,
+20-Feb-92,Wind Rock Valley,73,14.6,4.3,29,TS,9.7
+01-Mar-92,Wind Rock Valley,,,,,NST,
+15-Mar-92,Wind Rock Valley,,,,,NST,
+25-Mar-92,Wind Rock Valley,0,0,0,0,NSM,
+27-Dec-92,Arbab's Forest,42.5,8.5,1.8,21,TS,
+13-Jan-93,Arbab's Forest,70,14,2.8,20,TS,
+27-Jan-93,Arbab's Forest,67.5,13.5,4.2,31,TS,
+11-Feb-93,Arbab's Forest,71,14.2,4.2,30,TS,
+24-Feb-93,Arbab's Forest,53,10.6,2.8,26,TS,
+12-Mar-93,Arbab's Forest,39,7.8,2.6,33,TS,
+29-Mar-93,Arbab's Forest,0,0,0,0,NSM, 
+31-Dec-92,Beaver Spring,91.5,18.3,5.4,30,TS,8.35
+15-Jan-93,Beaver Spring,,,,,NST,
+28-Jan-93,Beaver Spring,218.5,43.7,13.1,30,TS,16.4
+10-Feb-93,Beaver Spring,254,50.8,14.4,28,TS,
+24-Feb-93,Beaver Spring,276.5,55.3,16.3,29,TS,6.25
+10-Mar-93,Beaver Spring,233,46.6,16.8,36,TS,6.87
+30-Mar-93,Beaver Spring,170.5,34.1,13.4,39,TS,7.8
+29-Dec-92,Bowl Canyon,84.5,16.9,4.2,25,TS,10
+15-Jan-93,Bowl Canyon,,,,,NST,
+20-Jan-93,Bowl Canyon,231,46.2,11.6,25,TS,16.6
+28-Jan-93,Bowl Canyon,200,40,12.6,32,TS,16.7
+11-Feb-93,Bowl Canyon,230,46,12.6,27,TS,2.7
+25-Feb-93,Bowl Canyon,248.5,49.7,15.1,30,TS,4.6
+10-Mar-93,Bowl Canyon,215,43,14.6,34,TS,5.5
+29-Mar-93,Bowl Canyon,165.5,33.1,12.1,37,TS,6.6
+29-Dec-92,Fluted Rock,34,6.8,1.6,24,TS,
+12-Jan-93,Fluted Rock,71,14.2,3.9,27,TS,
+27-Jan-93,Fluted Rock,77.5,15.5,4.8,31,TS,13.53
+11-Feb-93,Fluted Rock,90.5,18.1,5.8,32,TS,
+24-Feb-93,Fluted Rock,92.5,18.5,6,32,TS,
+11-Mar-93,Fluted Rock,83.5,16.7,5.8,35,TS,
+29-Mar-93,Fluted Rock,9.5,1.9,0.5,26,BS,
+31-Dec-92,Hidden Valley,58.5,11.7,3.3,28,TS,8.35
+15-Jan-93,Hidden Valley,,,,,NST,
+27-Jan-93,Hidden Valley,180.5,36.1,10.5,29,TS,12.2
+11-Feb-93,Hidden Valley,197.5,39.5,11.9,30,TS,5.2
+25-Feb-93,Hidden Valley,214,42.8,13.3,31,TS,6.57
+10-Mar-93,Hidden Valley,200.5,40.1,13.6,34,TS,6.9
+30-Mar-93,Hidden Valley,131.5,26.3,11.7,44,TS,7.5
+29-Dec-92,Missionary Spring,39.5,7.9,1.8,23,BS,7.6
+12-Jan-93,Missionary Spring,92,18.4,5.4,29,TS,10.6
+28-Jan-93,Missionary Spring,107.5,21.5,7.1,33,TS,
+12-Feb-93,Missionary Spring,108.5,21.7,7.1,33,TS,
+24-Feb-93,Missionary Spring,115.5,23.1,8.2,35,TS,14.8
+12-Mar-93,Missionary Spring,90.5,18.1,7,39,TS,15.2
+29-Mar-93,Missionary Spring,0,0,0,0,NSM,15.6
+30-Dec-92,Tsaile I,68,13.6,3.5,26,TS,10.3
+14-Jan-93,Tsaile I,127,25.4,6.5,26,TS,14.54
+28-Jan-93,Tsaile I,150,30,8.5,28,TS,16.9
+10-Feb-93,Tsaile I,174,34.8,9.1,26,TS,3.65
+24-Feb-93,Tsaile I,178,35.6,10.8,30,TS,5.7
+10-Mar-93,Tsaile I,151.5,30.3,10.4,34,TS,6.6
+30-Mar-93,Tsaile I,79,15.8,6.9,44,TS,7.4
+30-Dec-92,Tsaile III,84,16.8,4.2,25,TS,7.35
+14-Jan-93,Tsaile III,213.5,42.7,10.6,25,TS,12.55
+28-Jan-93,Tsaile III,225,45,13.5,30,TS,15.2
+10-Feb-93,Tsaile III,262.5,52.5,14.3,27,TS,3.09
+24-Feb-93,Tsaile III,264.5,52.9,15.4,29,TS,4.61
+11-Mar-93,Tsaile III,229,45.8,15,33,TS,5.19
+30-Mar-93,Tsaile III,158,31.6,14.4,46,TS,6.1
+31-Dec-92,Whiskey Creek,82,16.4,4.6,28,TS,6.9
+13-Jan-93,Whiskey Creek,193.5,38.7,10,26,TS,9.8
+28-Jan-93,Whiskey Creek,208.5,41.7,12.1,29,TS,12
+11-Feb-93,Whiskey Creek,234,46.8,13.1,28,TS,3.69
+25-Feb-93,Whiskey Creek,263.5,52.7,15.4,29,TS,4.57
+10-Mar-93,Whiskey Creek,228,45.6,15.8,35,TS,5
+31-Mar-93,Whiskey Creek,147.5,29.5,12.2,41,TS,5.5
+29-Dec-92,White Clay,33,6.6,1.9,29,TS,
+15-Jan-93,White Clay,,,,,NST,
+27-Jan-93,White Clay,70,14,4.6,33,TS,
+11-Feb-93,White Clay,70.5,14.1,4.4,31,TS,
+16-Feb-93,White Clay,86.5,17.3,5.4,31,TS,
+24-Feb-93,White Clay,68.5,13.7,4.8,35,TS,
+11-Mar-93,White Clay,43.5,8.7,3.6,41,TS,5.7
+01-Apr-93,White Clay,,,,,NST,
+05-Jan-93,Wind Rock Valley,0,0,0,0,NSM,5.95
+15-Jan-93,Wind Rock Valley,,,,,NST,
+01-Feb-93,Wind Rock Valley,,,,,NST,
+15-Feb-93,Wind Rock Valley,,,,,NST,
+01-Mar-93,Wind Rock Valley,,,,,NST,
+15-Mar-93,Wind Rock Valley,,,,,NST,
+01-Apr-93,Wind Rock Valley,,,,,NST,
+29-Dec-93,Arbab's Forest,0,0,0,0,NSM,
+13-Jan-94,Arbab's Forest,0,0,0,0,NSM,
+31-Jan-94,Arbab's Forest,24.5,4.9,0.4,8,BS,
+14-Feb-94,Arbab's Forest,37.5,7.5,1.4,19,BS,
+28-Feb-94,Arbab's Forest,25,5,1.5,30,BS,
+14-Mar-94,Arbab's Forest,0,0,0,0,NSM,
+01-Apr-94,Arbab's Forest,,,,,NST,
+28-Dec-93,Beaver Spring,57.5,11.5,2.7,23,TS,9.5
+12-Jan-94,Beaver Spring,58.5,11.7,3,26,TS,9.6
+31-Jan-94,Beaver Spring,88,17.6,3.6,21,TS,
+14-Feb-94,Beaver Spring,127,25.4,6.8,27,TS,
+28-Feb-94,Beaver Spring,165,33,8.4,25,TS,13.79
+12-Mar-94,Beaver Spring,120,24,8.5,35,TS,14.71
+01-Apr-94,Beaver Spring,,,,,NST,
+28-Dec-93,Bowl Canyon,55,11,2.8,25,TS,7.8
+12-Jan-94,Bowl Canyon,53,10.6,2.9,27,TS,
+31-Jan-94,Bowl Canyon,99.5,19.9,4.6,23,TS,
+15-Feb-94,Bowl Canyon,124,24.8,6.8,27,TS,
+01-Mar-94,Bowl Canyon,141.5,28.3,8.4,30,TS,12.1
+15-Mar-94,Bowl Canyon,138,27.6,10.2,37,TS,13.2
+01-Apr-94,Bowl Canyon,,,,,NST,
+29-Dec-93,Fluted Rock,15.5,3.1,0.4,13,BS,
+13-Jan-94,Fluted Rock,14.5,2.9,0.6,21,BS,
+31-Jan-94,Fluted Rock,24,4.8,0.5,10,BS,
+14-Feb-94,Fluted Rock,43.5,8.7,1.6,18,BS,6.5
+28-Feb-94,Fluted Rock,47.5,9.5,2.2,23,TS,
+14-Mar-94,Fluted Rock,10.5,2.1,0.8,38,BS,
+01-Apr-94,Fluted Rock,,,,,NST,
+28-Dec-93,Hidden Valley,36.5,7.3,1.8,25,TS,6.88
+13-Jan-94,Hidden Valley,32.5,6.5,1.4,22,BS,6.91
+01-Feb-94,Hidden Valley,53.5,10.7,1.8,16,TS,7.35
+15-Feb-94,Hidden Valley,91.5,18.3,4.9,27,TS,
+01-Mar-94,Hidden Valley,106.5,21.3,6,28,TS,9.78
+15-Mar-94,Hidden Valley,87,17.4,5.9,34,TS,9.61
+01-Apr-94,Hidden Valley,,,,,NST,
+28-Dec-93,Missionary Spring,20.5,4.1,0.8,20,BS,7.8
+12-Jan-94,Missionary Spring,0,0,0,0,NSM,
+31-Jan-94,Missionary Spring,43.5,8.7,1,11.8,TS,8.8
+15-Feb-94,Missionary Spring,63,12.6,3.4,27,TS,9.8
+01-Mar-94,Missionary Spring,58,11.6,4.8,41,TS,11
+15-Mar-94,Missionary Spring,0,0,0,0,NSM,
+01-Apr-94,Missionary Spring,,,,,NST,
+29-Dec-93,Tsaile I,31,6.2,1.1,18,BS,
+12-Jan-94,Tsaile I,32,6.4,1.2,19,BS,5.8
+31-Jan-94,Tsaile I,57.5,11.5,1.8,16,TS,6.86
+14-Feb-94,Tsaile I,97.5,19.5,4.7,24,TS,
+28-Feb-94,Tsaile I,126,25.2,5.9,23,TS,10.8
+14-Mar-94,Tsaile I,75,15,6.5,43,TS,11.42
+01-Apr-94,Tsaile I,,,,,NST,
+29-Dec-93,Tsaile III,58.5,11.7,2.7,23,TS,8.1
+12-Jan-94,Tsaile III,60,12,2.9,24,BS,8.09
+31-Jan-94,Tsaile III,99.5,19.9,4,21,TS,9.2
+14-Feb-94,Tsaile III,143.5,28.7,7,24,TS,
+28-Feb-94,Tsaile III,189,37.8,8.8,23,TS,12.99
+14-Mar-94,Tsaile III,129.5,25.9,8.9,34,TS,13.65
+01-Apr-94,Tsaile III,,,,,NST,
+28-Dec-93,Whiskey Creek,53.5,10.7,2.4,22,TS,8.89
+13-Jan-94,Whiskey Creek,53.5,10.7,2.5,23,BS,8.2
+01-Feb-94,Whiskey Creek,85.5,17.1,3.8,22,TS,9
+15-Feb-94,Whiskey Creek,130.5,26.1,6.9,26,TS,
+01-Mar-94,Whiskey Creek,154.5,30.9,8.8,28,TS,11.02
+15-Mar-94,Whiskey Creek,133.5,26.7,8.7,33,TS,11.92
+01-Apr-94,Whiskey Creek,,,,,NST,
+29-Dec-93,White Clay,16.5,3.3,0.4,12,BS,
+13-Jan-94,White Clay,15,3,0.6,20,BS,
+31-Jan-94,White Clay,22,4.4,0.6,14,BS,5.9
+14-Feb-94,White Clay,39.5,7.9,1.4,18,BS,
+28-Feb-94,White Clay,35,7,1.6,23,BS,7.3
+14-Mar-94,White Clay,0,0,0,0,NSM,
+29-Mar-94,White Clay,0,0,0,0,NSM,8
+28-Dec-94,Arbab's Forest,0,0,0,0,NSM,
+11-Jan-95,Arbab's Forest,50.5,10.1,1.8,18,TS,
+30-Jan-95,Arbab's Forest,72.5,14.5,4.2,29,TS,
+15-Feb-95,Arbab's Forest,,,,,NST,
+27-Feb-95,Arbab's Forest,0,0,0,0,NSM,
+14-Mar-95,Arbab's Forest,0,0,0,0,NSM,
+29-Mar-95,Arbab's Forest,0,0,0,0,NSM,
+29-Dec-94,Beaver Spring,84.5,16.9,4.9,29,TS,9.2
+12-Jan-95,Beaver Spring,203.5,40.7,9.3,23,TS,
+30-Jan-95,Beaver Spring,217,43.4,12,28,TS,
+13-Feb-95,Beaver Spring,176.5,35.3,11.2,32,TS,14.7
+27-Feb-95,Beaver Spring,167,33.4,11.5,34,TS,15.99
+14-Mar-95,Beaver Spring,208.5,41.7,15.2,36,TS,18.81
+30-Mar-95,Beaver Spring,170.5,34.1,12.7,37,TS,
+28-Dec-94,Bowl Canyon,73,14.6,2.2,15,TS,2.4
+12-Jan-95,Bowl Canyon,180,36,7.7,21,TS,6.2
+31-Jan-95,Bowl Canyon,188,37.6,10,27,TS,7.9
+14-Feb-95,Bowl Canyon,168,33.6,9.6,29,TS,8.3
+27-Feb-95,Bowl Canyon,174,34.8,10,29,TS,
+15-Mar-95,Bowl Canyon,201.5,40.3,13.9,35,TS,
+29-Mar-95,Bowl Canyon,147.5,29.5,11,37,TS,13.8
+28-Dec-94,Fluted Rock,6.5,1.3,0.4,31,BS,
+11-Jan-95,Fluted Rock,69,13.8,3.3,24,TS,
+30-Jan-95,Fluted Rock,110,22,6,27,TS,6.2
+15-Feb-95,Fluted Rock,,,,,NST,
+28-Feb-95,Fluted Rock,40,8,3.4,43,TS,
+14-Mar-95,Fluted Rock,0,0,0,0,NSM,
+29-Mar-95,Fluted Rock,0,0,0,0,NSM,
+29-Dec-94,Hidden Valley,51.5,10.3,3.5,34,TS,7.5
+11-Jan-95,Hidden Valley,141,28.2,6.6,23,TS,
+31-Jan-95,Hidden Valley,172.5,34.5,10.2,30,TS,
+14-Feb-95,Hidden Valley,152.5,30.5,9.3,30,TS,9.85
+28-Feb-95,Hidden Valley,144,28.8,9.8,34,TS,10.91
+14-Mar-95,Hidden Valley,161.5,32.3,13.2,41,TS,13.99
+29-Mar-95,Hidden Valley,122.5,24.5,9.9,40,TS,14.15
+28-Dec-94,Missionary Spring,10.5,2.1,0.5,24,BS,
+12-Jan-95,Missionary Spring,82.5,16.5,4.3,26,TS,
+31-Jan-95,Missionary Spring,100.5,20.1,6,30,TS,
+14-Feb-95,Missionary Spring,76.5,15.3,5.4,35,TS,
+27-Feb-95,Missionary Spring,38,7.6,3.4,45,BS,
+14-Mar-95,Missionary Spring,0,0,0,0,NSM,
+29-Mar-95,Missionary Spring,0,0,0,0,NSM,
+29-Dec-94,Tsaile I,35.5,7.1,2.5,35,TS,
+12-Jan-95,Tsaile I,157,31.4,7.3,23,TS,
+30-Jan-95,Tsaile I,170,34,9.4,28,TS,
+13-Feb-95,Tsaile I,131,26.2,8.4,32,TS,15.53
+27-Feb-95,Tsaile I,119,23.8,9.3,39,TS,17.34
+14-Mar-95,Tsaile I,134.5,26.9,11.2,42,TS,21.9
+30-Mar-95,Tsaile I,76,15.2,5.9,39,TS,23
+29-Dec-94,Tsaile III,72,14.4,4.2,29,BS,7.9
+12-Jan-95,Tsaile III,195,39,8.6,22,TS,
+30-Jan-95,Tsaile III,213.5,42.7,11.4,27,TS,
+13-Feb-95,Tsaile III,171.5,34.3,10.5,31,TS,13.29
+27-Feb-95,Tsaile III,167,33.4,10.9,33,TS,14.2
+14-Mar-95,Tsaile III,207,41.4,14.7,36,TS,18.95
+30-Mar-95,Tsaile III,162,32.4,11.7,36,TS,19.28
+28-Dec-94,Whiskey Creek,74,14.8,3.8,26,TS,8.1
+11-Jan-95,Whiskey Creek,171.5,34.3,8,23,TS,
+31-Jan-95,Whiskey Creek,196,39.2,11.3,29,TS,
+14-Feb-95,Whiskey Creek,166.5,33.3,10.1,30,TS,11.87
+28-Feb-95,Whiskey Creek,161,32.2,10.6,33,TS,12.65
+14-Mar-95,Whiskey Creek,194,38.8,14.1,36,TS,15.3
+29-Mar-95,Whiskey Creek,149,29.8,11.3,38,TS,15.38
+28-Dec-94,White Clay,0,0,0,0,NSM,
+09-Jan-95,White Clay,70,14,2.2,16,TS,5.1
+23-Jan-95,White Clay,72,14.4,3.2,22,TS,
+30-Jan-95,White Clay,85.5,17.1,4.2,25,TS,
+15-Feb-95,White Clay,,,,,NST,
+28-Feb-95,White Clay,0,0,0,0,NSM,
+15-Mar-95,White Clay,,,,,NST,
+29-Mar-95,White Clay,0,0,0,0,NSM,
+04-Jan-95,Wind Rock Valley,28.5,5.7,1.4,25,BS,
+15-Jan-95,Wind Rock Valley,,,,,NST,
+01-Feb-95,Wind Rock Valley,,,,,NST,
+15-Feb-95,Wind Rock Valley,,,,,NST,
+01-Mar-95,Wind Rock Valley,,,,,NST,
+15-Mar-95,Wind Rock Valley,,,,,NST,
+01-Apr-95,Wind Rock Valley,,,,,NST,
+27-Dec-95,Arbab's Forest,36,7.2,2,28,TS,
+16-Jan-96,Arbab's Forest,22.5,4.5,0.8,18,BS,
+31-Jan-96,Arbab's Forest,23,4.6,1.2,26,BS,
+14-Feb-96,Arbab's Forest,0,0,0,0,NSM,
+28-Feb-96,Arbab's Forest,16.5,3.3,0.4,12,BS,
+13-Mar-96,Arbab's Forest,0,0,0,0,NSM,
+01-Apr-96,Arbab's Forest,0,0,0,0,NSM,
+28-Dec-95,Beaver Spring,30,6,0.91,15,BS,4.21
+11-Jan-96,Beaver Spring,32,6.4,1.2,19,BS,4.71
+01-Feb-96,Beaver Spring,,,,,NST,
+14-Feb-96,Beaver Spring,71.5,14.3,4.6,32,TS,7.8
+29-Feb-96,Beaver Spring,104.5,20.9,5,24,TS,
+14-Mar-96,Beaver Spring,75,15,5.4,36,TS,
+28-Mar-96,Beaver Spring,28.5,5.7,2,35,BS,
+27-Dec-95,Bowl Canyon,39,7.8,5.5,14,BS,5.1
+16-Jan-96,Bowl Canyon,39,7.8,1.6,21,BS,5.2
+31-Jan-96,Bowl Canyon,79,15.8,3.8,24,TS,
+15-Feb-96,Bowl Canyon,74,14.8,4.4,31,TS,7.3
+28-Feb-96,Bowl Canyon,76,15.2,3.9,26,TS,
+13-Mar-96,Bowl Canyon,66.5,13.3,3.9,29,TS,
+01-Apr-96,Bowl Canyon,0,0,0,0,NSM,
+27-Dec-95,Fluted Rock,29.5,5.9,0.8,14,BS,
+16-Jan-96,Fluted Rock,22,4.4,1.2,27,BS,
+31-Jan-96,Fluted Rock,33,6.6,1.8,27,BS,
+14-Feb-96,Fluted Rock,0,0,0,0,NSM,
+28-Feb-96,Fluted Rock,27.5,5.5,0.8,15,BS,
+13-Mar-96,Fluted Rock,0,0,0,0,NSM,
+01-Apr-96,Fluted Rock,0,0,0,0,NSM,
+28-Dec-95,Hidden Valley,27,5.4,0.6,11,BS,4.49
+11-Jan-96,Hidden Valley,26,5.2,0.9,17,BS,4.68
+01-Feb-96,Hidden Valley,71,14.2,2.9,20,TS,5.81
+15-Feb-96,Hidden Valley,52.5,10.5,3.9,37,TS,6.1
+29-Feb-96,Hidden Valley,39,7.8,1.3,17,BS,6.59
+13-Mar-96,Hidden Valley,15.5,3.1,0.5,16,BS,
+28-Mar-96,Hidden Valley,0,0,0,0,NSM,
+27-Dec-95,Missionary Spring,35.5,7.1,1.1,15,BS,
+16-Jan-96,Missionary Spring,21,4.2,1.2,29,BS,
+30-Jan-96,Missionary Spring,35,7,2.1,30,BS,5.6
+14-Feb-96,Missionary Spring,0,0,0,0,NSM,
+28-Feb-96,Missionary Spring,28.5,5.7,0.8,14,BS,7.3
+13-Mar-96,Missionary Spring,0,0,0,0,NSM,7.35
+29-Mar-96,Missionary Spring,49,9.8,3.8,39,,
+01-Apr-96,Missionary Spring,0,0,0,0,NSM,
+28-Dec-95,Tsaile I,22.5,4.5,0.6,13,BS,4.4
+11-Jan-96,Tsaile I,25.5,5.1,0.8,16,BS,
+31-Jan-96,Tsaile I,53,10.6,2.4,23,TS,
+14-Feb-96,Tsaile I,47,9.4,2.9,31,BS,
+28-Feb-96,Tsaile I,44,8.8,1,11,BS,
+13-Mar-96,Tsaile I,16.5,3.3,0.7,21,BS,
+28-Mar-96,Tsaile I,0,0,0,0,NSM,
+28-Dec-95,Tsaile IA,28,5.6,0.7,13,BS,4.4
+11-Jan-96,Tsaile IA,35.5,7.1,1,14,BS,5.1
+31-Jan-96,Tsaile IA,82,16.4,3.4,21,TS,6.83
+14-Feb-96,Tsaile IA,96,19.2,4.9,26,TS,8.35
+28-Feb-96,Tsaile IA,126,25.2,6.1,24,TS,
+13-Mar-96,Tsaile IA,96.5,19.3,5.9,31,TS,
+28-Mar-96,Tsaile IA,49,9.8,3.5,36,BS,10.75
+28-Dec-95,Tsaile III,29.5,5.9,0.9,15,BS,4.75
+11-Jan-96,Tsaile III,33.5,6.7,1.2,18,BS,5.23
+31-Jan-96,Tsaile III,84,16.8,3.3,20,TS,6.7
+14-Feb-96,Tsaile III,88.5,17.7,5.6,32,TS,8.8
+28-Feb-96,Tsaile III,121,24.2,6.3,26,TS,9.4
+14-Mar-96,Tsaile III,77.5,15.5,5.8,38,TS,10.19
+28-Mar-96,Tsaile III,26,5.2,1.8,35,BS,
+28-Dec-95,Whiskey Creek,36.5,7.3,1.1,15,BS,3.91
+16-Jan-96,Whiskey Creek,33.5,6.7,1.4,21,BS,4.1
+01-Feb-96,Whiskey Creek,106,21.2,5,24,TS,5.42
+15-Feb-96,Whiskey Creek,83.5,16.7,5.6,34,TS,
+29-Feb-96,Whiskey Creek,98.5,19.7,5.1,26,TS,6.4
+14-Mar-96,Whiskey Creek,72.5,14.5,5.6,39,TS,
+29-Mar-96,Whiskey Creek,49,9.8,3.8,39,BS,
+27-Dec-95,White Clay,16.5,3.3,0.6,18,BS,
+16-Jan-96,White Clay,0,0,0,0,NSM,
+31-Jan-96,White Clay,30.5,6.1,1.6,26,BS,
+15-Feb-96,White Clay,,,,,NST,
+28-Feb-96,White Clay,25.5,5.1,0.6,12,BS,
+15-Mar-96,White Clay,,,,,NST,
+01-Apr-96,White Clay,,,,,NST,
+01-Jan-96,Wind Rock Valley,,,,,NST,
+18-Jan-96,Wind Rock Valley,33.5,6.7,1.6,24,BS,4.4
+01-Feb-95,Wind Rock Valley,,,,,NST,
+15-Feb-95,Wind Rock Valley,,,,,NST,
+01-Mar-95,Wind Rock Valley,,,,,NST,
+15-Mar-95,Wind Rock Valley,,,,,NST,
+01-Apr-95,Wind Rock Valley,,,,,NST,
+30-Dec-96,Arbab's Forest,0,0,0,0,NSM,
+21-Jan-97,Arbab's Forest,74.5,14.9,3.8,26,TS,
+30-Jan-97,Arbab's Forest,72.5,14.5,4.3,30,TS,
+13-Feb-97,Arbab's Forest,78,15.6,3.2,21,TS,
+27-Feb-97,Arbab's Forest,60,12,3.8,32,TS,
+14-Mar-97,Arbab's Forest,35,7,2.4,34,BS,
+31-Mar-97,Arbab's Forest,0,0,0,0,NSM,
+30-Dec-96,Beaver Spring,83.5,16.7,4.7,28,TS,10.13
+15-Jan-97,Beaver Spring,,,,,NST,
+29-Jan-97,Beaver Spring,209.5,41.9,11.7,28,TS,
+12-Feb-97,Beaver Spring,189.5,37.9,12.4,33,TS,14.4
+26-Feb-97,Beaver Spring,193,38.6,12.9,33,TS,14.7
+13-Mar-97,Beaver Spring,182.5,36.5,13.9,38,TS,16.9
+31-Mar-97,Beaver Spring,,,,,NM,
+31-Dec-96,Bowl Canyon,98.5,19.7,4.7,24,TS,
+16-Jan-97,Bowl Canyon,194,38.8,9,23,TS,
+30-Jan-97,Bowl Canyon,222.5,44.5,12.2,27,TS,14.6
+13-Feb-97,Bowl Canyon,211,42.2,12.2,29,TS,15
+27-Feb-97,Bowl Canyon,199.5,39.9,12.8,32,TS,16
+03-Mar-97,Bowl Canyon,230,46,14.6,32,TS,
+13-Mar-97,Bowl Canyon,188,37.6,12.9,34,TS,15.5
+31-Mar-97,Bowl Canyon,70.5,14.1,6.1,43,TS,14.9
+30-Dec-96,Fluted Rock,0,0,0,0,NSM,
+21-Jan-97,Fluted Rock,86,17.2,3.9,23,TS,
+30-Jan-97,Fluted Rock,93,18.6,5.4,29,TS,9.2
+13-Feb-97,Fluted Rock,102,20.4,6.2,30,TS,
+27-Feb-97,Fluted Rock,90.5,18.1,5.4,30,TS,
+14-Mar-97,Fluted Rock,72.5,14.5,5.2,36,TS,10.7
+31-Mar-97,Fluted Rock,0,0,0,0,NSM,
+31-Dec-96,Hidden Valley,59,11.8,3.8,32,TS,9.46
+15-Jan-97,Hidden Valley,,,,,NST,
+30-Jan-97,Hidden Valley,161,32.2,10.2,32,TS,
+13-Feb-97,Hidden Valley,169.5,33.9,10.8,32,TS,
+27-Feb-97,Hidden Valley,166,33.2,10.4,31,TS,
+14-Mar-97,Hidden Valley,156,31.2,10.9,35,TS,12.8
+02-Apr-97,Hidden Valley,40.5,8.1,4,49,BS,12.77
+30-Dec-96,Missionary Spring,0,0,0,0,NSM,9.6
+16-Jan-97,Missionary Spring,82.5,16.5,3.6,22,TS,
+30-Jan-97,Missionary Spring,110.5,22.1,5.6,25,TS,14.9
+13-Feb-97,Missionary Spring,103,20.6,6.4,31,TS,15.5
+27-Feb-97,Missionary Spring,96.5,19.3,6.9,36,TS,15.86
+13-Mar-97,Missionary Spring,60,12,5.3,44,TS,
+14-Mar-97,Missionary Spring,194,38.8,14.2,36,TS,14.79
+31-Mar-97,Missionary Spring,0,0,0,0,NSM,
+30-Dec-96,Tsaile I,29,5.8,1.7,29,BS,
+13-Jan-97,Tsaile I,84,16.8,2.7,16,TS,
+29-Jan-97,Tsaile I,129.5,25.9,7.1,27,TS,
+12-Feb-97,Tsaile I,121,24.2,7.3,30,TS,
+26-Feb-97,Tsaile I,123,24.6,7.9,32,TS,
+13-Mar-97,Tsaile I,117,23.4,8.1,35,TS,
+14-Mar-97,Tsaile I,156,31.2,10.9,35,TS,12.8
+31-Mar-97,Tsaile I,0,0,0,0,NSM,
+30-Dec-96,Tsaile IA,88.5,17.7,4.7,27,TS,10.85
+13-Jan-97,Tsaile IA,158,31.6,7.4,23,TS,
+29-Jan-97,Tsaile IA,204,40.8,10.8,26,TS,
+12-Feb-97,Tsaile IA,189.5,37.9,11.8,31,TS,16.08
+13-Feb-97,Tsaile IA,196,39.2,10,26,TS,16.2
+26-Feb-97,Tsaile IA,192.5,38.5,11.7,30,TS,
+13-Mar-97,Tsaile IA,180.5,36.1,12.2,34,TS,17.65
+31-Mar-97,Tsaile IA,47.5,9.5,4.4,46,BS,17.6
+30-Dec-96,Tsaile III,64,12.8,3.7,29,TS,10.21
+13-Jan-97,Tsaile III,136,27.2,5.3,19,TS,
+29-Jan-97,Tsaile III,196,39.2,10.6,27,TS,
+12-Feb-97,Tsaile III,174,34.8,11,32,TS,15.3
+26-Feb-97,Tsaile III,184.5,36.9,11.5,31,TS,16.75
+13-Mar-97,Tsaile III,158,31.6,11.3,36,TS,16.71
+31-Mar-97,Tsaile III,42.5,8.5,4.2,49,BS,16.9
+31-Dec-96,Whiskey Creek,96.5,19.3,5.2,27,TS,
+15-Jan-97,Whiskey Creek,,,,,NST,
+30-Jan-97,Whiskey Creek,226,45.2,13.1,29,TS,
+13-Feb-97,Whiskey Creek,221,44.2,13.8,31,TS,14.1
+27-Feb-97,Whiskey Creek,222.5,44.5,14,31,TS,
+14-Mar-97,Whiskey Creek,194,38.8,14.2,37,TS,14.79
+02-Apr-97,Whiskey Creek,82.5,16.5,6.9,42,TS,14.76
+01-Jan-97,White Clay,,,,,NST,
+15-Jan-97,White Clay,,,,,NST,
+03-Feb-97,White Clay,96,19.2,5.6,29,TS,10.7
+14-Feb-97,White Clay,98.5,19.7,5.2,26,TS,11.3
+27-Feb-97,White Clay,88.5,17.7,5.4,31,TS,11.6
+14-Mar-97,White Clay,35.5,7.1,2.6,37,BS,11.83
+01-Apr-97,White Clay,,,,,NST,
+01-Jan-97,Wind Rock Valley,,,,,NST,
+15-Jan-97,Wind Rock Valley,,,,,NST,
+01-Feb-97,Wind Rock Valley,,,,,NST,
+15-Feb-97,Wind Rock Valley,,,,,NST,
+04-Mar-97,Wind Rock Valley,83.5,16.7,5.3,32,TS,9.3
+15-Mar-97,Wind Rock Valley,,,,,NST,
+01-Apr-97,Wind Rock Valley,,,,,NST,
+30-Dec-97,Arbab's Forest,67,13.4,3,22,TS,
+13-Jan-98,Arbab's Forest,76,15.2,3.4,22,TS,
+28-Jan-98,Arbab's Forest,66,13.2,3.8,29,TS,
+12-Feb-98,Arbab's Forest,80,16,4.8,30,TS,
+26-Feb-98,Arbab's Forest,95,19,6,32,TS,
+11-Mar-98,Arbab's Forest,70,14,4.2,30,TS,
+30-Mar-98,Arbab's Forest,30,6,2,33,TS,
+02-Jan-98,Beaver Spring,96.5,19.3,4.7,24,TS,8.75
+14-Jan-98,Beaver Spring,151,30.2,7.3,24,TS,
+28-Jan-98,Beaver Spring,131.5,26.3,7.7,29,TS,11.18
+12-Feb-98,Beaver Spring,,,,,NST,
+26-Feb-98,Beaver Spring,234.5,46.9,12.1,26,TS,
+13-Mar-98,Beaver Spring,203,40.6,13.1,32,TS,16.28
+31-Mar-98,Beaver Spring,241.5,48.3,14.3,30,TS,19.46
+30-Dec-97,Bowl Canyon,127.5,25.5,5.8,23,TS,7.9
+15-Jan-98,Bowl Canyon,144,28.8,7.1,25,TS,10.3
+28-Jan-98,Bowl Canyon,135.5,27.1,7.2,27,TS,10.2
+12-Feb-98,Bowl Canyon,180.5,36.1,8.4,23,TS,12.1
+26-Feb-98,Bowl Canyon,210.5,42.1,11.2,27,TS,14.5
+12-Mar-98,Bowl Canyon,185,37,11.9,32,TS,14.5
+31-Mar-98,Bowl Canyon,185.5,37.1,11.6,31,TS,16.9
+30-Dec-97,Fluted Rock,76,15.2,4,26,TS,8
+13-Jan-98,Fluted Rock,84,16.8,4.6,27,TS,8.7
+28-Jan-98,Fluted Rock,81,16.2,4.4,27,TS,8.1
+12-Feb-98,Fluted Rock,114,22.8,5.2,23,TS,10.2
+26-Feb-98,Fluted Rock,140,28,7.8,28,TS,
+11-Mar-98,Fluted Rock,122,24.4,7.6,31,TS,10
+31-Mar-98,Fluted Rock,56,11.2,3.4,30,TS,12.5
+02-Jan-98,Hidden Valley,88.5,17.7,4.8,27,TS,7.1
+14-Jan-98,Hidden Valley,133.5,26.7,6.7,25,TS,13.65
+28-Jan-98,Hidden Valley,128.5,25.7,7.4,29,TS,8.8
+12-Feb-98,Hidden Valley,179,35.8,9.7,27,TS,
+26-Feb-98,Hidden Valley,213,42.6,11.6,27,TS,11.5
+11-Mar-98,Hidden Valley,198.5,39.7,12.8,32,TS,11.5
+30-Mar-98,Hidden Valley,168.5,33.7,10.9,32,TS,13.15
+29-Dec-97,Missionary Spring,81.5,16.3,3.4,21,TS,7.5
+15-Jan-98,Missionary Spring,88.5,17.7,4.5,25,TS,8.4
+28-Jan-98,Missionary Spring,77,15.4,4.3,28,TS,8.9
+12-Feb-98,Missionary Spring,113.5,22.7,6,26,TS,9.9
+26-Feb-98,Missionary Spring,120,24,6.5,27,TS,11.5
+12-Mar-98,Missionary Spring,97.5,19.5,7,36,TS,11.7
+31-Mar-98,Missionary Spring,23,4.6,1.6,35,BS,13.9
+31-Dec-97,Tsaile I,93.5,18.7,4.4,24,TS,
+13-Jan-98,Tsaile I,128,25.6,5.4,21,TS,
+29-Jan-98,Tsaile I,119,23.8,5.8,24,TS,13.73
+13-Feb-98,Tsaile I,163,32.6,8,25,TS,16.2
+26-Feb-98,Tsaile I,,,,,NST,
+12-Mar-98,Tsaile I,162,32.4,9.9,31,TS,19.09
+31-Mar-98,Tsaile I,126.5,25.3,7.1,28,TS,22.65
+30-Dec-97,Tsaile IA,88.5,17.7,4.7,27,TS,10.85
+31-Dec-97,Tsaile IA,115.5,23.1,5.6,24,TS,11.3
+13-Jan-98,Tsaile IA,157,31.4,7.2,23,TS,14.25
+29-Jan-98,Tsaile IA,144.5,28.9,7.6,26,TS,13.73
+15-Feb-98,Tsaile IA,,,,,NST,
+01-Mar-98,Tsaile IA,,,,,NST,
+12-Mar-98,Tsaile IA,213,42.6,12.5,29,TS,19.09
+31-Mar-98,Tsaile IA,199,39.8,11.8,30,TS,22.65
+31-Dec-97,Tsaile III,108.5,21.7,5.7,26,TS,10.12
+13-Jan-98,Tsaile III,153,30.6,7.3,24,TS,11.75
+29-Jan-98,Tsaile III,137.5,27.5,7.8,28,TS,12.3
+13-Feb-98,Tsaile III,192.5,38.5,10.3,27,TS,13.97
+26-Feb-98,Tsaile III,,,,,NST,
+12-Mar-98,Tsaile III,207.5,41.5,13.7,33,TS,18.58
+31-Mar-98,Tsaile III,207.5,41.5,12.7,31,TS,19.12
+30-Dec-97,Whiskey Creek,108.5,21.7,5.3,24,TS,7.7
+14-Jan-98,Whiskey Creek,137.5,27.5,6.9,25,TS,9.02
+28-Jan-98,Whiskey Creek,132,26.4,7.7,29,TS,9.15
+13-Feb-98,Whiskey Creek,174.5,34.9,9.7,28,TS,11.45
+26-Feb-98,Whiskey Creek,213,42.6,11.4,27,TS,10.5
+11-Mar-98,Whiskey Creek,196.5,39.3,12.8,33,TS,11.9
+30-Mar-98,Whiskey Creek,189.5,37.9,12.1,32,TS,13.5
+31-Dec-97,White Clay,37,7.4,2,27,TS,
+14-Jan-98,White Clay,63,12.6,3.8,30,TS,
+29-Jan-98,White Clay,50,10,2.6,26,TS,
+15-Feb-98,White Clay,,,,,NST,
+27-Feb-98,White Clay,112,22.4,6.2,28,TS,
+12-Mar-98,White Clay,81,16.2,5.6,35,TS,
+01-Apr-98,White Clay,,,,,NST,
+01-Jan-98,Wind Rock Valley,,,,,NST,
+08-Jan-98,Wind Rock Valley,55,11,2.5,23,TS,6.8
+01-Feb-98,Wind Rock Valley,,,,,NST,
+15-Feb-98,Wind Rock Valley,,,,,NST,
+01-Mar-98,Wind Rock Valley,,,,,NST,
+15-Mar-98,Wind Rock Valley,,,,,NST,
+01-Apr-98,Wind Rock Valley,,,,,NST,
+29-Dec-98,Arbab's Forest,0,0,0,0,NSM,
+16-Jan-99,Arbab's Forest,0,0,0,0,NSM,
+27-Jan-99,Arbab's Forest,0,0,0,0,NSM,
+11-Feb-99,Arbab's Forest,0,0,0,0,NSM,
+03-Mar-99,Arbab's Forest,0,0,0,0,NSM,
+15-Mar-99,Arbab's Forest,0,0,0,0,NSM,
+31-Mar-99,Arbab's Forest,0,0,0,0,NSM,
+30-Dec-98,Beaver Spring,64,12.5,3.9,30,TS,
+14-Jan-99,Beaver Spring,72,14.4,4.2,29,TS,
+27-Jan-99,Beaver Spring,83,16.6,4.4,26,TS,
+12-Feb-99,Beaver Spring,99,19.8,6.1,31,TS,
+01-Mar-99,Beaver Spring,,,,,NST,
+16-Mar-99,Beaver Spring,16,3.2,0.8,47,BS,
+31-Mar-99,Beaver Spring,0,0,0,0,NSM,
+29-Dec-98,Bowl Canyon,67.5,13.5,3.4,25,TS,
+15-Jan-99,Bowl Canyon,69.5,13.9,3.7,27,TS,
+28-Jan-99,Bowl Canyon,83,16.6,4.5,27,TS,
+11-Feb-99,Bowl Canyon,101.5,20.3,4.5,22,TS,
+01-Mar-99,Bowl Canyon,,,,,NST,
+16-Mar-99,Bowl Canyon,39.5,7.9,2.4,30,BS,
+31-Mar-99,Bowl Canyon,0,0,0,0,NSM,
+29-Dec-98,Fluted Rock,0,0,0,0,NSM,
+16-Jan-99,Fluted Rock,0,0,0,0,NSM,
+27-Jan-99,Fluted Rock,0,0,0,0,NSM,
+11-Feb-99,Fluted Rock,6.5,1.3,0.2,15,BS,
+03-Mar-99,Fluted Rock,0,0,0,0,NSM,
+15-Mar-99,Fluted Rock,0,0,0,0,NSM,
+31-Mar-99,Fluted Rock,0,0,0,0,NSM,
+30-Dec-98,Hidden Valley,38,7.6,1.5,20,BS,
+14-Jan-99,Hidden Valley,43.5,8.7,2.1,24,BS,
+28-Jan-99,Hidden Valley,50,10,2.7,27,BS,
+12-Feb-99,Hidden Valley,47,9.4,2.9,31,BS,
+02-Mar-99,Hidden Valley,7,1.4,1,71,BS,
+15-Mar-99,Hidden Valley,0,0,0,0,NSM,
+31-Mar-99,Hidden Valley,0,0,0,0,NSM,
+29-Dec-98,Missionary Spring,12.5,2.5,0.6,24,BS,
+15-Jan-99,Missionary Spring,0,0,0,0,NSM,
+28-Jan-99,Missionary Spring,0,0,0,0,NSM,
+09-Feb-99,Missionary Spring,0,0,0,0,NSM,
+01-Mar-99,Missionary Spring,,,,,NST,
+15-Mar-99,Missionary Spring,0,0,0,0,NSM,
+31-Mar-99,Missionary Spring,0,0,0,0,NSM,
+29-Dec-98,Tsaile I,48.5,9.7,2,21,BS,
+13-Jan-99,Tsaile I,51,6.2,2.5,25,BS,
+27-Jan-99,Tsaile I,62.5,12.5,3.3,26,TS,
+11-Feb-99,Tsaile I,66.5,13.3,3.3,25,TS,
+01-Mar-99,Tsaile I,12,2.4,1.7,71,BS,
+15-Mar-99,Tsaile I,0,0,0,0,NSM,
+31-Mar-99,Tsaile I,0,0,0,0,NSM,
+29-Dec-98,Tsaile IA,105,21,5.5,26,TS,
+13-Jan-99,Tsaile IA,113.5,22.7,5.7,25,TS,
+01-Feb-99,Tsaile IA,,,,,NST,
+11-Feb-99,Tsaile IA,148,29.6,6.9,23,TS,
+01-Mar-99,Tsaile IA,120,24,6.7,28,TS,
+15-Mar-99,Tsaile IA,,,,,NST,
+31-Mar-99,Tsaile IA,0,0,0,0,NSM,
+27-Dec-98,Tsaile III,69.5,13.9,3.8,27,TS,
+13-Jan-99,Tsaile III,69,13.8,3.8,28,BS,
+27-Jan-99,Tsaile III,89,17.8,4.5,25,TS,
+11-Feb-99,Tsaile III,97,19.4,5.1,26,TS,
+01-Mar-99,Tsaile III,54.5,10.9,4,37,BS,
+15-Mar-99,Tsaile III,29.5,5.9,0.9,15,BS,
+31-Mar-99,Tsaile III,0,0,0,0,NSM,
+29-Dec-98,Whiskey Creek,63.5,12.7,3.1,24,TS,
+14-Jan-99,Whiskey Creek,68.5,13.7,3.7,27,TS,
+28-Jan-99,Whiskey Creek,82,16.4,4.8,29,TS,
+11-Feb-99,Whiskey Creek,96.5,19.3,4.5,23,BS,
+01-Mar-99,Whiskey Creek,,,,,NST,
+16-Mar-99,Whiskey Creek,38.5,7.7,2.1,27,BS,
+31-Mar-99,Whiskey Creek,0,0,0,0,NSM,
+30-Dec-99,Arbab's Forest,9,1.8,0.2,11,BS,
+13-Jan-00,Arbab's Forest,14,2.8,0.6,21,BS,
+31-Jan-00,Arbab's Forest,15.5,3.1,0.4,13,BS,
+15-Feb-00,Arbab's Forest,0,0,0,0,NSM,
+29-Feb-00,Arbab's Forest,0,0,0,0,NSM,
+15-Mar-00,Arbab's Forest,0,0,0,0,NSM,
+30-Mar-00,Arbab's Forest,0,0,0,0,NSM,
+29-Dec-99,Beaver Spring,19.5,3.9,0.6,15,BS,
+13-Jan-00,Beaver Spring,44.5,8.9,1.9,21,BS,
+31-Jan-00,Beaver Spring,97,19.4,3.7,19,TS,
+14-Feb-00,Beaver Spring,83.5,16.7,4.7,28,TS,
+28-Feb-00,Beaver Spring,87.5,17.5,5.3,30,TS,
+14-Mar-00,Beaver Spring,87,17.4,6.2,36,TS,
+30-Mar-00,Beaver Spring,96,19.2,6.3,33,TS,
+30-Dec-99,Bowl Canyon,33.5,6.7,0.8,12,BS,
+13-Jan-00,Bowl Canyon,51.5,10.3,2.7,26,TS ,
+01-Feb-00,Bowl Canyon,92.5,18.5,4.2,23,TS ,
+15-Feb-00,Bowl Canyon,82.5,16.5,4.2,25,TS ,
+29-Feb-00,Bowl Canyon,93.5,18.7,5.5,29,TS ,
+15-Mar-00,Bowl Canyon,98,19.6,6.9,35,TS ,
+30-Mar-00,Bowl Canyon,101,20.2,6.6,33,TS ,
+30-Dec-99,Fluted Rock,0,0,0,0,NSM,
+13-Jan-00,Fluted Rock,11,2.2,0.4,18,BS,
+31-Jan-00,Fluted Rock,29.5,5.9,0.6,10,BS,
+15-Feb-00,Fluted Rock,0,0,0,0,NSM,
+29-Feb-00,Fluted Rock,0,0,0,0,NSM,
+15-Mar-00,Fluted Rock,0,0,0,0,NSM,
+30-Mar-00,Fluted Rock,0,0,0,0,NSM,
+29-Dec-99,Hidden Valley,17,3.4,0.4,12,BS,
+14-Jan-00,Hidden Valley,31.5,6.3,1.1,17,BS,
+01-Feb-00,Hidden Valley,57,11.4,1.9,17,TS,
+15-Feb-00,Hidden Valley,42,8.4,2.6,31,BS,
+29-Feb-00,Hidden Valley,45.5,9.1,2.8,31,BS,
+15-Mar-00,Hidden Valley,53,10.6,4.3,41,BS,
+31-Mar-00,Hidden Valley,64.5,12.9,4,31,TS,
+30-Dec-99,Missionary Spring,18,3.6,0.6,17,BS,
+14-Jan-00,Missionary Spring,27,5.4,1.2,22,BS,
+31-Jan-00,Missionary Spring,12.5,2.5,0.4,16,BS,
+15-Feb-00,Missionary Spring,0,0,0,0,NSM,
+29-Feb-00,Missionary Spring,4.5,0.9,0.2,22,BS,
+15-Mar-00,Missionary Spring,0,0,0,0,NSM,
+31-Mar-00,Missionary Spring,,,,,NST,
+29-Dec-99,Tsaile I,32.5,6.5,0.9,14,BS,
+13-Jan-00,Tsaile I,55,11,2,18,TS,
+02-Feb-00,Tsaile I,76.5,15.3,3.2,21,TS,
+14-Feb-00,Tsaile I,46.5,9.3,3.1,33,TS,
+28-Feb-00,Tsaile I,42.5,8.5,2.6,31,BS,
+14-Mar-00,Tsaile I,41,8.2,2.7,33,BS,
+30-Mar-00,Tsaile I,31,6.2,1.6,26,BS,
+29-Dec-99,Tsaile IA,48,9.6,1.5,16,BS,
+13-Jan-00,Tsaile IA,78.5,15.7,3.1,20,TS,
+01-Feb-00,Tsaile IA,126,25.2,5.6,22,TS,
+14-Feb-00,Tsaile IA,110,22,5.9,27,TS,
+28-Feb-00,Tsaile IA,115.5,23.1,6.5,28,TS,
+14-Mar-00,Tsaile IA,122,24.4,7.3,30,TS,
+30-Mar-00,Tsaile IA,120,24,7.5,31,TS,
+29-Dec-99,Tsaile III,37.5,7.5,1.1,15,BS,
+13-Jan-00,Tsaile III,69,13.8,3,22,TS,
+31-Jan-00,Tsaile III,120,24,5.3,22,TS,
+14-Feb-00,Tsaile III,104.5,20.9,6.1,29,TS,
+28-Feb-00,Tsaile III,106,21.2,6.7,32,TS,
+14-Mar-00,Tsaile III,102,20.4,7.6,37,TS,
+30-Mar-00,Tsaile III,106,21.2,7.3,34,TS,
+29-Dec-99,Whiskey Creek,29.5,5.9,0.8,14,BS,
+13-Jan-00,Whiskey Creek,48.5,9.7,2.5,26,TS,
+01-Feb-00,Whiskey Creek,84,16.8,3.9,23,TS,
+15-Feb-00,Whiskey Creek,79.5,15.9,4.8,30,TS,
+29-Feb-00,Whiskey Creek,100.5,20.1,5.9,29,TS,
+15-Mar-00,Whiskey Creek,104,20.8,7,34,TS,
+30-Mar-00,Whiskey Creek,127.5,25.5,9.2,36,TS,
+02-Jan-01,Arbab's Forest,0,0,0,0,NSM,9.3
+16-Jan-01,Arbab's Forest,20,4,0.5,13,BS,9.9
+01-Feb-01,Arbab's Forest,73,14.6,2.1,14,TS,11.38
+15-Feb-01,Arbab's Forest,66,13.2,2.9,22,TS,12.46
+28-Feb-01,Arbab's Forest,68.5,13.7,3.3,24,TS,13.1
+14-Mar-01,Arbab's Forest,55.5,11.1,3.5,32,TS,14.22
+29-Mar-01,Arbab's Forest,0,0,0,0,NSM,14.5
+01-Jan-01,Beaver Spring,,,,,NST,
+17-Jan-01,Beaver Spring,94.5,18.9,3.4,18,TS,10.6
+01-Feb-01,Beaver Spring,,,,,NST,
+15-Feb-01,Beaver Spring,,,,,NST,
+01-Mar-01,Beaver Spring,,,,,NST,
+14-Mar-01,Beaver Spring,172.5,34.5,10.3,30,TS,17.87
+30-Mar-01,Beaver Spring,99,19.8,7.5,38,TS,18.01
+03-Jan-01,Bowl Canyon,57.5,11.5,2.8,24,TS,11.8
+16-Jan-01,Bowl Canyon,90.5,18.1,3.7,20,TS,12.35
+01-Feb-01,Bowl Canyon,145.5,29.1,6,21,TS,14
+15-Feb-01,Bowl Canyon,158.5,31.7,7.6,24,TS,15.3
+01-Mar-01,Bowl Canyon,165.5,33.1,8.7,26,TS,15.9
+15-Mar-01,Bowl Canyon,176.5,35.3,10.7,30,TS,17.4
+30-Mar-01,Bowl Canyon,108,21.6,8.4,39,TS,17.9
+02-Jan-01,Fluted Rock,0,0,0,0,NSM,5.3
+16-Jan-01,Fluted Rock,19.3,3.9,0.6,14,BS,5.65
+01-Feb-01,Fluted Rock,87,17.4,2.9,17,TS,6.82
+15-Feb-01,Fluted Rock,80,16,3.7,23,TS,7.4
+28-Feb-01,Fluted Rock,80,16,4.5,28,TS,7.9
+14-Mar-01,Fluted Rock,87,17.4,5.9,34,TS,9.15
+29-Mar-01,Fluted Rock,17.5,3.5,1.4,40,BS,9.3
+28-Dec-01,Hidden Valley,62.5,12.5,3.2,26,TS,8.5
+02-Jan-01,Hidden Valley,39.5,7.9,1.6,20,BS,5.9
+17-Jan-01,Hidden Valley,76.5,15.3,2.5,16,TS,6.2
+01-Feb-01,Hidden Valley,,,,,NST,
+14-Feb-01,Hidden Valley,120.5,24.1,5.7,24,TS,7.6
+01-Mar-01,Hidden Valley,131,26.2,6.9,26,TS,7.95
+14-Mar-01,Hidden Valley,137,27.4,8.6,31,TS,8.41
+02-Apr-01,Hidden Valley,44.5,8.9,3.2,36,BS,8.95
+03-Jan-01,Missionary Spring,18,3.6,0.7,19,BS,6.5
+17-Jan-01,Missionary Spring,55.5,11.1,1.8,16,BS,7.25
+01-Feb-01,Missionary Spring,107.5,21.5,5.3,25,TS,8.75
+15-Feb-01,Missionary Spring,97,19.4,5.3,27,TS,10
+28-Feb-01,Missionary Spring,78,15.6,5.9,38,TS,10.5
+14-Mar-01,Missionary Spring,75,15,6.1,41,TS,11.65
+29-Mar-01,Missionary Spring,12,2.4,1.2,50,BS,12
+02-Jan-01,Tsaile I,30.5,6.1,1,16,BS,12.6
+16-Jan-01,Tsaile I,73,14.6,1.9,13,TS,13.59
+01-Feb-01,Tsaile I,131.5,26.3,4.7,18,TS,15.84
+15-Feb-01,Tsaile I,,,,,NST,
+02-Mar-01,Tsaile I,131,26.2,7.2,27,TS,18.65
+15-Mar-01,Tsaile I,113.5,22.7,8,35,TS,19.95
+30-Mar-01,Tsaile I,41,8.2,3.5,43,BS,20.88
+02-Jan-01,Tsaile IA,59.5,11.9,1.6,13,TS,12.6
+16-Jan-01,Tsaile IA,109,21.8,3.4,16,TS,13.59
+01-Feb-01,Tsaile IA,180.5,36.1,6.3,17,TS,15.84
+15-Feb-01,Tsaile IA,,,,,NST,
+02-Mar-01,Tsaile IA,197.5,39.5,9.9,25,TS,18.65
+15-Mar-01,Tsaile IA,173.5,34.7,10.3,30,TS,19.95
+30-Mar-01,Tsaile IA,100,20,6.9,34,TS,20.88
+02-Jan-01,Tsaile III,61,12.2,2.7,22,BS,15.3
+16-Jan-01,Tsaile III,106,21.2,4,19,TS,16.15
+01-Feb-01,Tsaile III,155.5,31.1,6.3,20,TS,17.59
+15-Feb-01,Tsaile III,,,,,NST,
+02-Mar-01,Tsaile III,176,35.2,9.4,27,TS,20.2
+15-Mar-01,Tsaile III,153.5,30.7,10,33,TS,22.01
+30-Mar-01,Tsaile III,74,14.8,5.5,37,TS,22.22
+03-Jan-01,Whiskey Creek,64.5,12.9,2.8,22,TS,11.07
+16-Jan-01,Whiskey Creek,91,18.2,4.3,24,TS,11.3
+31-Jan-01,Whiskey Creek,154,30.8,6.5,21,TS,13
+15-Feb-01,Whiskey Creek,166.5,33.3,8.9,27,TS,13.73
+01-Mar-01,Whiskey Creek,175,35,9.3,27,TS,14.4
+15-Mar-01,Whiskey Creek,169,33.8,10,30,TS,15.43
+02-Apr-01,Whiskey Creek,78.5,15.7,6.2,39,TS,15.77
+26-Dec-01,Arbab's Forest,36,7.2,1.4,19,TS,5.09
+14-Jan-02,Arbab's Forest,36,7.2,1.6,22,BS,5.68
+31-Jan-02,Arbab's Forest,40.5,8.1,1.6,20,BS,6.05
+13-Feb-02,Arbab's Forest,28,5.6,1.4,25,BS,5.9
+28-Feb-02,Arbab's Forest,14,2.8,0.8,29,BS,
+14-Mar-02,Arbab's Forest,0,0,0,0,NSM,6.25
+25-Mar-02,Arbab's Forest,0,0,0,0,NSM,6.69
+28-Dec-01,Beaver Spring,71,14.2,3.5,25,TS,9.6
+16-Jan-02,Beaver Spring,82.5,16.5,4.4,27,TS,11.52
+31-Jan-02,Beaver Spring,93,18.6,4.1,22,TS,11.5
+14-Feb-02,Beaver Spring,77,15.4,4.4,29,TS,11.7
+27-Feb-02,Beaver Spring,77,15.4,4.2,27,TS,12.3
+15-Mar-02,Beaver Spring,,,,,NST,
+28-Mar-02,Beaver Spring,0,0,0,0,NSM,13
+27-Dec-01,Bowl Canyon,78.5,15.7,3.5,22,TS,7.3
+14-Jan-02,Bowl Canyon,86,17.2,4.3,25,TS,10.2
+30-Jan-02,Bowl Canyon,104,20.8,4.3,21,TS,10.43
+13-Feb-02,Bowl Canyon,94,18.8,4.2,22,TS,10.5
+28-Feb-02,Bowl Canyon,92.5,18.5,4.8,26,TS,10.7
+13-Mar-02,Bowl Canyon,71.5,14.3,3.3,23,TS,9.8
+25-Mar-02,Bowl Canyon,30.5,6.1,1.8,30,BS,11.1
+26-Dec-01,Fluted Rock,44.5,8.9,1.6,18,BS,5.14
+14-Jan-02,Fluted Rock,44.5,8.9,2,23,TS,5.67
+31-Jan-02,Fluted Rock,53,10.6,2.2,21,BS,15.5
+13-Feb-02,Fluted Rock,44,8.8,2,23,TS,5.8
+28-Feb-02,Fluted Rock,27.5,5.5,1.2,22,BS,5.8
+14-Mar-02,Fluted Rock,0,0,0,0,NSM,6
+25-Mar-02,Fluted Rock,0,0,0,0,NSM,6.2
+28-Dec-01,Hidden Valley,62.5,12.5,3.2,26,TS,8.5
+16-Jan-02,Hidden Valley,77.5,15.5,3.5,23,TS,9
+31-Jan-02,Hidden Valley,91,18.2,3.9,21,TS,9.1
+13-Feb-02,Hidden Valley,74,14.8,4,27,TS,9.2
+27-Feb-02,Hidden Valley,67.5,13.5,3.5,26,TS,9.35
+15-Mar-02,Hidden Valley,28,5.6,1.7,30,TS,9.5
+27-Mar-02,Hidden Valley,0,0,0,0,NSM,9.8
+27-Dec-01,Missionary Spring,47,9.4,1.9,20,BS,
+14-Jan-02,Missionary Spring,42.5,8.5,1.3,15,BS,5.2
+01-Feb-02,Missionary Spring,51.5,10.3,2.8,27,BS,
+13-Feb-02,Missionary Spring,39.5,7.9,2.3,29,BS,6.4
+28-Feb-02,Missionary Spring,17,3.4,1.1,32,BS,6.51
+13-Mar-02,Missionary Spring,0,0,0,0,NSM,6.73
+25-Mar-02,Missionary Spring,0,0,0,0,NSM,6.9
+26-Dec-01,Tsaile I,63.5,12.7,3,24,TS,9.2
+01-Jan-02,Tsaile I,71.5,14.3,3.3,23,TS,
+15-Jan-02,Tsaile I,71,14.2,3.2,23,TS,10.15
+01-Feb-02,Tsaile I,71.5,14.3,3.3,23,TS,
+14-Feb-02,Tsaile I,62.5,12.5,3.2,26,TS,
+28-Feb-02,Tsaile I,53,10.6,2.9,27,TS,
+14-Mar-02,Tsaile I,16,3.2,0.8,25,BS,
+26-Mar-02,Tsaile I,0,0,0,0,NSM,
+26-Dec-01,Tsaile IA,81.5,16.3,3.7,23,TS,
+15-Jan-02,Tsaile IA,100,20,4.9,25,TS,10.15
+01-Feb-02,Tsaile IA,107,21.4,4.6,21,TS,9.5
+14-Feb-02,Tsaile IA,102,20.4,4.6,23,TS,10.3
+27-Feb-02,Tsaile IA,107,21.4,4.9,23,TS,10.78
+14-Mar-02,Tsaile IA,83.5,16.7,2.8,17,TS,11.25
+26-Mar-02,Tsaile IA,54.5,10.9,3.4,31,TS,11.8
+28-Dec-01,Tsaile III,75.5,15.1,3.6,24,TS,12.7
+15-Jan-02,Tsaile III,78.5,15.7,4.2,27,TS,14.45
+01-Feb-02,Tsaile III,83.5,16.7,4.5,27,TS,14.4
+14-Feb-02,Tsaile III,74,14.8,4.1,28,TS,14.7
+28-Feb-02,Tsaile III,73,14.6,4,27,TS,14.9
+15-Mar-02,Tsaile III,39,7.8,2.8,36,TS,15.1
+26-Mar-02,Tsaile III,22.5,4.5,1.3,29,BS,16
+27-Dec-01,Whiskey Creek,63,12.6,3,24,TS,5.7
+14-Jan-02,Whiskey Creek,65.5,13.1,3.1,24,TS,8.2
+30-Jan-02,Whiskey Creek,81.5,16.3,3.3,20,TS,8.42
+13-Feb-02,Whiskey Creek,73,14.6,3.6,25,TS,8.5
+27-Feb-02,Whiskey Creek,68.5,13.7,3.2,23,TS,18.6
+14-Mar-02,Whiskey Creek,55,11,2.5,24,TS,8.7
+28-Mar-02,Whiskey Creek,0,0,0,0,NSM,9.1
+30-Dec-02,Arbab's Forest,42.5,8.5,1,12,TS,9.6
+13-Jan-03,Arbab's Forest,26,5.2,1.6,31,BS,9.8
+30-Jan-03,Arbab's Forest,12.5,2.5,0.9,36,BS,9.79
+13-Feb-03,Arbab's Forest,0,0,0,0,NSM,10
+27-Feb-03,Arbab's Forest,28,5.6,1,18,BS,11.5
+13-Mar-03,Arbab's Forest,0,0,0,0,NSM,12
+27-Mar-03,Arbab's Forest,0,0,0,0,NSM,13.4
+30-Dec-02,Beaver Spring,66.5,13.3,3,23,TS,15.5
+14-Jan-03,Beaver Spring,69.5,13.9,3.8,27,TS,16
+30-Jan-03,Beaver Spring,58,11.6,3.2,28,TS,16.1
+13-Feb-03,Beaver Spring,57,11.4,3.6,32,TS,16.3
+26-Feb-03,Beaver Spring,126.5,25.3,5.5,22,TS,19.2
+12-Mar-03,Beaver Spring,133,26.6,8.8,33,TS,22.1
+27-Mar-03,Beaver Spring,135.5,27.1,9.6,35,TS,8.6
+02-Jan-03,Bowl Canyon,56.5,11.3,2.5,22,TS,11.2
+13-Jan-03,Bowl Canyon,67.5,13.5,3.4,25,TS,11.6
+31-Jan-03,Bowl Canyon,62,12.4,3.3,27,TS,11.65
+14-Feb-03,Bowl Canyon,50,10,3.4,34,TS,12.2
+28-Feb-03,Bowl Canyon,169,33.8,7.2,21,TS,15.9
+14-Mar-03,Bowl Canyon,111,22.2,7.7,35,TS,16.9
+28-Mar-03,Bowl Canyon,103.5,20.7,8.1,39,TS,18.5
+17-Apr-03,Bowl Canyon,39,7.8,3.5,45,TS,18.9
+30-Dec-02,Fluted Rock,31.5,6.3,1,16,TS,9.83
+13-Jan-03,Fluted Rock,24.5,4.9,1.4,29,BS,10.1
+30-Jan-03,Fluted Rock,0,0,0,0,NSM,10.05
+13-Feb-03,Fluted Rock,0,0,0,0,NSM,10.2
+27-Feb-03,Fluted Rock,45,9,1.8,20,BS,12
+13-Mar-03,Fluted Rock,34.5,6.9,2.5,36,TS,12.75
+27-Mar-03,Fluted Rock,16.5,3.3,1.3,39,BS,14
+30-Dec-02,Hidden Valley,56,11.2,2.6,23,TS,10.1
+15-Jan-03,Hidden Valley,62,12.4,3,24,TS,10.4
+30-Jan-03,Hidden Valley,58.5,11.7,3.5,30,TS,11.4
+13-Feb-03,Hidden Valley,44,8.8,2.4,27,TS,10.7
+27-Feb-03,Hidden Valley,121,24.2,5.5,23,TS,12.6
+13-Mar-03,Hidden Valley,112,22.4,8,36,TS,13.7
+27-Mar-03,Hidden Valley,110.5,22.1,9.4,43,TS,14.6
+31-Dec-02,Missionary Spring,42.5,8.5,3,35,TS,9.45
+14-Jan-03,Missionary Spring,45.5,9.1,2.8,31,BS,9.92
+31-Jan-03,Missionary Spring,17,3.4,1.1,32,BS,9.95
+13-Feb-03,Missionary Spring,0,0,0,0,NSM,10.12
+28-Feb-03,Missionary Spring,92.8,18.6,3.2,17,TS,12.7
+12-Mar-03,Missionary Spring,43,8.6,3.3,38,TS,13.02
+27-Mar-03,Missionary Spring,14.5,2.9,0.2,7,BS,14.1
+31-Dec-02,Tsaile I,52,10.4,2.3,22,TS,13.8
+14-Jan-03,Tsaile I,58,11.6,3.2,28,TS,
+29-Jan-03,Tsaile I,47.5,9.5,3,32,BS,14.4
+12-Feb-03,Tsaile I,39.5,7.9,2.7,34,BS,14.5
+26-Feb-03,Tsaile I,90,18,3.9,22,TS,17.9
+12-Mar-03,Tsaile I,97,19.4,6.9,36,TS,20.55
+26-Mar-03,Tsaile I,80.5,16.1,7,43,TS,23.5
+31-Dec-02,Tsaile IA,87,17.4,4.3,25,TS,
+14-Jan-03,Tsaile IA,100,20,5.1,26,TS,14.3
+29-Jan-03,Tsaile IA,94.5,18.9,5.3,28,TS,
+12-Feb-03,Tsaile IA,96.5,19.3,5.5,28,TS,14.5
+26-Feb-03,Tsaile IA,165,33,8.7,26,TS,17.9
+12-Mar-03,Tsaile IA,179.5,35.9,11.4,32,TS,
+26-Mar-03,Tsaile IA,164,32.8,12.6,38,TS,
+31-Dec-02,Tsaile III,88.5,17.7,4.3,24,TS,14.2
+14-Jan-03,Tsaile III,96.5,19.3,5.5,28,TS,15.35
+29-Jan-03,Tsaile III,82.5,16.5,5.2,32,TS,15.3
+12-Feb-03,Tsaile III,75.5,15.1,5.1,34,TS,15.3
+26-Feb-03,Tsaile III,143,28.6,7.7,27,TS,16.1
+12-Mar-03,Tsaile III,162.5,32.5,11.2,34,TS,5.92
+26-Mar-03,Tsaile III,154.5,30.9,12.2,39,TS,5.6
+30-Dec-02,Whiskey Creek,69.5,13.9,3.3,24,TS,10.2
+15-Jan-03,Whiskey Creek,81,16.2,4.1,25,TS,10.55
+30-Jan-03,Whiskey Creek,77,15.4,4.3,28,TS,10.6
+13-Feb-03,Whiskey Creek,69.5,13.9,4,29,TS,10.9
+03-Mar-03,Whiskey Creek,167.5,33.5,8.7,26,TS,14
+13-Mar-03,Whiskey Creek,142.5,28.5,8.9,31,TS,14.55
+27-Mar-03,Whiskey Creek,147,29.4,11,37,TS,16.1
+30-Dec-03,Arbab's Forest,22.5,4.5,0.8,18,BS,9.9
+14-Jan-04,Arbab's Forest,15,3,1,33,BS,10.1
+29-Jan-04,Arbab's Forest,30.5,6.1,1.6,26,BS,11.8
+12-Feb-04,Arbab's Forest,46,9.2,2,22,BS,11
+26-Feb-04,Arbab's Forest,30,6,1.8,30,BS,11.7
+11-Mar-04,Arbab's Forest,16,3.2,1,31,BS,11.7
+01-Apr-04,Arbab's Forest,0,0,0,0,NSM,
+30-Dec-03,Beaver Spring,66,13.2,2.6,20,TS,11.3
+14-Jan-04,Beaver Spring,64,12.8,3.4,27,TS,13
+28-Jan-04,Beaver Spring,99.5,19.9,4.5,23,TS,16.1
+11-Feb-04,Beaver Spring,143,28.6,6.7,23,TS,18
+26-Feb-04,Beaver Spring,140,28,6.9,25,TS,18.7
+11-Mar-04,Beaver Spring,140.5,28.1,8.6,31,TS,20.3
+31-Mar-04,Beaver Spring,0,0,0,0,NSM,
+31-Dec-03,Bowl Canyon,49.5,9.9,2,20,TS,11
+15-Jan-04,Bowl Canyon,72.5,14.5,2.9,20,TS,11.7
+29-Jan-04,Bowl Canyon,99,19.8,4,20,TS,12.4
+12-Feb-04,Bowl Canyon,118.5,23.7,4.9,21,TS,13.6
+27-Feb-04,Bowl Canyon,127,25.4,6,24,TS,14.2
+10-Mar-04,Bowl Canyon,129,25.8,7.5,29,TS,15.9
+29-Mar-04,Bowl Canyon,23.5,4.7,1.3,28,BS,
+30-Dec-03,Fluted Rock,27,5.4,1,19,BS,10
+15-Jan-04,Fluted Rock,39.5,7.9,1.6,20,BS,10.4
+29-Jan-04,Fluted Rock,50,10,2.2,22,BS,10.9
+12-Feb-04,Fluted Rock,73,14.6,3.2,22,TS,11.33
+26-Feb-04,Fluted Rock,68,13.6,3.2,24,TS,11.85
+11-Mar-04,Fluted Rock,64,12.8,3.8,30,BS,12.8
+01-Apr-04,Fluted Rock,0,0,0,0,NSM,
+30-Dec-03,Hidden Valley,37.5,7.5,1.5,20,BS,10.3
+14-Jan-04,Hidden Valley,49,9.8,2.1,21,BS,10.7
+28-Jan-04,Hidden Valley,72,14.4,3.6,25,TS,11.2
+11-Feb-04,Hidden Valley,107,21.4,4.6,21,TS,12
+26-Feb-04,Hidden Valley,107,21.4,5.5,26,TS,12.5
+12-Mar-04,Hidden Valley,97,19.4,5.9,30,TS,13.3
+01-Apr-04,Hidden Valley,,,,,NST,
+15-Apr-04,Hidden Valley,,,,,NST,
+30-Apr-04,Hidden Valley,0,0,0,0,NSM,
+29-Dec-03,Missionary Spring,34,6.8,1.1,16,BS,11.3
+15-Jan-04,Missionary Spring,50.5,10.1,2.1,21,BS,12.1
+28-Jan-04,Missionary Spring,68,13.6,3.3,24,TS,12.8
+12-Feb-04,Missionary Spring,84,16.8,3.9,23,TS,13.4
+27-Feb-04,Missionary Spring,73,14.6,4.6,32,TS,13.9
+10-Mar-04,Missionary Spring,57.5,11.5,3.6,31,TS,14.82
+01-Apr-04,Missionary Spring,,,,,NST,
+15-Apr-04,Missionary Spring,,,,,NST,
+29-Apr-04,Missionary Spring,0,0,0,0,NSM,
+29-Dec-03,Tsaile I,46,9.2,1.8,20,BS,
+13-Jan-04,Tsaile I,56.5,11.3,2.9,26,TS,10.6
+27-Jan-04,Tsaile I,90,18,4,22,TS,11.2
+10-Feb-04,Tsaile I,127,25.4,5.7,22,TS,13.3
+25-Feb-04,Tsaile I,121.5,24.3,5.6,23,TS,13.8
+09-Mar-04,Tsaile I,124.5,24.9,6.5,26,TS,15.6
+01-Apr-04,Tsaile I,,,,,NST,
+15-Apr-04,Tsaile I,,,,,NST,
+30-Apr-04,Tsaile I,0,0,0,0,NSM,
+29-Dec-03,Tsaile IA,82.5,16.5,2.9,18,TS,
+13-Jan-04,Tsaile IA,90.5,18.1,4.3,24,TS,10.6
+27-Jan-04,Tsaile IA,127,25.4,5.1,20,TS,
+10-Feb-04,Tsaile IA,165.5,33.1,7.4,22,TS,
+25-Feb-04,Tsaile IA,163.5,32.7,7.6,23,TS,
+09-Mar-04,Tsaile IA,173,34.6,9.4,27,TS,
+01-Apr-04,Tsaile IA,,,,,NST,
+15-Apr-04,Tsaile IA,,,,,NST,
+30-Apr-04,Tsaile IA,33.5,6.7,2.2,33,BS,
+30-Dec-03,Tsaile III,79,15.8,3.1,20,TS,11.8
+13-Jan-04,Tsaile III,88.5,17.7,4.6,26,TS,12.8
+27-Jan-04,Tsaile III,130,26,6.1,23,TS,13.9
+10-Feb-04,Tsaile III,163.5,32.7,7.8,24,TS,15.7
+25-Feb-04,Tsaile III,165.5,33.1,8,24,TS,16.3
+09-Mar-04,Tsaile III,154,30.8,9.3,30,TS,17.4
+01-Apr-04,Tsaile III,,,,,NST,
+15-Apr-04,Tsaile III,,,,,NST,
+30-Apr-04,Tsaile III,0,0,0,0,NSM,
+31-Dec-03,Whiskey Creek,67.5,13.5,3.1,23,TS,10.8
+15-Jan-04,Whiskey Creek,85,17,3.8,22,TS,11.4
+29-Jan-04,Whiskey Creek,119,23.8,6.3,26,TS,12
+12-Feb-04,Whiskey Creek,140.5,28.1,6.9,25,TS,12.7
+27-Feb-04,Whiskey Creek,153.5,30.7,8.4,27,TS,13.5
+12-Mar-04,Whiskey Creek,135.5,27.1,8.6,32,TS,14.6
+01-Apr-04,Whiskey Creek,,,,,NST,
+15-Apr-04,Whiskey Creek,,,,,NST,
+30-Apr-04,Whiskey Creek,31.5,6.3,2,32,BS,
+03-Jan-05,Arbab's Forest,13.5,2.7,0.2,7,BS,12.02
+13-Jan-05,Arbab's Forest,18,3.6,0.8,22,BS,13.5
+31-Jan-05,Arbab's Forest,6.5,1.3,0.2,15,BS,13.9
+14-Feb-05,Arbab's Forest,5,1,0.4,40,BS,15.5
+28-Feb-05,Arbab's Forest,8.5,1.7,0.8,47,BS,17.5
+14-Mar-05,Arbab's Forest,22.9,4.6,0.4,9,BS,19
+01-Apr-05,Arbab's Forest,0,0,0,0,NSM,20.12
+06-Jan-05,Beaver Spring,110.5,22.1,5.4,24,TS,
+12-Jan-05,Beaver Spring,170.5,34.1,8.7,26,TS,19.2
+26-Jan-05,Beaver Spring,123,24.6,8.1,33,TS,19.3
+14-Feb-05,Beaver Spring,184,36.8,11.5,31,TS,22.5
+01-Mar-05,Beaver Spring,210.5,42.1,13.5,32,TS,
+15-Mar-05,Beaver Spring,176,35.2,12.6,36,TS,
+01-Apr-05,Beaver Spring,211.5,42.3,14.5,34,TS,
+03-Jan-05,Bowl Canyon,71.5,14.3,3.2,22,TS,13.7
+10-Jan-05,Bowl Canyon,108.5,21.7,5,23,TS,15.4
+25-Jan-05,Bowl Canyon,115.5,23.1,5.8,25,TS,16.3
+11-Feb-05,Bowl Canyon,181.5,36.3,9.4,26,TS,18.3
+28-Feb-05,Bowl Canyon,214.5,42.9,13.3,31,TS,22.1
+14-Mar-05,Bowl Canyon,198,39.6,12.6,32,TS,7.75
+30-Mar-05,Bowl Canyon,212,42.4,14.7,35,TS,9.2
+03-Jan-05,Fluted Rock,20,4,0.8,20,BS,12.3
+14-Jan-05,Fluted Rock,41.5,8.3,2.4,29,BS,14.02
+27-Jan-05,Fluted Rock,21.5,4.3,1.4,33,BS,14.5
+14-Feb-05,Fluted Rock,34,6.8,2.8,41,BS,16.53
+01-Mar-05,Fluted Rock,53.5,10.7,2.8,26,BS,18.6
+15-Mar-05,Fluted Rock,20.5,4.1,1.1,27,BS,19.6
+01-Apr-05,Fluted Rock,12,2.4,0.8,33,BS,21.13
+05-Jan-05,Hidden Valley,44.5,8.9,2.2,25,BS,15.9
+12-Jan-05,Hidden Valley,71.5,14.3,4,28,TS,17.7
+27-Jan-05,Hidden Valley,80,16,5.2,33,TS,18
+14-Feb-05,Hidden Valley,112.5,22.5,7.2,32,TS,20.5
+01-Mar-05,Hidden Valley,143,28.6,10.2,36,TS,23.15
+15-Mar-05,Hidden Valley,118.5,23.7,9.7,41,TS,
+30-Mar-05,Hidden Valley,160.5,32.1,11.8,37,TS,23.3
+04-Jan-05,Missionary Spring,24,4.8,0.8,17,BS,13.18
+13-Jan-05,Missionary Spring,46.5,9.3,2.4,26,BS,14.43
+28-Jan-05,Missionary Spring,24,4.8,1.3,27,BS,15.23
+15-Feb-05,Missionary Spring,42,8.4,2.6,31,BS,16.7
+02-Mar-05,Missionary Spring,45,9,3.3,37,BS,18.5
+16-Mar-05,Missionary Spring,11.5,2.3,0.4,17,BS,18.9
+31-Mar-05,Missionary Spring,7.5,1.5,0.2,13,BS,20.05
+04-Jan-05,Tsaile I,59.5,11.9,2.8,24,TS,18.5
+11-Jan-05,Tsaile I,59,11.8,4.1,35,TS,20.5
+26-Jan-05,Tsaile I,62.5,12.5,4.9,39,TS,21.3
+14-Feb-05,Tsaile I,110,22,7.4,34,TS,24.7
+01-Mar-05,Tsaile I,117.5,23.5,8.9,38,TS,27.1
+15-Mar-05,Tsaile I,71.5,14.3,6.2,43,TS,27.5
+01-Apr-05,Tsaile I,102.5,20.5,8.8,43,TS,31
+04-Jan-05,Tsaile IA,96.5,19.3,3.9,20,TS,18.5
+11-Jan-05,Tsaile IA,106,21.2,5.6,26,TS,
+26-Jan-05,Tsaile IA,112.5,22.5,6.5,29,TS,
+14-Feb-05,Tsaile IA,165,33,8.9,27,TS,
+01-Mar-05,Tsaile IA,175,35,11,31,TS,
+15-Mar-05,Tsaile IA,150.5,30.1,10.5,35,TS,
+01-Apr-05,Tsaile IA,174.5,34.9,12.8,37,TS,31
+04-Jan-05,Tsaile III,98,19.6,4.6,23,TS,17.1
+11-Jan-05,Tsaile III,106.5,21.3,6.4,30,TS,18.5
+26-Jan-05,Tsaile III,101,20.2,6.4,32,TS,19
+14-Feb-05,Tsaile III,166,33.2,10.5,32,TS,22.5
+01-Mar-05,Tsaile III,192.5,38.5,12.3,32,TS,24.25
+15-Mar-05,Tsaile III,153.5,30.7,11.3,37,TS,25.1
+01-Apr-05,Tsaile III,180,36,14.3,40,TS,28.3
+03-Jan-05,Whiskey Creek,74,14.8,3.5,24,TS,15.6
+10-Jan-05,Whiskey Creek,117.5,23.5,5.8,25,TS,16.85
+25-Jan-05,Whiskey Creek,119,23.8,7.3,31,TS,8.7
+11-Feb-05,Whiskey Creek,171,34.2,9.2,27,TS,10.7
+28-Feb-05,Whiskey Creek,222,44.4,14,32,TS,13.8
+14-Mar-05,Whiskey Creek,183,36.6,12.8,35,TS,14.1
+30-Mar-05,Whiskey Creek,212.5,42.5,14.3,34,TS,15.6
+28-Feb-06,Arbab's Forest,0,0,0,0,NSM,0.07
+27-Feb-06,Bowl Canyon,15.5,3.1,0.6,19,BS,0.13
+28-Feb-06,Fluted Rock,0,0,0,0,NSM,0.08
+28-Feb-06,Hidden Valley,0,0,0,0,NSM,0.04
+27-Feb-06,Missionary Spring,0,0,0,0,NSM,0.17
+28-Feb-06,Tsaile I,0,0,0,0,NSM,"0.27
+0.27"
+28-Feb-06,Tsaile III,13.5,2.7,0.6,22,BS,.28
+27-Feb-06,Whiskey Creek,12,2.4,0.5,21,BS,.20
+15-Feb-06,Arbab's Forest,0,0,0,0,NSM,0.10
+14-Feb-06,Beaver Spring,29,5.8,1.5,26,BS,0.12
+13-Feb-06,Bowl Canyon,23,4.6,0.8,17,BS,0.05
+14-Feb-06,Fluted Rock,0,0,0,0,NSM,0.10
+15-Feb-06,Hidden Valley,24,4.8,1.2,25,BS,0.71
+13-Feb-06,Missionary Spring,0,0,0,0,NSM,0
+14-Feb-06,Tsaile III,27.5,5.5,1.4,25,BS,.02
+14-Feb-06,Tsaile I,27.5,5.5,1.2,22,BS,.23
+13-Feb-06,Whiskey Creek,28,5.6,1.2,21,BS,.10
+03-Feb-06,Beaver Spring,45.5,9.1,1.9,21,BS,1.47
+30-Jan-06,Arbab's Forest,7.5,1.5,0.6,40,BS,0.45
+30-Jan-06,Bowl Canyon,27,5.4,0.8,15,BS,0.80
+30-Jan-06,Fluted Rock,9.5,1.9,0.4,21,BS,0.47
+02-Feb-06,Hidden Valley,35.5,7.1,1.5,21,BS,.63
+30-Jan-06,Missionary Spring,21,4.2,0.6,14,BS,.63
+12-Jan-06,Hidden Valley,0,0,0,0,NSM,0
+13-Jan-06,Missionary Spring,0,0,0,0,NSM,0.18
+12-Jan-06,Tsaile III,8,1.6,0.2,13,BS,0.10
+12-Jan-06,Tsaile I,0,0,0,0,NSM,0.13
+13-Jan-06,Whiskey Creek,0,0,0,0,NSM,0
+30-Dec-05,Arbab's Forest,0,0,0,0,NSM,0.10
+30-Dec-05,Fluted Rock,0,0,0,0,NSM,0.10
+31-Jan-06,Tsaile I,39.5,7.9,1.2,15,BS,1.70
+01-Feb-06,Tsaile III,39,7.8,1.6,21,BS,1.20
+30-Jan-06,Whiskey Creek,38.5,7.7,1.4,18,BS,.88
+13-Jan-06,Arbab's Forest,0,0,0,0,NSM,0.15
+12-Jan-06,Beaver Spring,7,1.4,0.2,14,BS,.13
+13-Jan-06,Fluted Rock,0,0,0,0,NSM,0.03
+29-Dec-05,Beaver Spring,15,3,0.3,10,BS,0.55
+13-Jan-06,Bowl Canyon,0,0,0,0,NSM,0.10
+28-Dec-05,Missionary Spring,0,0,0,0,NSM,0.20
+28-Dec-05,Bowl Canyon,0,0,0,0,NSM,0.25
+28-Dec-05,Whiskey Creek,6.5,1.3,0.2,15,BS,0.45
+28-Dec-05,Hidden Valley,0,0,0,0,NSM,.60
+29-Dec-05,Tsaile I,0,0,0,0,NSM,0.65
+29-Dec-05,Tsaile III,8,1.6,0.2,13,BS,0.58
+14-Mar-06,Arbab's Forest,46,9.2,1.8,20,BS,0.86
+14-Mar-06,Beaver Spring,84,16.8,3.7,22,TS,2.15
+13-Mar-06,Bowl Canyon,88,17.6,3,17,TS,2.42
+15-Mar-06,Fluted Rock,41,8.2,1.6,20,BS,1.49
+14-Mar-06,Hidden Valley,52.5,10.5,2.5,24,TS,1.1
+15-Mar-06,Missionary Spring,46.5,9.3,2.2,24,BS,1.68
+15-Mar-06,Tsaile I,56,11.2,2.5,22,TS,2.43
+15-Mar-06,Tsaile III,70,14,3.1,22,TS,2.0
+14-Mar-06,Whiskey Creek,90.5,18.1,3.7,20,TS,1.2
+27-Mar-06,Arbab's Forest,0,0,0,0,NSM,0.15
+29-Mar-06,Beaver Spring,38,7.6,2.7,36,BS,.60
+30-Mar-06,Bowl Canyon,47,9.4,2.7,29,BS,.75
+27-Mar-06,Fluted Rock,0,0,0,0,NSM,.10
+29-Mar-06,Hidden Valley,0,0,0,0,NSM,.20
+30-Mar-06,Missionary Spring,10,2,0.4,20,BS,.40
+31-Mar-06,Tsaile I,16.5,3.3,0.7,21,BS,1.30
+31-Mar-06,Tsaile III,41.5,8.3,2.2,27,BS,.85
+01-Mar-06,Beaver Spring,14,2.8,0.8,29,BS,0.03
+29-Mar-06,Whiskey Creek,37.5,7.5,3,40,BS,.15
+28-Dec-06,Arbab's Forest,13,2.6,0.4,15,BS,.68
+28-Dec-06,Beaver Spring,36,7.2,1.4,19,BS,1.13
+27-Dec-06,Bowl Canyon,39,7.8,1.4,18,BS,1.20
+28-Dec-06,Fluted Rock,10.5,2.1,0.4,19,BS,.66
+29-Dec-06,Hidden Valley,54,10.8,1.1,10,BS,.95
+27-Dec-06,Missionary Spring,24.5,4.9,1,20,BS,1.0
+27-Dec-06,Tsaile I,25,5,1.1,22,BS,1.46
+27-Dec-06,Tsaile III,38,7.6,1.5,20,BS,1.38
+27-Dec-06,Whiskey Creek,37,7.4,1.4,19,BS,1.13
+12-Jan-07,Arbab's Forest,18,3.6,0.7,19,BS,.30
+10-Jan-07,Beaver Spring,40,8,1.8,23,BS,.80
+16-Jan-07,Bowl Canyon,84,16.8,2.9,17,TS,.80
+12-Jan-07,Fluted Rock,16,3.2,0.7,22,BS,.20
+10-Jan-07,Hidden Valley,38,7.6,1.1,14,BS,.25
+12-Jan-07,Missionary Spring,38.5,7.7,1.8,23,BS,.60
+11-Jan-07,Tsaile I,39,7.8,1.5,19,BS,1.0
+11-Jan-07,Tsaile III,56.5,11.3,2.4,21,BS,.90
+16-Jan-07,Whiskey Creek,104.5,20.9,4.6,22,TS,.57
+31-Jan-07,Arbab's Forest,75,15,2.2,15,TS,1.05
+30-Jan-07,Beaver Spring,79,15.8,3.6,23,TS,1.40
+29-Jan-07,Bowl Canyon,84,16.8,3.7,22,TS,.90
+31-Jan-07,Fluted Rock,79,15.8,2.1,13,TS,1.90
+30-Jan-07,Hidden Valley,63.5,12.7,2.5,20,TS,.75
+29-Jan-07,Missionary Spring,64,12.8,2.9,23,BS,.70
+30-Jan-07,Tsaile I,66.5,13.3,3.2,24,TS,.60
+30-Jan-07,Tsaile III,88,17.6,4.3,24,TS,1.15
+29-Jan-07,Whiskey Creek,92.5,18.5,4.3,23,TS,.80
+14-Feb-07,Arbab's Forest,68,13.6,2.9,21,TS,1.25
+13-Feb-07,Beaver Spring,123,24.6,5.6,23,TS,2.10
+12-Feb-07,Bowl Canyon,135,27,5.7,21,TS,2.3
+14-Feb-07,Fluted Rock,115.5,23.1,4.3,19,TS,1.80
+13-Feb-07,Hidden Valley,94.5,18.9,4.9,26,TS,1.15
+12-Feb-07,Missionary Spring,62.5,12.5,3.8,30,BS,1.50
+13-Feb-07,Tsaile I,80,16,3.7,23,TS,1.40
+13-Feb-07,Tsaile III,128,25.6,6.4,25,TS,2.20
+12-Feb-07,Whiskey Creek,148.5,29.7,7.2,24,TS,1.73
+26-Feb-07,Arbab's Forest,45,9,2.9,32,TS,.5
+28-Feb-07,Beaver Spring,134.5,26.9,6.9,26,TS,1.10
+27-Feb-07,Bowl Canyon,140.5,28.1,7.3,26,TS,.85
+26-Feb-07,Fluted Rock,73.5,14.7,4.4,30,TS,.40
+01-Mar-07,Hidden Valley,125.5,25.1,5.8,23,TS,.60
+26-Feb-07,Missionary Spring,53,10.3,3.7,35,TS,.30
+28-Feb-07,Tsaile I,91.5,18.3,6.1,33,TS,.30
+28-Feb-07,Tsaile III,142,28.4,7.7,27,TS,.45
+27-Feb-07,Whiskey Creek,151.5,30.3,8.4,28,TS,.47
+14-Mar-07,Arbab's Forest,0,0,0,0,NS,0
+13-Mar-07,Beaver Spring,89,17.8,6.4,36,TS,.3
+14-Mar-07,Bowl Canyon,83,16.6,5.7,34,TS,.15
+14-Mar-07,Fluted Rock,20,4,1.2,30,BS,".05
+.05"
+12-Mar-07,Hidden Valley,69,13.8,4.4,32,TS,.2
+14-Mar-07,Missionary Spring,0,0,0,0,NS,.2
+13-Mar-07,Tsaile I,47,9.4,3.6,38,TS,1.5
+13-Mar-07,Tsaile III,91.5,18.3,6.5,36,TS,1.1
+12-Mar-07,Whiskey Creek,123.5,24.7,8.6,35,TS,.4
+02-Apr-07,Arbab's Forest,0,0,0,0,NS,.4
+30-Mar-07,Beaver Spring,47,9.4,1.5,16,TS,1.1
+29-Mar-07,Bowl Canyon,30.5,6.1,1.2,20,BS,.89
+02-Apr-07,Fluted Rock,0,0,0,0,NS,.65
+28-Mar-07,Hidden Valley,11,2.2,0.4,18,BS,.5
+29-Mar-07,Missionary Spring,0,0,0,0,NS,.6
+27-Mar-07,Tsaile I,0,0,0,0,NS,.4
+27-Mar-07,Tsaile III,17,3.4,1.1,32,BS,.6
+29-Mar-07,Whiskey Creek,52.5,10.5,3.4,32,TS,.7
+26-Dec-07,Arbab's Forest,27,5.4,0.9,17,BS,1.05
+30-Dec-07,Bowl Canyon,90.5,18.1,3.6,20,TS,
+26-Dec-07,Fluted Rock,32.5,6.5,1.2,18,BS,3.45
+02-Jan-08,Hidden Valley,48.5,9.7,2.6,27,TS,3.80
+26-Dec-07,Missionary Spring,30.5,6.1,1.2,20,BS,4.22
+27-Dec-07,Tsaile I,69,13.8,1.5,11,TS,5.75
+31-Dec-07,Tsaile III,69.5,13.9,3,22,TS,"3.60
+3.60"
+10-Jan-08,Arbab's Forest,57,11.4,2.3,20,TS,.85
+14-Jan-08,Beaver Spring,125.5,25.1,5.6,22,TS,
+12-Jan-08,Bowl Canyon,132.5,26.5,5.6,21,TS,
+10-Jan-08,Fluted Rock,73,14.6,3,21,TS,1.5
+14-Jan-08,Hidden Valley,106.5,21.3,5,23,TS,"1.5
+1.5"
+10-Jan-08,Missionary Spring,67.5,13.5,2.6,19,TS,1.78
+13-Jan-08,Tsaile I,112,22.4,4.9,22,TS,
+13-Jan-08,Tsaile III,135.5,27.1,6.4,24,TS,3.1
+12-Jan-08,Whiskey Creek,122,24.5,5.6,23,TS,
+28-Jan-08,Arbab's Forest,65.5,13.1,3,23,TS,1.40
+02-Feb-08,Beaver Spring,195.5,39.1,10.2,26,TS,3.3
+29-Jan-08,Bowl Canyon,183,36.6,8.2,22,TS,.70
+28-Jan-08,Fluted Rock,89,17.8,3.9,22,TS,1.50
+02-Feb-08,Hidden Valley,147.5,29.5,7.1,24,TS,4.2
+28-Jan-08,Missionary Spring,89,17.8,3.8,21,TS,1.60
+03-Feb-08,Tsaile I,133,26.6,5.4,20,TS,0
+03-Feb-08,Tsaile III,177,35.4,9,25,TS,1.80
+01-Feb-08,Whiskey Creek,188.5,37.7,9.6,25,TS,1.60
+14-Feb-08,Missionary Spring,108,21.6,5.9,27,TS,1.7
+13-Feb-08,Arbab's Forest,82,16.4,4.6,29,TS,1.45
+13-Feb-08,Fluted Rock,122,24.4,6.2,25,TS,1.6
+12-Feb-08,Bowl Canyon,211.5,42.3,10.9,26,TS,3.1
+12-Feb-08,Whiskey Creek,200,40,11.8,30,TS,1.2
+12-Feb-08,Hidden Valley,177,35.4,9.8,28,TS,0
+13-Feb-08,Tsaile I,142,28.4,5.9,21,TS,1.6
+13-Feb-08,Tsaile III,171.5,34.3,9.6,28,TS,1.0
+25-Feb-08,Arbab's Forest,77.5,15.5,4.6,30,TS,.8
+27-Feb-08,Beaver Spring,253.5,50.7,15.5,31,TS,
+26-Feb-08,Bowl Canyon,252,50.4,13.2,26,TS,4.1
+25-Feb-08,Fluted Rock,140.5,28.1,7.4,26,TS,1.0
+27-Feb-08,Hidden Valley,225,45,12.6,28,TS,1.10
+29-Feb-08,Missionary Spring,135,27,7.5,28,TS,1.60
+28-Feb-08,Tsaile I,174.5,34.9,7.7,22,TS,"1.9
+1.9"
+28-Feb-08,Tsaile III,212.5,42.5,12.3,29,TS,2.50
+26-Feb-08,Whiskey Creek,248.5,49.7,14.3,29,TS,1.60
+10-Mar-08,Arbab's Forest,46,9.2,3,33,TS,0
+12-Mar-08,Beaver Spring,205,41,13.8,34,TS,"0
+0"
+11-Mar-08,Bowl Canyon,215,43,13.4,31,TS,0
+10-Mar-08,Fluted Rock,105.5,21.1,6.6,31,TS,"0
+0"
+12-Mar-08,Hidden Valley,188,37.6,12.7,34,TS,.40
+11-Mar-08,Missionary Spring,104.5,20.9,7.8,37,TS,0
+13-Mar-08,Tsaile III,164,32.8,10.9,33,TS,.05
+13-Mar-08,Tsaile I,126.5,25.3,8.5,34,TS,"0
+-.7"
+11-Mar-08,Whiskey Creek,210.5,42.1,14.8,35,TS,.2
+31-Mar-08,Arbab's Forest,0,0,0,0,NS,0
+28-Mar-08,Bowl Canyon,130.5,26.1,9.6,37,TS,.10
+31-Mar-08,Fluted Rock,0,0,0,0,NS,"0
+0"
+29-Mar-08,Hidden Valley,116,23.2,9.3,40,TS,.2
+30-Mar-08,Missionary Spring,0,0,0,0,NS,.10
+27-Mar-08,Tsaile I,54,10.8,3.9,36,BS,.10
+27-Mar-08,Tsaile III,99,19.8,7.5,38,TS,.15
+28-Mar-08,Whiskey Creek,138.5,27.7,11.3,41,TS,.05
+31-Dec-08,Arbab's Forest,66,13.2,3.6,27,Tube Sample,2.60
+30-Dec-08,Beaver Spring,166.5,33.3,9.3,28,Tube Sample,5.90
+29-Dec-08,Bowl Canyon,164.5,32.9,8.8,27,Tube Sample,5.22
+31-Dec-08,Fluted Rock,78.5,15.7,3.8,24,Tube Sample,2.90
+29-Dec-08,Hidden Valley,141,28.2,7.3,26,Tube Sample,3.20
+31-Dec-08,Missionary Spring,112.5,22.5,6.3,28,Tube Sample,4.40
+30-Dec-08,Tsaile I,140,28,6.8,24,Tube Sample,6.15
+30-Dec-08,Tsaile III,178,35.6,8.6,24,Tube Sample,5.85
+29-Dec-08,Whiskey Creek,192,38.4,11.2,29,Tube Sample,3.60
+12-Jan-09,Arbab's Forest,70,14,3.8,27,Tube Sample,.40
+13-Jan-09,Beaver Spring,145.5,29.1,9.1,31,Tube Sample,1.10
+14-Jan-09,Bowl Canyon,144.5,28.9,8.8,30,Tube Sample,.35
+12-Jan-09,Fluted Rock,80.5,16.1,4.1,25,Tube Sample,.45
+14-Jan-09,Hidden Valley,131,26.2,7.9,30,Tube Sample,.45
+12-Jan-09,Missionary Spring,89,17.8,5.3,30,Tube Sample,.30
+13-Jan-09,Tsaile I,130.5,26.1,7.1,27,Tube Sample,1.40
+13-Jan-09,Tsaile III,154,30.8,8.9,29,Tube Sample,.75
+14-Jan-09,Whiskey Creek,161,32.2,11.1,34,Tube Sample,.50
+29-Jan-09,Arbab's Forest,32,6.4,2.3,36,Bulk Sample,.32
+29-Jan-09,Beaver Spring,141.5,28.3,10.2,36,Tube Sample,.10
+30-Jan-09,Bowl Canyon,137,27.4,9.1,33,Tube Sample,.40
+29-Jan-09,Fluted Rock,44.5,8.9,3,34,Tube Sample,.35
+30-Jan-09,Hidden Valley,114,22.8,8,35,Tube Sample,.85
+30-Jan-09,Missionary Spring,62.5,12.5,4.6,37,Tube Sample,.30
+29-Jan-09,Tsaile I,99.5,19.9,6.7,34,Tube Sample,.50
+29-Jan-09,Tsaile III,140.5,28.1,9.4,33,Tube Sample,.90
+30-Jan-09,Whiskey Creek,137,27.4,9.5,35,Tube Sample,.50
+12-Feb-09,Arbab's Forest,55,11,2.8,25,Tube Sample,.70
+14-Feb-09,Beaver Spring,192.5,38.5,10.5,27,Tube Sample,.70
+13-Feb-09,Bowl Canyon,184,36.8,10.7,29,Tube Sample,1.30
+12-Feb-09,Fluted Rock,88.5,17.7,4.9,28,Tube Sample,1.30
+14-Feb-09,Hidden Valley,173.5,34.7,10.6,31,Tube Sample,"1.10
+1.10"
+13-Feb-09,Missionary Spring,89.5,17.9,5.6,31,Tube Sample,1.0
+12-Feb-09,Tsaile I,182,36.4,8.8,24,Tube Sample,1.70
+12-Feb-09,Tsaile III,217,43.4,11.6,27,Tube Sample,2.20
+13-Feb-09,Whiskey Creek,216.5,43.3,12.8,30,Tube Sample,1.10
+26-Feb-09,Arbab's Forest,18,3.6,1.4,39,Bulk Sample,.28
+28-Feb-09,Bowl Canyon,146.5,29.3,10.3,35,Tube Sample,.50
+26-Feb-09,Fluted Rock,40.5,8.1,3.7,46,Tube Sample,.20
+26-Feb-09,Hidden Valley,126,25.2,9.1,36,Tube Sample,.10
+27-Feb-09,Missionary Spring,46.5,9.3,4.1,44,Tube Sample,.38
+26-Feb-09,Whiskey Creek,174,34.8,12.7,36,Tube Sample,.65
+13-Mar-09,Arbab's Forest,0,0,0,0,No Snow Measured,
+11-Mar-09,Bowl Canyon,132,26.4,9.5,36,Tube Sample,0
+12-Mar-09,Fluted Rock,7,1.4,0.7,50,Bulk Sample,
+12-Mar-09,Hidden Valley,97.5,19.5,8.2,42,Tube Sample,
+11-Mar-09,Missionary Spring,0,0,0,0,No Snow Measured,.12
+13-Mar-09,Tsaile I,72.5,14.5,5.9,41,Tube Sample,.70
+12-Mar-09,Tsaile III,117,23.4,9.3,40,Tube Sample,
+09-Mar-09,Whiskey Creek,153.5,30.7,11.7,38,Tube Sample,0
+27-Mar-09,Arbab's Forest,5,1,0.1,10,Bulk Sample,.38
+27-Mar-09,Bowl Canyon,109.5,21.9,7.8,36,Tube Sample,.75
+27-Mar-09,Fluted Rock,10,2,0.3,15,Bulk Sample,.46
+26-Mar-09,Hidden Valley,55,11,4.7,43,Tube Sample,.25
+30-Mar-09,Missionary Spring,11.5,2.3,0.2,9,Bulk Sample,1.0
+26-Mar-09,Tsaile I,33,6.6,1.8,27,Bulk Sample,.25
+26-Mar-09,Tsaile III,78.5,15.7,6.2,39,Tube Sample,.93
+27-Mar-09,Whiskey Creek,134,26.8,9.4,35,Tube Sample,.45
+29-Dec-09,Missionary Spring,57.5,11.5,2.4,21,Bulk Sample,2.0
+29-Dec-09,Tsaile I,88,17.6,3.9,22,Tube Sample,3.1
+28-Dec-09,Bowl Canyon,96,19.2,4,21,Tube Sample,2.2
+28-Dec-09,Whiskey Creek,113.5,22.7,6.2,27,Tube Sample,1.91
+28-Dec-09,Arbab's Forest,41,8.2,1.6,20,Bulk Sample,0.91
+28-Dec-09,Fluted Rock,46,9.2,1.6,17,Bulk Sample,1.28
+,Beaver Spring,,,,,No Sample Taken,
+,Hidden Valley,,,,,No Sample Taken,
+,Tsaile III,,,,,No Sample Taken,
+13-Jan-10,Arbab's Forest,58,11.6,2.1,18,Tube Sample,.82
+13-Jan-10,Beaver Spring,124.5,24.9,7.1,29,Tube Sample,5.0
+12-Jan-10,Bowl Canyon,116.5,23.3,5.6,24,Tube Sample,1.0
+13-Jan-10,Fluted Rock,72.5,14.5,3,21,Tube Sample,.82
+12-Jan-10,Missionary Spring,72.5,14.5,3.2,22,Bulk Sample,.70
+12-Jan-10,Whiskey Creek,126,25.2,6.9,27,Tube Sample,.89
+27-Jan-10,Arbab's Forest,143,28.6,6.3,22,Tube Sample,3.38
+26-Jan-10,Bowl Canyon,248.5,49.7,11.1,22,Tube Sample,4.65
+27-Jan-10,Fluted Rock,159.5,31.9,7.2,23,Tube Sample,2.98
+25-Jan-10,Missionary Spring,165,33,7.8,24,Tube Sample,2.70
+31-Jan-10,Tsaile I,226,45.2,11.9,26,Tube Sample,6.9
+31-Jan-10,Tsaile III,234,46.8,12.1,26,Tube Sample,
+31-Jan-10,Whiskey Creek,248,49.6,13.7,28,Tube Sample,
+01-Feb-10,Beaver Spring,242,48.4,14.1,29,Tube Sample,6.7
+01-Feb-10,Hidden Valley,207.5,41.5,12.3,30,Tube Sample,
+10-Feb-10,Arbab's Forest,139.5,27.9,7.2,26,Tube Sample,1.19
+12-Feb-10,Beaver Spring,253,50.6,15.2,30,Tube Sample,1.30
+10-Feb-10,Bowl Canyon,261.5,52.3,14,27,Tube Sample,1.30
+10-Feb-10,Fluted Rock,149,29.8,7.2,24,Tube Sample,1.00
+12-Feb-10,Hidden Valley,216,43.2,13.9,32,Tube Sample,0.50
+11-Feb-10,Missionary Spring,181.5,36.3,8.9,25,Tube Sample,1.60
+10-Feb-10,Tsaile I,243.5,48.7,13.3,27,Tube Sample,2.10
+10-Feb-10,Tsaile III,250,50,13.5,27,Tube Sample,0.50
+11-Feb-10,Whiskey Creek,266,53.2,15.7,30,Tube Sample,0.80
+25-Feb-10,Arbab's Forest,145,29,7.6,26,Tube Sample,
+26-Feb-10,Beaver Spring,284,56.8,17.4,31,Tube Sample,
+23-Feb-10,Bowl Canyon,267,53.4,15.6,29,Tube Sample,0
+25-Feb-10,Fluted Rock,153,30.6,8,26,Tube Sample,.60
+26-Feb-10,Hidden Valley,247,49.4,15.9,32,Tube Sample,1.20
+24-Feb-10,Missionary Spring,183.5,36.7,10.7,29,Tube Sample,.90
+24-Feb-10,Tsaile I,261,52.2,15.1,29,Tube Sample,.80
+25-Feb-10,Tsaile III,297.5,59.5,16.4,28,Tube Sample,2.50
+24-Feb-10,Whiskey Creek,272.5,54.5,17,31,Tube Sample,.90
+11-Mar-10,Arbab's Forest,119.5,23.9,7.1,30,Tube Sample,
+10-Mar-10,Hidden Valley,245,49,15.8,32,Tube Sample,0.50
+10-Mar-10,Whiskey Creek,271,54.2,17.9,33,Tube Sample,.90
+10-Mar-10,Bowl Canyon,267.5,53.5,16.3,30,Tube Sample,
+10-Mar-10,Missionary Spring,139.5,27.9,9.2,33,Tube Sample,0.59
+11-Mar-10,Fluted Rock,152.5,30.5,8.6,28,Tube Sample,1.02
+12-Mar-10,Beaver Spring,296,59.2,19.6,33,Tube Sample,3.0
+12-Mar-10,Tsaile I,235,47,15.4,33,Tube Sample,1.70
+12-Mar-10,Tsaile III,274,54.8,17.8,32,Tube Sample,1.30
+30-Mar-10,Arbab's Forest,29.5,5.9,2.5,42,Bulk Sample,.50
+28-Mar-10,Beaver Spring,220,44,17.1,39,Tube Sample,.50
+01-Apr-10,Bowl Canyon,194.5,38.9,14.3,37,Tube Sample,3.25
+30-Mar-10,Fluted Rock,74.5,14.9,5.8,39,Bulk Sample,.38
+31-Mar-10,Hidden Valley,183.5,36.7,14,38,Tube Sample,.60
+29-Mar-10,Missionary Spring,74,14.8,6,41,Bulk Sample,.41
+28-Mar-10,Tsaile I,184,36.8,14.2,39,Tube Sample,
+28-Mar-10,Tsaile III,215,43,16.5,38,Tube Sample,.50
+01-Apr-10,Whiskey Creek,208.5,41.7,15.6,37,Tube Sample,.70
+27-Dec-10,Arbab's Forest,0,0,0,0,No Snow Measured,1.80
+28-Dec-10,Beaver Spring,86,17.2,4.6,27,Tube Sample,
+29-Dec-10,Bowl Canyon,94.5,18.9,3.9,21,Tube Sample,1.30
+27-Dec-10,Fluted Rock,2,0.4,0,0,Bulk Sample,1.80
+31-Dec-10,Hidden Valley,104.5,20.9,4.7,22,Tube Sample,2.50
+28-Dec-10,Missionary Spring,0,0,0,0,No Snow Measured,1.29
+28-Dec-10,Tsaile I,39.5,7.9,2.5,32,Bulk Sample,1.80
+28-Dec-10,Tsaile III,77.5,15.5,4.7,30,Tube Sample,
+27-Dec-10,Whiskey Creek,86.5,17.3,4.7,27,Tube Sample,2.02
+12-Jan-11,Arbab's Forest,30,6,1,17,Bulk Sample,0.83
+13-Jan-11,Beaver Spring,126,25.2,7.2,29,Tube Sample,1.85
+11-Jan-11,Bowl Canyon,123.5,24.7,5.4,22,Tube Sample,2.00
+12-Jan-11,Fluted Rock,36,7.2,1.2,17,Bulk Sample,0.85
+11-Jan-11,Hidden Valley,101.5,20.3,5.1,26,Tube Sample,0.50
+13-Jan-11,Missionary Spring,49,9.8,1.6,16,Bulk Sample,1.38
+13-Jan-11,Tsaile I,93.5,18.7,4.6,25,Tube Sample,2.20
+13-Jan-11,Tsaile III,130,26,7.3,28,Tube Sample,1.60
+11-Jan-11,Whiskey Creek,132.5,26.5,6.9,27,Tube Sample,1.00
+28-Jan-11,Bowl Canyon,113,22.6,6.1,27,Tube Sample,0
+27-Jan-11,Arbab's Forest,21.5,4.3,1.2,28,Bulk Sample,.07
+27-Jan-11,Fluted Rock,22,4.4,1.2,27,Bulk Sample,.15
+28-Jan-11,Hidden Valley,89,17.8,5,28,Tube Sample,
+27-Jan-11,Missionary Spring,37,7.4,2.2,30,Bulk Sample,.14
+29-Jan-11,Tsaile I,82,16.4,5.5,34,Tube Sample,.20
+29-Jan-11,Tsaile III,111.5,22.3,7.3,33,Tube Sample,.20
+28-Jan-11,Whiskey Creek,111,22.2,6.6,30,Tube Sample,.20
+14-Feb-11,Arbab's Forest,21.5,4.3,1.1,26,Bulk Sample,.50
+10-Feb-11,Bowl Canyon,138,27.6,6.5,24,Tube Sample,.20
+14-Feb-11,Fluted Rock,36,7.2,1.7,24,Bulk Sample,.65
+14-Feb-11,Hidden Valley,100.5,20.1,5.3,26,Tube Sample,.30
+14-Feb-11,Missionary Spring,40,8,2.5,31,Bulk Sample,.61
+11-Feb-11,Tsaile I,106,21.2,5.3,25,Tube Sample,.80
+11-Feb-11,Tsaile III,132.5,26.5,7.5,28,Tube Sample,.50
+10-Feb-11,Whiskey Creek,131,26.2,7.3,28,Tube Sample,.50
+28-Feb-11,Arbab's Forest,18.5,3.7,1.1,30,Bulk Sample,0.90
+25-Feb-11,Beaver Spring,153.5,30.7,8.4,27,Tube Sample,
+24-Feb-11,Bowl Canyon,147.5,29.5,7.5,25,Tube Sample,1.30
+28-Feb-11,Fluted Rock,29.5,5.9,1.6,27,Bulk Sample,0.70
+28-Feb-11,Hidden Valley,106,21.2,6.5,31,Tube Sample,1.35
+28-Feb-11,Missionary Spring,25,5,1.8,36,Bulk Sample,0.78
+25-Feb-11,Tsaile I,99,19.8,6.3,32,Tube Sample,0.10
+25-Feb-11,Tsaile III,151,30.2,8.9,29,Tube Sample,1.05
+24-Feb-11,Whiskey Creek,146.5,29.3,8.2,28,Tube Sample,0.60
+11-Mar-11,Arbab's Forest,0,0,0,0,No Snow Measured,.66
+10-Mar-11,Bowl Canyon,157,31.4,8.2,26,Tube Sample,.50
+14-Mar-11,Fluted Rock,5,1,0.5,50,Bulk Sample,.35
+14-Mar-11,Hidden Valley,85,17,5.9,35,Tube Sample,
+14-Mar-11,Missionary Spring,0,0,0,0,No Snow Measured,.10
+11-Mar-11,Tsaile I,85.5,17.1,6.7,39,Tube Sample,1.50
+11-Mar-11,Tsaile III,140,28,9.3,33,Tube Sample,1.05
+10-Mar-11,Whiskey Creek,154,30.8,8.5,28,Tube Sample,.70
+30-Mar-11,Arbab's Forest,0,0,0,0,No Snow Measured,.29
+30-Mar-11,Bowl Canyon,56.5,11.3,3.9,35,Tube Sample,.45
+30-Mar-11,Fluted Rock,0,0,0,0,No Snow Measured,.35
+29-Mar-11,Hidden Valley,36.5,7.3,2.2,30,Bulk Sample,.23
+30-Mar-11,Missionary Spring,0,0,0,0,No Snow Measured,.80
+28-Mar-11,Tsaile I,0,0,0,0,No Snow Measured,.90
+29-Mar-11,Tsaile III,73,14.6,5.3,36,Tube Sample,.70
+30-Mar-11,Whiskey Creek,81,16.2,5.8,36,Tube Sample,.48
+27-Dec-11,Arbab's Forest,29,5.8,1.2,21,Bulk Sample,1.04
+28-Dec-11,Beaver Spring,43,8.6,2,23,Bulk Sample,
+29-Dec-11,Bowl Canyon,83,16.6,3.4,20,Bulk Sample,1.10
+27-Dec-11,Fluted Rock,33,6.6,1.2,18,Bulk Sample,1.07
+29-Dec-11,Hidden Valley,53,10.6,2.2,21,Bulk Sample,0.80
+27-Dec-11,Missionary Spring,32.5,6.5,1.4,22,Bulk Sample,0.94
+27-Dec-11,Tsaile I,40,8,1.2,15,Bulk Sample,1.32
+27-Dec-11,Tsaile III,65.6,13.1,2.4,18,Bulk Sample,1.25
+10-Jan-12,Arbab's Forest,23.5,4.7,0.9,19,Bulk Sample,0.26
+12-Jan-12,Beaver Spring,50.5,10.1,2.6,26,Bulk Sample,0.48
+10-Jan-12,Bowl Canyon,82.5,16.5,3.8,23,Bulk Sample,0.30
+10-Jan-12,Fluted Rock,26,5.2,1.2,23,Bulk Sample,0.00
+10-Jan-12,Hidden Valley,48.5,9.7,2.2,23,Bulk Sample,0.00
+10-Jan-12,Missionary Spring,16,3.2,0.8,25,Bulk Sample,0.03
+11-Jan-12,Tsaile I,30,6,1.4,23,Bulk Sample,0.05
+12-Jan-12,Tsaile III,58.5,11.7,2.7,23,Bulk Sample,0.15
+26-Jan-12,Bowl Canyon,106.5,21.3,5.2,24,Tube Sample,0.60
+25-Jan-12,Fluted Rock,23.5,4.7,1,21,Bulk Sample,0.40
+25-Jan-12,Hidden Valley,76.5,15.3,3.4,22,Bulk Sample,1.30
+25-Jan-12,Missionary Spring,18,3.6,0.7,19,Bulk Sample,0.70
+26-Jan-12,Tsaile I,56,11.2,2.2,20,Bulk Sample,1.35
+26-Jan-12,Tsaile III,90,18,4,22,Tube Sample,1.05
+25-Jan-12,Whiskey Creek,107.5,21.5,4.7,22,Tube Sample,
+14-Feb-12,Arbab's Forest,20,4,0.9,23,Bulk Sample,0.38
+10-Feb-12,Beaver Spring,96.5,19.3,4.8,25,Tube Sample,0.38
+13-Feb-12,Bowl Canyon,130,26,5.4,21,Tube Sample,0.75
+14-Feb-12,Fluted Rock,15,3,0.5,17,Bulk Sample,0.20
+12-Mar-12,Missionary Spring,0,0,0,0,No Snow Measured,0.70
+15-Mar-12,Tsaile I,55,11,3.4,31,Bulk Sample,0.20
+14-Mar-12,Tsaile III,109.5,21.9,7.5,34,Tube Sample,0.55
+13-Mar-12,Whiskey Creek,137.5,27.5,7.9,29,Tube Sample,0.90
+27-Mar-12,Arbab's Forest,0,0,0,0,No Snow Measured,0.29
+30-Mar-12,Bowl Canyon,47,9.4,2.6,28,Bulk Sample,0.30
+27-Mar-12,Fluted Rock,0,0,0,0,No Snow Measured,0.38
+11-Jan-12,Whiskey Creek,65,13,3.1,24,Bulk Sample,
+25-Jan-12,Arbab's Forest,25,5,1,20,Bulk Sample,0.10
+26-Jan-12,Beaver Spring,94,19,4.3,23,Tube Sample,1.12
+14-Feb-12,Hidden Valley,110,22,4.6,21,Tube Sample,0.70
+14-Feb-12,Missionary Spring,25.5,5.1,1.1,22,Bulk Sample,0.82
+10-Feb-12,Tsaile I,65,13,3.1,24,Bulk Sample,0.91
+10-Feb-12,Tsaile III,100.5,20.1,4.5,22,Tube Sample,0.76
+13-Feb-12,Whiskey Creek,130,26,6.1,23,Tube Sample,1.10
+27-Feb-12,Arbab's Forest,9,1.8,0.6,33,Bulk Sample,.35
+29-Feb-12,Beaver Spring,137.5,27.5,6.8,25,Tube Sample,1.92
+29-Feb-12,Bowl Canyon,144,28.8,6.8,24,Tube Sample,.8
+27-Feb-12,Fluted Rock,3.5,0.7,0.3,43,Bulk Sample,.25
+28-Feb-12,Hidden Valley,115,23,5.4,23,Tube Sample,
+28-Feb-12,Missionary Spring,22.5,4.5,0.8,18,Bulk Sample,.63
+29-Feb-12,Tsaile I,93,18.6,4.4,24,Tube Sample,1.89
+29-Feb-12,Tsaile III,143.5,28.7,6.9,24,Tube Sample,1.49
+27-Feb-12,Whiskey Creek,120.5,24.1,7.4,31,Tube Sample,.2
+13-Mar-12,Arbab's Forest,1,0.2,0,0,Bulk Sample,0.67
+14-Mar-12,Beaver Spring,108.5,21.7,6.6,30,Tube Sample,0.40
+13-Mar-12,Bowl Canyon,128.5,25.7,7,27,Tube Sample,0.45
+13-Mar-12,Fluted Rock,1.5,0.3,0.1,33,Bulk Sample,0.75
+15-Mar-12,Hidden Valley,89,17.8,4.9,28,Tube Sample,0.50
+28-Mar-12,Hidden Valley,16.5,3.3,1,30,Bulk Sample,0.18
+26-Mar-12,Missionary Spring,0,0,0,0,No Snow Measured,0.10
+29-Mar-12,Tsaile I,0,0,0,0,No Snow Measured,0.90
+29-Mar-12,Tsaile III,36,7.2,2.2,31,Bulk Sample,0.75
+27-Mar-12,Whiskey Creek,73,14.6,4.5,31,Bulk Sample,0.25
+29-Dec-12,Arbab's Forest,58,11.6,2.1,18,Bulk Sample,0.70
+28-Dec-12,Beaver Spring,110.5,22.1,4,18,Tube Sample,3.00
+27-Dec-12,Bowl Canyon,87,17.4,3,17,Tube Sample,2.30
+29-Dec-12,Fluted Rock,60.5,12.1,2.2,18,Tube Sample,0.90
+26-Dec-12,Hidden Valley,67,13.4,2.7,20,Tube Sample,1.10
+29-Dec-12,Missionary Spring,59.5,11.9,2.2,18,Bulk Sample,1.59
+27-Dec-12,Tsaile I,110.5,22.1,3.5,16,Tube Sample,3.00
+27-Dec-12,Tsaile III,136.5,27.3,4.5,16,Tube Sample,3.30
+26-Dec-12,Whiskey Creek,86.5,17.3,3.7,21,Tube Sample,2.10
+14-Jan-13,Arbab's Forest,62,12.4,2.2,18,Bulk Sample,0.70
+09-Jan-13,Beaver Spring,83.5,16.7,4.5,27,Tube Sample,
+10-Jan-13,Bowl Canyon,91.5,18.3,4.2,23,Tube Sample,0.30
+14-Jan-13,Fluted Rock,69,13.8,2.6,19,Bulk Sample,
+10-Jan-13,Hidden Valley,76,15.2,3.7,24,Tube Sample,0.40
+09-Jan-13,Missionary Spring,61,12.2,2.2,18,Bulk Sample,
+09-Jan-13,Tsaile I,91.5,18.3,4.6,25,Tube Sample,
+09-Jan-13,Tsaile III,98,19.6,5.1,26,Tube Sample,0.45
+10-Jan-13,Whiskey Creek,90,18,4.8,27,Tube Sample,1.10
+31-Jan-13,Arbab's Forest,47.5,9.5,3,32,Bulk Sample,1.75
+30-Jan-13,Beaver Spring,158,31.6,7.7,24,Tube Sample,
+31-Jan-13,Bowl Canyon,137.5,27.5,6.4,23,Tube Sample,2.50
+31-Jan-13,Fluted Rock,46.5,9.3,2.3,25,Bulk Sample,
+31-Jan-13,Hidden Valley,112,22.4,5.9,26,Tube Sample,2.70
+31-Jan-13,Missionary Spring,53,10.6,2.8,26,Bulk Sample,1.50
+27-Jan-13,Tsaile I,75.5,15.1,5,33,Tube Sample,2.85
+27-Jan-13,Tsaile III,131,26.2,6.9,26,Tube Sample,2.85
+29-Jan-13,Whiskey Creek,157,31.4,7.3,23,Tube Sample,
+14-Feb-13,Arbab's Forest,37,7.4,2.2,30,Bulk Sample,0.67
+14-Feb-13,Beaver Spring,173.5,34.7,9,26,Tube Sample,2.10
+11-Feb-13,Bowl Canyon,177,35.4,8,23,Tube Sample,0.50
+14-Feb-13,Fluted Rock,55,11,3,27,Bulk Sample,0.69
+15-Feb-13,Hidden Valley,138,27.6,8.8,32,Tube Sample,0.30
+14-Feb-13,Missionary Spring,57,11.4,3.2,28,Bulk Sample,0.62
+13-Feb-13,Tsaile I,164,32.8,9.1,28,Tube Sample,
+14-Feb-13,Tsaile III,205,41,11.5,28,Tube Sample,2.55
+12-Feb-13,Whiskey Creek,165.5,33.1,9.3,28,Tube Sample,
+28-Feb-13,Arbab's Forest,35,7,2,29,Bulk Sample,0.33
+26-Feb-13,Beaver Spring,168.5,33.7,10.4,31,Tube Sample,1.20
+25-Feb-13,Bowl Canyon,160,32,9.2,29,Tube Sample,0.60
+28-Feb-13,Fluted Rock,56.5,11.3,3.3,29,Bulk Sample,0.31
+26-Feb-13,Hidden Valley,138.5,27.7,8.3,30,Tube Sample,0.40
+28-Feb-13,Missionary Spring,52.5,10.5,3.6,34,Bulk Sample,0.20
+27-Feb-13,Tsaile I,151,30.2,9.8,32,Tube Sample,
+27-Feb-13,Tsaile III,192.5,38.5,12.2,32,Tube Sample,0.85
+25-Feb-13,Whiskey Creek,173,34.6,10.3,30,Tube Sample,0.00
+11-Mar-13,Arbab's Forest,21,4.2,1.4,33,Bulk Sample,0.47
+13-Mar-13,Beaver Spring,132.5,26.5,8.4,32,Tube Sample,0.70
+12-Mar-13,Bowl Canyon,138.5,27.7,7.4,27,Tube Sample,0.40
+11-Mar-13,Fluted Rock,47,9.4,2.8,30,Bulk Sample,0.58
+13-Mar-13,Hidden Valley,116,23.2,7.9,34,Tube Sample,0.41
+11-Mar-13,Missionary Spring,19,3.8,1.4,37,Bulk Sample,0.38
+11-Mar-13,Tsaile I,128,25.6,8.6,34,Tube Sample,0.55
+11-Mar-13,Tsaile III,173.5,34.7,11,32,Tube Sample,0.60
+12-Mar-13,Whiskey Creek,149.5,29.9,8.6,29,Tube Sample,1.10
+27-Mar-13,Arbab's Forest,0,0,0,0,No Snow Measured,0.00
+26-Mar-13,Beaver Spring,67.5,13.5,5.8,43,Tube Sample,0.00
+28-Mar-13,Bowl Canyon,64,12.8,4.7,37,Tube Sample,0.18
+27-Mar-13,Fluted Rock,0,0,0,0,No Snow Measured,0.00
+29-Mar-13,Hidden Valley,48,9.6,3.7,39,Tube Sample,0.00
+27-Mar-13,Missionary Spring,0,0,0,0,No Snow Measured,0.00
+25-Mar-13,Tsaile I,39,7.8,2.5,32,Bulk Sample,0.00
+25-Mar-13,Tsaile III,92.5,18.5,7.6,41,Tube Sample,0.00
+29-Mar-13,Whiskey Creek,67,13.4,4.9,37,Tube Sample,0.00
+28-Jan-14,Arbab's Forest,3,0.6,0.1,17,Bulk Sample,0.00
+28-Jan-14,Beaver Spring,40,8,2.2,28,Bulk Sample,0.00
+29-Jan-14,Bowl Canyon,50.5,10.1,2.2,22,Bulk Sample,0.00
+28-Jan-14,Fluted Rock,11.5,2.3,0.4,17,Bulk Sample,0.00
+28-Jan-14,Hidden Valley,29,5.8,1.1,19,Bulk Sample,0.10
+28-Jan-14,Missionary Spring,0,0,0,0,No Snow Measured,0.00
+27-Jan-14,Tsaile I,50.5,10.1,2.3,23,Bulk Sample,0.10
+27-Jan-14,Tsaile III,57.5,11.5,3,26,Bulk Sample,0.00
+29-Jan-14,Whiskey Creek,53.5,10.7,2.8,26,Bulk Sample,0.00
+11-Feb-14,Arbab's Forest,3,0.6,0.2,33,Bulk Sample,0.20
+13-Feb-14,Beaver Spring,92,18.4,4.9,27,Tube Sample,2.50
+10-Feb-14,Bowl Canyon,70,14,3.1,22,Bulk Sample,0.76
+11-Feb-14,Fluted Rock,9,1.8,0.4,22,Bulk Sample,0.67
+13-Feb-14,Hidden Valley,43.5,8.7,2.1,24,Bulk Sample,0.80
+11-Feb-14,Missionary Spring,9,1.8,0.6,33,Bulk Sample,0.95
+12-Feb-14,Tsaile I,68.5,13.7,4.1,30,Tube Sample,2.20
+12-Feb-14,Tsaile III,100,20,5.8,29,Tube Sample,1.90
+10-Feb-14,Whiskey Creek,79,15.8,3.6,23,Bulk Sample,0.85
+25-Feb-14,Arbab's Forest,0,0,0,0,No Snow Measured,0.00
+27-Feb-14,Beaver Spring,59,11.8,3.3,28,Bulk Sample,0.20
+24-Feb-14,Bowl Canyon,52,10.4,2.7,26,Bulk Sample,0.00
+25-Feb-14,Fluted Rock,0,0,0,0,No Snow Measured,0.00
+26-Feb-14,Hidden Valley,11,2.2,0.7,32,Bulk Sample,
+25-Feb-14,Missionary Spring,0,0,0,0,No Snow Measured,0.00
+25-Feb-14,Tsaile I,19.5,3.9,1.1,28,Bulk Sample,0.10
+25-Feb-14,Tsaile III,68,13.6,4.6,34,Bulk Sample,0.00
+24-Feb-14,Whiskey Creek,62.5,12.5,3.3,26,Bulk Sample,0.00
+10-Mar-14,Arbab's Forest,0,0,0,0,No Snow Measured,0.99
+12-Mar-14,Bowl Canyon,60.5,12.1,3.3,27,Bulk Sample,1.40
+10-Mar-14,Fluted Rock,4,0.8,0.2,25,Bulk Sample,1.43
+14-Mar-14,Hidden Valley,5,1,0.2,20,Bulk Sample,
+10-Mar-14,Missionary Spring,0,0,0,0,No Snow Measured,1.15
+12-Mar-14,Tsaile I,8.5,1.7,1.1,65,Bulk Sample,2.40
+13-Mar-14,Tsaile III,82.5,16.5,4.8,29,Bulk Sample,2.20
+12-Mar-14,Whiskey Creek,65.5,13.1,4.1,31,Bulk Sample,1.40
+26-Mar-14,Arbab's Forest,0,0,0,0,No Snow Measured,0.19
+26-Mar-14,Beaver Spring,21,4.2,1.2,29,Bulk Sample,
+26-Mar-14,Bowl Canyon,19,3.8,0.9,24,Bulk Sample,0.00
+26-Mar-14,Fluted Rock,0,0,0,0,No Snow Measured,0.40
+25-Mar-14,Hidden Valley,0,0,0,0,No Snow Measured,0.00
+25-Mar-14,Missionary Spring,0,0,0,0,No Snow Measured,0.02
+25-Mar-14,Tsaile I,0,0,0,0,No Snow Measured,0.00
+25-Mar-14,Tsaile III,29.5,5.9,1.6,27,Bulk Sample,0.00
+25-Mar-14,Whiskey Creek,36,7.2,2.3,32,Bulk Sample,0.13
+14-Jan-14,Bowl Canyon,59.5,11.9,2.6,22,Bulk Sample,0.00
+14-Jan-14,Fluted Rock,26.5,5.3,1.1,21,Bulk Sample,0.09
+13-Jan-14,Hidden Valley,34.5,6.9,1.5,22,Bulk Sample,0.00
+14-Jan-14,Missionary Spring,9.5,1.9,0.4,21,Bulk Sample,0.14
+12-Jan-14,Tsaile I,55.5,11.1,2.4,22,Bulk Sample,0.20
+12-Jan-14,Tsaile III,65.5,13.1,3.2,24,Bulk Sample,0.10
+14-Jan-14,Whiskey Creek,60,12,3.2,27,Bulk Sample,
+30-Dec-13,Hidden Valley,38,7.6,1.7,22,Bulk Sample,0.55
+31-Dec-13,Missionary Spring,23.5,4.7,1.2,26,Bulk Sample,0.61
+26-Dec-13,Tsaile I,55,11,2.3,21,Bulk Sample,1.35
+26-Dec-13,Tsaile III,75,15,3.6,24,Bulk Sample,1.75
+30-Dec-13,Whiskey Creek,73,14.6,3.6,25,Bulk Sample,0.60
+14-Jan-14,Arbab's Forest,9,1.8,0.4,22,Bulk Sample,0.10
+13-Jan-14,Beaver Spring,49,9.8,2.5,26,Bulk Sample,
+26-Dec-13,Arbab's Forest,13.5,2.7,0.6,22,Bulk Sample,0.65
+27-Dec-13,Bowl Canyon,66.5,13.3,2.7,20,Bulk Sample,0.70
+27-Dec-13,Fluted Rock,34.5,6.9,1.3,19,Bulk Sample,1.14
+29-Jan-15,Beaver Spring,54,10.8,2.6,24,Bulk Sample,0.20
+27-Jan-15,Bowl Canyon,78.5,15.7,3.2,20,Bulk Sample,0.60
+27-Jan-15,Fluted Rock,26,5.2,1.6,31,Bulk Sample,0.80
+28-Jan-15,Hidden Valley,45.5,9.1,2.5,27,Bulk Sample,
+27-Jan-15,Missionary Spring,15.5,3.1,0.9,29,Bulk Sample,0.76
+29-Jan-15,Tsaile I,35.5,7.1,2.2,31,Bulk Sample,0.15
+29-Jan-15,Tsaile III,70,14,3.6,26,Bulk Sample,
+27-Jan-15,Whiskey Creek,74.5,14.9,3.6,24,Bulk Sample,0.65
+10-Feb-15,Beaver Spring,62.5,12.5,3.3,26,Bulk Sample,
+11-Feb-15,Bowl Canyon,80.5,16.1,4.1,25,Bulk Sample,
+10-Feb-15,Fluted Rock,18,3.6,1.5,42,Bulk Sample,1.00
+11-Feb-15,Hidden Valley,50,10,3.3,33,Bulk Sample,
+10-Feb-15,Missionary Spring,0,0,0,0,No Snow Measured,0.80
+10-Feb-15,Tsaile I,37.5,7.5,2.6,35,Bulk Sample,
+10-Feb-15,Tsaile III,71,14.2,4.1,29,Bulk Sample,
+11-Feb-15,Whiskey Creek,71,14.2,3.9,27,Bulk Sample,1.45
+25-Feb-15,Beaver Spring,91,18.2,3.9,21,Tube Sample,
+24-Feb-15,Bowl Canyon,125,25,4.5,18,Tube Sample,
+25-Feb-15,Fluted Rock,22,4.4,0.4,9,Bulk Sample,0.70
+25-Feb-15,Hidden Valley,61.5,12.3,3.2,26,Bulk Sample,
+30-Dec-14,Beaver Spring,34.5,6.9,1.3,19,Bulk Sample,2.20
+29-Dec-14,Bowl Canyon,51.5,10.3,1.6,16,Bulk Sample,2.10
+28-Dec-14,Fluted Rock,25.5,5.1,0.8,16,Bulk Sample,2.32
+29-Dec-14,Hidden Valley,26,5.2,1,19,Bulk Sample,1.40
+28-Dec-14,Missionary Spring,11.5,2.3,0.3,13,Bulk Sample,1.52
+30-Dec-14,Tsaile I,25,5,0.9,18,Bulk Sample,1.60
+30-Dec-14,Tsaile III,49,9.8,1.5,15,Bulk Sample,2.00
+29-Dec-14,Whiskey Creek,49.5,9.9,1.9,19,Bulk Sample,1.50
+15-Jan-15,Beaver Spring,79.5,15.9,3.1,19,Tube Sample,1.70
+13-Jan-15,Bowl Canyon,68,13.6,2.4,18,Bulk Sample,0.80
+13-Jan-15,Fluted Rock,25,5,1,20,Bulk Sample,0.78
+15-Jan-15,Hidden Valley,67.5,13.5,2.4,18,Tube Sample,1.30
+13-Jan-15,Missionary Spring,18.5,3.7,0.4,11,Bulk Sample,0.52
+14-Jan-15,Tsaile I,71,14.2,2.1,15,Tube Sample,2.30
+14-Jan-15,Tsaile III,103,20.6,3.5,17,Tube Sample,1.90
+13-Jan-15,Whiskey Creek,73.5,14.7,2.7,18,Bulk Sample,1.05
+24-Feb-15,Missionary Spring,51,10.2,1.1,11,Bulk Sample,1.30
+24-Feb-15,Tsaile I,45,9,1.5,17,Bulk Sample,
+24-Feb-15,Tsaile III,103.5,20.7,4.5,22,Bulk Sample,
+26-Feb-15,Whiskey Creek,87,17.4,4.8,28,Bulk Sample,
+12-Mar-15,Beaver Spring,123.5,24.7,7.6,31,Tube Sample,
+10-Mar-15,Bowl Canyon,141.5,28.3,7.9,28,Tube Sample,2.55
+12-Mar-15,Fluted Rock,5.5,1.1,0.3,27,Bulk Sample,1.50
+11-Mar-15,Hidden Valley,93.5,18.7,7.3,39,Tube Sample,
+10-Mar-15,Missionary Spring,35.5,7.1,2.4,34,Bulk Sample,2.05
+12-Mar-15,Tsaile I,53,10.6,3.3,31,Bulk Sample,2.15
+12-Mar-15,Tsaile III,115,23,7.2,31,Tube Sample,3.30
+11-Mar-15,Whiskey Creek,120,24,7.4,31,Tube Sample,2.00
+,Beaver Spring,,,,,No Sample Taken,
+25-Mar-15,Bowl Canyon,73,14.6,4.1,28,Bulk Sample,0.02
+27-Mar-15,Fluted Rock,0,0,0,0,No Snow Measured,0.02
+25-Mar-15,Hidden Valley,33,6.6,2.5,38,Bulk Sample,0.00
+25-Mar-15,Missionary Spring,0,0,0,0,No Snow Measured,0.08
+26-Mar-15,Tsaile I,0,0,0,0,No Snow Measured,0.00
+26-Mar-15,Tsaile III,37.5,7.5,2.3,31,Bulk Sample,0.00
+30-Mar-15,Whiskey Creek,21.5,4.3,1.2,28,Bulk Sample,0.20
+22-Feb-16,Fluted Rock,35,7,2.6,37,Bulk Sample,0.00
+24-Feb-16,Hidden Valley,97.5,19.5,5.6,29,Tube Sample,
+22-Feb-16,Missionary Spring,6.5,1.3,0.4,31,Bulk Sample, 0.0
+22-Feb-16,Tsaile I,92.5,18.5,5.9,32,Tube Sample,
+22-Feb-16,Tsaile III,128,25.6,8.5,33,Tube Sample,
+23-Feb-16,Whiskey Creek,135.5,27.1,8.2,30,Tube Sample,
+14-Mar-16,Beaver Spring,76.5,15.3,6.2,41,Bulk Sample,2.95
+09-Mar-16,Bowl Canyon,93,18.6,6.2,33,Tube Sample,
+08-Mar-16,Fluted Rock,0,0,0,0,No Snow Measured,
+08-Mar-16,Hidden Valley,60.5,12.1,3.9,32,Tube Sample,
+09-Mar-16,Missionary Spring,0,0,0,0,No Snow Measured,
+09-Mar-16,Tsaile I,44,8.8,3.2,36,Bulk Sample,
+30-Dec-15,Beaver Spring,130.5,26.1,6.3,24,Tube Sample,4.7
+23-Dec-15,Bowl Canyon,109.5,21.9,4.9,22,Tube Sample,
+28-Dec-15,Fluted Rock,42,8.4,1.7,20,Tube Sample,1.3
+29-Dec-15,Hidden Valley,84,16.8,3.7,23,Tube Sample,1.01
+28-Dec-15,Missionary Spring,42.5,8.5,1.8,21,Bulk Sample,2.4
+28-Dec-15,Tsaile I,83,16.6,3.4,20,Tube Sample,2.0
+28-Dec-15,Tsaile III,130,26,5.8,22,Tube Sample,3.03
+23-Dec-15,Whiskey Creek,114.5,22.9,5,22,Tube Sample,3.5
+15-Jan-16,Beaver Spring,157,31.4,7.9,25,Tube Sample,1.30
+11-Jan-16,Bowl Canyon,159,31.8,7.4,23,Tube Sample,NST
+12-Jan-16,Fluted Rock,75,15,3,20,Tube Sample,1.0
+14-Jan-16,Hidden Valley,121,24.2,4.9,20,Tube Sample,0.75
+11-Jan-16,Missionary Spring,65,13,2.1,16,Bulk Sample,2.1
+13-Jan-16,Tsaile I,116.5,23.3,5,22,Tube Sample,2.5
+13-Jan-16,Tsaile III,152.5,30.5,7.8,26,Tube Sample,1.4
+12-Jan-16,Whiskey Creek,164,32.8,8.8,27,Tube Sample,2
+28-Jan-16,Beaver Spring,155,31,8.9,29,Tube Sample,
+25-Jan-16,Bowl Canyon,141,28.2,7.6,27,Tube Sample,
+26-Jan-16,Fluted Rock,70.5,14.1,3.2,23,Tube Sample,0.25
+27-Jan-16,Hidden Valley,126.5,25.3,6.6,26,Tube Sample,0.3
+26-Jan-16,Missionary Spring,55.5,11.1,2.4,22,Bulk Sample,1.8
+26-Jan-16,Tsaile I,127.5,25.5,5.7,22,Tube Sample,0.6
+26-Jan-16,Tsaile III,153.5,30.7,7.7,25,Tube Sample,0.7
+25-Jan-16,Whiskey Creek,158,31.6,8.9,28,Tube Sample,0
+,Beaver Spring,,,,,No Sample Taken,
+10-Feb-16,Bowl Canyon,157.5,31.5,8.6,27,Tube Sample,
+08-Feb-16,Fluted Rock,79.5,15.9,4.2,26,Tube Sample,0.85
+10-Feb-16,Hidden Valley,136.5,27.3,7.2,26,Tube Sample,
+08-Feb-16,Missionary Spring,48.5,9.7,3,31,Bulk Sample,0.75
+08-Feb-16,Tsaile I,154.5,30.9,7.7,25,Tube Sample,
+08-Feb-16,Tsaile III,178,35.6,9.8,28,Tube Sample,
+09-Feb-16,Whiskey Creek,175,35,10.1,29,Tube Sample,
+,Beaver Spring,,,,,No Sample Taken,
+23-Feb-16,Bowl Canyon,129,25.8,8.4,33,Tube Sample,0.00
+07-Mar-16,Tsaile III,87.5,17.5,5.9,34,Tube Sample,
+11-Mar-16,Whiskey Creek,94.5,18.9,7,37,Tube Sample,
+28-Mar-16,Beaver Spring,12.5,2.5,1.1,44,Bulk Sample,
+25-Mar-16,Bowl Canyon,36.5,7.3,2.8,38,Bulk Sample,0.2
+25-Mar-16,Fluted Rock,0,0,0,0,No Snow Measured,0.1
+29-Mar-16,Hidden Valley,0,0,0,0,No Snow Measured,
+25-Mar-16,Missionary Spring,0,0,0,0,No Snow Measured,0.1
+25-Mar-16,Tsaile I,0,0,0,0,No Snow Measured,
+25-Mar-16,Tsaile III,21,4.2,1.4,33,Bulk Sample,
+28-Mar-16,Whiskey Creek,31,6.2,2.2,35,Bulk Sample,
+29-Dec-16,Beaver Spring,83,16.6,5.3,31,Tube Sample,
+26-Dec-16,Bowl Canyon,78.5,15.7,3.9,24,Tube Sample,
+29-Dec-16,Fluted Rock,7,1.4,0.3,30,Bulk Sample,
+30-Dec-16,Hidden Valley,47,9.4,2.7,30,Bulk Sample,
+27-Dec-16,Missionary Spring,15,3,0.8,27,Bulk Sample,
+28-Dec-16,Tsaile I,47,9.4,3,33,Tube Sample,
+28-Dec-16,Tsaile III,77,15.4,4.7,31,Tube Sample,
+27-Dec-16,Whiskey Creek,81,16.2,5,31,Tube Sample,
+02-Feb-17,Beaver Spring,191,38.2,11.3,30,Tube Sample,
+25-Jan-17,Bowl Canyon,219,43.8,11.2,25,Tube Sample,
+31-Jan-17,Fluted Rock,75,15,2.9,19,Tube Sample,
+31-Jan-17,Hidden Valley,146.5,29.3,9.1,31,Tube Sample,
+31-Jan-17,Missionary Spring,68,13.6,3.2,23,Bulk Sample,
+28-Jan-17,Tsaile I,147,29.4,8.4,29,Tube Sample,
+30-Jan-17,Tsaile III,195.5,39.1,9.9,25,Tube Sample,
+27-Jan-17,Whiskey Creek,218.5,43.7,13.6,31,Tube Sample,
+28-Feb-17,Beaver Spring,,,,,No Sample Taken,
+21-Feb-17,Bowl Canyon,169,33.8,10.8,32,Tube Sample,18.42
+22-Feb-17,Fluted Rock,19.5,3.9,1.5,38,Bulk Sample,13.9
+23-Feb-17,Hidden Valley,104.5,20.9,8.2,39,Tube Sample,0.70
+31-Mar-17,Beaver Spring,56.5,11.3,3.4,31,Tube Sample,
+27-Mar-17,Bowl Canyon,89,17.8,7.2,40,Tube Sample,1.98
+30-Mar-17,Fluted Rock,,,,,No Snow Measured,
+28-Mar-17,Hidden Valley,32.5,6.5,2.5,42,Bulk Sample,2.05
+30-Mar-17,Missionary Spring,,,,,No Snow Measured,
+31-Mar-17,Tsaile I,8.5,1.7,0.3,15,Bulk Sample,
+30-Mar-17,Tsaile III,56.5,11.3,4.6,42,Tube Sample,1.0
+29-Mar-17,Whiskey Creek,102,20.5,8.1,40,Tube Sample,2.18
+22-Feb-17,Missionary Spring,,,,,No Snow Measured,
+27-Feb-17,Tsaile I,69,13.8,5.4,39,Tube Sample,0.80
+02-Mar-17,Tsaile III,212,42.4,13.3,31,Tube Sample,3.6
+22-Feb-17,Whiskey Creek,161.5,32.3,11,34,Tube Sample,1.10
+29-Jan-15,Beaver Spring,54,10.8,2.6,24,Bulk Sample,0.20
+27-Jan-15,Bowl Canyon,78.5,15.7,3.2,20,Bulk Sample,0.60
+27-Jan-15,Fluted Rock,26,5.2,1.6,31,Bulk Sample,0.80
+28-Jan-15,Hidden Valley,45.5,9.1,2.5,27,Bulk Sample,
+27-Jan-15,Missionary Spring,15.5,3.1,0.9,29,Bulk Sample,0.76
+29-Jan-15,Tsaile I,35.5,7.1,2.2,31,Bulk Sample,0.15
+29-Jan-15,Tsaile III,70,14,3.6,26,Bulk Sample,
+27-Jan-15,Whiskey Creek,74.5,14.9,3.6,24,Bulk Sample,0.65
+10-Feb-15,Beaver Spring,62.5,12.5,3.3,26,Bulk Sample,
+11-Feb-15,Bowl Canyon,80.5,16.1,4.1,25,Bulk Sample,
+10-Feb-15,Fluted Rock,18,3.6,1.5,42,Bulk Sample,1.00
+11-Feb-15,Hidden Valley,50,10,3.3,33,Bulk Sample,
+10-Feb-15,Missionary Spring,0,0,0,0,No Snow Measured,0.80
+10-Feb-15,Tsaile I,37.5,7.5,2.6,35,Bulk Sample,
+10-Feb-15,Tsaile III,71,14.2,4.1,29,Bulk Sample,
+11-Feb-15,Whiskey Creek,71,14.2,3.9,27,Bulk Sample,1.45
+25-Feb-15,Beaver Spring,91,18.2,3.9,21,Tube Sample,
+24-Feb-15,Bowl Canyon,125,25,4.5,18,Tube Sample,
+25-Feb-15,Fluted Rock,22,4.4,0.4,9,Bulk Sample,0.70
+25-Feb-15,Hidden Valley,61.5,12.3,3.2,26,Bulk Sample,
+30-Dec-14,Beaver Spring,34.5,6.9,1.3,19,Bulk Sample,2.20
+29-Dec-14,Bowl Canyon,51.5,10.3,1.6,16,Bulk Sample,2.10
+28-Dec-14,Fluted Rock,25.5,5.1,0.8,16,Bulk Sample,2.32
+29-Dec-14,Hidden Valley,26,5.2,1,19,Bulk Sample,1.40
+28-Dec-14,Missionary Spring,11.5,2.3,0.3,13,Bulk Sample,1.52
+30-Dec-14,Tsaile I,25,5,0.9,18,Bulk Sample,1.60
+30-Dec-14,Tsaile III,49,9.8,1.5,15,Bulk Sample,2.00
+29-Dec-14,Whiskey Creek,49.5,9.9,1.9,19,Bulk Sample,1.50
+15-Jan-15,Beaver Spring,79.5,15.9,3.1,19,Tube Sample,1.70
+13-Jan-15,Bowl Canyon,68,13.6,2.4,18,Bulk Sample,0.80
+13-Jan-15,Fluted Rock,25,5,1,20,Bulk Sample,0.78
+15-Jan-15,Hidden Valley,67.5,13.5,2.4,18,Tube Sample,1.30
+13-Jan-15,Missionary Spring,18.5,3.7,0.4,11,Bulk Sample,0.52
+14-Jan-15,Tsaile I,71,14.2,2.1,15,Tube Sample,2.30
+14-Jan-15,Tsaile III,103,20.6,3.5,17,Tube Sample,1.90
+13-Jan-15,Whiskey Creek,73.5,14.7,2.7,18,Bulk Sample,1.05
+24-Feb-15,Missionary Spring,51,10.2,1.1,11,Bulk Sample,1.30
+24-Feb-15,Tsaile I,45,9,1.5,17,Bulk Sample,
+24-Feb-15,Tsaile III,103.5,20.7,4.5,22,Bulk Sample,
+26-Feb-15,Whiskey Creek,87,17.4,4.8,28,Bulk Sample,
+12-Mar-15,Beaver Spring,123.5,24.7,7.6,31,Tube Sample,
+10-Mar-15,Bowl Canyon,141.5,28.3,7.9,28,Tube Sample,2.55
+12-Mar-15,Fluted Rock,5.5,1.1,0.3,27,Bulk Sample,1.50
+11-Mar-15,Hidden Valley,93.5,18.7,7.3,39,Tube Sample,
+10-Mar-15,Missionary Spring,35.5,7.1,2.4,34,Bulk Sample,2.05
+12-Mar-15,Tsaile I,53,10.6,3.3,31,Bulk Sample,2.15
+12-Mar-15,Tsaile III,115,23,7.2,31,Tube Sample,3.30
+11-Mar-15,Whiskey Creek,120,24,7.4,31,Tube Sample,2.00
+,Beaver Spring,,,,,No Sample Taken,
+25-Mar-15,Bowl Canyon,73,14.6,4.1,28,Bulk Sample,0.02
+27-Mar-15,Fluted Rock,0,0,0,0,No Snow Measured,0.02
+25-Mar-15,Hidden Valley,33,6.6,2.5,38,Bulk Sample,0.00
+25-Mar-15,Missionary Spring,0,0,0,0,No Snow Measured,0.08
+26-Mar-15,Tsaile I,0,0,0,0,No Snow Measured,0.00
+26-Mar-15,Tsaile III,37.5,7.5,2.3,31,Bulk Sample,0.00
+30-Mar-15,Whiskey Creek,21.5,4.3,1.2,28,Bulk Sample,0.20
+22-Feb-16,Fluted Rock,35,7,2.6,37,Bulk Sample,0.00
+24-Feb-16,Hidden Valley,97.5,19.5,5.6,29,Tube Sample,
+22-Feb-16,Missionary Spring,6.5,1.3,0.4,31,Bulk Sample, 0.0
+22-Feb-16,Tsaile I,92.5,18.5,5.9,32,Tube Sample,
+22-Feb-16,Tsaile III,128,25.6,8.5,33,Tube Sample,
+23-Feb-16,Whiskey Creek,135.5,27.1,8.2,30,Tube Sample,
+14-Mar-16,Beaver Spring,76.5,15.3,6.2,41,Bulk Sample,2.95
+09-Mar-16,Bowl Canyon,93,18.6,6.2,33,Tube Sample,
+08-Mar-16,Fluted Rock,0,0,0,0,No Snow Measured,
+08-Mar-16,Hidden Valley,60.5,12.1,3.9,32,Tube Sample,
+09-Mar-16,Missionary Spring,0,0,0,0,No Snow Measured,
+09-Mar-16,Tsaile I,44,8.8,3.2,36,Bulk Sample,
+30-Dec-15,Beaver Spring,130.5,26.1,6.3,24,Tube Sample,4.7
+23-Dec-15,Bowl Canyon,109.5,21.9,4.9,22,Tube Sample,
+28-Dec-15,Fluted Rock,42,8.4,1.7,20,Tube Sample,1.3
+29-Dec-15,Hidden Valley,84,16.8,3.7,23,Tube Sample,1.01
+28-Dec-15,Missionary Spring,42.5,8.5,1.8,21,Bulk Sample,2.4
+28-Dec-15,Tsaile I,83,16.6,3.4,20,Tube Sample,2.0
+28-Dec-15,Tsaile III,130,26,5.8,22,Tube Sample,3.03
+23-Dec-15,Whiskey Creek,114.5,22.9,5,22,Tube Sample,3.5
+15-Jan-16,Beaver Spring,157,31.4,7.9,25,Tube Sample,1.30
+11-Jan-16,Bowl Canyon,159,31.8,7.4,23,Tube Sample,NST
+12-Jan-16,Fluted Rock,75,15,3,20,Tube Sample,1.0
+14-Jan-16,Hidden Valley,121,24.2,4.9,20,Tube Sample,0.75
+11-Jan-16,Missionary Spring,65,13,2.1,16,Bulk Sample,2.1
+13-Jan-16,Tsaile I,116.5,23.3,5,22,Tube Sample,2.5
+13-Jan-16,Tsaile III,152.5,30.5,7.8,26,Tube Sample,1.4
+12-Jan-16,Whiskey Creek,164,32.8,8.8,27,Tube Sample,2
+28-Jan-16,Beaver Spring,155,31,8.9,29,Tube Sample,
+25-Jan-16,Bowl Canyon,141,28.2,7.6,27,Tube Sample,
+26-Jan-16,Fluted Rock,70.5,14.1,3.2,23,Tube Sample,0.25
+27-Jan-16,Hidden Valley,126.5,25.3,6.6,26,Tube Sample,0.3
+26-Jan-16,Missionary Spring,55.5,11.1,2.4,22,Bulk Sample,1.8
+26-Jan-16,Tsaile I,127.5,25.5,5.7,22,Tube Sample,0.6
+26-Jan-16,Tsaile III,153.5,30.7,7.7,25,Tube Sample,0.7
+25-Jan-16,Whiskey Creek,158,31.6,8.9,28,Tube Sample,0
+,Beaver Spring,,,,,No Sample Taken,
+10-Feb-16,Bowl Canyon,157.5,31.5,8.6,27,Tube Sample,
+08-Feb-16,Fluted Rock,79.5,15.9,4.2,26,Tube Sample,0.85
+10-Feb-16,Hidden Valley,136.5,27.3,7.2,26,Tube Sample,
+08-Feb-16,Missionary Spring,48.5,9.7,3,31,Bulk Sample,0.75
+08-Feb-16,Tsaile I,154.5,30.9,7.7,25,Tube Sample,
+08-Feb-16,Tsaile III,178,35.6,9.8,28,Tube Sample,
+09-Feb-16,Whiskey Creek,175,35,10.1,29,Tube Sample,
+,Beaver Spring,,,,,No Sample Taken,
+23-Feb-16,Bowl Canyon,129,25.8,8.4,33,Tube Sample,0.00
+07-Mar-16,Tsaile III,87.5,17.5,5.9,34,Tube Sample,
+11-Mar-16,Whiskey Creek,94.5,18.9,7,37,Tube Sample,
+28-Mar-16,Beaver Spring,12.5,2.5,1.1,44,Bulk Sample,
+25-Mar-16,Bowl Canyon,36.5,7.3,2.8,38,Bulk Sample,0.2
+25-Mar-16,Fluted Rock,0,0,0,0,No Snow Measured,0.1
+29-Mar-16,Hidden Valley,0,0,0,0,No Snow Measured,
+25-Mar-16,Missionary Spring,0,0,0,0,No Snow Measured,0.1
+25-Mar-16,Tsaile I,0,0,0,0,No Snow Measured,
+25-Mar-16,Tsaile III,21,4.2,1.4,33,Bulk Sample,
+28-Mar-16,Whiskey Creek,31,6.2,2.2,35,Bulk Sample,
+29-Dec-16,Beaver Spring,83,16.6,5.3,31,Tube Sample,
+26-Dec-16,Bowl Canyon,78.5,15.7,3.9,24,Tube Sample,
+29-Dec-16,Fluted Rock,7,1.4,0.3,30,Bulk Sample,
+30-Dec-16,Hidden Valley,47,9.4,2.7,30,Bulk Sample,
+27-Dec-16,Missionary Spring,15,3,0.8,27,Bulk Sample,
+28-Dec-16,Tsaile I,47,9.4,3,33,Tube Sample,
+28-Dec-16,Tsaile III,77,15.4,4.7,31,Tube Sample,
+27-Dec-16,Whiskey Creek,81,16.2,5,31,Tube Sample,
+02-Feb-17,Beaver Spring,191,38.2,11.3,30,Tube Sample,
+25-Jan-17,Bowl Canyon,219,43.8,11.2,25,Tube Sample,
+31-Jan-17,Fluted Rock,75,15,2.9,19,Tube Sample,
+31-Jan-17,Hidden Valley,146.5,29.3,9.1,31,Tube Sample,
+31-Jan-17,Missionary Spring,68,13.6,3.2,23,Bulk Sample,
+28-Jan-17,Tsaile I,147,29.4,8.4,29,Tube Sample,
+30-Jan-17,Tsaile III,195.5,39.1,9.9,25,Tube Sample,
+27-Jan-17,Whiskey Creek,218.5,43.7,13.6,31,Tube Sample,
+28-Feb-17,Beaver Spring,,,,,No Sample Taken,
+21-Feb-17,Bowl Canyon,169,33.8,10.8,32,Tube Sample,18.42
+22-Feb-17,Fluted Rock,19.5,3.9,1.5,38,Bulk Sample,13.9
+23-Feb-17,Hidden Valley,104.5,20.9,8.2,39,Tube Sample,0.70
+31-Mar-17,Beaver Spring,56.5,11.3,3.4,31,Tube Sample,
+27-Mar-17,Bowl Canyon,89,17.8,7.2,40,Tube Sample,1.98
+30-Mar-17,Fluted Rock,,,,,No Snow Measured,
+28-Mar-17,Hidden Valley,32.5,6.5,2.5,42,Bulk Sample,2.05
+30-Mar-17,Missionary Spring,,,,,No Snow Measured,
+31-Mar-17,Tsaile I,8.5,1.7,0.3,15,Bulk Sample,
+30-Mar-17,Tsaile III,56.5,11.3,4.6,42,Tube Sample,1.0
+29-Mar-17,Whiskey Creek,102,20.5,8.1,40,Tube Sample,2.18
+22-Feb-17,Missionary Spring,,,,,No Snow Measured,
+27-Feb-17,Tsaile I,69,13.8,5.4,39,Tube Sample,0.80
+02-Mar-17,Tsaile III,212,42.4,13.3,31,Tube Sample,3.6
+22-Feb-17,Whiskey Creek,161.5,32.3,11,34,Tube Sample,1.10
