@@ -18,11 +18,30 @@ library(naniar)
 library(measurements)
 library(tidyverse)
 library(dataRetrieval)
+library(Metrics)
+library(mltools)
+library(gridExtra)
 ```
+
+```{r, echo = FALSE}
+# path to source graphing functions
+path_graph <- "../Functions/Graphing/"
+```
+
+```{r, echo = FALSE}
+# source functions
+source(paste0(path_graph, "graph_season_trend.R"))
+source(paste0(path_graph, "graph_correlation.R"))
+
+```
+
 
 ```{r, echo = FALSE}
 # set water year order
 wint_wy_order <- c("Dec", "Jan", "Feb", "Mar", "Apr")
+
+# colors for months
+colors = c('#F6BD60', '#7FB069', '#548687', "plum4", "coral2", "slategrey")
 ```
 
 ```{r, echo = FALSE, message=FALSE, warning = FALSE}
@@ -41,8 +60,65 @@ bs_snodas <- read_csv("../Data/beaver_springs_snodas_swe.csv", col_names = c("da
 
 # read in prism data
 wc_prism <- read_csv("../Data/wc_prism_snow_accum.csv")
+bs_prism <- read_csv("../Data/bs_prism_snow.csv")
 
 ```
+
+# SNOTEL Seasonality
+```{r, echo = FALSE }
+# clean beaver
+beav <- bs_snotel %>% 
+  select(Date, swe_mm) %>% 
+  mutate(station_name = "Beaver Springs")
+
+# snotel seasonal graph
+snotel_season <- wc_snotel %>% 
+  select("Date"=date, swe_mm) %>% 
+  mutate(station_name = "Whiskey Creek") %>% 
+  rbind(beav) %>% 
+  mutate(month = month(Date, abbr = TRUE, label = TRUE)) %>% 
+  filter(month %in% c("Nov", "Dec", "Jan", "Feb", "Mar", "Apr")) %>% 
+  group_by(month)
+
+ggplot(snotel_season, aes(x = factor(month, 
+                        levels = c("Nov","Dec","Jan", "Feb", "Mar", "Apr")), y = swe_mm)) +
+  geom_boxplot(aes(fill = month), alpha = 0.5, show.legend = FALSE) +
+  facet_wrap(~station_name) +
+  labs( 
+    x = "Month",
+    y = "SWE (mm)"
+    ) +
+  theme_bw()
+
+
+```
+
+# Whiskey creek full record
+```{r, echo = FALSE}
+
+wc_prism_snotel_snodas <- wc_prism %>% 
+  select("date"= Date, waterYear, prism_snow_mm_accum) %>% 
+  left_join(wc_snodas, by = "date") %>% 
+  rename(snodas_swe_mm = swe_mm) %>% 
+  left_join(wc_snotel, by = "date") %>% 
+  select(date, waterYear, prism_snow_mm_accum, snodas_swe_mm, "snotel_swe_mm" = swe_mm) %>% 
+  pivot_longer(c(prism_snow_mm_accum, snodas_swe_mm, snotel_swe_mm), values_to = "mm", names_to = "model")
+
+ggplot(wc_prism_snotel_snodas, aes(x = date, y = mm)) +
+  geom_line(aes(color = model)) +
+  labs(
+    x = "Year",
+    y = "milimeters",
+    title = "Whiskey Creek PRISM, SNOTEL, SNODAS",
+    color = ""
+  ) +
+  scale_x_date(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic() +
+  theme(legend.position="bottom", text = element_text(size=14)) 
+```
+
+
 
 ```{r, echo = FALSE}
 snow_course <- snow_course_raw %>% 
@@ -78,6 +154,7 @@ ggplot(snow_course_trim, aes(x = date, y = swe_mm)) +
   geom_line(aes(color = station_name))+
   #geom_col(aes(fill = station_name)) +
   facet_wrap(~station_name)
+
 
 ```
 
@@ -126,22 +203,66 @@ ggplot(missing_month, aes(x = month, y = pct_miss, group = station_name)) +
 
 ```
 
+** A lot of data missing in April let's throw that out
+
+```{r, echo = FALSE}
+
+snow_course_trim %>% 
+  mutate(month = month(date, label = TRUE, abbr = TRUE)) %>% 
+  filter(month != "Apr") %>% 
+  group_by(month) %>% 
+  ggplot(aes(x = factor(month, 
+                        levels = c("Dec","Jan", "Feb", "Mar")), y = swe_mm)) +
+  geom_boxplot(aes(color = month), show.legend = FALSE) +
+  facet_wrap(~station_name) +
+  labs( 
+    x = "Month",
+    y = "SWE (mm)"
+    ) +
+  theme_classic()
+
+```
+
 
 Look at seasonal monthly median
 
 ```{r, echo = FALSE}
-
+# by month
 seasonal_median <- snow_course_trim %>% 
   mutate(month = month(date, label = TRUE, abbr = TRUE)) %>% 
   group_by(station_name, month) %>% 
   summarize(swe_mm = median(swe_mm, na.rm = TRUE)) %>% 
-  drop_na()
+  drop_na() %>% 
+  filter(month != "Apr")
+
 
 ggplot(seasonal_median, aes(x = factor(month, wint_wy_order), y = swe_mm, group = station_name)) +
   geom_point(aes(color = station_name)) +
   geom_line(aes(color = station_name)) +
   labs(
     x = "Month",
+    y = "SWE (mm)",
+    color = "Station"
+  ) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+
+# by date
+
+date_median <- snow_course_trim %>% 
+  mutate(month = month(date, label = TRUE, abbr = TRUE)) %>% 
+  mutate(day = day(date)) %>% 
+  mutate(month_day = paste0(month, "-", day)) %>% 
+  group_by(station_name, month_day) %>% 
+  summarize(swe_mm = median(swe_mm, na.rm = TRUE)) %>% 
+  drop_na()
+
+
+ggplot(date_median, aes(x = month_day, y = swe_mm, group = station_name)) +
+  geom_point(aes(color = station_name)) +
+  geom_line(aes(color = station_name)) +
+  labs(
+    x = "Date",
     y = "SWE (mm)",
     color = "Station"
   ) +
@@ -194,7 +315,143 @@ ggplot(sc_wy_max, aes(x = waterYear, y = swe_mm)) +
 
 ```
 
-# compare max SWE snotel to PRISM max accumulated
+# Beaver Spring and WHiskey Creek seasonality
+```{r, echo = FALSE}
+bs_snowcourse <- snow_course_trim %>% 
+  filter(station_name == "Beaver Spring")
+
+wc_snowcourse <- snow_course_trim %>% 
+  filter(station_name == "Whiskey Creek")
+
+wc_bs_sc <- snow_course_trim %>% 
+  filter(station_name %in% c("Whiskey Creek", "Beaver Spring")) %>% 
+  drop_na()
+
+# plot raw time series BS vs WC
+ggplot(wc_bs_sc, aes(x = date, y = swe_mm)) +
+  geom_line(aes(color = station_name))
+
+# plot seasonality
+wc_bs_sc %>% 
+  mutate(month = month(date, label = TRUE, abbr = TRUE)) %>% 
+  filter(month != "Apr") %>% 
+  group_by(month) %>% 
+  ggplot(aes(x = factor(month, 
+                        levels = c("Dec","Jan", "Feb", "Mar")), y = swe_mm)) +
+  geom_boxplot(aes(fill = month), alpha = 0.5, show.legend = FALSE) +
+  facet_wrap(~station_name) +
+  labs( 
+    x = "Month",
+    y = "SWE (mm)"
+    ) +
+  theme_bw()
+
+# plot maximums
+wc_bs_sc %>% 
+  group_by(station_name, waterYear) %>% 
+  top_n(1, swe_mm) %>% 
+  ggplot(aes(x = waterYear, y = swe_mm)) +
+  #geom_point(aes(color = station_name)) +
+  geom_col(aes(fill = station_name), position = "dodge") +
+  scale_x_continuous(expand = c(0,0), breaks= seq(1984,2017, by = 2)) +
+  scale_y_continuous(expand = c(0,0)) +
+  scale_fill_manual(values = colors)
+
+```
+
+
+
+# Beaver Spring
+
+## PRISM, snow course, snodas, snotel
+
+```{r, echo = FALSE, fig.width=10, fig.height=5}
+# swe and prism snowfall
+bs_sc_snotel_prism_snodas <- bs_prism %>% 
+  select("date" = Date, prism_snow_mm_accum) %>% 
+  left_join(bs_snowcourse, by = "date") %>% 
+  select(date, "snowcourse" = swe_mm, prism_snow_mm_accum) %>% 
+  left_join(bs_snodas, by = "date") %>% 
+  rename(snodas = swe_mm) %>% 
+  rename(Date = date) %>% 
+  left_join(bs_snotel, by = "Date") %>% 
+  select("date" = Date, snowcourse, "snotel" = swe_mm, snodas, prism_snow_mm_accum)
+
+bs_sc_snotel_prism_snodas_plot <- bs_sc_snotel_prism_snodas %>% 
+  pivot_longer(c(snotel, snodas, prism_snow_mm_accum), names_to = "ground_model", values_to = "mm")
+
+# graph all of them
+ggplot(bs_sc_snotel_prism_snodas_plot, aes(x = date, y = snowcourse)) +
+  geom_col(color = "grey", position = "dodge") +
+  geom_line(aes(y = mm, color = ground_model)) +
+  labs(
+    x = "Year",
+    y = "milimeters",
+    color = ""
+  ) +
+  scale_x_date(expand = c(0,0), date_breaks = "5 years") +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw() +
+  theme(text = element_text(size=14), legend.position="bottom")
+
+```
+
+
+## plot PRISM with Snow course SWE
+```{r, echo = FALSE}
+
+
+bs_prism_sc <- bs_prism %>% 
+  select("date" = Date, prism_snow_mm_accum) %>% 
+  mutate(month = month(date)) %>% 
+  left_join(bs_snowcourse, by = "date") %>% 
+  select(date, waterYear, prism_snow_mm_accum, swe_mm)%>% 
+  mutate(month = month(date, label = TRUE, abbr = TRUE)) 
+ # pivot_longer(c(prism_snow_mm_accum, swe_mm), values_to = "snow_mm", names_to = "monitor") 
+
+ggplot(bs_prism_sc, aes(x = date, y = swe_mm)) +
+  geom_col(color = "grey68") +
+  geom_line(aes(y = prism_snow_mm_accum), color = "#1219cc") +
+  labs(
+    x = "Year",
+    y = "Snow Course SWE (mm)"
+  ) +
+  scale_y_continuous(sec.axis = sec_axis(~., "PRISM accumulated snowfall (mm)"), expand = c(0,0)) +
+  theme_classic() +
+  theme(axis.line.y.right = element_line(color = "#1219cc"),
+                axis.text.y.right = element_text(color = "#1219cc"),
+                axis.title.y.right = element_text(color = "#1219cc"),
+        text = element_text(size=14))
+
+
+```
+
+```{r, echo = FALSE}
+
+bs_prism_sc_wint <- bs_prism_sc %>% 
+  filter(month %in% c("Dec", "Jan", "Feb", "Mar", "Apr")) %>% 
+  drop_na() %>% 
+  mutate(median_sc = median(swe_mm)) %>% 
+  mutate(median_prism = median(prism_snow_mm_accum))
+
+bs_prism_sc_rmse_mae <- bs_prism_sc_wint %>% 
+  ungroup() %>% 
+  group_by(month) %>% 
+  mutate(rmse = rmse(swe_mm, prism_snow_mm_accum)) %>% 
+  mutate(mae = mae(swe_mm, prism_snow_mm_accum)) %>% 
+  slice(1)
+
+graph_correlation(bs_prism_sc_wint, x_data = bs_prism_sc_wint$swe_mm, 
+                        y_data = bs_prism_sc_wint$prism_snow_mm_accum,
+                        title = "Beaver Spring Snow Course Daily SWE and PRISM ", 
+                         xlabel = "Snow Course SWE (mm)",
+                         ylabel = "PRISM Accumulated Snowfall (mm)") +
+                          geom_point(aes(color = month)) +
+                          scale_color_manual(values = colors) 
+
+```
+
+# compare max SWE snow course to PRISM max accumulated
 ```{r, echo = FALSE}
 wc_prism_max_sc <- wc_prism %>% 
   select(-waterYear) %>% # have to do this for some reason
@@ -206,11 +463,66 @@ wc_max_prism_sc <- sc_wy_max %>%
   filter(station_name == "Whiskey Creek") %>% 
   left_join(wc_prism_max_sc, by = "waterYear")
 
-ggplot(wc_max_prism_sc, aes(x = swe_mm, y = prism_snow_mm_accum)) +
-  geom_point()
+graph_correlation(wc_max_prism_sc, x_data = wc_max_prism_sc$swe_mm, 
+                  y_data = wc_max_prism_sc$prism_snow_mm_accum,
+                  title = "Whiskey Creek Max Snow Course SWE and PRISM ", 
+                   xlabel = "Snow Course SWE (mm)",
+                   ylabel = "PRISM Accumulated Snowfall (mm)") 
+```
+# Whiskey Creek
+## plot PRISM with Snow course SWE
+```{r, echo = FALSE}
 
-summary(lm(wc_max_prism_sc$swe_mm ~ wc_max_prism_sc$prism_snow_mm_accum)) # r2 = 0.44
 
+wc_prism_sc <- wc_prism %>% 
+  select("date" = Date, prism_snow_mm_accum) %>% 
+  mutate(month = month(date)) %>% 
+  left_join(wc_snowcourse, by = "date") %>% 
+  select(date, waterYear, prism_snow_mm_accum, swe_mm)%>% 
+  mutate(month = month(date, label = TRUE, abbr = TRUE)) 
+ # pivot_longer(c(prism_snow_mm_accum, swe_mm), values_to = "snow_mm", names_to = "monitor") 
+
+ggplot(wc_prism_sc, aes(x = date, y = swe_mm)) +
+  geom_col(color = "grey68") +
+  geom_line(aes(y = prism_snow_mm_accum), color = "#1219cc") +
+  labs(
+    x = "Year",
+    y = "Snow Course SWE (mm)"
+  ) +
+  scale_y_continuous(sec.axis = sec_axis(~., "PRISM accumulated snowfall (mm)"), expand = c(0,0)) +
+  theme_classic() +
+  theme(axis.line.y.right = element_line(color = "#1219cc"),
+                axis.text.y.right = element_text(color = "#1219cc"),
+                axis.title.y.right = element_text(color = "#1219cc"),
+        text = element_text(size=14))
+
+
+```
+
+```{r, echo = FALSE}
+wc_prism_sc_wint <- wc_prism_sc %>% 
+  filter(month %in% c("Dec", "Jan", "Feb", "Mar", "Apr")) %>% 
+  drop_na() %>% 
+  mutate(median_sc = median(swe_mm)) %>% 
+  mutate(median_prism = median(prism_snow_mm_accum))
+
+graph_correlation(wc_prism_sc_wint, x_data = wc_prism_sc_wint$swe_mm, 
+                  y_data = wc_prism_sc_wint$prism_snow_mm_accum,
+                  title = "Whiskey Creek Snow Course Daily SWE and PRISM ", 
+                   xlabel = "Snow Course SWE (mm)",
+                   ylabel = "PRISM Accumulated Snowfall (mm)") +
+                  geom_point(aes(color = month)) +
+                  scale_color_manual(values = colors)
+
+
+graph_correlation(wc_prism_sc_wint, x_data = wc_prism_sc_wint$swe_mm, 
+                  y_data = wc_prism_sc_wint$prism_snow_mm_accum,
+                  title = "Whiskey Creek Snow Course Daily SWE and PRISM ", 
+                   xlabel = "Snow Course SWE (mm)",
+                   ylabel = "PRISM Accumulated Snowfall (mm)") +
+                  geom_point(aes(color = month)) +
+                  scale_color_manual(values = colors) +
+  facet_wrap(~month)
 
 ```
 
@@ -224,27 +536,28 @@ wc_snotel_course <- snow_course_trim %>%
   filter(station_name == "Whiskey Creek") %>% 
   rename(course_swe_mm = swe_mm) %>% 
   left_join(wc_snotel, by = "date") %>% 
-  rename(snotel_swe_mm = swe_mm)
+  rename(snotel_swe_mm = swe_mm) %>% 
+  mutate(month = month(date, label = TRUE, abbr = TRUE)) %>% 
+  drop_na()
 
-ggplot(wc_snotel_course, aes(x = course_swe_mm, y = snotel_swe_mm)) +
-  geom_point() +
-  labs(
-    title = "Whiskey Creek Snotel and Snow Course Daily SWE",
-    x = "Snow Course SWE (mm)",
-    y = "SNOTEL SWE (mm)"
-  )
+graph_correlation(wc_snotel_course, x_data = wc_snotel_course$course_swe_mm, 
+                  y_data = wc_snotel_course$snotel_swe_mm,
+                  title = "Whiskey Creek Snotel and Snow Course Daily SWE", 
+                   xlabel = "Snow Course SWE (mm)",
+                   ylabel = "SNOTEL SWE (mm)") +
+                  geom_point(aes(color = month)) +
+                  scale_x_continuous(limits = c(0,500)) +
+                  scale_y_continuous(limits = c(0,500)) +
+  scale_color_manual(values = colors)
 
-summary(lm(wc_snotel_course$snotel_swe_mm ~ wc_snotel_course$course_swe_mm)) # r2 = 0.83
-
-ggplot(wc_snotel_course, aes( x = av_depth_mm, y = snow_depth_mm)) +
-  geom_point() +
-  labs(
-    title = "Whiskey Creek Snotel and Snow Course Daily Snow Depth",
-    x = "Snow Course Snow Depth (mm)",
-    y = "SNOTEL Snow Depth (mm)"
-  )
-
-summary(lm(wc_snotel_course$snow_depth_mm ~ wc_snotel_course$av_depth_mm)) #r2 = 0.90
+graph_correlation(wc_snotel_course, x_data = wc_snotel_course$av_depth_mm, 
+                  y_data = wc_snotel_course$snow_depth_mm,
+                  title = "Whiskey Creek Snotel and Snow Course Daily Snow Depth", 
+                   xlabel = "Snow Course Snow Depth (mm)",
+                   ylabel = "SNOTEL Snow Depth (mm)") +
+  geom_point(aes(color = month)) +
+  scale_x_continuous(limits = c(0,1500))  +
+  scale_color_manual(values = colors)
 
 # Beaver Springs snotel and snow course
 bs_snotel_course <- snow_course_trim %>% 
@@ -252,29 +565,31 @@ bs_snotel_course <- snow_course_trim %>%
   rename(Date = date) %>% 
   rename(course_swe_mm = swe_mm) %>% 
   left_join(bs_snotel, by = "Date") %>% 
-  rename(snotel_swe_mm = swe_mm)
+  rename(snotel_swe_mm = swe_mm) %>% 
+  mutate(month = month(Date, label = TRUE, abbr = TRUE)) %>% 
+  filter(!is.na(month)) %>% 
+  drop_na()
 
-# sWE
-ggplot(bs_snotel_course, aes(x = course_swe_mm, y = snotel_swe_mm)) +
-  geom_point() +
-  labs(
-    title = "Beaver Spring Snotel and Snow Course Daily SWE",
-    x = "Snow Course SWE (mm)",
-    y = "SNOTEL SWE (mm)"
-  )
-
-summary(lm(bs_snotel_course$snotel_swe_mm ~ bs_snotel_course$course_swe_mm)) # r2 = 0.90
+# SWE
+graph_correlation(bs_snotel_course, x_data = bs_snotel_course$course_swe_mm, 
+                  y_data = bs_snotel_course$snotel_swe_mm,
+                  title = "Beaver Springs Snotel and Snow Course Daily SWE", 
+                   xlabel = "Snow Course SWE (mm)",
+                   ylabel = "SNOTEL SWE (mm)") +
+  geom_point(aes(color = month)) +
+  scale_y_continuous(limits = c(0,500)) +
+  scale_color_manual(values = colors)
 
 # depth
-ggplot(bs_snotel_course, aes( x = av_depth_mm, y = snow_depth_mm)) +
-  geom_point() +
-  labs(
-    title = "Beaver Spring Snotel and Snow Course Daily Snow Depth",
-    x = "Snow Course Snow Depth (mm)",
-    y = "SNOTEL Snow Depth (mm)"
-  )
+graph_correlation(bs_snotel_course, x_data = bs_snotel_course$av_depth_mm, 
+                  y_data = bs_snotel_course$snow_depth_mm,
+                  title = "Beaver Springs Snotel and Snow Course Daily Snow Depth", 
+                   xlabel = "Snow Course Snow Depth (mm)",
+                   ylabel = "SNOTEL Snow Depth (mm)") +
+  geom_point(aes(color = month)) +
+  scale_color_manual(values = colors)
 
-summary(lm(bs_snotel_course$snow_depth_mm ~ bs_snotel_course$av_depth_mm)) # 0.94
+
 ```
 
 # compare SWE SNODAS to swe snow course for whiskey creek and beaver springs
@@ -284,35 +599,38 @@ summary(lm(bs_snotel_course$snow_depth_mm ~ bs_snotel_course$av_depth_mm)) # 0.9
 wc_snodas_course <- snow_course_trim %>% 
   filter(station_name == "Whiskey Creek") %>% 
   rename(course_swe_mm = swe_mm) %>% 
-  left_join(wc_snodas, by = "date") 
+  left_join(wc_snodas, by = "date")  %>% 
+  mutate(month = month(date, label = TRUE, abbr = TRUE)) %>% 
+  drop_na()
 
-ggplot(wc_snodas_course, aes( x =  course_swe_mm, y = swe_mm)) +
-  geom_point() +
-  labs(
-    title = "Whiskey Creek SNODAS and Snow Course Daily SWE",
-    x = "Snow Course SWE (mm)",
-    y = "SNODAS SWE (mm)"
-  )
-
-summary(lm(wc_snodas_course$swe_mm ~ wc_snodas_course$course_swe_mm)) # r2 = 0.39
+graph_correlation(wc_snodas_course, x_data = wc_snodas_course$swe_mm, 
+                  y_data = wc_snodas_course$course_swe_mm,
+                  title = "Whiskey Creek SNODAS and Snow Course Daily SWE", 
+                   xlabel = "SNODAS SWE (mm)",
+                   ylabel = "Snow Course SWE (mm)") +
+  geom_point(aes(color = month)) +
+  scale_color_manual(values = colors) +
+  scale_y_continuous(limits = c(0,500))
 
 
 # Beaver Springs SNODAS and snow course
 bs_snodas_course <- snow_course_trim %>% 
   filter(station_name == "Beaver Spring") %>% 
   rename(course_swe_mm = swe_mm) %>% 
-  left_join(bs_snodas, by = "date")
+  left_join(bs_snodas, by = "date")%>% 
+  mutate(month = month(date, label = TRUE, abbr = TRUE)) %>% 
+  filter(!is.na(month)) %>% 
+  drop_na()
 
 # SWE
-ggplot(bs_snodas_course, aes(x = course_swe_mm, y = swe_mm)) +
-  geom_point() +
-  labs(
-    title = "Beaver Spring SNODAS and Snow Course Daily SWE",
-    x = "Snow Course SWE (mm)",
-    y = "SNODAS SWE (mm)"
-  )
-
-summary(lm(bs_snodas_course$swe_mm ~ bs_snodas_course$course_swe_mm)) # r2 = 0.44
+graph_correlation(bs_snodas_course, x_data = bs_snodas_course$swe_mm, 
+                  y_data = bs_snodas_course$course_swe_mm,
+                  title = "Beaver Spring SNODAS and Snow Course Daily SWE", 
+                   xlabel = "SNODAS SWE (mm)",
+                   ylabel = "Snow Course SWE (mm)") +
+  geom_point(aes(color = month)) +
+  scale_color_manual(values = colors) +
+  scale_x_continuous(limits = c(0,500))
 
 
 ```

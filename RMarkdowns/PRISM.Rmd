@@ -17,6 +17,7 @@ library(lubridate)
 library(ggplot2)
 library(tidyquant)
 library(dataRetrieval)
+library(measurements)
 ```
 
 ```{r, echo = FALSE}
@@ -91,6 +92,14 @@ winter_wet = c("Dec", "Jan", "Feb", "Mar")
 spring_dry =  c("Apr", "May", "Jun")
 summer_wet = c("Jul", "Aug", "Sep")
 
+
+# Yearly chuska total precipitation m3
+chuska_precip_wy <- chuska_precip_day %>% 
+  addWaterYear() %>% 
+  group_by(waterYear) %>% 
+  summarize(wy_precip_m3 = sum(precip_m3))
+
+
 # show how much total precipitation this area gets every month over the years
 prism_precip_months <- chuska_precip_day %>% 
   mutate(year = year(Date), month = month(Date, label=TRUE,abbr=TRUE)) %>% 
@@ -106,6 +115,7 @@ prism_precip_months <- chuska_precip_day %>%
                                  ifelse(month %in% summer_wet, "summer_wet",
                                         "fall_dry"))))
   
+
 # plot monthly total precip
 ggplot(prism_precip_months, aes(x = waterYear, y = monthly_precip_mm)) +
   geom_col() +
@@ -117,12 +127,72 @@ ggplot(prism_precip_months, aes(x = waterYear, y = monthly_precip_mm)) +
   ) +
   theme_bw()
 
+# show how much total precipitation this area gets every month over the years in m3
+prism_precip_months_m3 <- chuska_precip_day %>% 
+  mutate(year = year(Date), month = month(Date, label=TRUE,abbr=TRUE)) %>% 
+  addWaterYear() %>% 
+  group_by(waterYear, month) %>% 
+  summarize(
+    monthly_precip_m3 = sum(precip_m3)
+  ) %>% 
+  left_join(chuska_precip_wy, by = "waterYear") %>% 
+  mutate(month_wy_fract = monthly_precip_m3/wy_precip_m3)
+
+# plot monthly total precip m3
+ggplot(prism_precip_months_m3, aes(x = waterYear, y = monthly_precip_m3)) +
+  geom_col() +
+  facet_wrap(~factor(month, wy_order)) +
+  labs(
+    x = "Water Year",
+    y = "Total Precipitation (m3)",
+    title = "Chuska Total PRISM Precipitation By Month"
+  ) + 
+  scale_x_continuous(expand = c(0,0), breaks = seq(1981,2019, by = 5)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw()
+
+# plot monthly total precip m3 as a fraction of yearly total
+ggplot(prism_precip_months_m3, aes(x = waterYear, y = month_wy_fract)) +
+  geom_col() +
+  facet_wrap(~factor(month, wy_order)) +
+  labs(
+    x = "Water Year",
+    y = "Fraction",
+    title = "Chuska Monthly Fraction of Total PRISM Precipitation"
+  ) + 
+  scale_x_continuous(expand = c(0,0), breaks = seq(1981,2019, by = 5)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw()
+
+
+
+```
+
+```{r, echo = FALSE}
 # plot total precip separated by winter/summer
 prism_precip_months %>% 
   group_by(waterYear, bimodal_season) %>% 
   summarize(season_precip_mm = sum(monthly_precip_mm)) %>% 
   filter(waterYear != 2020) %>% 
 ggplot(aes(x = waterYear, y = season_precip_mm)) +
+  geom_col(aes(fill = bimodal_season)) +
+  labs(
+    x = "Year",
+    y = "Total Precipitation (mm)",
+    title = "Chuska Total PRISM Precipitation By Season",
+    fill = "Season"
+  ) +
+  scale_x_continuous(expand = c(0,0), breaks = seq(1981,2019, by = 5)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw()
+
+# plot total precip separated by winter/summer fraction
+prism_precip_months %>% 
+  group_by(waterYear, bimodal_season) %>% 
+  summarize(season_precip_mm = sum(monthly_precip_mm)) %>% 
+  filter(waterYear != 2020) %>% 
+  mutate(percent = season_precip_mm/sum(season_precip_mm)) %>% 
+ggplot(aes(x = waterYear, y = percent)) +
   geom_col(aes(fill = bimodal_season)) +
   labs(
     x = "Year",
@@ -168,8 +238,8 @@ ggplot(aes(x = waterYear, y = percent)) +
   scale_x_continuous(expand = c(0,0), breaks = seq(1981,2019, by = 5)) +
   scale_y_continuous(expand = c(0,0)) +
   theme_bw()
-
 ```
+
 
 ### Temperature
 
@@ -202,6 +272,12 @@ graph_season_trend(num_freeze, num_freeze$ndayfr, num_freeze$waterYear,
                    title = "Number of Freezing Days per Water Year", 
                    xlabel = "Water Year",
                    ylabel = "Number of Freezing Days")  
+
+graph_season_trend(num_freeze, num_freeze$ndayfr, num_freeze$waterYear, 
+                   title = "Number of Freezing Days per Water Year", 
+                   xlabel = "Water Year",
+                   ylabel = "Number of Freezing Days",
+                   graph_type = "point") 
 ```
 
 Temperature of hottest average temperature days each water year
@@ -273,7 +349,8 @@ chuska_av_winter <- chuska_tmean %>%
 graph_season_trend(chuska_av_winter, chuska_av_winter$tmean, chuska_av_winter$waterYear, 
                    title = "Average Temperature Each Winter", 
                    xlabel = "Winter Water Year",
-                   ylabel = "Temperature (°C)")  
+                   ylabel = "Temperature (°C)",
+                   graph_type = "point")  
 
 ```
 
@@ -297,10 +374,14 @@ chuska_snow <- ch_tav_precip %>%
   mutate(month = month(Date)) %>% 
   filter(precip_type != is.na(precip_type)) %>% 
   mutate(prism_snow_mm = ifelse(precip_type == "snow", precip_mm, 0)) %>% 
+  mutate(prism_snow_m3 = ifelse(precip_type == "snow", precip_m3, 0)) %>% 
   group_by(waterYear) %>% 
   mutate(prism_snow_mm_accum = cumsum(prism_snow_mm)) %>%  # accumulate prism precip
   mutate(prism_snow_mm_accum = ifelse(month(Date) %in% c(4,5,6,7,8,9,10), 0, 
-                                      prism_snow_mm_accum)) 
+                                      prism_snow_mm_accum)) %>% 
+  mutate(prism_snow_m3_accum = cumsum(prism_snow_m3)) %>%  # accumulate prism precip
+  mutate(prism_snow_m3_accum = ifelse(month(Date) %in% c(4,5,6,7,8,9,10), 0, 
+                                      prism_snow_m3_accum))
 ```
 
 Is more preciptiation falling as rain or snow in winter?
@@ -358,20 +439,14 @@ chuska_wint_precip_fract <- chuska_snow %>%
   mutate(fraction_precip = precip_mm/sum(precip_mm))
 
 
-chuska_wint_precip_fract %>% 
-  filter(precip_type == "snow") %>% 
-ggplot(aes(x = waterYear, y = fraction_precip)) +
-  geom_point() +
-  geom_line() +
-  geom_smooth(method = "lm", se = FALSE) +
-  labs(
-    x = "Water Year",
-    y = "Fraction",
-    title = "Fraction of Total Winter Precipitation Falling as Snow in the Chuskas"
-  ) +
-  scale_x_continuous(expand = c(0,0)) +
-  theme_bw()
+snow_fraction <- chuska_wint_precip_fract %>% 
+  filter(precip_type == "snow")
 
+graph_season_trend(snow_fraction, snow_fraction$fraction_precip, snow_fraction$waterYear,
+                    xlabel = "Water Year",
+                   ylabel = "Fraction",
+                   title = "Fraction of Total Winter Precipitation Falling as Snow",
+                   graph_type = "point")
 
 ```
 
@@ -431,6 +506,23 @@ graph_season_trend(ch_snow_max, (ch_snow_max$snow_mm)/1000, ch_snow_max$waterYea
                    title = "Max Accumulated Snowfall", 
                    xlabel = "Water Year",
                    ylabel = "Snow (m)") 
+
+# total amount of snow that fell on the chuskas in m3
+ch_snow_max_m3 <- chuska_snow %>% 
+  filter(waterYear > 1981) %>% 
+  summarize(snow_m3 = max(prism_snow_m3_accum, na.rm = TRUE)) 
+
+ggplot(ch_snow_max_m3, aes(x = waterYear, y = snow_m3)) +
+  geom_col() +
+  labs(
+    x = "Water Year",
+    y = bquote("Maximum Accumulated Snowfall " (m^3))
+  ) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+
+
 
 # anomaly for max accumulated snowfall PRISM
 ch_snow_max_mean_82_11 <- ch_snow_max %>% 

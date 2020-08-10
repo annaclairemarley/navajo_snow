@@ -24,23 +24,32 @@ library(naniar)
 library(ggridges)
 library(tidyverse)
 library(janitor)
+library(kableExtra)
+library(Metrics)
 ```
 
 ```{r, include = FALSE}
 # set path to source funcitons from data cleaning folder
 path_clean = "../Functions/Cleaning/"
 path_graph = "../Functions/Graphing/"
+
+mltools::rmse
 ```
 
 ```{r, echo = FALSE}
 # source functions
 source(paste0(path_clean, "to_water_week.R")) # for calculating week of water year
 source(paste0(path_graph, "graph_season_trend.R"))
+source(paste0(path_graph, "graph_correlation.R"))
 ```
 
 ```{r, echo = FALSE}
 # for organizing graphs in month order of water years
 wy_order = c("Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep")
+
+# colors for months
+colors = c('#F6BD60', '#7FB069', '#548687', "plum4", "coral2", "slategrey")
+
 ```
 
 
@@ -383,7 +392,7 @@ wc_snotel_snodas_dist %>%
 # depth distribution
 wc_snotel_snodas_dist %>% 
   filter(type == "snodas_snow_depth_mm" | type == "snotel_depth_mm") %>% 
-  ggplot(., aes(x = value_mm, y = type)) +
+  ggplot(aes(x = value_mm, y = type)) +
   geom_density_ridges(scale = 7,
                       aes(fill = type),
                       size = 0.3,
@@ -418,33 +427,41 @@ wc_snodas_snotel_wint <- wc_snodas_snotel %>%
   mutate(month_name = month(Date, label = TRUE, abbr = TRUE)) %>% 
   filter(month %in% c(11,12,1,2,3,4)) %>% 
   filter(waterYear > 2009)# 2009 not a full water year
-  
-# all correlation    
-  ggplot(wc_snodas_snotel_wint, aes(x = snotel_swe_mm, y = snodas_swe_mm)) +
-    geom_point(aes(color = waterYear)) +
-    geom_smooth(method = lm) +
-    scale_x_continuous(expand = c(0,0)) +
-    scale_y_continuous(expand = c(0,0)) +
-    labs(
-      x = "SNOTEL SWE (mm)",
-      y = "SNODAS SWE (mm)",
-      title = "SNOTEL and SNODAS Daily SWE Relationship Nov-Apr"
-    ) +
-    theme_classic()
 
-# correlations by water year
-  ggplot(wc_snodas_snotel_wint, aes(x = snotel_swe_mm, y = snodas_swe_mm)) +
-      geom_point(aes(color = month_name)) +
-      #geom_smooth(method = lm) +
-      facet_wrap(~waterYear) +
-      scale_x_continuous(expand = c(0,0)) +
-      scale_y_continuous(expand = c(0,0)) +
-      labs(
-        x = "SNOTEL SWE (mm)",
-        y = "SNODAS SWE (mm)",
-        title = "SNOTEL and SNODAS Daily SWE Relationship Nov-Apr"
-      ) +
-      theme_bw()
+# rmse and mae by month between snodas swe and snotel swe
+wc_snodas_snotel_wint_rmse_mae <- wc_snodas_snotel_wint %>% 
+  ungroup() %>% 
+  group_by(month) %>% 
+  mutate(rmse = rmse(snodas_swe_mm, snotel_swe_mm)) %>% 
+  mutate(mae = mae(snodas_swe_mm, snotel_swe_mm)) %>% 
+  select(month_name, rmse, mae) %>% 
+  slice(1)
+
+# rmse and mae by water year between snodas swe and snotel swe
+wc_snodas_snotel_wint_rmse_mae_wy <- wc_snodas_snotel_wint %>% 
+  ungroup() %>% 
+  group_by(waterYear) %>% 
+  mutate(rmse = rmse(snodas_swe_mm, snotel_swe_mm)) %>% 
+  mutate(mae = mae(snodas_swe_mm, snotel_swe_mm)) %>% 
+  select(waterYear, rmse, mae) %>% 
+  slice(1)
+  
+# all    
+all_wc_snodas <-  graph_correlation(wc_snodas_snotel_wint, x_data = wc_snodas_snotel_wint$snodas_swe_mm, 
+                        y_data = wc_snodas_snotel_wint$snotel_swe_mm,
+                        title = "Whiskey Creek SNOTEL and SNODAS Daily SWE", 
+                         xlabel = "SNODAS SWE (mm)",
+                         ylabel = "SNOTEL SWE (mm)") +
+                          geom_point(aes(color = month_name)) +
+                          scale_color_manual(values = colors)
+ 
+all_wc_snodas
+
+# by water year
+all_wc_snodas + facet_wrap(~waterYear)
+  
+# by month  
+all_wc_snodas + facet_wrap(~month_name) 
   
   # correlations for 2014 and 2018
 wc_snodas_snotel_wint %>% 
@@ -462,18 +479,6 @@ wc_snodas_snotel_wint %>%
       ) +
       theme_classic()
   
-```
-
-**stats**
-```{r}
-# correlation
-cor.test(wc_snodas_snotel_wint$snodas_swe_mm, wc_snodas_snotel_wint$snotel_swe_mm)
-
-# linear model 
-summary(lm(wc_snodas_snotel_wint$snodas_swe_mm ~ wc_snodas_snotel_wint$snotel_swe_mm))
-
-# root mean square error
-rmse(wc_snodas_snotel_wint$snodas_swe_mm, wc_snodas_snotel_wint$snotel_swe_mm, na.rm = TRUE)
 ```
 
 ```{r, echo = FALSE}
@@ -517,17 +522,7 @@ ggplot(wc_snodas_snotel_wint, aes(x = snotel_depth_mm, y = snodas_snow_depth_mm)
   
 ```
 
-**stats**
-```{r}
-# correlation
-cor.test(wc_snodas_snotel_wint$snodas_snow_depth_mm, wc_snodas_snotel_wint$snotel_depth_mm)
 
-# linear model 
-summary(lm(wc_snodas_snotel_wint$snodas_snow_depth_mm ~ wc_snodas_snotel_wint$snotel_depth_mm))
-
-# root mean square error
-rmse(wc_snodas_snotel_wint$snodas_snow_depth_mm, wc_snodas_snotel_wint$snotel_depth_mm, na.rm = TRUE)
-```
 
 ```{r, echo = FALSE}
 # Stats for snotel and snodas
@@ -539,8 +534,8 @@ snodas_snotel_stats <- wc_snodas_snotel_wint %>%
            summary(lm(snodas_snow_depth_mm ~ snotel_depth_mm))$adj.r.squared)  %>% 
   mutate(rsquare_swe = 
             summary(lm(snodas_swe_mm ~ snotel_swe_mm))$adj.r.squared) %>% 
-  mutate(rmse_depth = rmse(snodas_snow_depth_mm, snotel_depth_mm, na.rm = TRUE))  %>% 
-  mutate(rmse_swe = rmse(snodas_swe_mm, snotel_swe_mm, na.rm = TRUE)) %>% 
+  mutate(rmse_depth = mltools::rmse(snodas_snow_depth_mm, snotel_depth_mm, na.rm = TRUE))  %>% 
+  mutate(rmse_swe = mltools::rmse(snodas_swe_mm, snotel_swe_mm, na.rm = TRUE)) %>% 
   mutate(var_snotel_depth = var(snotel_depth_mm, na.rm = TRUE))  %>% 
   mutate(var_snodas_depth = var(snodas_snow_depth_mm, na.rm = TRUE))  %>% 
   mutate(var_snotel_swe = var(snotel_swe_mm, na.rm = TRUE)) %>% 
@@ -595,7 +590,7 @@ rmse_snodas_snotel_plot
 grid.arrange(rsquare_snodas_snotel_plot, rmse_snodas_snotel_plot, ncol = 1)
 ```
 
-```{r, echo = FALSe}
+```{r, echo = FALSE}
 # compartive stats for snodas vs snotel
 stats_snotel <- snodas_snotel_stats %>% 
   select(waterYear, contains("snotel")) %>% 
@@ -700,26 +695,7 @@ grid.arrange(median_depth_plot, sd_depth_plot, variance_depth_plot, ncol = 1)
 
 
 
-
-
-Stats
-
-```{r}
-# correlation
-cor.test(wc_snodas_snotel_wint$snodas_snow_depth_mm,
-         wc_snodas_snotel_wint$snotel_depth_mm)
-
-# linear model 
-summary(lm(wc_snodas_snotel_wint$snodas_snow_depth_mm ~
-             wc_snodas_snotel_wint$snotel_depth_mm))
-
-# root mean square error
-rmse(wc_snodas_snotel_wint$snodas_snow_depth_mm, 
-     wc_snodas_snotel_wint$snotel_depth_mm, na.rm = TRUE)
-```
-
 Timing of max swe
-
 
 ```{r, echo = FALSE}
 max_swe <- wc_snodas_snotel %>% 
@@ -750,7 +726,7 @@ max_swe_snotel_time <- max_swe %>%
 snotel_max_hist <- max_swe_snotel_time %>% 
   ungroup() %>% 
   mutate(month_day = paste0(month(Date), "-", day(Date))) %>% 
-  count(month_day)
+  count(month_day) %>% 
   ggplot(aes(x = month_day)) +
   geom_histogram()
 
@@ -796,20 +772,7 @@ ggplot(wc_snodas_snotel_monthly, aes(x = snodas_swe_mm, y = snotel_swe_mm)) +
 
 ```
 
-Stats
 
-```{r}
-# correlation
-cor.test(wc_snodas_snotel_monthly$snodas_swe_mm,
-         wc_snodas_snotel_monthly$snotel_swe_mm)
-
-# linear model 
-summary(lm(wc_snodas_snotel_monthly$snodas_swe_mm ~ wc_snodas_snotel_monthly$snotel_swe_mm))
-
-# root mean square error
-rmse(wc_snodas_snotel_monthly$snodas_swe_mm,
-     wc_snodas_snotel_monthly$snotel_swe_mm, na.rm = TRUE)
-```
 
 ```{r, echo = FALSE}
 # correlations
@@ -1234,10 +1197,34 @@ ggplot(wc_prism_snotel_snodas_swe_tidy, aes(x = Date, y = snow_mm)) +
   theme_classic() +
   theme(legend.position="bottom", text = element_text(size=14)) 
 
+# snotel, prism, and snodas stats
+wc_prism_snotel_snodas_stats <- wc_prism_snotel_snodas_swe_tidy %>% 
+  ungroup() %>% 
+  mutate(month = month(Date)) %>% 
+  filter(month %in% c(11,12,1,2,3,4)) %>% 
+  rename(data = measurement) %>% 
+  mutate(data = factor(data, c("SNOTEL SWE (mm)", "SNODAS SWE (mm)", 
+                               "PRISM Accumulated Snowfall (mm)"))) %>% 
+  group_by(data) %>% 
+  summarize(
+    median = round(median(snow_mm, na.rm = TRUE),2),
+    mean = round(mean(snow_mm, na.rm = TRUE),2),
+    variance = round(var(snow_mm, na.rm = TRUE),2),
+    st_dev = round(sd(snow_mm, na.rm = TRUE),2)
+  )
+
+wc_prism_snotel_snodas_table <- kable(wc_prism_snotel_snodas_stats,
+                                      col.names = c("Data", "Median", "Mean", "Variance", "SD")) %>% 
+  kable_styling(bootstrap_option = c("striped", "hover"), full_width = F)
+
+wc_prism_snotel_snodas_table
 ```
 
 
+
+
 ```{r, echo = FALSE}
+
 # maximum values for each water year 
 wc_prism_snotel_snodas_swe_max <- wc_prism_snotel_snodas_swe_tidy %>% 
   filter(waterYear != 2009) %>% 
@@ -1261,9 +1248,6 @@ ggplot(wc_prism_snotel_snodas_swe_max, aes(x = waterYear, y = snow_mm)) +
   scale_y_continuous(expand = c(0,0)) +
   theme_classic() +
   theme(legend.position="bottom", text = element_text(size=14)) 
-
-
-
 
 # Max SWE correlation graph 
 wc_prism_snotel_snodas_swe_max_cor  <- wc_prism_snotel_snodas_swe_max %>% 
@@ -1297,6 +1281,7 @@ wc_snodas_max_lm <- wc_prism_snotel_snodas_swe_max_cor %>%
 summary(lm(wc_prism_max_lm$snow_mm ~ wc_prism_max_lm$snotel_swe_mm))
 summary(lm(wc_snodas_max_lm$snow_mm ~ wc_snodas_max_lm$snotel_swe_mm))
 rmse(wc_snodas_max_lm$snow_mm, wc_snodas_max_lm$snotel_swe_mm)
+
 ```
 
 
@@ -1309,82 +1294,6 @@ ggplot(wc_prism_snotel, aes(x = snotel_av_temp, y = tmean)) +
 # correlation
 cor.test(wc_prism_snotel$snotel_av_temp, wc_prism_snotel$tmean)
 ```
-
-
-```{r, echo = FALSE}
-
-## Calibrate prism model ## 
-
-### 0 C check
-# check how snow days for prism compare to snowfall for snotel
-wc_prism_snotel_check_0 <- wc_prism_snotel %>% 
-  ungroup() %>% 
-  select(Date, snotel_swe_mm, ppt, tmean, freeze, precip_type) %>% 
-  mutate(snotel_snow = ifelse(snotel_swe_mm - lag(snotel_swe_mm) > 0, "snowfall", "none")) %>% 
-  mutate(prism_snow_check = ifelse(precip_type == "snow" & ppt > 0 & snotel_snow == "snowfall",
-                                   "TRUE", "FALSE"))
-
-# % of times that snotel records snowfall and PRISM does too
-wc_prism_snotel_record_0 <- wc_prism_snotel_check %>% 
-  filter(snotel_snow == "snowfall") %>% 
-  count(prism_snow_check) %>% 
-  mutate(percent = (n/sum(n)*100))
-
-## Broxton et al relationship between temperature and fraction of precipitation days that also had an increase in SWE, (the fraction of wet days (when precipitation >1 mm) that are associated with an increase in SWE at SNOTEL stations (> 1 mm))
-
-wc_broxton <- wc_prism_snotel %>% 
-  ungroup() %>% 
-  select(Date, snotel_swe_mm, ppt, tmean) %>% 
-  mutate(wet_day = ifelse(ppt > 1, "wet", "dry")) %>% 
-  mutate(broxton_thresh = ifelse(wet_day == "wet" & snotel_swe_mm - lag(snotel_swe_mm) > 1, 
-                                 1, 0)) %>% 
-  filter(wet_day == "wet") %>% 
-  mutate(degree_tmean = as.integer(tmean)) %>% 
-  group_by(degree_tmean) %>% 
-  count(broxton_thresh) %>% 
-  mutate(fraction_brox = n/sum(n)) %>% 
-  filter(broxton_thresh == 1)
- 
-# plot it 
-ggplot(wc_broxton, aes(x = degree_tmean, y = fraction_brox)) +
-  geom_point() +
-  geom_smooth(se = FALSE ) +
-  labs(
-    x = "Daily Tempearture (°C)",
-    y = "Fraction PRISM ppt > 1 mm & SNOTEL ΔSWE > 1 mm"
-  ) +
-  theme_classic()
-
-### function check
-
-# check to see how well different prism thresholds match with additional SWE
-
-cal_prism_snotel = function(df, temp_thresh) {
-  # check how snow days for prism compare to snowfall for snotel
-  temp <- df %>% 
-    ungroup() %>% 
-    select(Date, snotel_swe_mm, ppt, tmean) %>% 
-    mutate(freeze = ifelse(tmean <= temp_thresh, 1, 0)) %>% 
-    mutate(precip_type = ifelse(freeze == 1, "snow", "rain")) %>% 
-    mutate(snotel_snow = ifelse(snotel_swe_mm - lag(snotel_swe_mm) > 0, "snowfall", "none")) %>% 
-    mutate(prism_snow_check = ifelse(precip_type == "snow" & ppt > 0 & snotel_snow == "snowfall",
-                                   "TRUE", "FALSE"))
-
-  # % of times that snotel records snowfall and PRISM does too
-  percent_match <- temp %>% 
-    filter(snotel_snow == "snowfall") %>% 
-    count(prism_snow_check) %>% 
-    mutate(percent = (n/sum(n)*100))
-  
-  return(percent_match)
-}
-
-
-cal_prism_snotel(wc_prism_snotel, temp_thresh = 0)
-
-
-```
-
 
 ```{r, echo = FALSE}
 # look at correlations for winter months
@@ -1435,64 +1344,48 @@ wc_rmse_month <- wc_rmse_clean %>%
 
 ```{r, echo = FALSE}
 # plot it
-wc_prism_snotel_wint_plot <- wc_prism_snotel_wint %>% 
-  mutate(month_name = month(Date, label = TRUE, abbr=TRUE)) %>% 
-  ggplot(aes(x = snotel_swe_mm, y = prism_snow_mm_accum)) +
-  geom_point(aes(color = month_name)) +
- # geom_smooth(method = "lm") +
-  labs(
-    x = "SNOTEL SWE (mm)",
-    y = "PRISM Estimated Snow Accumulation (mm)",
-    title = "Whiskey Creek Station"
-  ) +
-  scale_y_continuous(limits = c(0,500)) +
-  theme_bw()
+wc_prism_snotel_wint <- wc_prism_snotel_wint %>% 
+  mutate(month_name = month(Date, label = TRUE, abbr=TRUE))
+
+wc_prism_snotel_wint_plot <- graph_correlation(wc_prism_snotel_wint, x_data = 
+                                                 wc_prism_snotel_wint$prism_snow_mm_accum, 
+                        y_data = wc_prism_snotel_wint$snotel_swe_mm,
+                        title = "Whiskey Creek SNOTEL and PRISM", 
+                         xlabel = "PRISM Estimated Snow Accumulation (mm)",
+                         ylabel = "SNOTEL SWE (mm)") +
+                          geom_point(aes(color = month_name)) +
+                          scale_color_manual(values = colors)
 wc_prism_snotel_wint_plot
 
-# r squared
-print("Adjusted R2 value is")
-summary(lm(wc_prism_snotel_wint$prism_snow_mm_accum ~ wc_prism_snotel_wint$snotel_swe_mm))$adj.r.squared
+# by each month
+wc_prism_snotel_wint_plot + 
+  facet_wrap(~factor(month_name, level = c("Nov", "Dec", "Jan", "Feb", "Mar"))) +
+  labs(color = "month")
+  
+# by water year
+wc_prism_snotel_wint_plot + facet_wrap(~waterYear) +
+  labs(color = "month")
 
-# correlations by each month
-wc_prism_snotel_wint_plot + facet_wrap(~factor(month_name,
-                                               level = c("Nov", "Dec", "Jan", "Feb", "Mar")))
-
-wc_prism_snotel_wint_plot + facet_wrap(~waterYear)
-
-# rsquared for each year
-wc_prism_snotel_wint_r2 <-  wc_prism_snotel_wint %>% 
-  ungroup() %>% 
+# rmse and mae per water year
+wc_prism_snotel_wint_rmse_mae <- wc_prism_snotel_wint %>% 
+  select(waterYear, snotel_swe_mm, prism_snow_mm_accum) %>% 
   group_by(waterYear) %>% 
-  mutate(prism_snow_snotel_swe_r2 = summary(lm(prism_snow_mm_accum ~
-                                                 snotel_swe_mm))$adj.r.squared) %>% 
-  mutate(prism_snow_snotel_swe_p = summary(lm(prism_snow_mm_accum ~
-                                                 snotel_swe_mm))$coefficients[2,4]) %>% 
-  slice(1) %>% 
-  mutate(month_name = month(Date, label = TRUE, abbr=TRUE)) %>% 
-  select(month_name, prism_snow_snotel_swe_r2, prism_snow_snotel_swe_p)
+  mutate(rmse = rmse(snotel_swe_mm, prism_snow_mm_accum)) %>% 
+  mutate(mae = mae(snotel_swe_mm, prism_snow_mm_accum)) %>% 
+  slice(1)
 
-# rsquared for each month
-wc_prism_snotel_wint_r2 <-  wc_prism_snotel_wint %>% 
+# rmse and mae per month
+wc_prism_snotel_wint_rmse_mae_mnth <- wc_prism_snotel_wint %>% 
   ungroup() %>% 
+  select(Date, snotel_swe_mm, prism_snow_mm_accum) %>% 
+  mutate(month = month(Date)) %>% 
   group_by(month) %>% 
-  mutate(prism_snow_snotel_swe_r2 = summary(lm(prism_snow_mm_accum ~
-                                                 snotel_swe_mm))$adj.r.squared) %>% 
-  slice(1) %>% 
-  mutate(month_name = month(Date, label = TRUE, abbr=TRUE)) %>% 
-  select(month_name, prism_snow_snotel_swe_r2)
+  mutate(rmse = rmse(snotel_swe_mm, prism_snow_mm_accum)) %>% 
+  mutate(mae = mae(snotel_swe_mm, prism_snow_mm_accum)) %>% 
+  slice(1)
+  
 
-# plot r squared values by month
-ggplot(wc_prism_snotel_wint_r2, 
-       aes(x = factor(month_name, level = c("Nov", "Dec", "Jan", "Feb", "Mar")), 
-           y = prism_snow_snotel_swe_r2)) +
-  geom_col() +
-  labs(
-    x = "Month",
-    y = "Adjusted R2 Value",
-    title = "R2 values for PRISM Estimated Snowfall and SNOTEL SWE by month"
-  ) + 
-  scale_y_continuous(expand = c(0,0)) +
-  theme_classic()
+
 ```
 
 
@@ -1565,7 +1458,7 @@ ggplot(wc_prism_snotel, aes(x = snotel_ppt_mm, y = prism_ppt_mm)) +
 beaver_spring_snotel <- grabNRCS.data(network = "SNTL",
                                       site_id = 1143,
                                       timescale = "daily",
-                                      DayBgn = "2009-10-01",
+                                      DayBgn = "2009-01-01",
                                       DayEnd = "2020-06-01")
 
 # clean dataset
@@ -1908,11 +1801,10 @@ bs_das_tel_swe <- bs_tidy_snodas_snotel %>%
   labs(
     y = "SWE (mm)",
     type = "Data Source",
-    title = "SNODAS and SNOTEL SWE Beaver Springs Station"
+    title = "SNODAS and SNOTEL SWE Beaver Springs"
   ) +
-  scale_x_date(expand = c(0,0)) +
   theme_classic()
-bs_das_tel_swe
+wc_das_tel_swe
 
 # clean the data for graphing
 bs_snodas_snotel_wint <- bs_snodas_snotel %>% 
@@ -1920,33 +1812,42 @@ bs_snodas_snotel_wint <- bs_snodas_snotel %>%
   mutate(month_name = month(Date, label = TRUE, abbr = TRUE)) %>% 
   filter(month %in% c(11,12,1,2,3,4)) %>% 
   filter(waterYear > 2009)# 2009 not a full water year
-  
-# all correlation    
-  ggplot(bs_snodas_snotel_wint, aes(x = snotel_swe_mm, y = snodas_swe_mm)) +
-    geom_point(aes(color = waterYear)) +
-    geom_smooth(method = lm) +
-    scale_x_continuous(expand = c(0,0)) +
-    scale_y_continuous(expand = c(0,0)) +
-    labs(
-      x = "SNOTEL SWE (mm)",
-      y = "SNODAS SWE (mm)",
-      title = "SNOTEL and SNODAS Daily SWE Relationship Nov-Apr"
-    ) +
-    theme_classic()
 
-# correlations by water year
-  ggplot(bs_snodas_snotel_wint, aes(x = snotel_swe_mm, y = snodas_swe_mm)) +
-      geom_point(aes(color = month_name)) +
-     # geom_smooth(method = lm, se = FALSE) +
-      facet_wrap(~waterYear) +
-      scale_x_continuous(expand = c(0,0)) +
-      scale_y_continuous(expand = c(0,0)) +
-      labs(
-        x = "SNOTEL SWE (mm)",
-        y = "SNODAS SWE (mm)",
-        title = "SNOTEL and SNODAS Daily SWE Relationship Nov-Apr"
-      ) +
-      theme_bw()
+# rmse and mae by month between snodas swe and snotel swe
+bs_snodas_snotel_wint_rmse_mae <- bs_snodas_snotel_wint %>% 
+  ungroup() %>% 
+  group_by(month) %>% 
+  mutate(rmse = rmse(snodas_swe_mm, snotel_swe_mm)) %>% 
+  mutate(mae = mae(snodas_swe_mm, snotel_swe_mm)) %>% 
+  select(month_name, rmse, mae) %>% 
+  slice(1)
+
+# rmse and mae by water year between snodas swe and snotel swe
+bs_snodas_snotel_wint_rmse_mae_wy <- bs_snodas_snotel_wint %>% 
+  ungroup() %>% 
+  group_by(waterYear) %>% 
+  mutate(rmse = rmse(snodas_swe_mm, snotel_swe_mm)) %>% 
+  mutate(mae = mae(snodas_swe_mm, snotel_swe_mm)) %>% 
+  select(waterYear, rmse, mae) %>% 
+  slice(1)
+  
+# all    
+all_bs_snodas <-  graph_correlation(bs_snodas_snotel_wint, x_data = bs_snodas_snotel_wint$snodas_swe_mm, 
+                        y_data = bs_snodas_snotel_wint$snotel_swe_mm,
+                        title = "Beaver Spring SNOTEL and SNODAS Daily SWE", 
+                         xlabel = "SNODAS SWE (mm)",
+                         ylabel = "SNOTEL SWE (mm)") +
+                          geom_point(aes(color = month_name)) +
+                          scale_color_manual(values = colors)
+ 
+all_bs_snodas
+
+# by water year
+all_bs_snodas + facet_wrap(~waterYear) +
+  labs(color = "month")
+  
+# by month  
+all_bs_snodas + facet_wrap(~month_name) 
 ```
 
 ```{r, echo = FALSE}
@@ -2038,8 +1939,8 @@ snodas_snotel_stats <- bs_snodas_snotel_wint %>%
            summary(lm(snodas_snow_depth_mm ~ snotel_depth_mm))$adj.r.squared)  %>% 
   mutate(rsquare_swe = 
             summary(lm(snodas_swe_mm ~ snotel_swe_mm))$adj.r.squared) %>% 
-  mutate(rmse_depth = rmse(snodas_snow_depth_mm, snotel_depth_mm, na.rm = TRUE))  %>% 
-  mutate(rmse_swe = rmse(snodas_swe_mm, snotel_swe_mm, na.rm = TRUE)) %>% 
+  mutate(rmse_depth = mltools::rmse(snodas_snow_depth_mm, snotel_depth_mm, na.rm = TRUE))  %>% 
+  mutate(rmse_swe = mltools::rmse(snodas_swe_mm, snotel_swe_mm, na.rm = TRUE)) %>% 
   mutate(var_snotel_depth = var(snotel_depth_mm, na.rm = TRUE))  %>% 
   mutate(var_snodas_depth = var(snodas_snow_depth_mm, na.rm = TRUE))  %>% 
   mutate(var_snotel_swe = var(snotel_swe_mm, na.rm = TRUE)) %>% 
@@ -2096,7 +1997,7 @@ rmse_snodas_snotel_plot
 grid.arrange(rsquare_snodas_snotel_plot, rmse_snodas_snotel_plot, ncol = 1)
 ```
 
-```{r, echo = FALSe}
+```{r, echo = FALSE}
 # compartive stats for snodas vs snotel
 stats_snotel <- snodas_snotel_stats %>% 
   select(waterYear, contains("snotel")) %>% 
@@ -2370,6 +2271,19 @@ graph_season_trend(num_freeze, num_freeze$ndayfr, num_freeze$waterYear,
                    ylabel = "Number of Freezing Days")  
 ```
 
+```{r, ehco = FALSE}
+# raw prism snowfall
+bs_prism_snow <- bs_prism_freeze %>% 
+  select(-waterYear) %>% 
+  addWaterYear() %>% 
+  mutate(month = month(Date)) %>% 
+  drop_na(ppt) %>% 
+  group_by(waterYear) %>% 
+  mutate(prism_snow_mm_accum = cumsum(prism_snow_mm)) %>%  # accumulate prism precip
+  mutate(prism_snow_mm_accum = ifelse(month(Date) %in% c(4,5,6,7,8,9,10), 0, 
+                                      prism_snow_mm_accum))
+```
+
 
 freezing days correlation to SNOTEL swe max
 ```{r, echo = FALSE}
@@ -2449,9 +2363,27 @@ bs_prism_snotel_snodas_swe_tidy <- bs_prism_snotel_snodas %>%
                names_to = "measurement") %>% 
   filter(Date > "2009-09-01")
   
+# snotel, prism, and snodas stats
+bs_prism_snotel_snodas_stats <- bs_prism_snotel_snodas_swe_tidy %>% 
+  ungroup() %>% 
+  mutate(month = month(Date)) %>% 
+  filter(month %in% c(11,12,1,2,3,4)) %>% 
+  rename(data = measurement) %>% 
+  mutate(data = factor(data, c("SNOTEL SWE (mm)", "SNODAS SWE (mm)", 
+                               "PRISM Accumulated Snowfall (mm)"))) %>% 
+  group_by(data) %>% 
+  summarize(
+    median = round(median(snow_mm, na.rm = TRUE),2),
+    mean = round(mean(snow_mm, na.rm = TRUE),2),
+    variance = round(var(snow_mm, na.rm = TRUE),2),
+    st_dev = round(sd(snow_mm, na.rm = TRUE),2)
+  )
 
+bs_prism_snotel_snodas_table <- kable(bs_prism_snotel_snodas_stats,
+                                      col.names = c("Data", "Median", "Mean", "Variance", "SD")) %>% 
+  kable_styling(bootstrap_option = c("striped", "hover"), full_width = F)
 
-
+bs_prism_snotel_snodas_table
 ```
 
 
@@ -2537,62 +2469,49 @@ summary(lm(bs_snodas_max_lm$snow_mm ~ bs_snodas_max_lm$snotel_swe_mm))
 
 ```{r, echo = FALSE}
 
-
 # plot it
-bs_prism_snotel_wint_plot <- bs_prism_snotel_wint %>% 
-  mutate(month_name = month(Date, label = TRUE, abbr=TRUE)) %>% 
-  ggplot(aes(x = snotel_swe_mm, y = prism_snow_mm_accum)) +
-  geom_point(aes(color = month_name)) +
- # geom_smooth(method = "lm") +
-  labs(
-    x = "SNOTEL SWE (mm)",
-    y = "PRISM Estimated Snow Accumulation (mm)",
-    title = "Beaver Springs Station"
-  ) +
-  theme_bw()
+bs_prism_snotel_wint <- bs_prism_snotel_wint %>% 
+  mutate(month_name = month(Date, label = TRUE, abbr=TRUE))
+
+bs_prism_snotel_wint_plot <- graph_correlation(bs_prism_snotel_wint, x_data = 
+                                                 bs_prism_snotel_wint$prism_snow_mm_accum, 
+                        y_data = bs_prism_snotel_wint$snotel_swe_mm,
+                        title = "Beaver Spring SNOTEL and PRISM", 
+                         xlabel = "PRISM Estimated Snow Accumulation (mm)",
+                         ylabel = "SNOTEL SWE (mm)") +
+                          geom_point(aes(color = month_name)) +
+                          scale_color_manual(values = colors)
 bs_prism_snotel_wint_plot
 
-# r squared
-print("Adjusted R2 value is")
-summary(lm(bs_prism_snotel_wint$prism_snow_mm_accum ~ bs_prism_snotel_wint$snotel_swe_mm))$adj.r.squared
+# by each month
+bs_prism_snotel_wint_plot + 
+  facet_wrap(~factor(month_name, level = c("Nov", "Dec", "Jan", "Feb", "Mar"))) +
+  labs(color = "month")
+  
+# by water year
+bs_prism_snotel_wint_plot + facet_wrap(~waterYear) +
+  labs(color = "month")
 
-# correlations by each month
-bs_prism_snotel_wint_plot + facet_wrap(~month) 
-
-# corretions each water year
-bs_prism_snotel_wint_plot + facet_wrap(~waterYear) 
-
-
-# rsquared for each WY
-bs_prism_snotel_wint_r2_wy <-  bs_prism_snotel_wint %>% 
-  ungroup() %>% 
+# rmse and mae per water year
+bs_prism_snotel_wint_rmse_mae <- bs_prism_snotel_wint %>% 
+  select(waterYear, snotel_swe_mm, prism_snow_mm_accum) %>% 
   group_by(waterYear) %>% 
-  mutate(prism_snow_snotel_swe_r2 = summary(lm(prism_snow_mm_accum ~
-                                                 snotel_swe_mm))$adj.r.squared) %>% 
+  mutate(rmse = rmse(snotel_swe_mm, prism_snow_mm_accum)) %>% 
+  mutate(mae = mae(snotel_swe_mm, prism_snow_mm_accum)) %>% 
   slice(1)
 
-# rsquared for each month
-bs_prism_snotel_wint_r2 <-  bs_prism_snotel_wint %>% 
+# rmse and mae per month
+bs_prism_snotel_wint_rmse_mae_mnth <- bs_prism_snotel_wint %>% 
   ungroup() %>% 
+  select(Date, snotel_swe_mm, prism_snow_mm_accum) %>% 
+  mutate(month = month(Date)) %>% 
   group_by(month) %>% 
-  mutate(prism_snow_snotel_swe_r2 = summary(lm(prism_snow_mm_accum ~
-                                                 snotel_swe_mm))$adj.r.squared) %>% 
-  slice(1) %>% 
-  mutate(month_name = month(Date, label = TRUE, abbr=TRUE)) %>% 
-  select(month_name, prism_snow_snotel_swe_r2)
+  mutate(rmse = rmse(snotel_swe_mm, prism_snow_mm_accum)) %>% 
+  mutate(mae = mae(snotel_swe_mm, prism_snow_mm_accum)) %>% 
+  slice(1)
+  
 
-# plot r squared values by month
-ggplot(bs_prism_snotel_wint_r2, 
-       aes(x = factor(month_name, level = c("Nov", "Dec", "Jan", "Feb", "Mar","Apr")), 
-           y = prism_snow_snotel_swe_r2)) +
-  geom_col() +
-  labs(
-    x = "Month",
-    y = "Adjusted R2 Value",
-    title = "R2 values for PRISM Estimated Snowfall and SNOTEL SWE by month"
-  ) + 
-  scale_y_continuous(expand = c(0,0)) +
-  theme_classic()
+
 ```
 
 ```{r, echo = FALSE}
@@ -2651,7 +2570,7 @@ summary(lm(bs_prism_snotel_max$prism_snow_mm_accum ~ bs_prism_snotel_max$snotel_
 ```{r, echo = FALSE}
 
 bs_prism_snotel_temp <- bs_prism_snotel %>% 
-  mutate(precip_type_snotel_tmean = ifelse(snotel_tmean <= 0, "snow", "rain")) %>% 
+  mutate(precip_type_snotel_tmean = ifelse(snotel_av_temp <= 0, "snow", "rain")) %>% 
   filter(precip_type_snotel_tmean != is.na(precip_type_snotel_tmean)) %>%
   mutate(prism_snow_mm_snotel = ifelse(precip_type_snotel_tmean == "snow", ppt, 0)) %>% 
   mutate(prism_snow_mm_accum_snotel = cumsum(prism_snow_mm_snotel)) %>%  # accumulate prism precip
