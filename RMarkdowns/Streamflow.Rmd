@@ -23,6 +23,7 @@ library(naniar)
 library(gridExtra)
 library(corrplot)
 library(janitor)
+library(kableExtra)
 ```
 
 ```{r, include = FALSE, message = FALSE}
@@ -79,6 +80,9 @@ wc_snotel <- read_csv("../Data/wc_snotel.csv") %>%
 bs_snotel <- read_csv("../Data/bs_snotel.csv") %>% 
   clean_names() %>% 
   mutate(swe_m = conv_unit(swe_mm, "mm", "m"))
+
+snow_course_raw <- read_csv("../Data/nn_snow_course.csv") %>% 
+  clean_names()
 
 # order of months
 wy_order <- c("OCT", "NOV", "DEC", "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP")
@@ -424,6 +428,13 @@ ggplot(bs_snotel_rank, aes( x = as.character(waterYear), y = max_swe_m)) +
     y = "Max SWE (m)",
     title = "Beaver Springs Max SWE each Water Year"
   )
+
+# SNOTEL ranks water years
+snotel_rank <- wc_snotel_rank %>% 
+  select(waterYear, "whiskey_creek_rank" = rank_swe) %>% 
+  left_join(bs_snotel_rank, by = "waterYear") %>% 
+  select(waterYear, whiskey_creek_rank, "beaver_spring_rank" = rank_swe)
+
 ```
 
 ```{r, echo = FALSE}
@@ -448,18 +459,39 @@ ggplot(peak_discharge_wy, aes(x = WY, y = discharge_cmps)) +
 ### Compare peak discharge rank to snotel peak swe rank
 
 ```{r, include = FALSE}
+
+# SNOTEL ranks water years streamflow available (2010-2018)
+snotel_rank <- wc_snotel_rank %>% 
+  filter(waterYear <= 2018) %>% 
+  arrange(max_swe_m) %>% 
+  mutate(whiskey_creek_snotel = 1:n()) %>% 
+  select(-rank_swe, -max_swe_m) %>% 
+  left_join(bs_snotel_rank, by = "waterYear") %>% 
+  arrange(max_swe_m) %>% 
+  mutate(beaver_spring_snotel = 1:n()) %>% 
+  select(-rank_swe, -max_swe_m)
+
 # peak discharge ranking from WY 2010 for comparison to SNOTEL
 peak_discharge_wy_10 <- peak_discharge_wy %>% 
   filter(WY > 2009) %>% 
-  mutate(rank_stream = 1:n()) %>% 
-  ungroup()
+  arrange(station, discharge_cmps) %>% 
+  mutate(rank_stream = 1:n())
+  
+peak_disharge_stream_snotel <- peak_discharge_wy_10 %>% 
+  select(station, WY, rank_stream) %>% 
+  pivot_wider(c(WY, station, rank_stream), 
+              values_from = "rank_stream", names_from = "station") %>% 
+  rename(waterYear = WY) %>% 
+  left_join(snotel_rank, by = "waterYear") %>% 
+  arrange(waterYear) %>% 
+  clean_names() %>% 
+  select(water_year, whiskey_creek_snotel, beaver_spring_snotel, whiskey_creek,
+         wheatfields, captain_tom_wash,  asaayi, tsaile_creek)
 
-peak_discharge_wy_10_kt <- peak_discharge_wy_10 %>% 
-  select(rank_stream, station) %>% 
-  mutate(station = as.factor(station))
-
-kruskal.test(rank_stream ~ station, data = peak_discharge_wy_10_kt)
-# ranks are equal between each other
+peak_disharge_stream_snotel_table <- kable(peak_disharge_stream_snotel,
+                                           col.names = c("Water Year", "Whiskey Creek SNOTEL",
+                                                         "Beaver Spring SNOTEL", "Whiskey Creek", "Wheatfield Creeks", "Captain Tom Wash", "Asaayi Creek", "Tsaile Creek")) %>% 
+  kable_styling(bootstrap_option = c("striped", "hover"), full_width = F)
 
 ```
 

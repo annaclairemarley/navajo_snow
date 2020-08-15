@@ -119,7 +119,7 @@ ggplot() +
 
 ```{r, echo = FALSE}
 # download DEM
-dem.raster <- getData("SRTM", lat = 36, lon = -109 , download = TRUE)
+dem.raster <- getData("SRTM", lat = 36, lon = -109)
 
 # crop to extent we want to look at
 extent_ch <- extent(c(-109.5, -108.4, 35.7, 36.65))
@@ -174,8 +174,11 @@ ggplot() +
   geom_sf(data = stream_point, size = 2) +
   geom_sf(data = huc_8_watersheds, fill = NA, color = "grey64") +
   geom_sf(data = snow_stations %>% filter(Network == "SNOTEL"), color = "steelblue4", size = 2) +
-  geom_text_repel(data = stream_point, 
-                  aes(x = longitude, y = latitude, label = stations)) +
+  labs(
+    fill = "Elevation"
+  ) +
+#  geom_text_repel(data = stream_point, 
+ #                 aes(x = longitude, y = latitude, label = stations)) +
   coord_sf(xlim = c(-109.5, -108.4), ylim = c(35.7, 36.65), expand = FALSE) +
   theme_classic()
 ```
