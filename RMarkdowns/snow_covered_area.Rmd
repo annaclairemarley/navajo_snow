@@ -15,6 +15,7 @@ Snow covered ARea (km^2)
 # load packages 
 library(tidyverse)
 library(janitor)
+library(ggplot2)
 ```
 
 ```{r, include = FALSE}
@@ -29,9 +30,20 @@ source(paste0(path_clean, "to_water_week.R")) # for calculating week of water ye
 source(paste0(path_graph, "graph_season_trend.R"))
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, message = FALSE}
 # prism snow
 chuska_prism_snow <- read_csv("../Data/chuska_prism_snow.csv")
+
+# snowcourse
+snow_course <- read_csv("../Data/nn_snow_course.csv") %>% 
+  clean_names() %>% 
+  mutate(Date = dmy(date_collected)) %>% 
+  mutate(total_depth_mm = conv_unit(total_snow_depth_in, "inch", "mm")) %>% 
+  mutate(av_depth_mm = conv_unit(ave_snow_depth_in, "inch", "mm")) %>% 
+  mutate(swe_mm = conv_unit(ave_water_content_in, "inch", "mm")) %>% 
+  dplyr::select(Date, station_name, swe_mm, av_depth_mm, total_depth_mm) %>% 
+  addWaterYear() %>% 
+  rename(date = Date)
 ```
 
 ```{r, echo = FALSE}
@@ -315,7 +327,8 @@ bs_snotel <- read_csv("../Data/bs_snotel.csv") %>%
   clean_names() %>% 
   mutate(swe_m = conv_unit(swe_mm, "mm", "m"))%>% 
   mutate(Date = date) %>% 
-  addWaterYear()
+  addWaterYear() %>% 
+  left_join()
 
 
 
@@ -323,16 +336,17 @@ bs_snotel <- read_csv("../Data/bs_snotel.csv") %>%
 ```{r, echo = FALSE}
 
 # whiskey creek
-ch_max_snotel_sca <- wc_snotel %>% 
+ch_max_wc_snotel_sca <- wc_snotel %>% 
   group_by(waterYear) %>% 
   top_n(1, swe_m) %>% 
   top_n(1, Date) %>% 
   filter(waterYear > 2009) %>% 
   ungroup() %>% 
   select(waterYear, swe_m) %>% 
-  left_join(chuska_max_week_sca, by = "waterYear") 
+  left_join(chuska_max_week_sca, by = "waterYear")  %>% 
+  mutate(snotel_station = "Whiskey Creek")
 
-ch_max_snotel_sca %>% 
+ch_max_wc_snotel_sca %>% 
   mutate(waterYear = as.integer(waterYear)) %>% 
 ggplot( aes(x = swe_m, y = sca_km_2)) +
   geom_point(aes(color = waterYear)) +
@@ -346,19 +360,18 @@ ggplot( aes(x = swe_m, y = sca_km_2)) +
   ) +
   theme_bw()
 
-summary(lm(ch_max_snotel_sca$sca_km_2 ~ ch_max_snotel_sca$swe_m))
-
 # beaver spring
-ch_max_snotel_sca <- bs_snotel %>% 
+ch_max_bs_snotel_sca <- bs_snotel %>% 
   group_by(waterYear) %>% 
   top_n(1, swe_m) %>% 
   top_n(1, Date) %>% 
   filter(waterYear > 2009) %>% 
   ungroup() %>% 
   select(waterYear, swe_m) %>% 
-  left_join(chuska_max_week_sca, by = "waterYear") 
+  left_join(chuska_max_week_sca, by = "waterYear") %>% 
+  mutate(snotel_station = "Beaver Spring")
 
-ch_max_snotel_sca %>% 
+ch_max_bs_snotel_sca %>% 
   mutate(waterYear = as.integer(waterYear)) %>% 
 ggplot( aes(x = swe_m, y = sca_km_2)) +
   geom_point(aes(color = waterYear)) +
@@ -372,8 +385,84 @@ ggplot( aes(x = swe_m, y = sca_km_2)) +
   ) +
   theme_bw()
 
-summary(lm(ch_max_snotel_sca$sca_km_2 ~ ch_max_snotel_sca$swe_m))
+plot(lm(ch_max_snotel_sca$sca_km_2 ~ ch_max_snotel_sca$swe_m))
+cor.test(ch_max_snotel_sca$sca_km_2, ch_max_snotel_sca$swe_m, method = "spearman")
 
+# whiskey creek and beaver springs max swe and SCA
+ch_max_sca_wc_bs_snotel <- rbind(ch_max_wc_snotel_sca, ch_max_bs_snotel_sca) %>% 
+  mutate(waterYear = as.integer(waterYear))
+
+ggplot(ch_max_sca_wc_bs_snotel, aes(x = swe_m*1000, y = sca_km_2)) +
+  geom_point(aes(color = snotel_station)) +
+  geom_abline(intercept = 550, slope = 1545.4545, linetype = "dashed") +
+  labs(
+    x = "SNOTEL SWE (mm)",
+    y = bquote("Snow Covered Area " (km^2)),
+    title = "Beaver Spring Max SNOTEL SWE and Chuska SCA",
+    color = "SNOTEL Station"
+  ) +
+  scale_x_continuous(expand = c(0,0), limits = c(0, 0.55)) +
+  scale_y_continuous(expand = c(0,0), limits = c(550,1400)) +
+  coord_cartesian(clip = 'off') +
+  theme_classic() +
+  theme(text = element_text(size=14),
+        axis.line.y.right = element_line(color = "black"),
+        axis.line.x.top = element_line(color = "black"),
+        panel.border = element_rect(colour = "black", fill=NA))  
+
+ggplot(ch_max_sca_wc_bs_snotel, aes(x = swe_m*1000, y = sca_km_2)) +
+  geom_point(aes(color = snotel_station), size = 2) +
+  labs(
+    x = "SNOTEL SWE (mm)",
+    y = bquote("Snow Covered Area " (km^2)),
+    title = "Beaver Spring Max SNOTEL SWE and Chuska SCA",
+    color = "SNOTEL Station"
+  ) +
+  scale_x_continuous(expand = c(0,0), limits = c(0, 450)) +
+  scale_y_continuous(expand = c(0,0), limits = c(550,1400)) +
+  coord_cartesian(clip = 'off') +
+  theme_classic() +
+  theme(text = element_text(size=14),
+        axis.line.y.right = element_line(color = "black"),
+        axis.line.x.top = element_line(color = "black"),
+        panel.border = element_rect(colour = "black", fill=NA),
+        legend.position = "bottom")  
+
+
+```
+
+MAX snow course SWE and max sca Chuska
+
+```{r,echo = FALSE}
+
+bs_wc_snowcourse <- snow_course %>% 
+  filter(station_name %in% c("Beaver Spring", "Whiskey Creek")) %>% 
+  drop_na() %>% 
+  group_by(waterYear, station_name) %>% 
+  top_n(1, swe_mm) %>% 
+  slice(1)
+
+ch_sca_snowcourse <- bs_wc_snowcourse %>% 
+  left_join(chuska_max_week_sca, by = "waterYear")
+
+ggplot(ch_sca_snowcourse, aes(x = swe_mm, y = sca_km_2)) +
+  geom_point(aes(color = station_name), size =2) +
+  labs(
+    x = "Snowcourse SWE (mm)",
+   y = bquote("Chuska Snow Covered Area " (km^2)),
+   color = "Snowcourse Station",
+   title = "Chuska Max SCA and Snowcourse Max SWE"
+  ) +
+  theme_classic() +
+  theme(text = element_text(size=14),
+        axis.line.y.right = element_line(color = "black"),
+        axis.line.x.top = element_line(color = "black"),
+        panel.border = element_rect(colour = "black", fill=NA),
+        legend.position = "bottom")  
+
+plot(lm(ch_sca_snowcourse$sca_km_2 ~ ch_sca_snowcourse$swe_mm))
+cor.test(ch_sca_snowcourse$sca_km_2, ch_sca_snowcourse$swe_mm, method = "spearman")
+  
 
 ```
 

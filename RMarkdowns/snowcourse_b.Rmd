@@ -26,12 +26,14 @@ library(gridExtra)
 ```{r, echo = FALSE}
 # path to source graphing functions
 path_graph <- "../Functions/Graphing/"
+path_clean <- "../Functions/Cleaning/"
 ```
 
 ```{r, echo = FALSE}
 # source functions
 source(paste0(path_graph, "graph_season_trend.R"))
 source(paste0(path_graph, "graph_correlation.R"))
+source(paste0(path_clean, "calculate_prism_snowfall.R"))
 
 ```
 
@@ -57,10 +59,30 @@ bs_snotel <- read_csv("../Data/bs_snotel.csv")
 # read in snodas data
 wc_snodas <- read_csv("../Data/whiskey_creek_snodas_swe.csv", col_names = c("date", "swe_mm"), skip = 1)
 bs_snodas <- read_csv("../Data/beaver_springs_snodas_swe.csv", col_names = c("date", "swe_mm"), skip = 1)
+fr_snodas <- read_csv("../Data/fr_snodas.csv", col_names = c("date", "swe_mm"), skip = 1)
+bc_snodas <-read_csv("../Data/bowl_canyon_snodas.csv", col_names = c("date", "swe_mm"), skip = 1) # bowl canyon
 
 # read in prism data
 wc_prism <- read_csv("../Data/wc_prism_snow_accum.csv")
 bs_prism <- read_csv("../Data/bs_prism_snow.csv")
+fr_prism <- read_csv("../Data/fr_prism.csv") %>%  # fluted rock 
+  mutate(date = mdy(date))
+
+
+# for combining files
+folder <- "/Users/annaclairemarley/Documents/CAARE_2020/Extra_Data/"
+fill_pattern <- "fr_temp*"
+variable <- "temp"
+
+df = NULL
+  for (file in list.files(folder, pattern = fill_pattern)) {
+    readFile = read_csv(paste(folder, file, sep="/"), col_names=c("date", variable), skip = 1)
+    if (is.null(df)) { # don't merge the first one
+      df = readFile
+    } else {
+      df = rbind(df, readFile) # bind the files together
+    }
+  }
 
 ```
 
@@ -90,6 +112,19 @@ ggplot(snotel_season, aes(x = factor(month,
     ) +
   theme_bw()
 
+# maximum day beaver springs
+beav_max <- beav %>% 
+  addWaterYear() %>% 
+  group_by(waterYear) %>% 
+  top_n(1, swe_mm)
+
+# beaver spring and PRISM RMSE and MAE
+bs_prism_snotel_error <- left_join(beav, bs_prism, by = "Date") %>% 
+  select(Date, waterYear, swe_mm, prism_snow_mm_accum) %>% 
+  mutate(month = month(Date)) %>% 
+  filter(month %in% c(11,12,1,2,3)) %>% 
+  group_by(month) %>% 
+  mutate(rmse = rmse(swe_mm, prism_snow_mm_accum, na.rm = TRUE))
 
 ```
 
@@ -459,7 +494,7 @@ ggplot(bs_prism_sc, aes(x = date, y = swe_mm)) +
 ```{r, echo = FALSE}
 
 bs_prism_sc_wint <- bs_prism_sc %>% 
-  filter(month %in% c("Dec", "Jan", "Feb", "Mar", "Apr")) %>% 
+  filter(month %in% c("Dec", "Jan", "Feb", "Mar")) %>% 
   drop_na() %>% 
   mutate(median_sc = median(swe_mm)) %>% 
   mutate(median_prism = median(prism_snow_mm_accum)) 
@@ -471,11 +506,11 @@ bs_prism_sc_rmse_mae <- bs_prism_sc_wint %>%
   mutate(mae = mae(swe_mm, prism_snow_mm_accum)) %>% 
   slice(1)
 
-graph_correlation(bs_prism_sc_wint, x_data = bs_prism_sc_wint$swe_mm, 
-                        y_data = bs_prism_sc_wint$prism_snow_mm_accum,
+graph_correlation(bs_prism_sc_wint, x_data = bs_prism_sc_wint$prism_snow_mm_accum, 
+                        y_data = bs_prism_sc_wint$swe_mm,
                         title = "Beaver Spring Snow Course Daily SWE and PRISM ", 
-                         xlabel = "Snow Course SWE (mm)",
-                         ylabel = "PRISM Accumulated Snowfall (mm)") +
+                         xlabel = "PRISM Accumulated Snowfall (mm)",
+                         ylabel = "Snow Course SWE (mm)") +
                         scale_y_continuous(expand = c(0,0), limits = c(0,500)) +
                         scale_x_continuous(expand = c(0,0), limits = c(0,500))
 ```
@@ -521,7 +556,7 @@ graph_correlation(bs_snotel_snodas, x_data = bs_snotel_snodas$SNODAS,
 
 
 # compare max SWE snow course to PRISM max accumulated
-```{r, echo = FALSE}
+```{r, echo = FALSE, error=TRUE}
 wc_prism_max_sc <- wc_prism %>% 
   select(-waterYear) %>% # have to do this for some reason
   addWaterYear() %>% 
@@ -623,16 +658,16 @@ max_wc_prism_snodas_snotel <- wc_sc_snotel_prism_snodas_plot %>%
 
 ```{r, echo = FALSE}
 wc_prism_sc_wint <- wc_prism_sc %>% 
-  filter(month %in% c("Dec", "Jan", "Feb", "Mar", "Apr")) %>% 
+  filter(month %in% c("Dec", "Jan", "Feb", "Mar")) %>% 
   drop_na() %>% 
   mutate(median_sc = median(swe_mm)) %>% 
   mutate(median_prism = median(prism_snow_mm_accum))
 
-graph_correlation(wc_prism_sc_wint, x_data = wc_prism_sc_wint$swe_mm, 
-                  y_data = wc_prism_sc_wint$prism_snow_mm_accum,
+graph_correlation(wc_prism_sc_wint, x_data = wc_prism_sc_wint$prism_snow_mm_accum, 
+                  y_data = wc_prism_sc_wint$swe_mm,
                   title = "Whiskey Creek Snow Course Daily SWE and PRISM ", 
-                   xlabel = "Snow Course SWE (mm)",
-                   ylabel = "PRISM Accumulated Snowfall (mm)") +
+                   xlabel = "PRISM Accumulated Snowfall (mm)",
+                   ylabel = "Snow Course SWE (mm)") +
   scale_x_continuous(expand = c(0,0), limits = c(0,500)) +
   scale_y_continuous(expand = c(0,0), limits = c(0,500))
                   
@@ -764,3 +799,130 @@ bs_snodas_course_error <- bs_snodas_course %>%
 
 
 ```
+
+
+## Fluted Rock
+
+```{r,echo = FALSE}
+# prism and snow course SWE
+
+fr_snowcourse <- snow_course_trim %>% 
+  filter(station_name == "Fluted Rock")
+
+fr_prism_snow <- fr_prism %>% 
+  mutate(Date = date) %>% 
+  addWaterYear() %>% 
+  mutate(prism_snow = calculate_prism_snowfall(prism_df = ., temp = temperature, precip = precip_mm))
+
+fr_sc_prism <- fr_snowcourse %>% 
+  select(-waterYear) %>% 
+  left_join(fr_prism_snow, by = "date") %>% 
+  drop_na() %>% 
+  mutate(month = month(date, abbr = TRUE, label = TRUE)) %>% 
+  filter(month != "Apr") 
+  
+graph_correlation(fr_sc_prism, x_data = fr_sc_prism$prism_snow, 
+                  y_data = fr_sc_prism$swe_mm,
+                  title = "Fluted Rock PRISM and Snow Course Daily SWE", 
+                   xlabel = "PRISM Accumulated Snowfall (mm)",
+                   ylabel = "Snow Course SWE (mm)") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,250)) +
+  scale_x_continuous(expand = c(0,0), limits = c(0,250))
+
+fr_sc_prism_nm <- fr_sc_prism %>% 
+  filter(month != "Mar")
+  
+graph_correlation(fr_sc_prism_nm, x_data = fr_sc_prism_nm$prism_snow, 
+                  y_data = fr_sc_prism_nm$swe_mm,
+                  title = "Fluted Rock PRISM and Snow Course Daily SWE without March", 
+                   xlabel = "PRISM Accumulated Snowfall (mm)",
+                   ylabel = "Snow Course SWE (mm)") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,250)) +
+  scale_x_continuous(expand = c(0,0), limits = c(0,250))
+
+
+```
+
+```{r, echo = FALSE}
+# snodas and snow course SWE
+fr_sc_snodas <- fr_snowcourse %>% 
+  rename(sc_swe_mm = swe_mm) %>% 
+  left_join(fr_snodas, by = "date") %>% 
+  drop_na() %>% 
+  mutate(month = month(date, abbr = TRUE, label = TRUE))
+
+graph_correlation(fr_sc_snodas, x_data = fr_sc_snodas$swe_mm, 
+                  y_data = fr_sc_snodas$sc_swe_mm,
+                  title = "Fluted Rock SNODAS and Snow Course Daily SWE", 
+                   xlabel = "SNODAS SWE (mm)",
+                   ylabel = "Snow Course SWE (mm)") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,250)) +
+  scale_x_continuous(expand = c(0,0), limits = c(0,250))
+
+
+# plot line graph of snowcourse vs snodas
+fr_sc_snodas_all <- fr_snodas %>% 
+  rename(snodas_swe_mm = swe_mm) %>% 
+  left_join(fr_snowcourse, by = "date") %>% 
+  rename(sc_swe_mm = swe_mm)
+
+
+ggplot(fr_sc_snodas_all, aes(x = date, y = sc_swe_mm)) +
+  geom_col(color = "grey", position = "dodge", width = 2) +
+  geom_line(aes(y = snodas_swe_mm), size = 1) +
+  labs(
+    x = "Year",
+    y = "milimeters",
+    color = ""
+  ) +
+  scale_x_date(expand = c(0,0), date_breaks = "2 years") +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw() +
+  theme(text = element_text(size=14), legend.position="bottom")
+
+```
+
+## Bowl Canyon
+
+```{r, echo = FALSE}
+bc_snowcourse <- snow_course_trim %>% 
+  filter(station_name == "Bowl Canyon")
+
+# snodas and snow course SWE
+bc_sc_snodas <- bc_snowcourse %>% 
+  rename(sc_swe_mm = swe_mm) %>% 
+  left_join(bc_snodas, by = "date") %>% 
+  drop_na() %>% 
+  mutate(month = month(date, abbr = TRUE, label = TRUE))
+
+graph_correlation(bc_sc_snodas, x_data = bc_sc_snodas$swe_mm, 
+                  y_data = bc_sc_snodas$sc_swe_mm,
+                  title = "Bowl Canyon SNODAS and Snow Course Daily SWE", 
+                   xlabel = "SNODAS SWE (mm)",
+                   ylabel = "Snow Course SWE (mm)") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,250)) +
+  scale_x_continuous(expand = c(0,0), limits = c(0,250))
+
+
+# plot line graph of snowcourse vs snodas
+bc_sc_snodas_all <- bc_snodas %>% 
+  rename(snodas_swe_mm = swe_mm) %>% 
+  left_join(bc_snowcourse, by = "date") %>% 
+  rename(sc_swe_mm = swe_mm)
+
+
+ggplot(bc_sc_snodas_all, aes(x = date, y = sc_swe_mm)) +
+  geom_col(color = "grey", position = "dodge", width = 2) +
+  geom_line(aes(y = snodas_swe_mm), size = 1) +
+  labs(
+    x = "Year",
+    y = "milimeters",
+    color = ""
+  ) +
+  scale_x_date(expand = c(0,0), date_breaks = "2 years") +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw() +
+  theme(text = element_text(size=14), legend.position="bottom")
+
+```
+
