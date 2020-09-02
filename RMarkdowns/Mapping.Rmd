@@ -42,6 +42,7 @@ navajo_nation <- read_sf(paste0(path_shape, "/Reservation"), layer = "NavajoRese
 
 # all snow stations
 snow_stations <- read_sf(paste0(path_shape, "/SnowStations"), layer = "Snow_Stations")
+#arbabs forest is [-109.198, 35.696]
 
 # all mountian regions
 mt_regions <- read_sf(paste0(path_shape, "/mt_ranges"), layer = "Polygons")

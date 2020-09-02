@@ -61,17 +61,21 @@ wc_snodas <- read_csv("../Data/whiskey_creek_snodas_swe.csv", col_names = c("dat
 bs_snodas <- read_csv("../Data/beaver_springs_snodas_swe.csv", col_names = c("date", "swe_mm"), skip = 1)
 fr_snodas <- read_csv("../Data/fr_snodas.csv", col_names = c("date", "swe_mm"), skip = 1)
 bc_snodas <-read_csv("../Data/bowl_canyon_snodas.csv", col_names = c("date", "swe_mm"), skip = 1) # bowl canyon
+af_snodas <- read_csv("../Data/arbabs_forest_snodas.csv", col_names = c("date", "swe_mm"), skip = 1) %>% 
+  mutate(date = mdy(date))
 
 # read in prism data
 wc_prism <- read_csv("../Data/wc_prism_snow_accum.csv")
 bs_prism <- read_csv("../Data/bs_prism_snow.csv")
 fr_prism <- read_csv("../Data/fr_prism.csv") %>%  # fluted rock 
   mutate(date = mdy(date))
+bc_prism <- read_csv("../Data/bc_prism.csv")
+af_prism <- read_csv("../Data/bc_prism.csv")
 
 
 # for combining files
 folder <- "/Users/annaclairemarley/Documents/CAARE_2020/Extra_Data/"
-fill_pattern <- "fr_temp*"
+fill_pattern <- "af_temp*"
 variable <- "temp"
 
 df = NULL
@@ -197,6 +201,11 @@ How much data is missing?
 
 ```{r, echo = FALSE, warning = FALSE}
 
+missing_total <- snow_course_trim %>% 
+  select(station_name, swe_mm) %>% 
+  group_by(station_name) %>% 
+  miss_var_summary()
+
 missing_WY <- snow_course_trim %>% 
   dplyr::select(waterYear, station_name, swe_mm) %>% 
   group_by(station_name, waterYear) %>% 
@@ -205,7 +214,7 @@ missing_WY <- snow_course_trim %>%
 missing_month <- snow_course_trim %>% 
   mutate(month = month(date, abbr = TRUE, label = TRUE)) %>% 
   filter(!is.na(date)) %>% 
-  dplyr::select(date, month, station_name, swe_mm) %>% 
+  dplyr::select(month, station_name, swe_mm) %>% 
   group_by(station_name, month) %>% 
   miss_var_summary()
 
@@ -926,3 +935,94 @@ ggplot(bc_sc_snodas_all, aes(x = date, y = sc_swe_mm)) +
 
 ```
 
+```{r, echo=FALSE}
+# PRISM and snow course
+
+bc_prism_snow <- bc_prism %>% 
+  mutate(Date = date) %>% 
+  addWaterYear() %>% 
+  mutate(prism_snow = calculate_prism_snowfall(prism_df = ., temp = temperature, precip = precip_mm))
+
+bc_sc_prism <- bc_snowcourse %>% 
+  select(-waterYear) %>% 
+  left_join(bc_prism_snow, by = "date") %>% 
+  drop_na() %>% 
+  mutate(month = month(date, abbr = TRUE, label = TRUE)) %>% 
+  filter(month != "Apr") 
+  
+graph_correlation(bc_sc_prism, x_data = bc_sc_prism$prism_snow, 
+                  y_data = bc_sc_prism$swe_mm,
+                  title = "Bowl Canyon PRISM and Snow Course Daily SWE", 
+                   xlabel = "PRISM Accumulated Snowfall (mm)",
+                   ylabel = "Snow Course SWE (mm)") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,500)) +
+  scale_x_continuous(expand = c(0,0), limits = c(0,500))
+
+```
+
+# Arbab's forest
+
+```{r, echo = FALSE}
+af_snowcourse <- snow_course_trim %>% 
+  filter(station_name == "Arbab's Forest")
+
+# snodas and snow course SWE
+af_sc_snodas <- af_snowcourse %>% 
+  rename(sc_swe_mm = swe_mm) %>% 
+  left_join(af_snodas, by = "date") %>% 
+  drop_na() %>% 
+  mutate(month = month(date, abbr = TRUE, label = TRUE))
+
+graph_correlation(af_sc_snodas, x_data = af_sc_snodas$swe_mm, 
+                  y_data = af_sc_snodas$sc_swe_mm,
+                  title = "Arbab's Forest SNODAS and Snow Course Daily SWE", 
+                   xlabel = "SNODAS SWE (mm)",
+                   ylabel = "Snow Course SWE (mm)") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,250)) +
+  scale_x_continuous(expand = c(0,0), limits = c(0,250))
+
+# plot line graph of snowcourse vs snodas
+af_sc_snodas_all <- af_snodas %>% 
+  rename(snodas_swe_mm = swe_mm) %>% 
+  left_join(af_snowcourse, by = "date") %>% 
+  rename(sc_swe_mm = swe_mm)
+
+
+ggplot(af_sc_snodas_all, aes(x = date, y = sc_swe_mm)) +
+  geom_col(color = "grey", position = "dodge", width = 2) +
+  geom_line(aes(y = snodas_swe_mm), size = 1) +
+  labs(
+    x = "Year",
+    y = "milimeters",
+    color = ""
+  ) +
+  scale_x_date(expand = c(0,0), date_breaks = "2 years") +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw() +
+  theme(text = element_text(size=14), legend.position="bottom")
+```
+
+```{r, echo=FALSE}
+# PRISM and snow course
+
+af_prism_snow <- af_prism %>% 
+  mutate(Date = date) %>% 
+  addWaterYear() %>% 
+  mutate(prism_snow = calculate_prism_snowfall(prism_df = ., temp = temperature, precip = precip_mm))
+
+af_sc_prism <- af_snowcourse %>% 
+  select(-waterYear) %>% 
+  left_join(af_prism_snow, by = "date") %>% 
+  drop_na() %>% 
+  mutate(month = month(date, abbr = TRUE, label = TRUE)) %>% 
+  filter(month != "Apr") 
+  
+graph_correlation(af_sc_prism, x_data = af_sc_prism$prism_snow, 
+                  y_data = af_sc_prism$swe_mm,
+                  title = "Arbab's Forest PRISM and Snow Course Daily SWE", 
+                   xlabel = "PRISM Accumulated Snowfall (mm)",
+                   ylabel = "Snow Course SWE (mm)") +
+  scale_y_continuous(expand = c(0,0), limits = c(0,500)) +
+  scale_x_continuous(expand = c(0,0), limits = c(0,500))
+
+```
